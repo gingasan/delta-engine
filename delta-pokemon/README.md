@@ -14,6 +14,12 @@ This project is only for research purposes. Any commercial usage is not allowed.
 
 
 
+## Engine
+
+Code of our engine is in `engine.py`. It can be split into two modules: role engine (PokemonBase) and battle engine (Battle).
+
+
+
 ## Data
 
 Our data in `asset` contains two parts: **role script** and **role code**.
@@ -183,4 +189,30 @@ def move_5(self): # Earthquake
 
 
 ## Quick Play
+
+We are working on the real game. Now, we provide a quick play to test the pokemon roles.
+
+First, make a new dir in `assset` named with anything (default `user`). Then, place your role code in `asset/user`.
+
+```bash
+python test.py --user [YOUR USER NAME/DIR NAME, e.g. user] --role [YOUR POKEMON, e.g. Graphal] --oppo [OPPONENT POKEMON, e.g. Aerodactyl]
+```
+
+Sample output:
+
+```bash
+**
+V.S.:   Aerodactyl
+Type:   Rock & Flying
+**
+Choose your move from:
+{'1': 'Dark Rainbow', '2': 'Shadow Ball', '3': 'Dark Dealings', '4': 'Flash Cannon', '5': 'Dark World'}
+3
+**
+Graphal used Dark Dealings!
+Aerodactyl used Head Smash!
+Graphal|202/404||atk+2 spa+2 spe+2||DARK_WORLD
+Aerodactyl|404/404||||
+**
+```
 
