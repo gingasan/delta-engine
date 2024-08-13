@@ -1,0 +1,49 @@
+{
+  "species": "Red-Moon",
+  "types": [
+    "Dragon",
+    "Psychic"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Lunar Aura": "On switch-in, this Pokemon summons Lunar Aura on its side for 3 turns. Under Lunar Aura, Lunar moves (Lunar Cannon and Lunar Dance) have their secondary effect chance increased to 100%.",
+    "Bloo Burst": "At the end of the turn when Lunar Aura is over, if this Pokemon's HP is at or less than a half, inspires Bloo Burst. Under Bloo Burst, all its moves have their power multiplied by 2.0."
+  },
+  "moves": {
+    "Lunar Cannon": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to lower the target's special defense by 1 stage. This move cause doubled effect to Fairy-type Pokemon."
+    },
+    "Aura Sphere": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "This move does not check accuracy."
+    },
+    "Lunar Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's special attack and special defense by 1 stage. Has a 30% chance to raise the user's speed by 1 stage."
+    },
+    "Will-O-Wisp": {
+      "power": 0,
+      "accuracy": 85,
+      "category": "Status",
+      "type": "Fire",
+      "effect": "Burns the target."
+    },
+    "Recover": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  }
+}

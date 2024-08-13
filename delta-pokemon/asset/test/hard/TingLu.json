@@ -1,0 +1,50 @@
+{
+  "species": "Ting-Lu",
+  "types": [
+    "Dark",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Vessel of Ruin": "Target Pokemon have their Special Attack multiplied by 0.75.",
+    "Mound": "Halve the damage from Water-type moves."
+  },
+  "moves": {
+    "Ruination": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Deals damage to the target equal to half of its current HP."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    },
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Ancient Curse": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Ghost",
+      "effect": "Lowers the user's Speed by 1 stage and raises the user's Attack and Defense by 1 stage."
+    },
+    "Sin-Absorb": {
+      "power": 0,
+      "accuracy": 10000,
+      "category": "Status",
+      "type": "Dark",
+      "priority": -4,
+      "effect": "Takes effect after the opponent's move. If the opponent attacks the user, the user restores 2/3 its maximum HP, otherwise restores 1/3 maximum HP."
+    }
+  }
+}

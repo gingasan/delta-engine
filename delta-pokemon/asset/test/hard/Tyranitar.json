@@ -1,0 +1,52 @@
+{
+  "species": "Tyranitar",
+  "types": [
+    "Rock",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sand Stream": "On switch-in, this Pokemon summons Sandstorm.",
+    "Heavy Armor": "This Pokemon has a 30% chance to halve the damage from the attacks."
+  },
+  "moves": {
+    "Stone Edge": {
+      "power": 100,
+      "accuracy": 80,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a higher chance for a critical hit."
+    },
+    "Crunch": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "No additional effect."
+    },
+    "Toxic": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Badly poisons the target."
+    },
+    "Iron Defense": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Raises the user's Defense by 2 stages."
+    }
+  }
+}

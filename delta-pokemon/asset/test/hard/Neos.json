@@ -1,0 +1,52 @@
+{
+  "species": "Neos",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Elemental Heart": "Each time this Pokemon uses a non-Normal type moves (X-type), it becomes Normal+X type before moving.",
+    "Elemental Boost": "Each time of type changing, heals 1/3 of max HP and cures the status."
+  },
+  "moves": {
+    "Neos Force": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 2,
+      "type": "Normal",
+      "effect": "If Neos gets the extra non-Normal type before using this move, it loses that extra type and boosts its Atk by one stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Skyrip Wing": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "If the user's HP is lower than the target's HP, raises the user's Atk by one stage before the attack."
+    },
+    "Burn to Ash": {
+      "power": 90,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "50% chance to burn the target."
+    },
+    "Echo Burst": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Randomly lower one of the target's stat by one stage."
+    },
+    "Wrath of Black": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "Ignores the target's Def stat change during the attack. Deals double damage to Fairy-type Pokemon."
+    }
+  }
+}

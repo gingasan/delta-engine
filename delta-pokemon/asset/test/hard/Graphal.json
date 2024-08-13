@@ -1,0 +1,49 @@
+{
+  "species": "Graphal",
+  "types": [
+    "Dark",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Dark World": "On switch-in, summons Dark World for 5 turns. During this time, Dark-type attacks cause 1.5x damage and non-Dark-type attacks cause 0.75x damage.",
+    "Lord of Dark": "For one chance, when this Pokemon's HP zeroes, it revives with 50% maximum HP."
+  },
+  "moves": {
+    "Dark Rainbow": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 30% chance to flinch the target. In Dark World, this move's type effect is always 1."
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Dark Dealings": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dark",
+      "effect": "Raise the user's Atk., SpA. and Spe. by 2 stages at the cost of 50% of maximum HP."
+    },
+    "Flash Cannon": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Dark World": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dark",
+      "effect": "Summons Dark World for 5 turns."
+    }
+  }
+}

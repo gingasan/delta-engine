@@ -1,0 +1,60 @@
+{
+  "species": "Lightning",
+  "types": [
+    "Electric",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Ultra-Inductive": "Has a 30% chance to cause the Pokemon making contact with Lightning into Inductive. Special attacks from inductive Pokemon deal halved damage to Lightning.",
+    "Ultra-Recharge": "The power of Lightning Punch will get stronger with its speed stat, +20 power each boost."
+  },
+  "moves": {
+    "Lightning Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Electric",
+      "effect": "30% chance to paralyze the opponent. Deals double damage to the inductive opponent.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Drain Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "The user recovers 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Super Electro Bombardment": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Imposes the user itself and all opponents into inductive states. Lightning acquires an electro shield which reduces the damage from the next attack by 50%."
+    },
+    "Meteor Mash": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Steel",
+      "effect": "Has a 20% chance to raise the user's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Electro Boost": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Removes the user's inductive state and increase the speed by 2 stages."
+    }
+  }
+}
