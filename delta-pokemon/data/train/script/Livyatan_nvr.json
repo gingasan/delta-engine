@@ -1,0 +1,55 @@
+{
+  "species": "Livyatan",
+  "types": [
+    "Water",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Apex Predator": "This Pokemon's moves have 1.3x power to Pokemon with lower Speed stat.",
+    "Enamel Armor": "Reduces damage from Physical moves by 25%. If hit by a contact move, has a 20% chance to reduce target's Defense by 1 stage."
+  },
+  "moves": {
+    "Tidal Crush": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to confuse the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Abyssal Bite": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 50% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Whale Song": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Water",
+      "effect": "Increases the user's Attack and Speed by 1 stage each."
+    },
+    "Dark Surge": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Hydro Blast": {
+      "power": 110,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 10% chance to confuse the target."
+    }
+  }
+}

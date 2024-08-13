@@ -1,0 +1,38 @@
+{
+  "species": "Lucario",
+  "types": [
+    "Fighting",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Adaptability": "This Pokemon's same-type attack bonus (STAB) is 2 instead of 1.5."
+  },
+  "moves": {
+    "Aura Sphere": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "This move does not check accuracy."
+    },
+    "Metal Claw": {
+      "power": 50,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 10% chance to raise the user's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 70,
+    "atk": 130,
+    "def": 88,
+    "spa": 130,
+    "spd": 70,
+    "spe": 112
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "species": "Skeledirge",
+  "types": [
+    "Fire",
+    "Ghost"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Unaware": "This Pokemon ignores other Pokemon's def/spd stat stages when doing damage."
+  },
+  "moves": {
+    "Torch Song": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Has a 100% chance to raise the user's Special Attack by 1 stage."
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Substitute": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user loses 1/4 of its maximum HP and sets a substitute with the same amount of HP to take damage from attacks for it. The substitute is removed once enough damage (1/4 of max HP) is inflicted. Fails if the user does not have enough HP remaining, or if it already has a substitute."
+    },
+    "Slack Off": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    },
+    "Yawn": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "Causes the target to fall asleep at the end of the next turn. Fails if the target already has a non-volatile status condition."
+    }
+  }
+}

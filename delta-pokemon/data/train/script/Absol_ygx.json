@@ -1,0 +1,32 @@
+{
+  "species": "Absol",
+  "types": [
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Super Luck": "This Pokemon's moves have an increased critical hit ratio."
+  },
+  "moves": {
+    "Night Slash": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "The ratio for critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Thunder Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

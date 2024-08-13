@@ -1,0 +1,49 @@
+{
+  "species": "Stormfury",
+  "types": [
+    "Electric",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Storm Surge": "On switch-in, this Pokemon sets Storm Surge on its side for 3 turns. Under Storm Surge, Electric moves' accuracy is 100%.",
+    "Aircurrent": "This Pokemon's Flying-type moves gain 20% additional power."
+  },
+  "moves": {
+    "Thunder Strike": {
+      "power": 90,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 30% chance to paralyze the target."
+    },
+    "Aerial Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Has a 20% chance to lower the target's Speed by 1 stage."
+    },
+    "Storm Burst": {
+      "power": 100,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 20% chance to cause confusion."
+    },
+    "Gale Wing": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 10% chance to cause flinching."
+    },
+    "Volt Shield": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Raises the user's Defense by 1 stage."
+    }
+  }
+}

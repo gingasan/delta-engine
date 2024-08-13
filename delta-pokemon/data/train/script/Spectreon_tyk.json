@@ -1,0 +1,27 @@
+{
+  "species": "Spectreon",
+  "types": [
+    "Ghost",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Spectral Aura": "This Pokemon receives less damage based on its Defense boosts: 1 stage for 10% damage."
+  },
+  "moves": {
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Void Pulse": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 30% chance to lower the target's Attack by 1 stage."
+    }
+  }
+}

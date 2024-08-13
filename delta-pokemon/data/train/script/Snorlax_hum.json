@@ -1,0 +1,54 @@
+{
+  "species": "Snorlax",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Thick Fat": "Fire-/Ice-type attacks against this Pokemon deal halved damage.",
+    "Heavy Sleeper": "While asleep, this Pokemon regenerates 1/8 of its maximum HP at the end of each turn."
+  },
+  "moves": {
+    "Rest": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "The user goes to sleep, fully restoring HP and status."
+    },
+    "Snore": {
+      "power": 50,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Only usable if asleep. Has a 30% chance to make the target flinch."
+    },
+    "Body Slam": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "Has a 30% chance to paralyze the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Giga Impact": {
+      "power": 150,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "The user cannot act next turn, unless the target faints.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Sleep Talk": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user randomly uses one of its known moves while asleep."
+    }
+  }
+}

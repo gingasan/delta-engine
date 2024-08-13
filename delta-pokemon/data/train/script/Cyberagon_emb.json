@@ -1,0 +1,51 @@
+{
+  "species": "Cyberagon",
+  "types": [
+    "Steel",
+    "Dragon"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Material Gain": "Gains 1 Material at the end of each turn. Each Material increases the power of its moves by 10%.",
+    "Clear Body": "Prevents other Pokemon from lowering this Pokemon's stat stages."
+  },
+  "moves": {
+    "Infinity Cannon": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "The user gains 1 Material after using this move.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Thunder Charge": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 20% chance to paralyze the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Barrier Break": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "This move ignores the stat change of the target's Special Defense during the attack.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

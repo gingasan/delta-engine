@@ -1,0 +1,33 @@
+{
+  "species": "Scizor",
+  "types": [
+    "Bug",
+    "Steel"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Technician": "This Pokemon's moves of 60 power or less have 1.5x power, including Struggle."
+  },
+  "moves": {
+    "Steel Wing": {
+      "power": 70,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "The ratio for critical hit +1 and has a 10% chance to raise the user's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "X-Scissor": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Bug",
+      "effect": "Raises the user's Speed by 1 stage when its HP becomes 1/3 or less.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

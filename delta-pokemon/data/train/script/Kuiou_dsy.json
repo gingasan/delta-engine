@@ -1,0 +1,35 @@
+{
+  "species": "Kuiou",
+  "types": [
+    "Dragon",
+    "Electric"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Storm Command": "Boosts the power of Electric-type moves by 50% and its Electric-type moves have a 30% chance to paralyze the target if hit.",
+    "Celestial Guard": "Reduces damage from Dragon-type moves by 50% and heals 1/8 of its maximum HP when hit by a Dragon-type move."
+  },
+  "moves": {
+    "Celestial Roar": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "If the target is already paralyzed, the damage it deals increases by 50%"
+    },
+    "Ruler Strike": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Deals double damage if the target has higher HP than the user."
+    },
+    "Guardian Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Increases the user's Defense and Special Defense by 1 stage."
+    }
+  }
+}

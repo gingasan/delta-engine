@@ -1,0 +1,50 @@
+{
+  "species": "Dragonair",
+  "types": [
+    "Dragon"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Shed Skin": "At the end of each turn, this Pokemon has a 33% chance to cure its status and heals 1/8 of its max HP."
+  },
+  "moves": {
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Aqua Tail": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Fire Fang": {
+      "power": 65,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target and a separate 10% chance to make it flinch.",
+      "property": [
+        "contact",
+        "bite"
+      ]
+    },
+    "Thunder Wave": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Paralyzes the target."
+    }
+  }
+}

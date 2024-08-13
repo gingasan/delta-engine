@@ -1,0 +1,35 @@
+{
+  "species": "Jyuratodus",
+  "types": [
+    "Water",
+    "Ground"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Mud Armor": "Reduces damage taken from physical attacks by 50% when HP is below 50%.",
+    "Sludge Trap": "Lower the speed of the attacker by 1 stage, when hit by a Water-type move."
+  },
+  "moves": {
+    "Sludge Spit": {
+      "power": 70,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Traps the target for five turns. Causes damage to the target equal to 1/8 of its maximum HP at the end of each turn during effect."
+    },
+    "Mud Roll": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Increases the user's Defense by 1 stage."
+    },
+    "Swamp Wave": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Water",
+      "effect": "Reduces the speed of all non-Ground-type Pokemon by 2 stages and heals all Water-type Pokemon by 1/4 of their maximum HP."
+    }
+  }
+}

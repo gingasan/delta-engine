@@ -1,0 +1,37 @@
+{
+  "species": "Cloyster",
+  "types": [
+    "Water",
+    "Ice"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Skill Link": "This Pokemon's multi-hit moves always hit the maximum number of times."
+  },
+  "moves": {
+    "Rock Blast": {
+      "power": 25,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Hits 2-5 times. Each hit has a 50% chance to be the last."
+    },
+    "Icicle Spear": {
+      "power": 25,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Hits 2-5 times. Each hit has a 50% chance to be the last."
+    },
+    "Ice Spinner": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Ends the effects of Electric Terrain, Grassy Terrain, Misty Terrain, and Psychic Terrain.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

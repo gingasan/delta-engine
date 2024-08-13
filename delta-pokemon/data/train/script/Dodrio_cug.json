@@ -1,0 +1,40 @@
+{
+  "species": "Dodrio",
+  "types": [
+    "Normal",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Tangled Feet": "Gain 50% of evasion if this Pokemon is under a status condition."
+  },
+  "moves": {
+    "Drill Peck": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Tri Attack": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Has a 20% chance each to burn, freeze or paralyze the target. Only one will activate."
+    },
+    "Jump Kick": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "If this attack is not successful, the user loses half of its maximum HP.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

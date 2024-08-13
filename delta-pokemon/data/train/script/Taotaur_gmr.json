@@ -1,0 +1,42 @@
+{
+  "species": "Taotaur",
+  "types": [
+    "Dark",
+    "Normal"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Insatiable Hunger": "Boosts Attack and Special Attack by 1 stage whenever it was hit by the opponent.",
+    "Intimidating Gaze": "On switch-in, Lowers the Attack of the opponent by 1 stage."
+  },
+  "moves": {
+    "Devouring Bite": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    },
+    "Ancient Power": {
+      "power": 60,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Rock",
+      "effect": "Has a 10% chance to make the target sleep."
+    },
+    "Ritual Stomp": {
+      "power": 80,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "Lowers the target's Defense by 1 stage."
+    },
+    "Gluttonous Maw": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dark",
+      "effect": "The user heals 50% of its max HP and raises its Attack by 1 stage."
+    }
+  }
+}

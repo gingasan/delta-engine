@@ -1,0 +1,32 @@
+{
+  "species": "Leafeon",
+  "types": [
+    "Grass"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Verdant Grace": "This Pokemon's Grass moves have a 50% chance to heal the user by 1/10 of maximum HP."
+  },
+  "moves": {
+    "Leaf Blade": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Grass",
+      "effect": "The chance for a critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Quick Attack": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

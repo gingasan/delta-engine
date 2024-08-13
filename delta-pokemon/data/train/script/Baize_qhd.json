@@ -1,0 +1,38 @@
+{
+  "species": "Baize",
+  "types": [
+    "Dragon",
+    "Fairy"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Divine Insight": "This Pokemon's moves never miss.",
+    "Purifying Presence": "This Pokemon summons Pure Zone on switch-in for 3 turns. In Pure Zone, Baize makes itself not attacked."
+  },
+  "moves": {
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": []
+    },
+    "Mystic Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage each and lower its opponents' Attack by 1 stage.",
+      "property": []
+    },
+    "Celestial Voice": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Has a 30% chance to confuse the target.",
+      "property": []
+    }
+  }
+}

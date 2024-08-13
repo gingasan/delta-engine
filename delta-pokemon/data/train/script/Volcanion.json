@@ -1,0 +1,35 @@
+{
+  "species": "Volcanion",
+  "types": [
+    "Fire",
+    "Water"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Water Absorb": "This Pokemon is immune to Water moves and heals 1/4 of its max HP when hit by Water moves."
+  },
+  "moves": {
+    "Steam Eruption": {
+      "power": 110,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to burn the target. The target thaws out if it is frozen."
+    },
+    "Fire Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    }
+  },
+  "base": {
+    "hp": 80,
+    "atk": 110,
+    "def": 120,
+    "spa": 130,
+    "spd": 90,
+    "spe": 70
+  }
+}

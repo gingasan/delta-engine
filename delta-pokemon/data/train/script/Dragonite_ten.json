@@ -1,0 +1,34 @@
+{
+  "species": "Dragonite",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Multiscale": "If this Pokemon is at full HP, damage taken from attacks is halved."
+  },
+  "moves": {
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    },
+    "Aerial Ace": {
+      "power": 60,
+      "accuracy": 1000000,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "This move does not check accuracy."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    }
+  }
+}

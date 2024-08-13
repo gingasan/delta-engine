@@ -1,0 +1,49 @@
+{
+  "species": "Nebulazoid",
+  "types": [
+    "Psychic",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Mind Surge": "This Pokemon's Psychic-type moves have a 20% chance to confuse the target. If the target is already confused, damage from Psychic-type moves is doubled.",
+    "Dark Aura": "Raises the power of Dark-type moves by 33%."
+  },
+  "moves": {
+    "Void Beam": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 30% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Nightmare Pulse": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    },
+    "Astral Gaze": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's Special Attack and Speed by 1 stage."
+    },
+    "Shadow Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to confuse the target."
+    }
+  }
+}

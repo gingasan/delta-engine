@@ -1,0 +1,57 @@
+{
+  "species": "Rhyperior",
+  "types": [
+    "Ground",
+    "Rock"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Solid Fortification": "Reduces damage taken from super-effective (effect > 1) moves by 30%.",
+    "Stone Resolve": "Boosts its Special Defense by 1 stage at the end of each turn if Standstorm is active."
+  },
+  "moves": {
+    "Quake Impact": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon in this turn. The effect ends at the end of the turn whether the user has been attacked or not. Fails if the user uses this move last turn."
+    },
+    "Rock Blast": {
+      "power": 25,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Hits 2-5 times. Has a 35% chance to hit 2 or 3 times and a 15% chance to hit 4 or 5 times.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Earthen Barrier": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Ground",
+      "effect": "Increases the user's Defense and Special Defense by 1 stage."
+    },
+    "Ice Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

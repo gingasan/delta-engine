@@ -1,0 +1,48 @@
+{
+  "species": "Zaochi",
+  "types": [
+    "Ground",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Chisel Guard": "This Pokemon's Defense is increased by 1 stage when hit by a Physical move.",
+    "Spear Strike": "Has a 30% chance to lower the target's Defense by 1 stage when this Pokemon attacks with a Physical move."
+  },
+  "moves": {
+    "Gleaming Spear": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 20% chance to cause the target to flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Shield Bash": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Raises the user's Defense by 1 stage after dealing damage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Muddy Assault": {
+      "power": 100,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 20% chance to lower the target's Speed by 1 stage."
+    },
+    "Feral Roar": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Ground",
+      "effect": "Lowers the Attack of the target by 1 stage each in the next three turns."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "species": "Tianma",
+  "types": [
+    "Flying",
+    "Fairy"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Heavenly Speed": "Doubles the user's Speed during the first 5 turns of battle.",
+    "Divine Flight": "Grants immunity to Ground-type moves and raises evasion by 20%."
+  },
+  "moves": {
+    "Skybound Rush": {
+      "power": 100,
+      "accuracy": 100000,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Has a 20% chance to increase the user's Speed by 1 stage."
+    },
+    "Jade Strike": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target dizzy, 50% chance to fall asleep in the next turn."
+    },
+    "Celestial Barrier": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Raises the user's Defense and Special Defense by 2 stages."
+    }
+  }
+}

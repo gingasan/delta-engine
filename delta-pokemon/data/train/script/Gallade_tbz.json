@@ -1,0 +1,30 @@
+{
+  "species": "Gallade",
+  "types": [
+    "Psychic",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Neuroforce": "This Pokemon's attacks that are effective against the target do 1.25x damage."
+  },
+  "moves": {
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Drain Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "The user recovers 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

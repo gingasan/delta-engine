@@ -1,0 +1,27 @@
+{
+  "species": "Mimikyu",
+  "types": [
+    "Ghost",
+    "Fairy"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Disguise": "This Pokemon has Disguise on switch-in. It will be busted when it takes damage from attack. After Disguise is busted, the Pokemon takes damage normally."
+  },
+  "moves": {
+    "Play Rough": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fairy",
+      "effect": "Has a 10% chance to lower the target's atk by 1 stage."
+    },
+    "Shadow Claw": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "This move's critical ratio +1."
+    }
+  }
+}

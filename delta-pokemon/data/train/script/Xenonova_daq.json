@@ -1,0 +1,42 @@
+{
+  "species": "Xenonova",
+  "types": [
+    "Dragon",
+    "Fire"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Reckless Power": "Increases the power of all moves by 30% but the user takes recoil damage equal to 15% of the damage dealt.",
+    "Unstable Energy": "Has a 20% chance to cause the target to become confused at the end of each turn."
+  },
+  "moves": {
+    "Explosive Beam": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Deals damage to the target and has a 30% chance to burn it."
+    },
+    "Trample": {
+      "power": 120,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Deals damage to the target and has a 20% chance to make the target flinch."
+    },
+    "Will-O-Wisp": {
+      "power": 0,
+      "accuracy": 85,
+      "category": "Status",
+      "type": "Fire",
+      "effect": "Burns the target."
+    },
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    }
+  }
+}

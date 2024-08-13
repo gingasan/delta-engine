@@ -1,0 +1,27 @@
+{
+  "species": "Tyranitar",
+  "types": [
+    "Rock",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sand Stream": "On switch-in, this Pokemon summons Sandstorm and raises its Defense and Special Defense by 1 stage."
+  },
+  "moves": {
+    "Stone Edge": {
+      "power": 100,
+      "accuracy": 80,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "The ratio for critical hit +1."
+    },
+    "Dark Pulse": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    }
+  }
+}

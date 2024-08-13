@@ -1,0 +1,29 @@
+{
+  "species": "Hippowdon",
+  "types": [
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Toxic Boost": "If this Pokemon is poisoned, its Attack is multiplied by 1.5."
+  },
+  "moves": {
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    },
+    "Iron Head": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

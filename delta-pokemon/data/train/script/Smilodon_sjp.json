@@ -1,0 +1,59 @@
+{
+  "species": "Smilodon",
+  "types": [
+    "Fighting",
+    "Ice"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Precision Strike": "This Pokemon's moves ignore accuracy checks.",
+    "Frost Armor": "When HP is below half, this Pokemon's Defense is 1.5x."
+  },
+  "moves": {
+    "Ice Fang": {
+      "power": 65,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target and a 10% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Saber Slash": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Roar of Dominance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Raises the user's Attack by 1 stage.",
+      "priority": 1
+    },
+    "Frozen Roar": {
+      "power": 0,
+      "accuracy": 60,
+      "category": "Status",
+      "type": "Ice",
+      "effect": "Freezes the target. If the target is already frozen, raises the user's Speed by 2 stages."
+    },
+    "Bone Crush": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

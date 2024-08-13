@@ -1,0 +1,42 @@
+{
+  "species": "Magnamalo",
+  "types": [
+    "Fire",
+    "Poison"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Hellfire Metabolism": "This Pokemon's Special Attack increases by 1 stage when it uses a Fire-type move, but takes damage equal to 1/16 of its max HP.",
+    "Volatile Flame": "This Pokemon's Fire-type attacks have a 50% chance to cause an explosion to the target, dealing additional damage of 1/16 of its max HP."
+  },
+  "moves": {
+    "Hellfire Blast": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": ""
+    },
+    "Poison Vents": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    },
+    "Explosive Strike": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Deals additional damage equal to 10% of the target's max HP, but the user takes 10% of its own max HP as recoil."
+    },
+    "Gas Cloud": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Creates a gas cloud in the opponent's field that lasts for 2 turns, lowering the accuracy of all non-Poison-type Pokemon by 1 stage each end of the turn."
+    }
+  }
+}

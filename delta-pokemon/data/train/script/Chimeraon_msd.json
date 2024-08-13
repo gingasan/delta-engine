@@ -1,0 +1,42 @@
+{
+  "species": "Chimeraon",
+  "types": [
+    "Fire",
+    "Dragon"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Fiery Roar": "Increases the power of Fire-type moves by 50%. The Fire-type moves cause x2 effect to Water-type Pokemon instead of x0.5.",
+    "Venomous Strike": "Has a 30% chance to poison the attacker when hit by a contact move."
+  },
+  "moves": {
+    "Blazing Breath": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Dragon Fang": {
+      "power": 85,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Goat Rush": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "Increases the user's Speed by 1 stage after use."
+    },
+    "Serpent Venom": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 50% chance to poison the target. If the target is already poisoned, deals double damage."
+    }
+  }
+}

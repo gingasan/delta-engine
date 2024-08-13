@@ -1,0 +1,38 @@
+{
+  "species": "Hoopa",
+  "types": [
+    "Psychic",
+    "Dark"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Contrary": "This ability inverts all stat changes of the Pokemon with this ability."
+  },
+  "moves": {
+    "Hyperspace Fury": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Lowers the user's Defense stat by one stage."
+    },
+    "Psychic Combat": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Psychic",
+      "effect": "Lowers the user's Def and Spd by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 100,
+    "atk": 110,
+    "def": 60,
+    "spa": 150,
+    "spd": 130,
+    "spe": 70
+  }
+}

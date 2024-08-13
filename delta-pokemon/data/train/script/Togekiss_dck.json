@@ -1,0 +1,27 @@
+{
+  "species": "Togekiss",
+  "types": [
+    "Fairy",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Serene Grace": "This Pokemon's moves have their secondary effect chance doubled."
+  },
+  "moves": {
+    "Air Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Dazzling Gleam": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": ""
+    }
+  }
+}

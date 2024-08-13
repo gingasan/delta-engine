@@ -1,0 +1,35 @@
+{
+  "species": "Velkhana",
+  "types": [
+    "Ice",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Frost Armor": "At the start of battle, the Pokemon creates a layer of ice armor, reducing damage from physical moves by 25%. If hit by a physical move, the armor breaks and deals damage to the attacker of 1/8 of its max HP.",
+    "Frozen Surge": "When this Pokemon uses Flash Freeze Breath, it creates a freezing cloud on itself. The next Ice-type move used by Frostana will deal double damage and consume the cloud."
+  },
+  "moves": {
+    "Flash Freeze Breath": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Has a 30% chance to freeze the target."
+    },
+    "Icy Wall": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Ice",
+      "effect": "Creates a wall of ice that reduces damage from the next three attacks by 50%."
+    },
+    "Tail Lance": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Clears the user's all stat changes."
+    }
+  }
+}

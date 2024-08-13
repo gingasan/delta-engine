@@ -1,0 +1,34 @@
+{
+  "species": "Pelipper",
+  "types": [
+    "Water",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Rain Dish": "This Pokemon restores 1/16 of its max HP at the end of each turn during Rain."
+  },
+  "moves": {
+    "Hydro Pump": {
+      "power": 110,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Hurricane": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to confuse the target. If the weather is Rain Dance, this move does not check accuracy. If the weather is Sunny Day, this move's accuracy is 50%."
+    },
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    }
+  }
+}

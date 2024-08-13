@@ -1,0 +1,51 @@
+{
+  "species": "Diablos",
+  "types": [
+    "Ground",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Berserker Mode": "When HP falls below 50%, Diablos's Speed and Attack are increased by 50%.",
+    "Unyielding Fury": "Has a 30% chance to increase Attack by 1 stage each time Diablos takes damage."
+  },
+  "moves": {
+    "Corkscrew Burrow": {
+      "power": 120,
+      "accuracy": 60,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "This move hits twice if the user is in Berserker Mode.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Multi-Charge": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Hits 2-5 times in one turn. Each hit has a 10% chance to cause flinching.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Raging Earth": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Infernal Roar": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to burn the target.",
+      "property": [
+        "sound"
+      ]
+    }
+  }
+}

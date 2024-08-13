@@ -1,0 +1,49 @@
+{
+  "species": "Glimmerine",
+  "types": [
+    "Fairy",
+    "Water"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Dream Weaver": "If the opponent is asleep, this Pokemon's special attack x1.5.",
+    "Aqua Spirit": "This Pokemon's Water-type moves have a 10% chance to confuse the target."
+  },
+  "moves": {
+    "Lunar Ray": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "No additional effect."
+    },
+    "Aqua Veil": {
+      "power": 80,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Heals the user by 1/4 of the damage dealt."
+    },
+    "Hypnotic Pulse": {
+      "power": 0,
+      "accuracy": 75,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Puts the target to sleep."
+    },
+    "Fairy Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage."
+    },
+    "Mystic Wave": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 10% chance to confuse the target."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "species": "Draconicon",
+  "types": [
+    "Dragon",
+    "Poison"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Poisonous Skin": "Pokemon making contact with this Pokemon has a 20% chance of becoming confused."
+  },
+  "moves": {
+    "Draconic Beam": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 10% chance to lower the target's Defense and Speed by 1 stage."
+    },
+    "Venoshock": {
+      "power": 65,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Power doubles if the target is poisoned."
+    }
+  }
+}

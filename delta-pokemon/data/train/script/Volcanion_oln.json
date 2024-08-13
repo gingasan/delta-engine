@@ -1,0 +1,27 @@
+{
+  "species": "Volcanion",
+  "types": [
+    "Fire",
+    "Water"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Water Absorb": "This Pokemon is immune to Water moves and heals 1/4 of its max HP when hit by Water moves. When hit by Fire moves, Eruption Boost is triggered for 2 turns. When Eruption Boost is active, Special Attack is 1.5x and Steam Eruption deals 33% more damage to the target."
+  },
+  "moves": {
+    "Steam Eruption": {
+      "power": 110,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to burn the target. The target thaws out if it is frozen. When Eruption Boost is active, deals 33% more damage to the target."
+    },
+    "Fire Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    }
+  }
+}

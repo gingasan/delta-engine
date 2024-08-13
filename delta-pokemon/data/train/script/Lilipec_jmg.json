@@ -1,0 +1,35 @@
+{
+  "species": "Lilipec",
+  "types": [
+    "Ground",
+    "Water"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Harbinger": "Summons a Sandstorm for 5 turns when entering the battle.",
+    "Industrious Call": "Boosts the special attack by 1 stage when this Pokemon uses a Status move."
+  },
+  "moves": {
+    "Mudslide": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Aqua Pulse": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    }
+  }
+}

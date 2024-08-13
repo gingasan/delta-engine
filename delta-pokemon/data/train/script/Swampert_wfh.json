@@ -1,0 +1,31 @@
+{
+  "species": "Swampert",
+  "types": [
+    "Water",
+    "Ground"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Mist Mirage": "On switch-in, summons Mist Mirage on the user's side for 3 turns. Restores 1/16 HP every turn during Mist Mirage."
+  },
+  "moves": {
+    "Aqua Jet": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Water",
+      "effect": "Has a 30% chance to raise the user's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Mud Bomb": {
+      "power": 65,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 20% chance to lower the target's Accuracy by 1 stage."
+    }
+  }
+}

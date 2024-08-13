@@ -1,0 +1,26 @@
+{
+  "species": "Porygon-Z",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Download": "On switch-in, this Pokemon raises its Attack by 1 stage if the opponent's Defense is lower than its Special Defense, or its Special Attack if the opponent's Special Defense is lower."
+  },
+  "moves": {
+    "Thunderbolt": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target."
+    },
+    "Ice Beam": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target."
+    }
+  }
+}

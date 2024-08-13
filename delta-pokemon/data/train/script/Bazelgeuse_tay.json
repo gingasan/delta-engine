@@ -1,0 +1,49 @@
+{
+  "species": "Bazelgeuse",
+  "types": [
+    "Fire",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Explosive Scales": "Pokemon attacking this Pokemon will attach an explosive scale, exploding at the end of the turn. Each scale deals damage equal to 1/10 of maximum HP.",
+    "Superheated State": "When HP is below 50%, each scale explodes twice, dealing damage equal to 1/5 of maximum HP."
+  },
+  "moves": {
+    "Scale Burst": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Fire",
+      "effect": "Drops explosive scales to the opponents."
+    },
+    "Inferno Blast": {
+      "power": 100,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 50% chance to burn the target."
+    },
+    "Draco Meteor": {
+      "power": 130,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Lowers the user's Special Attack by 2 stages."
+    },
+    "Dragon Roar": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Lowers the target's Attack and Special Attack by 1 stage."
+    },
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    }
+  }
+}

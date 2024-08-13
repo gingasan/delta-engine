@@ -1,0 +1,43 @@
+{
+  "species": "Goumang",
+  "types": [
+    "Grass",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Verdant Growth": "At the end of each turn, this Pokemon heals 1/16 of its max HP if the weather is Sunny Day.",
+    "Spring Guardian": "Boosts the power of Grass-type moves by 30% during Sunny Day."
+  },
+  "moves": {
+    "Fusang Flame": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Willow Whip": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Grass",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Dragon Ride": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "priority": 2,
+      "type": "Flying",
+      "effect": "This move always goes first."
+    },
+    "Spring Renewal": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Grass",
+      "effect": "Heals the user by 50% of its max HP and cures all status conditions."
+    }
+  }
+}

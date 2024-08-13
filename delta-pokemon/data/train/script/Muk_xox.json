@@ -1,0 +1,29 @@
+{
+  "species": "Muk",
+  "types": [
+    "Poison"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Stench": "This Pokemon's attacks without a chance to flinch gain a 10% chance to flinch."
+  },
+  "moves": {
+    "Sludge Wave": {
+      "power": 95,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    },
+    "Lunge": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Bug",
+      "effect": "Has a 100% chance to lower the target's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "species": "Jirachi",
+  "types": [
+    "Steel",
+    "Psychic"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Serene Grace": "This Pokemon's secondary effect chances are doubled."
+  },
+  "moves": {
+    "Heart Swap": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Iron Bash": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Lunar Wish": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Heals the user by 50% of its maximum HP and removes all status conditions."
+    },
+    "Meteor Strike": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Has a 30% chance to reduce the target's Speed by 1 stage."
+    }
+  }
+}

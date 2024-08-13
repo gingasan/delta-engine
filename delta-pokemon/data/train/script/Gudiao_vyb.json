@@ -1,0 +1,50 @@
+{
+  "species": "Gudiao",
+  "types": [
+    "Water",
+    "Flying"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Abyssal Cry": "This Pokemon's Special Attack is raised by 1 stage when it successfully hits the target.",
+    "Aqua Veil": "This Pokemon heals 1/8 of its maximum HP at the end of each turn when it is raining."
+  },
+  "moves": {
+    "Horn Surge": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 30% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Eerie Wail": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to confuse the target.",
+      "property": []
+    },
+    "Wing Slice": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Ignores the target's def stat change during attack.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Aqua Camouflage": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Water",
+      "effect": "Raises the user's Def by 1 stages and changes the type to Water.",
+      "property": []
+    }
+  }
+}

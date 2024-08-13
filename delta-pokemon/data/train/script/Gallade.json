@@ -1,0 +1,68 @@
+{
+  "species": "Gallade",
+  "types": [
+    "Psychic",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sharpness": "This Pokemon's slicing moves have their power multiplied by 1.5.",
+    "Sharpness II": "This Pokemon's slicing moves have their priority plus 1."
+  },
+  "moves": {
+    "Psycho Cut": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Psychic",
+      "effect": "Has a higher chance for a critical hit.",
+      "property": [
+        "slicing"
+      ]
+    },
+    "Sacred Sword": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fighting",
+      "effect": "Ignores the target's stat stage changes.",
+      "property": [
+        "contact",
+        "slicing"
+      ]
+    },
+    "Swords Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "Raises the user's Attack by 2 stages."
+    },
+    "Leaf Blade": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Grass",
+      "effect": "Has a higher chance for a critical hit.",
+      "property": [
+        "contact",
+        "slicing"
+      ]
+    },
+    "Drain Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fighting",
+      "effect": "The user recovers 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

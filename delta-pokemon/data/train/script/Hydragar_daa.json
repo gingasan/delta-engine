@@ -1,0 +1,42 @@
+{
+  "species": "Hydragar",
+  "types": [
+    "Water",
+    "Fire"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Regenerative Fury": "When Hydragar's HP drops below 50%, it regenerates 20% of its maximum HP at the end of each turn.",
+    "Nine-Headed Vengeance": "When hit by a critical hit, Hydragar's Attack and Special Attack increase by 2 stages."
+  },
+  "moves": {
+    "Flame Torrent": {
+      "power": 95,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Venomous Spit": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 50% chance to poison the target."
+    },
+    "Aqua Slash": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Each time Hydraga uses Aqua Slash, increases chances of its critical hit rate by 20%."
+    },
+    "Hydra Wrath": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Reduces the target's Special Attack by 1 stage."
+    }
+  }
+}

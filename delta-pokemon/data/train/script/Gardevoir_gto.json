@@ -1,0 +1,42 @@
+{
+  "species": "Gardevoir",
+  "types": [
+    "Psychic",
+    "Fairy"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Wonder Skin": "50% to avoid the status moves from the opponent used on this Pokemon.",
+    "Psychic Surge": "On switch-in, this Pokemon creates a Psychic Terrain which lasts for 5 turns."
+  },
+  "moves": {
+    "Dazzling Gleam": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "No additional effect."
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Mind Blast": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to confuse the target."
+    },
+    "Fairy Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage each."
+    }
+  }
+}

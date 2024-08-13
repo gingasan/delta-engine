@@ -1,0 +1,38 @@
+{
+  "species": "Tyranitar",
+  "types": [
+    "Rock",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sand Stream": "On switch-in, this Pokemon summons Sandstorm."
+  },
+  "moves": {
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Crunch": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 120,
+    "atk": 134,
+    "def": 100,
+    "spa": 85,
+    "spd": 100,
+    "spe": 61
+  }
+}

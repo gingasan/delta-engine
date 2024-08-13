@@ -1,0 +1,35 @@
+{
+  "species": "Greninja",
+  "types": [
+    "Water",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Proten": "This Pokemon's type changes to the type of the move it is using."
+  },
+  "moves": {
+    "Hydro Pump": {
+      "power": 110,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Water",
+      "effect": "No additional effect."
+    },
+    "Dark Pulse": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    }
+  },
+  "base": {
+    "hp": 72,
+    "atk": 105,
+    "def": 67,
+    "spa": 153,
+    "spd": 71,
+    "spe": 132
+  }
+}

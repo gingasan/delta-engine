@@ -1,0 +1,49 @@
+{
+  "species": "Bubblifur",
+  "types": [
+    "Water",
+    "Fairy"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Soapy Grace": "Contact moves have a 30% chance to lower the attacker's accuracy by 1 stage.",
+    "Bubble Cloak": "Reduces damage from Special moves by 25%. If hit by a Special move, has a 20% chance to reduce the target's Special Attack by 1 stage."
+  },
+  "moves": {
+    "Bubble Slide": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to reduce the target's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Soothing Mist": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Heals the user by 50% of its maximum HP and cures any status conditions."
+    },
+    "Aqua Jet": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Water",
+      "effect": "Always moves first.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Pressurized Jet": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 10% chance to confuse the target."
+    }
+  }
+}

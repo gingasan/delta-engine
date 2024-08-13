@@ -1,0 +1,55 @@
+{
+  "species": "Medicham",
+  "types": [
+    "Fighting",
+    "Psychic"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Pure Power": "This Pokemon's Attack is doubled."
+  },
+  "moves": {
+    "High Jump Kick": {
+      "power": 130,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "If this move misses, the user loses half of its maximum HP rounded down.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Zen Headbutt": {
+      "power": 80,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Psychic",
+      "effect": "Has a 20% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ice Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target.",
+      "property": [
+        "contact",
+        "punch"
+      ]
+    },
+    "Thunder Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target.",
+      "property": [
+        "contact",
+        "punch"
+      ]
+    }
+  }
+}

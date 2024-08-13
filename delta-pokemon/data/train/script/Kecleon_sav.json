@@ -1,0 +1,42 @@
+{
+  "species": "Kecleon",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Color Change": "The type of this Pokemon changes to the type of a move it is hit by."
+  },
+  "moves": {
+    "Liquidation": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "property": [
+        "contact"
+      ],
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Lick": {
+      "power": 30,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "property": [
+        "contact"
+      ],
+      "effect": "Has a 30% chance to paralyze the target."
+    },
+    "Dizzy Punch": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "property": [
+        "contact"
+      ],
+      "effect": "Has a 20% chance to confuse the target."
+    }
+  }
+}

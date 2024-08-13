@@ -1,0 +1,42 @@
+{
+  "species": "Deviljho",
+  "types": [
+    "Dark",
+    "Dragon"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Endless Hunger": "Restores HP equal to 25% of damage dealt with biting moves.",
+    "Territorial Domination": "Raises Attack by 1 stage when entering battle."
+  },
+  "moves": {
+    "Devour": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to flinch the target.",
+      "property": [
+        "contact",
+        "bite"
+      ]
+    },
+    "Territorial Roar": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Lowers the Defense and Special Defense of all opponents by 1 stage."
+    },
+    "Rampage": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to cause the user to become confused.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "species": "Torterra",
+  "types": [
+    "Grass",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Anger Shell": "At 1/2 or less of this Pokemon's max HP: Atk, Sp. Atk, Spe x1.25, and Def, Sp. Def x0.75."
+  },
+  "moves": {
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Sp. Def by 1 stage."
+    },
+    "Giga Drain": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "The user recovers 1/2 the HP lost by the target."
+    }
+  }
+}

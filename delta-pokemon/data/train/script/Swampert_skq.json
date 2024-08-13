@@ -1,0 +1,30 @@
+{
+  "species": "Swampert",
+  "types": [
+    "Water",
+    "Ground"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Torrent": "If this Pokemon's HP is above 1/2 and below its max HP before it uses a Water-type move, the move raises its atk and spa by 1 stage and removes all of its stats change."
+  },
+  "moves": {
+    "Liquidation": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    }
+  }
+}

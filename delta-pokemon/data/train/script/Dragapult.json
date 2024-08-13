@@ -1,0 +1,45 @@
+{
+  "species": "Dragapult",
+  "types": [
+    "Dragon",
+    "Ghost"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Clear Body": "Prevents other Pokemon from lowering this Pokemon's stat stages."
+  },
+  "moves": {
+    "Dragon Darts": {
+      "power": 50,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Hits twice."
+    },
+    "Phantom Force": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "This attack charges on the first turn and executes on the second. On the first turn, the user avoids all attacks.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    }
+  },
+  "base": {
+    "hp": 88,
+    "atk": 120,
+    "def": 75,
+    "spa": 100,
+    "spd": 75,
+    "spe": 142
+  }
+}

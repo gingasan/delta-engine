@@ -1,0 +1,49 @@
+{
+  "species": "Zinorgeon",
+  "types": [
+    "Electric",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Thunder Surge": "On switch-in, this Pokemon summons Electric Terrain for 5 turns.",
+    "Apex Fury": "This Pokemon's each Electric-type attack has a 20% chance to paralyze the target. If the target is already paralyzed, damage from Electric-type moves is doubled."
+  },
+  "moves": {
+    "Volt Slam": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Electric",
+      "effect": "No additional effect."
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Electric Orb": {
+      "power": 60,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Hit 3 times."
+    },
+    "Thunder Howl": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "No additional effect."
+    }
+  }
+}

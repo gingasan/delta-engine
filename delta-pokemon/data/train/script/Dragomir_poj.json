@@ -1,0 +1,42 @@
+{
+  "species": "Dragomir",
+  "types": [
+    "Dragon",
+    "Psychic"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Mystic Eyes": "This Pokemon cannot have its stats lowered.",
+    "Focused Destruction": "Once per turn, this Pokemon can randomly lower one of the opponent's stats by one stage."
+  },
+  "moves": {
+    "Legend Strike": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Mind Shatter": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 30% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Recover": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    },
+    "Psychic Blast": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to paralyze the target."
+    }
+  }
+}

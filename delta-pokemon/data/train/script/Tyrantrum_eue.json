@@ -1,0 +1,43 @@
+{
+  "species": "Tyrantrum",
+  "types": [
+    "Rock",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Rock Head": "This Pokemon does not take recoil damage."
+  },
+  "moves": {
+    "Head Smash": {
+      "power": 150,
+      "accuracy": 80,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Deals recoil damage to the user equal to 50% the damage dealt.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Psychic Fangs": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Psychic",
+      "effect": "Destroys the effects of Reflect, Light Screen, and Aurora Veil on the target side of the field.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

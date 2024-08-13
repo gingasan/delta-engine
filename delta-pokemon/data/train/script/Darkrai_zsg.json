@@ -1,0 +1,26 @@
+{
+  "species": "Darkrai",
+  "types": [
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Bad Dreams": "Opposing Pokemon with Sleep status lose 1/8 of their max HP each turn."
+  },
+  "moves": {
+    "Dark Pulse": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    },
+    "Hypnosis": {
+      "power": 0,
+      "accuracy": 60,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Causes the target to fall asleep."
+    }
+  }
+}

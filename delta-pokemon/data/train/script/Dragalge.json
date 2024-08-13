@@ -1,0 +1,42 @@
+{
+  "species": "Dragalge",
+  "types": [
+    "Dragon",
+    "Poison"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Poison Point": "Pokemon making contact with this Pokemon has a 30% chance of being poisoned."
+  },
+  "moves": {
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Sludge Bomb": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    },
+    "Toxic Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Raises the user's spa and spd by 1 stage. If the opponent is poisoned or badly poisoned, additionally raises the user's def by 1 stage."
+    }
+  },
+  "base": {
+    "hp": 95,
+    "atk": 75,
+    "def": 90,
+    "spa": 133,
+    "spd": 123,
+    "spe": 84
+  }
+}

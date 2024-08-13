@@ -1,0 +1,46 @@
+{
+  "species": "Garchomp",
+  "types": [
+    "Dragon",
+    "Ground"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Rough Skin": "Pokemon making contact with this Pokemon lose 1/8 of their max HP."
+  },
+  "moves": {
+    "Sand Tomb": {
+      "power": 35,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Traps the target for five turns. Causes damage to the target equal to 1/8 of its maximum HP at the end of each turn during effect."
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn."
+    }
+  },
+  "base": {
+    "hp": 108,
+    "atk": 130,
+    "def": 95,
+    "spa": 80,
+    "spd": 85,
+    "spe": 102
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "species": "Red-Moon",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Pressure": "On switch-in, this Pokemon lowers the Defense and Special Defense of opponents by 1 stage."
+  },
+  "moves": {
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Sky Attack": {
+      "power": 140,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "This attack charges on the first turn and executes on the second. On the first turn, the user raises its Defense and Special Defense by 1 stage. On the second, has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

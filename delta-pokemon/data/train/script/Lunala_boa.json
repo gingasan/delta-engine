@@ -1,0 +1,49 @@
+{
+  "species": "Lunala",
+  "types": [
+    "Psychic",
+    "Ghost"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Shadow Shield": "If this Pokemon is at full HP, damage taken from attacks is halved.",
+    "Spectral Boost": "When this Pokemon lands a hit, it raises its Special Attack by 1 stage."
+  },
+  "moves": {
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to lower the target's Spe by 1 stage."
+    },
+    "Moonblast": {
+      "power": 95,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "Has a 30% chance to lower the target's SpA by 1 stage."
+    },
+    "Phantom Wave": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Lunar Barrier": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's special defense and defense by 1 stage for three turns."
+    },
+    "Soul Drain": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Heals the user for half the damage dealt."
+    }
+  }
+}

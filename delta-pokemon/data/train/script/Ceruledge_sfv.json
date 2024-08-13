@@ -1,0 +1,33 @@
+{
+  "species": "Ceruledge",
+  "types": [
+    "Fire",
+    "Ghost"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Inverse Armor": "If a physical attack hits this Pokemon, the type effectiveness of the move is inversed."
+  },
+  "moves": {
+    "Bitter Blade": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "The user recovers 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Shadow Claw": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "The ratio for critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

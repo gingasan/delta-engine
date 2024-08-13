@@ -1,0 +1,35 @@
+{
+  "species": "Suanyu",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Terrifying Presence": "Upon entry, lowers the target's Attack by 1 stage.",
+    "Mystic Cry": "Has a 30% chance to confuse the attacker when this Pokemon is hit by a move."
+  },
+  "moves": {
+    "Jade Shard": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Serpent Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Flying",
+      "effect": "Raises the user's Speed by 2 stages."
+    },
+    "Echoing Cry": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to confuse the target and is always critical if the target is already confused."
+    }
+  }
+}

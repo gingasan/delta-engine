@@ -1,0 +1,56 @@
+{
+  "species": "Sharpedo",
+  "types": [
+    "Water",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Speed Boost": "This Pokemon's Speed is raised by 1 stage at the end of each turn.",
+    "Razor Fin": "This Pokemon's biting moves have their power increased by 50%."
+  },
+  "moves": {
+    "Crunch": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "bite",
+        "contact"
+      ]
+    },
+    "Liquidation": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Aqua Jet": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Water",
+      "effect": "Usually goes first.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Fin Slash": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

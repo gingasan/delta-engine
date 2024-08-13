@@ -1,0 +1,49 @@
+{
+  "species": "Annihilape",
+  "types": [
+    "Fighting",
+    "Ghost"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Defiant": "This Pokemon's Attack is raised by 2 for each of its stats that is lowered by the target."
+  },
+  "moves": {
+    "Rage Fist": {
+      "power": 50,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "Power is equal to 50+(X*50), where X is the total number of times the user has been hit by a damaging attack during the battle. X cannot be greater than 6.",
+      "property": [
+        "contact",
+        "punch"
+      ]
+    },
+    "Close Combat": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Lowers the user's Defense and Special Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Final Gambit": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "Deals damage to the target equal to the user's current HP. If this move is successful, the user faints."
+    }
+  },
+  "base": {
+    "hp": 120,
+    "atk": 135,
+    "def": 90,
+    "spa": 75,
+    "spd": 90,
+    "spe": 90
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "species": "Aerodactyl",
+  "types": [
+    "Rock",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Momentum Claws": "This Pokemon's moves with claws gain 10 power for each time any single move with claws has been used.",
+    "Wind Rider": "This Pokemon's Speed is raised 2 stages if it uses a Flying-type move."
+  },
+  "moves": {
+    "Rock Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dual Wingbeat": {
+      "power": 40,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Hits twice.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Air Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Stone Edge": {
+      "power": 100,
+      "accuracy": 80,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a higher chance for a critical hit.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

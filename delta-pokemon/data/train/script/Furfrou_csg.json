@@ -1,0 +1,32 @@
+{
+  "species": "Furfrou",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Fur Coat": "Halves damage taken from physical moves."
+  },
+  "moves": {
+    "Thunder Fang": {
+      "power": 65,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target. Has a separate 10% chance to cause the target to flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ice Fang": {
+      "power": 65,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target. Has a separate 10% chance to cause the target to flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

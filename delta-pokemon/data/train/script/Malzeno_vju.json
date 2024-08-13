@@ -1,0 +1,35 @@
+{
+  "species": "Malzeno",
+  "types": [
+    "Dragon",
+    "Dark"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Symbiotic Control": "Increases the power of draining moves by 25%.",
+    "Bloodening Surge": "This Pokemon's each drain recharges itself once. After reaching 5, it will enter Bloodening condition, its attack and special attack is increased by 50%."
+  },
+  "moves": {
+    "Bloodblight Strike": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Drains 1/8 of the target's max HP and gains additional one rechage."
+    },
+    "Dragon Breath": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to paralyze the target."
+    },
+    "Quirio Beam": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "The user recovers 1/2 the HP lost by the target."
+    }
+  }
+}

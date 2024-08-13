@@ -1,0 +1,49 @@
+{
+  "species": "Nergigante",
+  "types": [
+    "Dragon",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Regenerative Spikes": "On switch-in, this Pokemon is covered with spikes. It restores 1/10 of its max HP at the end of each turn if its spikes are intact.",
+    "Spike Burst": "When this Pokemon's spikes are broken, it releases damage to all opponents of 1/8 of their max HP and lowers their Defense by 1 stage."
+  },
+  "moves": {
+    "Spike Slam": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "If the user's spikes are intact, break the spikes, dealing additional damage of 1/16 of the target's max HP.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Dive": {
+      "power": 120,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "The user takes recoil damage equal to 1/3 of the damage dealt.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Regenerate": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user heals 50% of its max HP and regenerates spikes if broken.",
+      "property": []
+    },
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    }
+  }
+}

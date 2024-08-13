@@ -1,0 +1,30 @@
+{
+  "species": "Skarmory",
+  "types": [
+    "Steel",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Tinted Lens": "The power of not very effective moves is doubled."
+  },
+  "moves": {
+    "Metal Claw": {
+      "power": 50,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 50% chance to raise the user's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Air Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch."
+    }
+  }
+}

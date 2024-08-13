@@ -1,0 +1,26 @@
+{
+  "species": "Porygon-Z",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Unknown",
+  "ability": {
+    "Galvanize": "Normal-type moves become Electric type and their power is boosted by 30%"
+  },
+  "moves": {
+    "Tri Attack": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Has a 20% chance to paralyze or burn or freeze the target"
+    },
+    "Tri Beam": {
+      "power": 45,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Hits 3 times in one turn"
+    }
+  }
+}

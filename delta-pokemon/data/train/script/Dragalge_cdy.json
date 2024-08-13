@@ -1,0 +1,48 @@
+{
+  "species": "Dragalge",
+  "types": [
+    "Poison"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Merciless": "This Pokemon's attacks are critical hits if the target is poisoned.",
+    "Intoxicate": "When this Pokemon uses a Poison-type move, it has a 10% chance at the end of the turn of increasing its Special Attack by 1 stage."
+  },
+  "moves": {
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Sludge Bomb": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    },
+    "Toxic": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Badly poison the target."
+    },
+    "Scald": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Venom Drench": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Lowers the target's Attack, Special Attack, and Speed by 1 stage if the target is poisoned."
+    }
+  }
+}

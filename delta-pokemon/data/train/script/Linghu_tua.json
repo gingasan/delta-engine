@@ -1,0 +1,36 @@
+{
+  "species": "Linghu",
+  "types": [
+    "Grass",
+    "Steel"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Gourd Resilience": "Reduces damage from all types of moves by 25% if the user's HP is above 50%.",
+    "Enduring Energy": "Restores 1/16 of its maximum HP if it uses a Grass-type move during Hail or Snow."
+  },
+  "moves": {
+    "Verdant Goad": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Grass",
+      "effect": "Has a 30% chance to lower the target's Special Attack by 1 stage."
+    },
+    "Metallic Rampart": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "priority": -4,
+      "type": "Steel",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage and reflects 25% of the physical damage taken this turn back to the attacker."
+    },
+    "Bovine Crush": {
+      "power": 120,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 20% chance to cause the target to flinch."
+    }
+  }
+}

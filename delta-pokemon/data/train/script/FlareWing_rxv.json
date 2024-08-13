@@ -1,0 +1,55 @@
+{
+  "species": "Flare-Wing",
+  "types": [
+    "Fire",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Battle Blaze": "This Pokemon's Fire attacks cause additional damage equal to the opponent Pokemon's all positive stat stages x10.",
+    "Dragon Fury": "When this Pokemon's HP drops below 50%, its Dragon-type moves deal 1.5x damage."
+  },
+  "moves": {
+    "Blazing Assault": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Draco Sweep": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Reduces the target's Special Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ignition Burst": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Always results in a critical hit if the user's HP is below 30%."
+    },
+    "Wing Slash": {
+      "power": 80,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Flare Blitz": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Recoil damage equal to 1/3 of the damage dealt."
+    }
+  }
+}

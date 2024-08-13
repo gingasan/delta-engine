@@ -1,0 +1,39 @@
+{
+  "species": "Scizor",
+  "types": [
+    "Bug",
+    "Steel"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Technician": "This Pokemon's moves of 60 power or less have 1.5x power, including Struggle."
+  },
+  "moves": {
+    "Bullet Punch": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Steel",
+      "effect": "Usually goes first.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bug Tangle": {
+      "power": 15,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Bug",
+      "effect": "Hits four times."
+    }
+  },
+  "base": {
+    "hp": 70,
+    "atk": 150,
+    "def": 130,
+    "spa": 75,
+    "spd": 100,
+    "spe": 75
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "species": "Hippowdon",
+  "types": [
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sand Spit": "When hit by a attack, this Pokemon summons a sandstorm."
+  },
+  "moves": {
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Sludge Wave": {
+      "power": 95,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Poison",
+      "effect": "Has a 10% chance to poison the target."
+    }
+  }
+}

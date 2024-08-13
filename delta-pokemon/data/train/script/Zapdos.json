@@ -1,0 +1,57 @@
+{
+  "species": "Zapdos",
+  "types": [
+    "Electric",
+    "Flying"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Laser Eye": "This Pokemon' moves of 70 accuracy or less have 1.5x accuracy.",
+    "Competitive": "This Pokemon's Sp. Atk is raised by 2 for each of its stats that is lowered by a foe."
+  },
+  "moves": {
+    "Hurricane": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to confuse the target. If the weather is Rain Dance, this move does not check accuracy. If the weather is Sunny Day, this move's accuracy is 50%."
+    },
+    "Zap Cannon": {
+      "power": 120,
+      "accuracy": 50,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 100% chance to paralyze the target."
+    },
+    "Focus Blast": {
+      "power": 120,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Energy recovery": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Fail if the last move is not Electric-type. Improves the user's Special Attack, Special Defense, and Speed by 1 stage."
+    },
+    "Inferno": {
+      "power": 100,
+      "accuracy": 50,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 100% chance to burn the target."
+    }
+  },
+  "base": {
+    "hp": 90,
+    "atk": 90,
+    "def": 85,
+    "spa": 125,
+    "spd": 90,
+    "spe": 120
+  }
+}

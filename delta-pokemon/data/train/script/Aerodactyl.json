@@ -1,0 +1,38 @@
+{
+  "species": "Aerodactyl",
+  "types": [
+    "Rock",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Tough Claws": "This Pokemon's contact moves have their power multiplied by 1.3."
+  },
+  "moves": {
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Dual Wingbeat": {
+      "power": 40,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Hits twice.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 80,
+    "atk": 135,
+    "def": 85,
+    "spa": 70,
+    "spd": 80,
+    "spe": 150
+  }
+}

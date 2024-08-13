@@ -1,0 +1,29 @@
+{
+  "species": "Chromeleon",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Unknown",
+  "ability": {
+    "Adaptive Camouflage": "50% chance for this Pokemon to change to the type of a move it is hit by."
+  },
+  "moves": {
+    "Aqua Slash": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "30% chance to make the target flinch."
+    },
+    "Ghostly Claw": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "20% chance to lower the target's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

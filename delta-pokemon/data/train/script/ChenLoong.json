@@ -1,0 +1,35 @@
+{
+  "species": "Chen-Loong",
+  "types": [
+    "Ice",
+    "Water"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Tailwind": "On switch-in, this Pokemon summons Snow and sets up Aurora Veil, which halves both physical and special damage to the user for 5 turns."
+  },
+  "moves": {
+    "Blizzard": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target. If the weather is Snow, this move does not check accuracy."
+    },
+    "Hydro Pump": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "No additional effect."
+    }
+  },
+  "base": {
+    "hp": 150,
+    "atk": 85,
+    "def": 90,
+    "spa": 105,
+    "spd": 110,
+    "spe": 60
+  }
+}

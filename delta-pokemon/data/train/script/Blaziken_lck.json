@@ -1,0 +1,30 @@
+{
+  "species": "Blaziken",
+  "types": [
+    "Fire",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Burn Brace": "This Pokemon cannot be frozen when its HP is 1/3 or less of its maximum HP."
+  },
+  "moves": {
+    "Fire Blast": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "High Jump Kick": {
+      "power": 130,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "If this attack misses the target, the user takes crash damage equal to half their maximum HP.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

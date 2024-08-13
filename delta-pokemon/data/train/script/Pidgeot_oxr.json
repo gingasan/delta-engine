@@ -1,0 +1,30 @@
+{
+  "species": "Pidgeot",
+  "types": [
+    "Normal",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Keen Eye": "Prevents other Pokemon from lowering this Pokemon's accuracy stat."
+  },
+  "moves": {
+    "Steel Wing": {
+      "power": 70,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 10% chance to raise the user's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Hyper Beam": {
+      "power": 150,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "User cannot move next turn."
+    }
+  }
+}

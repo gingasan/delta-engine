@@ -1,0 +1,33 @@
+{
+  "species": "Blazorus",
+  "types": [
+    "Fire",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Blaze Soul": "At 1/2 or less of its max HP, this Pokemon's offensive stats are 2x."
+  },
+  "moves": {
+    "Inferno Fist": {
+      "power": 90,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target and the ratio for critical hit +2.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Triple Strike": {
+      "power": 25,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Hits three times.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

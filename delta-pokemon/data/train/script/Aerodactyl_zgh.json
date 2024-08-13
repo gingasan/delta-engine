@@ -1,0 +1,61 @@
+{
+  "species": "Aerodactyl",
+  "types": [
+    "Rock",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Rock Head": "This Pokemon does not receive recoil damage from its recoil moves.",
+    "Velocity Surge": "When the user's Speed is raised, the user's Attack is raised by 1 stage."
+  },
+  "moves": {
+    "Head Smash": {
+      "power": 120,
+      "accuracy": 80,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "If the user's HP is at 100%, the power is 180 instead of 120. The user takes 25% recoil damage.",
+      "property": [
+        "recoil"
+      ]
+    },
+    "Sky Attack": {
+      "power": 140,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Raises the target's Defense by 1 stage before attacking. Has a 50% chance to make the target flinch if it hits."
+    },
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Aerial Ace": {
+      "power": 60,
+      "accuracy": 1000000,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Never misses.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

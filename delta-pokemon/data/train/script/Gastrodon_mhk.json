@@ -1,0 +1,50 @@
+{
+  "species": "Gastrodon",
+  "types": [
+    "Water",
+    "Ground"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Storm Drain": "This Pokemon draws Water moves to itself to raise Sp. Atk by 1; Water immunity."
+  },
+  "moves": {
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Surf": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": ""
+    },
+    "Pain Split": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Shares the combined HP of the user and target equally."
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn."
+    },
+    "Ice Beam": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target."
+    }
+  }
+}

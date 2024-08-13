@@ -1,0 +1,42 @@
+{
+  "species": "Moltaroth",
+  "types": [
+    "Fire",
+    "Steel"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Magma Armor": "Prevents the Pokemon from being frozen and increases its Fire-type move power by 30% when its HP is below 50%.",
+    "Proten": "This Pokemon's type changes to the type of the move it is using."
+  },
+  "moves": {
+    "Molten Breath": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Gold Meltdown": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": ""
+    },
+    "Fury Charge": {
+      "power": 130,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "The user takes recoil damage equal to 33% of the damage dealt."
+    },
+    "Enrage": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Raises the user's Attack and Speed stats by 1 stage."
+    }
+  }
+}

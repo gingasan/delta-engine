@@ -1,0 +1,41 @@
+{
+  "species": "Cyclonox",
+  "types": [
+    "Rock",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Titan Gaze": "The power of Rock-type moves is increased by 50% in the next turn when the user is hit by a Special move."
+  },
+  "moves": {
+    "Cyclone Smash": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Titanic Roar": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "Has a 30% chance to confuse the target."
+    },
+    "Crafted Strike": {
+      "power": 90,
+      "accuracy": 100000,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Increases the user's Defense by 1 stage if it hits."
+    },
+    "Mighty Stomp": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Has a 10% chance to flinch the target."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "species": "Luminarae",
+  "types": [
+    "Electric",
+    "Fairy"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Aegis Shield": "Reduces 20% of damage taken if this Pokemon has any status condition."
+  },
+  "moves": {
+    "Thunderbolt": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target."
+    },
+    "Mystic Gleam": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "Has a 20% chance to raise the user's Special Attack by 1 stage."
+    }
+  }
+}

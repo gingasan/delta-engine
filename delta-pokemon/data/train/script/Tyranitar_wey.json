@@ -1,0 +1,30 @@
+{
+  "species": "Tyranitar",
+  "types": [
+    "Rock",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Inner Health": "At the end of each turn, this Pokemon restores 10% of its max HP."
+  },
+  "moves": {
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Crunch": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

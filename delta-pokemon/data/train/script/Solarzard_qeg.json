@@ -1,0 +1,27 @@
+{
+  "species": "Solarzard",
+  "types": [
+    "Fire",
+    "Grass"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Solar Flare": "If Sunny Day is active, this Pokemon's moves gain 30 additional power, losing 1/8 max HP at the end of each turn."
+  },
+  "moves": {
+    "Fire Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    },
+    "Hurricane": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to confuse the target. If the weather is Rain Dance, this move does not check accuracy. If the weather is Sunny Day, this move's accuracy is 50%."
+    }
+  }
+}

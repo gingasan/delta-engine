@@ -1,0 +1,27 @@
+{
+  "species": "Duraludon",
+  "types": [
+    "Steel",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sniper": "Increases critical hit damage to 2.25x instead of 1.5x."
+  },
+  "moves": {
+    "Flash Cannon": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Tri Attack": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "Has a 20% chance to either burn, freeze or paralyze the target."
+    }
+  }
+}

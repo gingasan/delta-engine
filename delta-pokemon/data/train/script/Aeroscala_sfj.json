@@ -1,0 +1,42 @@
+{
+  "species": "Aeroscala",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Cyclone Shield": "For the first 3 turns of the battle, creates a wind barrier that raises the user's Defense and Special Defense by 1 stage at the end of each turn.",
+    "Tempest Fury": "Increases the power of Flying-type moves by 50% when HP is below 1/3."
+  },
+  "moves": {
+    "Wind Vortex": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target dizzy for 3 turns. Each end of the turn, the target has a 50% chance to fall asleep. The dizzy condition is removed once it sleeps. This effect will not occur when the target is already in a status."
+    },
+    "Metallic Scales": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage."
+    },
+    "Gale Force": {
+      "power": 110,
+      "accuracy": 75,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "This move has a high critical hit ratio."
+    },
+    "Ancient Wisdom": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Boosts the user's Special Attack and Special Defense by 1 stage each."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "species": "Lucario",
+  "types": [
+    "Fighting",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Adaptability": "This Pokemon's same-type attack bonus (STAB) is 2 instead of 1.5."
+  },
+  "moves": {
+    "Aura Blade": {
+      "power": 90,
+      "accuracy": 100,
+      "priority": 0,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Has a 30% chance to make the target flinch and the ratio for critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bullet Punch": {
+      "power": 40,
+      "accuracy": 100,
+      "priority": 1,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 10% chance to lower the target's Defense by 1 stage. Usually goes first.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

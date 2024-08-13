@@ -1,0 +1,30 @@
+{
+  "species": "Scizor",
+  "types": [
+    "Bug",
+    "Steel"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Tough Armor": "This Pokemon's moves of 75 power or less have 1.2x power. If this Pokemon has taken 150 or more total damage without fainting, it heals 25% of the damage taken."
+  },
+  "moves": {
+    "Steel Wing": {
+      "power": 70,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Raises the user's Defense by 1 stage after being used 3 times in a battle.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bug Rush": {
+      "power": 10,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Bug",
+      "effect": "Hits five times."
+    }
+  }
+}

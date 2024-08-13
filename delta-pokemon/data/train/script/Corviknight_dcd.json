@@ -1,0 +1,52 @@
+{
+  "species": "Corviknight",
+  "types": [
+    "Flying",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Mirror Armor": "Bounces back only the stat-lowering effects of moves.",
+    "Steel Clad": "Reduces damage taken from super-effective moves by 25%."
+  },
+  "moves": {
+    "Wing Slash": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "No additional effect."
+    },
+    "Steel Wing": {
+      "power": 70,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 10% chance to raise the user's Defense by 1 stage."
+    },
+    "Mirror Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage."
+    },
+    "Sky Dive": {
+      "power": 120,
+      "accuracy": 75,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "User takes recoil damage equal to 1/3 of the damage dealt."
+    },
+    "Body Press": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Damage is calculated using the user's Defense stat as its Attack, including stat stage changes.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

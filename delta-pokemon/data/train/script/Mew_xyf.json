@@ -1,0 +1,44 @@
+{
+  "species": "Mew",
+  "types": [
+    "Psychic"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Moody": "Raises a random stat by 2 stages and lowers another stat by 1 stage at the end of each turn.",
+    "Mirage Shield": "Any damage over 50% of this Pokemon's maximum HP is reduced by half."
+  },
+  "moves": {
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Play Rough": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fairy",
+      "effect": "Has a 10% chance to lower the target's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Astral Beam": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Mind Shield": {
+      "power": 0,
+      "accuracy": 1000000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage."
+    }
+  }
+}

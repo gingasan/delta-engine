@@ -1,0 +1,30 @@
+{
+  "species": "Steelix",
+  "types": [
+    "Steel",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sturdy": "If this Pokemon is at full HP, it survives one hit with at least 1 HP."
+  },
+  "moves": {
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    },
+    "Heavy Slam": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "property": [
+        "contact"
+      ],
+      "effect": "Lowers the user's Defense and Speed by 1 stage."
+    }
+  }
+}

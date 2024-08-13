@@ -1,0 +1,41 @@
+{
+  "species": "Blaziken",
+  "types": [
+    "Fire",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Blaze": "At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5x with Fire attacks."
+  },
+  "moves": {
+    "Blaze Kick": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target and the ratio for critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Double Kick": {
+      "power": 30,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Hits twice.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 80,
+    "atk": 150,
+    "def": 80,
+    "spa": 78,
+    "spd": 80,
+    "spe": 132
+  }
+}

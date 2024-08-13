@@ -1,0 +1,55 @@
+{
+  "species": "Blackwing",
+  "types": [
+    "Dark",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Black Feather": "This Pokemon acquires 3 Black Feather around it when switch-in. When taken damage from moves, takes 50% damage at cost of one Black Feather. If Black Feather is available, this Pokemon loses 1/8 its max HP at the end of each turn.",
+    "Shadow Glide": "This Pokemon's Speed is raised by 2 stages if hit by a Physical move."
+  },
+  "moves": {
+    "Dark Tempest": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target’s Defense by 1 stage."
+    },
+    "Wing Beat": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Has a 10% chance to flinch the target."
+    },
+    "Shadow Claw": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a higher critical hit ratio.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Feather Storm": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Flying",
+      "effect": "Lowers the target's accuracy by 2 stages."
+    },
+    "Night Dive": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "The user recovers half the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

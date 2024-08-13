@@ -1,0 +1,35 @@
+{
+  "species": "Almudron",
+  "types": [
+    "Ground",
+    "Water"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Muddy Secretion": "Active Pokemon without this ability have their speed multiplied by 0.7.",
+    "Soil Absorption": "This Pokemon recovers 1/8th of its maximum HP if it hits a foe with a Ground-type move."
+  },
+  "moves": {
+    "Mud Wave": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Mud Wall": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Ground",
+      "effect": "Creates a wall of mud that halves the damage of all Special moves for 5 turns."
+    },
+    "Golden Mire": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 20% chance to trap the target in mud for 2-5 turns, dealing damage of 1/16 of its maximum HP each end of turn."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "species": "Charizard",
+  "types": [
+    "Fire",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Solar Power": "If Sunny Day is active, this Pokemon's Sp. Atk is 1.5x and loses 1/8 max HP per end of turn."
+  },
+  "moves": {
+    "Fire Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    },
+    "Hurricane": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to confuse the target. If the weather is Rain Dance, this move does not check accuracy. If the weather is Sunny Day, this move's accuracy is 50%."
+    }
+  },
+  "base": {
+    "hp": 78,
+    "atk": 90,
+    "def": 78,
+    "spa": 139,
+    "spd": 115,
+    "spe": 100
+  }
+}

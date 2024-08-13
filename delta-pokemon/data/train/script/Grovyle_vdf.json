@@ -1,0 +1,26 @@
+{
+  "species": "Grovyle",
+  "types": [
+    "Grass"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Seed Sower": "When this Pokemon is hit by an attack, the effect of Grassy Terrain begins."
+  },
+  "moves": {
+    "Leech Seed": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Grass",
+      "effect": "Plants a seed on the target that drains 1/8 of its HP each end of turn."
+    },
+    "Seed Flare": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "Lowers the target's Special Defense by 2 stages."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "species": "Ting-Lu",
+  "types": [
+    "Dark",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Vessel of Ruin": "Target Pokemon have their Special Attack multiplied by 0.75."
+  },
+  "moves": {
+    "Ruination": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Deals damage to the target equal to half of its current HP."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    }
+  },
+  "base": {
+    "hp": 165,
+    "atk": 110,
+    "def": 125,
+    "spa": 65,
+    "spd": 85,
+    "spe": 50
+  }
+}

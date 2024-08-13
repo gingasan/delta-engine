@@ -1,0 +1,45 @@
+{
+  "species": "Huashe",
+  "types": [
+    "Ghost",
+    "Flying"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Wailing Echo": "Has a 30% chance to lower the target's Special Attack when Huashe is hit by a Special move.",
+    "Flood Herald": "When Rain Dance is active, it increases its Speed by 1 stage and reduces the opponent's Accuracy by 1 stage at each end of the turn."
+  },
+  "moves": {
+    "Phantom Cry": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Flood Surge": {
+      "power": 100,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Spectral Glide": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Flying",
+      "effect": "Make the user immune to all Ghost-type moves for the next three turns."
+    },
+    "Serpent Strike": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to cause the target to flinch",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

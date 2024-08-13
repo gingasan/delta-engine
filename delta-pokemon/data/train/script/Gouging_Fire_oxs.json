@@ -1,0 +1,57 @@
+{
+  "species": "Gouging Fire",
+  "types": [
+    "Fire",
+    "Dragon"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Protosynthesis": "On switch-in, boosts the Pokemon's highest stat by 30%. If the highest stat is speed, boosts by 50%."
+  },
+  "moves": {
+    "Scale Shot": {
+      "power": 25,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Hits two to five times. Lowers the user's Defense by 1 stage and raises the user's Speed by 1 stage after the last hit. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times."
+    },
+    "Flare Blitz": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target. If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Morning Sun": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP if no weather conditions are in effect, 2/3 of its maximum HP if the weather is Sunny Day, and 1/4 of its maximum HP if the weather is Rain Dance, Sandstorm, Snow, or Hail."
+    },
+    "Solar Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Grass",
+      "effect": "Boosts user's Attack by 1 stage if used in sunny day.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Iron Defense": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Raises the user's Defense by 2 stages.",
+      "property": []
+    }
+  }
+}

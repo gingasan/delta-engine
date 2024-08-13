@@ -1,0 +1,42 @@
+{
+  "species": "Chirona",
+  "types": [
+    "Psychic",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Wise Mentor": "Type effect of Psychic-type and Ground-type moves is always 1.",
+    "Nature Blessing": "Heals 1/8 of its maximum HP at the end of each turn when in grassy terrain."
+  },
+  "moves": {
+    "Healing Touch": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Restores 10% of the target's max HP but removes the user's status conditions."
+    },
+    "Nature Wrath": {
+      "power": 100,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 30% chance to lower the target's Speed by 1 stage."
+    },
+    "Philosopher Strike": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Psychic",
+      "effect": "The user's next move deals double damage if the opponent has a status condition."
+    },
+    "Cave Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Ground",
+      "effect": "Raises the user's Defense and Special Defense by 1 stage."
+    }
+  }
+}

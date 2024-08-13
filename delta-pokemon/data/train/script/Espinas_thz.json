@@ -1,0 +1,44 @@
+{
+  "species": "Espinas",
+  "types": [
+    "Poison",
+    "Fire"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Toxic Shield": "Espiker's thick hide reduces damage from physical moves by 30%; prevent from being paralyzed or poisoned; has a 20% chance to inflict Poison when hit by a contact move.",
+    "Blazing Surge": "This Pokemon's Fire-type moves have a 50% chance to inflict Paralysis."
+  },
+  "moves": {
+    "Thorned Assault": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Poison",
+      "effect": "This move has a 50% chance to burn the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Horn Charge": {
+      "power": 120,
+      "accuracy": 75,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "This move has a 30% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Flame Rush": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "This move has a 50% chance to increase the user's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

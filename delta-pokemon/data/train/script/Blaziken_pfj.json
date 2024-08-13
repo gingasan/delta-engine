@@ -1,0 +1,30 @@
+{
+  "species": "Blaziken",
+  "types": [
+    "Fire",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Combustion": "At 1/2 or less of its max HP, this Pokemon's Attack stat is doubled."
+  },
+  "moves": {
+    "Fire Blast": {
+      "power": 110,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Sky Uppercut": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "The ratio for critical hit +2 and has a 10% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

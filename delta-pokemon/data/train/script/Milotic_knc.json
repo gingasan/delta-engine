@@ -1,0 +1,26 @@
+{
+  "species": "Milotic",
+  "types": [
+    "Water"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Competitive": "Raises Special Attack by 2 stages for each stat lowered by an opposing Pokemon."
+  },
+  "moves": {
+    "Scald": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Leaf Storm": {
+      "power": 130,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "Lowers the user's Special Attack by two stages."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "species": "Scizor",
+  "types": [
+    "Bug",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Technician": "This Pokemon's moves of 60 power or less have 1.5x power, including Struggle.",
+    "Metalic Surge": "When this Pokemon enters the battle, its Speed is increased by 1 stage."
+  },
+  "moves": {
+    "Steel Cutter": {
+      "power": 20,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Hits five times. Each hit has a 30% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Quik Pinch": {
+      "power": 45,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Bug",
+      "effect": "Raises the user's Speed by 1 stage before attacking.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Iron Buzz": {
+      "power": 50,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Bug Echo": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 1,
+      "type": "Bug",
+      "effect": "Always moves first."
+    },
+    "Sharp Agility": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Raises the user's Speed and Accuracy by 1 stage each."
+    }
+  }
+}

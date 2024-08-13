@@ -1,0 +1,48 @@
+{
+  "species": "Celebi",
+  "types": [
+    "Psychic",
+    "Grass"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Serene Grace": "This Pokemon's moves have their secondary effect chance doubled."
+  },
+  "moves": {
+    "Leech Seed": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Grass",
+      "effect": "Plants a seed on the target. Each end of turn, the target loses 1/8 of its HP and the user drains that amount of HP."
+    },
+    "Psychic": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Ancient Power": {
+      "power": 60,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Rock",
+      "effect": "Has a 10% chance to raise all the user's stats by 1 stage."
+    },
+    "Giga Drain": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "User recovers 50% of the damage dealt."
+    },
+    "Recover": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Restores up to 50% of the user's maximum HP."
+    }
+  }
+}

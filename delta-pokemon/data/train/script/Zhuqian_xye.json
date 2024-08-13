@@ -1,0 +1,42 @@
+{
+  "species": "Zhuqian",
+  "types": [
+    "Dark",
+    "Steel"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Eclipse Guard": "Increases Defense by 1 stage when hit by a Dark-type move.",
+    "Thunder Roar": "Has a 30% chance to paralyze the attacker when Zhuqian is hit by an attack."
+  },
+  "moves": {
+    "Thunder Lash": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Electric",
+      "effect": "It will cause paralysis. If the target is already paralyzed, the power of this move has a 30% chance to increase by 50%."
+    },
+    "Shadow Coils": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Traps the target for four turns. Damages the target with each turn equal to 1/8 of its maximum HP."
+    },
+    "Steel Howl": {
+      "power": 60,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Raises the user's Special Attack and Special Defense by 1 stage."
+    },
+    "Coiling Guard": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Increases the user's Defense by 2 stages and heals 1/4 of its maximum HP."
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "species": "Alloraptor",
+  "types": [
+    "Dragon",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Prehistoric Fury": "This Pokemon's Dragon-type moves have their power multiplied by 1.5 when its HP is below half.",
+    "Metallic Resilience": "This Pokemon is immune to status conditions while its HP is above half."
+  },
+  "moves": {
+    "Iron Tail": {
+      "power": 100,
+      "accuracy": 75,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Fossil Fang": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ancient Roar": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Lowers the target's Attack and Special Attack by 1 stage."
+    },
+    "Steel Slash": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 10% chance to increase the user's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

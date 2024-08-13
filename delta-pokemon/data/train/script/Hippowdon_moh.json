@@ -1,0 +1,37 @@
+{
+  "species": "Hippowdon",
+  "types": [
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sand Armor": "When this Pokemon is hit by an attack, it has a 25% chance to gain a boost to its Attack stat.",
+    "Earthquake Shield": "Reduces damage taken from Earthquake moves by 50% and heals 1/4 of max HP if hit by one."
+  },
+  "moves": {
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": ""
+    },
+    "Iron Head": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Sandstorm": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Rock",
+      "effect": "Creates a sandstorm for 5 turns."
+    }
+  }
+}

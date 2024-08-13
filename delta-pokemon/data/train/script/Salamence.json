@@ -1,0 +1,35 @@
+{
+  "species": "Salamence",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Intimidate": "On switch-in, this Pokemon lowers the Attack of opponents by 1 stage."
+  },
+  "moves": {
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Hurricane": {
+      "power": 110,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to confuse the target. If the weather is Rain Dance, this move does not check accuracy. If the weather is Sunny Day, this move's accuracy is 50%."
+    }
+  },
+  "base": {
+    "hp": 95,
+    "atk": 90,
+    "def": 85,
+    "spa": 124,
+    "spd": 96,
+    "spe": 110
+  }
+}

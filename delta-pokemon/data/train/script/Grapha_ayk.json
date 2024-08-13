@@ -1,0 +1,42 @@
+{
+  "species": "Grapha",
+  "types": [
+    "Dark",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Dark Revival": "When this Pokemon's HP is knocked out, for one chance, it can revive itself with 50% maximum HP.",
+    "Shadow Swap": "If this Pokemon uses a Dark-type move, it can restore 10% maximum HP."
+  },
+  "moves": {
+    "Shadow Blast": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Dragon Rage": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to burn the target."
+    },
+    "Nightmare Claw": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    },
+    "Abyssal Roar": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Lowers the target's Attack and Special Attack by 1 stage."
+    }
+  }
+}

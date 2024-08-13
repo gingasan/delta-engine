@@ -1,0 +1,27 @@
+{
+  "species": "Aurorus",
+  "types": [
+    "Rock",
+    "Ice"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Refrigerate": "This Pokemon's Normal-type moves become Ice type and their power is boosted by 30%."
+  },
+  "moves": {
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Hyper Beam": {
+      "power": 150,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "User cannot move next turn."
+    }
+  }
+}

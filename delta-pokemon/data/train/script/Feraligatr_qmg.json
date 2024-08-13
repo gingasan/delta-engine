@@ -1,0 +1,32 @@
+{
+  "species": "Feraligatr",
+  "types": [
+    "Water"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sheer Force": "This Pokemon's moves with a secondary effect have 1.3x power, but lose their secondary effect."
+  },
+  "moves": {
+    "Aqua Tail": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "",
+      "property": [
+        "contact"
+      ]
+    },
+    "Storm Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Has a 20% chance to paralyze the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

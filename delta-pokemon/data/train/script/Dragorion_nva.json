@@ -1,0 +1,55 @@
+{
+  "species": "Dragorion",
+  "types": [
+    "Fire",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "End Phase Fury": "Each turn, if this Pokemon uses a status move, it deals damage equal to 1/8 of its max HP to its opponent Pokemon at the end of the turn.",
+    "Flame Shield": "When this Pokemon is hit by a contact move, it has a 30% chance to burn the attacker."
+  },
+  "moves": {
+    "Inferno Claw": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Breath": {
+      "power": 60,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to paralyze the target."
+    },
+    "Fiery Roar": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Fire",
+      "effect": "Lowers the target's Attack by 1 stage and has a 50% chance to burn."
+    },
+    "Heat Wave": {
+      "power": 95,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

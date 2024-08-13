@@ -1,0 +1,42 @@
+{
+  "species": "Drakha",
+  "types": [
+    "Dark",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Shadow Realm": "On switch-in, this Pokemon creates Shadow Realm on the field for 3 turns. Under Shadow Realm, Dark-type moves have their power multiplied by 1.5.",
+    "Destruction Surge": "This Pokemon's next attack deals 2x damage if its stat is lowered."
+  },
+  "moves": {
+    "Abyssal Flame": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Dark Pulse": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to flinch the target."
+    },
+    "Despair Roar": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dark",
+      "effect": "Lowers the target's Attack and Special Attack by 1 stage."
+    },
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    }
+  }
+}

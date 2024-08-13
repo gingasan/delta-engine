@@ -1,0 +1,30 @@
+{
+  "species": "Blaziken",
+  "types": [
+    "Fire",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Blaze Rush": "If Sunny Day is active, this Pokemon's Attack is raised by 1 stage at the end of each turn."
+  },
+  "moves": {
+    "Inferno Kick": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 30% chance to burn the target. Always results in a critical hit during Sunny Day, but cannot crit during Rain Dance."
+    },
+    "Flaming Charge": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Raises the user's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

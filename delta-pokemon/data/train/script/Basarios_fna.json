@@ -1,0 +1,42 @@
+{
+  "species": "Basarios",
+  "types": [
+    "Rock",
+    "Fire"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Heat Vent": "This Pokemon takes 50% less damage from Water and Grass type moves.",
+    "Lava Storm": "This Pokemon releases either a Sleeping Gas, Poison Gas, or Burning Gas after using a Fire-type move. Each gas has a 30% chance to force the target into sleep, poison, or burn status."
+  },
+  "moves": {
+    "Lava Beam": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "No additional effect."
+    },
+    "Poison Cloud": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Poisons all adjacent opponents."
+    },
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    }
+  }
+}

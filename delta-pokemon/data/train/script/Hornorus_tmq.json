@@ -1,0 +1,45 @@
+{
+  "species": "Hornorus",
+  "types": [
+    "Steel",
+    "Ground"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Iron Hide": "Reduces damage taken from Physical moves by 25%.",
+    "Horn Charge": "Increases the user's Attack by 1 stage when hitting the target with a Physical move."
+  },
+  "moves": {
+    "Horn Smash": {
+      "power": 90,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Steel Guard": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Increases the user's Defense and Special Defense by 1 stage each."
+    },
+    "Groundquake": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 20% chance to cause the target to flinch."
+    },
+    "Armored Strike": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "The user gains a temporary shield that absorbs 1/4 of the damage taken in the next turn."
+    }
+  }
+}

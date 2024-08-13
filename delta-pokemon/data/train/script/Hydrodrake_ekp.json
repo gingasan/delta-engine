@@ -1,0 +1,42 @@
+{
+  "species": "Hydrodrake",
+  "types": [
+    "Water",
+    "Poison"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Regenerative Scales": "Restores 1/8 of Hydrodrake's maximum HP at the end of each turn if it has taken damage during the turn.",
+    "Toxic Resilience": "Reduces damage from Poison-type moves by 50%."
+  },
+  "moves": {
+    "Hydra Surge": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 30% chance to confuse the target. If the target is already confused, this move's power increases by 50%."
+    },
+    "Venomous Strike": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Poison",
+      "effect": "Has a 40% chance to poison the target. If the target is already poisoned, this move's damage is doubled."
+    },
+    "Head Rebirth": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Water",
+      "effect": "Restores 1/4 of the user's maximum HP and increases the user's Defense by 1 stage. The user cannot use this move if its HP is full."
+    },
+    "Serpents Wrath": {
+      "power": 90,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Ignores all attacks in two turns."
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "species": "Feraligatr",
+  "types": [
+    "Water"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Sheer Force": "This Pokemon's attacks with secondary effects have 1.3x power; nullifies the effects.",
+    "Sheer Predator": "This Pokemon's moves of 75 power or less have +1 priority."
+  },
+  "moves": {
+    "Waterfall": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ice Fang": {
+      "power": 65,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target and a 10% chance to make it flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Scale Shot": {
+      "power": 25,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Hits two to five times. Lowers the user's Defense by 1 stage and raises the user's Speed by 1 stage after the last hit. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times."
+    },
+    "Bulldoze": {
+      "power": 60,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Has a 100% chance to lower the target's Speed by 1 stage."
+    }
+  }
+}

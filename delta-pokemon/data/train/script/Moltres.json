@@ -1,0 +1,62 @@
+{
+  "species": "Moltres",
+  "types": [
+    "Dark",
+    "Flying"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Berserk": "This Pokemon's Sp. Atk is raised by 1 when it reaches 1/2 or less max HP.",
+    "Competitive": "This Pokemon's Sp. Atk is raised by 2 for each of its stats that is lowered by the target."
+  },
+  "moves": {
+    "Fiery Wrath": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Dark",
+      "effect": "Has a 20% chance to make the target flinch."
+    },
+    "Nasty Plot": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Dark",
+      "effect": "Raises the user's Special Attack by 2 stages."
+    },
+    "Air Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Special",
+      "priority": 0,
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn."
+    },
+    "Roost": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Flying",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  },
+  "base": {
+    "hp": 100,
+    "atk": 85,
+    "def": 90,
+    "spa": 100,
+    "spd": 125,
+    "spe": 100
+  }
+}

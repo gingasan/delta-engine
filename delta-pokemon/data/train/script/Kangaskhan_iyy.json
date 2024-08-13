@@ -1,0 +1,52 @@
+{
+  "species": "Kangaskhan",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Inner Focus": "This Pokemon will not flinch."
+  },
+  "moves": {
+    "Comet Punch": {
+      "power": 18,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "Hits 3 times in one turn.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Brick Break": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "The effects of Reflect and Light Screen end for the target's side of the field before damage is calculated.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Crunch": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dizzy Punch": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "Has a 20% chance to confuse the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

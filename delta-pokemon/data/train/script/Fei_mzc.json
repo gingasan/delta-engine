@@ -1,0 +1,40 @@
+{
+  "species": "Fei",
+  "types": [
+    "Dark",
+    "Poison"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Desolate Trail": "This Pokemon causes the terrain to become Grassy Terrain for 10 turns when it enters battles.",
+    "Omen of Plague": "When this Pokemon is on the field, the oppenent has a 30% chance to be poisoned at the end of each turn."
+  },
+  "moves": {
+    "Plague Fang": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Poison",
+      "effect": "Has a 30% chance to badly poison the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Withering Gaze": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Has a 20% chance to lower the target's Special Attack by 1 stage.",
+      "property": []
+    },
+    "Pestilence": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Poison the opponents and lower their Speed by 1 stage.",
+      "property": []
+    }
+  }
+}

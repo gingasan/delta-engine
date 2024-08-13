@@ -1,0 +1,66 @@
+{
+  "species": "Red-Moon",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Intimidate": "On switch-in, this Pokemon lowers the Attack of opponents by 1 stage.",
+    "Red-Moon Defense": "If this Pokemon receives damage from attack, the attacker loses 1/16 of its max HP. If the attcker is burned, further loses 1/16."
+  },
+  "moves": {
+    "Red Dragon": {
+      "power": 110,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "Has a 30% chance to burn the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Brave Bird": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    },
+    "Iron Head": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Roost": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Flying",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  },
+  "base": {
+    "hp": 97,
+    "atk": 123,
+    "def": 105,
+    "spa": 70,
+    "spd": 82,
+    "spe": 123
+  }
+}

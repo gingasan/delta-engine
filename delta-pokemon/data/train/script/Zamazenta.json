@@ -1,0 +1,58 @@
+{
+  "species": "Zamazenta",
+  "types": [
+    "Steel",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Dauntless Shield": "On switch-in, this Pokemon's Defense is raised by 1 stage.",
+    "Shield Bash": "Each time this Pokemon's defense stat increases by 1, it recovers 1/10 of its maximum HP."
+  },
+  "moves": {
+    "Behemoth Bash": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Play Rough": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Fairy",
+      "effect": "Has a 10% chance to lower the target's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Iron Defense": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Raises the user's Defense by 2 stages."
+    },
+    "Body Press": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Damage is calculated using the user's Defense stat as its Attack, including stat stage changes.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Rest": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "The user falls asleep and restores all of its HP, curing itself of any non-volatile status in the process. Fails if the user has full HP, or is already asleep."
+    }
+  }
+}

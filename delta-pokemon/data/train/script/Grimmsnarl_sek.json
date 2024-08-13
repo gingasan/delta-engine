@@ -1,0 +1,30 @@
+{
+  "species": "Grimmsnarl",
+  "types": [
+    "Dark",
+    "Fairy"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Prankster": "As long as the move is Status, its priority +1."
+  },
+  "moves": {
+    "Spirit Break": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fairy",
+      "effect": "Lowers the target's Special Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bulk Up": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Fighting",
+      "effect": "Raises the user's Attack and Defense by 1 stage."
+    }
+  }
+}

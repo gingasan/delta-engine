@@ -1,0 +1,41 @@
+{
+  "species": "Lumina",
+  "types": [
+    "Psychic",
+    "Fairy"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Empathic Link": "When this Pokemon takes damage from attacks at full HP, the opponent receives the same amount of damage."
+  },
+  "moves": {
+    "Prismatic Beam": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Psychic",
+      "effect": "Has a 20% chance to lower the target's accuracy by 1 stage."
+    },
+    "Fairy Glow": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Fairy",
+      "effect": "Raises the user's Special Attack and Special Defense by 1 stage."
+    },
+    "Dazzling Gleam": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "No additional effect."
+    },
+    "Psycho Shift": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Transfers the user's status condition to the target."
+    }
+  }
+}

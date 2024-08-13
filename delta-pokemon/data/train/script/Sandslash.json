@@ -1,0 +1,45 @@
+{
+  "species": "Sandslash",
+  "types": [
+    "Steel",
+    "Ice"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Slush Rush": "If Snow is active, this Pokemon's Speed is doubled.",
+    "Raging Spikes": "If this Pokemon's HP reaches to 1/2 or less of its max HP, its Triple Axel hits four times."
+  },
+  "moves": {
+    "Triple Axel": {
+      "power": 20,
+      "accuracy": 90,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Ice",
+      "property": [
+        "contact"
+      ],
+      "effect": "Hits three times. Each hit increases the damage by 50%. This move checks accuracy for each hit, and the attack ends if the target avoids a hit."
+    },
+    "Rapid Spin": {
+      "power": 50,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "If this move is successful and the user has not fainted, the effects of Leech Seed and Trap end for the user. Has a 100% chance to raise the user's Speed by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Iron Head": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

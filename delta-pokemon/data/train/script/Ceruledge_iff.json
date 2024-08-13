@@ -1,0 +1,33 @@
+{
+  "species": "Ceruledge",
+  "types": [
+    "Fire",
+    "Ghost"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Ghost Armor": "30% chance to gain Ghost Armor on switch-in. Ghost Armor can also be triggered by a Physical hit. Ghost Armor increases Defense by 1.5x and lasts for 2 turns. During the period, it cannot be triggered repeatedly."
+  },
+  "moves": {
+    "Soul Stealer": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ghost",
+      "effect": "The user recovers 1/3 the HP lost by the target. The target loses 1/6 more HP.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bitter Blade": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "The user recovers 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

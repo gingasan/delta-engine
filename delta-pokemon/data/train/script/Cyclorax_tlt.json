@@ -1,0 +1,46 @@
+{
+  "species": "Cyclorax",
+  "types": [
+    "Rock",
+    "Steel"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Giants Craft": "Boosts the power of Rock and Steel-type moves by 50%. The user's Defense increases by 1 stage when hit by a Rock-type move.",
+    "One-Eyed Stubbornness": "Has a 30% chance to endure a move that would otherwise knock out Cyclorax with 1 HP."
+  },
+  "moves": {
+    "Titanic Strike": {
+      "power": 120,
+      "accuracy": 85,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 20% chance to lower the target's Defense by 1 stage."
+    },
+    "Forged Fist": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Physical",
+      "type": "Steel",
+      "effect": "Has a 30% chance to cause the target to flinch."
+    },
+    "Stubborn Stare": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Steel",
+      "effect": "Increases the user's Attack and Defense by 1 stage each. Also lowers the target's Attack by 1 stage."
+    },
+    "Counter": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": -5,
+      "type": "Fighting",
+      "effect": "Deals damage to the target if its hits the user with a physical attack this turn, equal to twice the HP lost by the user from that attack.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "species": "Salamence",
+  "types": [
+    "Dragon",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Fast Recovery": "If this Pokemon has taken 200 or more total damage without fainting, its Attack raises by 2 stages."
+  },
+  "moves": {
+    "Dragon Claw": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Dual Wingbeat": {
+      "power": 40,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "Hits twice.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "species": "Kangaskhan",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Scrappy": "Fighting, Normal moves hit Ghost.",
+    "Parental Bond": "This Pokemon's damaging moves hit twice. The second hit has its damage quartered."
+  },
+  "moves": {
+    "Double-Edge": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Normal",
+      "effect": "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Fire Punch": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Damage doubles if the target is using Dig."
+    },
+    "Rock Slide": {
+      "power": 75,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Rock",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Power-Up Punch": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Has a 100% chance to raise the user's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    }
+  },
+  "base": {
+    "hp": 105,
+    "atk": 125,
+    "def": 100,
+    "spa": 70,
+    "spd": 100,
+    "spe": 100
+  }
+}

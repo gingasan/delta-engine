@@ -1,0 +1,30 @@
+{
+  "species": "Greninja",
+  "types": [
+    "Water",
+    "Dark"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Proten": "This Pokemon's type changes to the type of the move it is using."
+  },
+  "moves": {
+    "Water Shuriken": {
+      "power": 20,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Hits 2-5 times. Each hit has a 50% chance to be the last."
+    },
+    "Night Slash": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Dark",
+      "effect": "The ratio for critical hit +1.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}
