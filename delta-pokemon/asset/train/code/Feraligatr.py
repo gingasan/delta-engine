@@ -56,7 +56,7 @@ def value():
     return ('Scale Shot',25,90,'Physical','Dragon',0,[])
 
 @Increment(Feraligatr)
-def move_1(self): # Scale Shot
+def move_4(self): # Scale Shot
     hit=True; i=0
     r=rnd()
     if r<0.35:
