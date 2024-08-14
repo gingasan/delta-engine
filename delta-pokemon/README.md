@@ -1,6 +1,6 @@
 # Delta-Pokemon
 
-Delta-Pokemon is a third-party game developed based on *Delta-Engine*. Players can craft their own pokemons by issuing natural language scripts and battle with others.
+Delta-Pokemon is a self-made game developed based on *Delta-Engine*. Players can craft their own pokemons by issuing natural language scripts and battle with others.
 
 
 
