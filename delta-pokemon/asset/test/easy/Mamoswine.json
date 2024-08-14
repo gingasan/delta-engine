@@ -1,0 +1,35 @@
+{
+  "species": "Mamoswine",
+  "types": [
+    "Ice",
+    "Ground"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Snow Cloak": "If Snow is active, this Pokemon's evasiveness is 1.25x."
+  },
+  "moves": {
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "Damage doubles if the target is using Dig."
+    },
+    "Icicle Crash": {
+      "power": 85,
+      "accuracy": 90,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Ice Shard": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Ice",
+      "effect": "Usually goes first."
+    }
+  }
+}

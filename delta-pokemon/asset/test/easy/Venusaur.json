@@ -1,0 +1,41 @@
+{
+  "species": "Venusaur",
+  "types": [
+    "Grass",
+    "Poison"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Chlorophyll": "If Sunny Day is active, this Pokemon's Speed is doubled."
+  },
+  "moves": {
+    "Growth": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Raises the user's Attack and Special Attack by 1 stage. If the weather is Sunny Day, this move raises the user's Attack and Special Attack by 2 stages."
+    },
+    "Giga Drain": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "The user recovers 1/2 the HP lost by the target."
+    },
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Leech Seed": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Grass",
+      "effect": "Plants a seed on the target. Each end of turn, the target loses 1/8 of its HP and the user drains that amount of HP."
+    }
+  }
+}

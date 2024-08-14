@@ -1,0 +1,37 @@
+{
+  "species": "Weezing-Galar",
+  "types": [
+    "Steel",
+    "Poison"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Levitate": "Immune to Ground-type moves."
+  },
+  "moves": {
+    "Strange Steam": {
+      "power": 90,
+      "accuracy": 95,
+      "category": "Special",
+      "priority": 0,
+      "type": "Fairy",
+      "effect": "Has a 20% chance to confuse the target."
+    },
+    "Pain Split": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user and the target's HP become the average of their current HP."
+    },
+    "Will-O-Wisp": {
+      "power": 0,
+      "accuracy": 85,
+      "category": "Status",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Burns the target."
+    }
+  }
+}

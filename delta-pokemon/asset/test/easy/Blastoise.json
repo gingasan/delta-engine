@@ -1,0 +1,40 @@
+{
+  "species": "Blastoise",
+  "types": [
+    "Water"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Torrent": "At 1/3 or less of its max HP, this Pokemon's offensive stat is 1.5x with Water attacks."
+  },
+  "moves": {
+    "Shell Smash": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Lowers the user's Defense and Special Defense by 1 stage. Raises the user's Attack, Special Attack, and Speed by 2 stages."
+    },
+    "Hydro Pump": {
+      "power": 110,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Water",
+      "effect": "No additional effect."
+    },
+    "Ice Beam": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ice",
+      "effect": "Has a 10% chance to freeze the target."
+    },
+    "Aura Sphere": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "This move does not check accuracy."
+    }
+  }
+}

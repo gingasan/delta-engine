@@ -1,0 +1,37 @@
+{
+  "species": "Raging Bolt",
+  "types": [
+    "Electric",
+    "Dragon"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Protosynthesis": "On switch-in, if Sunny Day is active, this Pokemon's highest stat is 1.3x, or 1.5x if Speed."
+  },
+  "moves": {
+    "Calm Mind": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Psychic",
+      "effect": "Raises the user's Special Attack and Special Defense by 1 stage."
+    },
+    "Dragon Pulse": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Dragon",
+      "effect": "No additional effect."
+    },
+    "Thunderbolt": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "species": "Grimmsnarl",
+  "types": [
+    "Dark",
+    "Fairy"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Prankster": "This Pokemon's Status moves have priority raised by 1."
+  },
+  "moves": {
+    "Bulk Up": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Fighting",
+      "effect": "Raises the user's Attack and Defense by 1 stage."
+    },
+    "Spirit Break": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fairy",
+      "effect": "Has a 100% chance to lower the target's Special Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Substitute": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user loses 1/4 of its maximum HP and sets a substitute with the same amount of HP to take damage from attacks for it. The substitute is removed once enough damage (1/4 of max HP) is inflicted. Fails if the user does not have enough HP remaining, or if it already has a substitute."
+    }
+  }
+}

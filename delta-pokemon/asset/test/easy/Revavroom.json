@@ -1,0 +1,51 @@
+{
+  "species": "Revavroom",
+  "types": [
+    "Steel",
+    "Poison"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Filter": "This Pokemon receives 3/4 damage from supereffective attacks."
+  },
+  "moves": {
+    "Shift Gear": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Steel",
+      "effect": "Raises the user's Speed by 2 stages and its Attack by 1 stage."
+    },
+    "Gunk Shot": {
+      "power": 120,
+      "accuracy": 80,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    },
+    "High Horsepower": {
+      "power": 95,
+      "accuracy": 95,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Ground",
+      "effect": "No additional effect.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Iron Head": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Steel",
+      "effect": "Has a 30% chance to make the target flinch.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

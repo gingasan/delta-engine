@@ -1,0 +1,37 @@
+{
+  "species": "Thundurus",
+  "types": [
+    "Electric",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Prankster": "This Pokemon's Status moves have priority raised by 1."
+  },
+  "moves": {
+    "Nasty Plot": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Dark",
+      "effect": "Raises the user's Special Attack by 2 stages."
+    },
+    "Thunderbolt": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Electric",
+      "effect": "Has a 10% chance to paralyze the target."
+    },
+    "Sludge Bomb": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Poison",
+      "effect": "Has a 30% chance to poison the target."
+    }
+  }
+}

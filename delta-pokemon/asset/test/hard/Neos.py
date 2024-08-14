@@ -53,7 +53,7 @@ def move_3(self): # Burn to Ash
 
 @Increment(Neos,'_move_4')
 def value():
-    return ('Echo Burst',90,100,'Special','Water',0,[])
+    return ('Echo Burst',90,100,'Special','Ice',0,[])
 
 @Increment(Neos)
 def move_4(self): # Echo Burst

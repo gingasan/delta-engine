@@ -1,0 +1,46 @@
+{
+  "species": "Arcanine-Hisui",
+  "types": [
+    "Fire",
+    "Rock"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Rock Head": "This Pokemon does not take recoil damage."
+  },
+  "moves": {
+    "Head Smash": {
+      "power": 150,
+      "accuracy": 80,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Rock",
+      "effect": "If the target lost HP, the user takes recoil damage equal to 1/2 the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Flare Blitz": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fire",
+      "property": [
+        "contact"
+      ],
+      "effect": "Has a 10% chance to burn the target. If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target."
+    },
+    "Extreme Speed": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 2,
+      "type": "Normal",
+      "effect": "Nearly always goes first.",
+      "property": [
+        "contact"
+      ]
+    }
+  }
+}

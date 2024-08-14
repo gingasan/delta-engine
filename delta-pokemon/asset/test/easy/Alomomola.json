@@ -1,0 +1,28 @@
+{
+  "species": "Alomomola",
+  "types": [
+    "Water"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Hydration": "This Pokemon has its status cured at the end of each turn if Rain Dance is active."
+  },
+  "moves": {
+    "Scald": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Water",
+      "effect": "Has a 30% chance to burn the target. The target thaws out if it is frozen."
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "species": "Blissey",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Serene Grace": "This Pokemon's moves have their secondary effect chance doubled."
+  },
+  "moves": {
+    "Seismic Toss": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Fighting",
+      "effect": "Deals 100 HP of damage to the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Calm Mind": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's Special Attack and Special Defense by 1 stage."
+    },
+    "Soft-Boiled": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  }
+}

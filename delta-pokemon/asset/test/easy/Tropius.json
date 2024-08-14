@@ -1,0 +1,41 @@
+{
+  "species": "Tropius",
+  "types": [
+    "Grass",
+    "Flying"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Solar Power": "If Sunny Day is active, this Pokemon's Sp. Atk is 1.5x and loses 1/8 max HP per end of turn."
+  },
+  "moves": {
+    "Calm Mind": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Raises the user's Special Attack and Special Defense by 1 stage."
+    },
+    "Air Slash": {
+      "power": 75,
+      "accuracy": 95,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Has a 30% chance to make the target flinch."
+    },
+    "Giga Drain": {
+      "power": 75,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "The user recovers 1/2 the HP lost by the target."
+    },
+    "Rest": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "The user falls asleep and restores all of its HP, curing itself of any non-volatile status in the process. Fails if the user has full HP, or is already asleep."
+    }
+  }
+}

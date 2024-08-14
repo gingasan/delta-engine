@@ -1,0 +1,29 @@
+{
+  "species": "Duraludon",
+  "types": [
+    "Steel",
+    "Dragon"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Stamina": "This Pokemon's Defense is raised by 1 stage after it is damaged by an attack."
+  },
+  "moves": {
+    "Thunder Wave": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "priority": 0,
+      "type": "Electric",
+      "effect": "Paralyzes the target."
+    },
+    "Flash Cannon": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Steel",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    }
+  }
+}

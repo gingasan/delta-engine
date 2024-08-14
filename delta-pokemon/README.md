@@ -14,9 +14,11 @@ This project is only for research purposes. Any commercial usage is not allowed.
 
 
 
-## Engine
+## Overview
 
 Code of our engine is in `engine.py`. It can be split into two modules: role engine (PokemonBase) and battle engine (Battle).
+
+To get SFT data, use `proc.ipynb`.
 
 
 

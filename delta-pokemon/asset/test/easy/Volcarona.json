@@ -1,0 +1,45 @@
+{
+  "species": "Volcarona",
+  "types": [
+    "Bug",
+    "Fire"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Flame Body": "30% chance a Pokemon making contact with this Pokemon will be burned."
+  },
+  "moves": {
+    "Quiver Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Bug",
+      "effect": "Raises the user's Special Attack, Special Defense, and Speed by 1 stage."
+    },
+    "Flamethrower": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    },
+    "Morning Sun": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP if no weather is in effect, 2/3 of its maximum HP if the weather is Sunny Day, and 1/4 of its maximum HP if the weather is Rain Dance, Sandstorm, or Snow."
+    },
+    "Will-O-Wisp": {
+      "power": 0,
+      "accuracy": 85,
+      "category": "Status",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Burns the target."
+    }
+  }
+}

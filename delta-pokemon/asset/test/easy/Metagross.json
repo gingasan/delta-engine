@@ -1,0 +1,53 @@
+{
+  "species": "Metagross",
+  "types": [
+    "Steel",
+    "Psychic"
+  ],
+  "gender": "Genderless",
+  "ability": {
+    "Clear Body": "Prevents other Pokemon from lowering this Pokemon's stat stages."
+  },
+  "moves": {
+    "Psychic Fangs": {
+      "power": 85,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Psychic",
+      "effect": "Destroys the effects of Reflect, Light Screen, and Aurora Veil on the target side of the field.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Bullet Punch": {
+      "power": 40,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 1,
+      "type": "Steel",
+      "effect": "Usually goes first.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Meteor Mash": {
+      "power": 90,
+      "accuracy": 90,
+      "category": "Physical",
+      "priority": 0,
+      "type": "Steel",
+      "effect": "Has a 20% chance to raise the user's Attack by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Earthquake": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "No additional effect."
+    }
+  }
+}

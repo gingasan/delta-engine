@@ -1,0 +1,47 @@
+{
+  "species": "Talonflame",
+  "types": [
+    "Fire",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Gale Wings": "If this Pokemon is at full HP, its Flying-type moves have their priority increased by 1."
+  },
+  "moves": {
+    "Brave Bird": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Flying",
+      "effect": "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Flamethrower": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target."
+    },
+    "Will-O-Wisp": {
+      "power": 0,
+      "accuracy": 85,
+      "category": "Status",
+      "priority": 0,
+      "type": "Fire",
+      "effect": "Burns the target."
+    },
+    "Roost": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Flying",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  }
+}
