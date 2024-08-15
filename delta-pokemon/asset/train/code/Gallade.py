@@ -101,7 +101,7 @@ def value():
 @Increment(Gallade)
 def get_priority(self,move_id):
     if 'slicing' in self._moves[move_id]['property']:
-        return self._moves[move_id]['priority'] + 1
+        return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 
 # -------------------------------------------------------------

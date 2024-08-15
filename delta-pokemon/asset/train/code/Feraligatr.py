@@ -85,7 +85,7 @@ def value():
 @Increment(Feraligatr)
 def get_priority(self,move_id):
     if self._moves[move_id]['power']<=75:
-        return self._moves[move_id]['priority'] + 1
+        return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 
 # -------------------------------------------------------------

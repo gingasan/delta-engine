@@ -97,10 +97,10 @@ def move_5(self): # Taunt
 
 @Increment(Tyranitar)
 def disable_moves(self,moves):
-    disabled = []
+    disabled=[]
     for m in moves:
         if self.target['conditions'].get('TAUNT') and moves[m]['category']=='Status':
-            disabled += [m]
+            disabled+=[m]
     return disabled
 
 @Increment(Tyranitar)

@@ -21,7 +21,7 @@ class Blaziken(PokemonBase):
                 return True
             elif self.env.get('RAINDANCE'):
                 return False
-        crit_mult = [0,24,8,2,1]
+        crit_mult=[0,24,8,2,1]
         crit_ratio=self['boosts']['crit']
         crit=False
         if rnd()*crit_mult[crit_ratio+1]<1:

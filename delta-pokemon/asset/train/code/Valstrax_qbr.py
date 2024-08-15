@@ -74,7 +74,7 @@ def get_stat(self,key,boost=None):
     stat_ratio={0:1,1:1.5,2:2,3:2.5,4:3,5:3.5,6:4}[min(6,abs(boost))]
     if boost<0:
         stat_ratio=1/stat_ratio
-    stat_ratio *= self.get_weather_stat_mult(key)
+    stat_ratio*=self.get_weather_stat_mult(key)
     if key=='spe' and self.isstatus('PAR'):
         stat_ratio*=0.5
     if key=='spa' and self['status']:
