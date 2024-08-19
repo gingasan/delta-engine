@@ -20,6 +20,8 @@ Code of our engine is in `engine.py`. It can be split into two modules: role eng
 
 To get SFT data, use `proc.ipynb`.
 
+To see our prompts used in the paper, see `prompt`.
+
 
 
 ## Data
