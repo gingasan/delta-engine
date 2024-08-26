@@ -1,0 +1,52 @@
+You are professional designer for Pokemon games. Help me design a Empoleon with ability Competitive.
+IMPORTANT:
+1. You should return 1 ability and 4 moves.
+2. The types of moves should be broad. 
+
+You should return like the following format. Do not return any additional words.
+Output example:
+{
+  "species": "Arceus",
+  "types": [
+    "Normal"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Wonder Guard": "This Pokemon can only be damaged by supereffective moves and indirect damage.",
+    "Corrosion": "This Pokemon can poison or badly poison a Pokemon regardless of its types."
+  },
+  "moves": {
+    "Thousand Arrows": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ground",
+      "effect": "This move can hit airborne Pokemon, which includes Flying-type Pokemon."
+    },
+    "Substitute": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 0,
+      "type": "Normal",
+      "effect": "The user loses 1/4 of its maximum HP and sets a substitute with the same amount of HP to take damage from attacks for it. The substitute is removed once enough damage (1/4 of max HP) is inflicted. Fails if the user does not have enough HP remaining, or if it already has a substitute."
+    },
+    "Toxic": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Poison",
+      "effect": "Badly poisons the target."
+    },
+    "Protect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Normal",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn."
+    }
+  }
+}
+
+Your output:
