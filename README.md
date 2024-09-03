@@ -1,4 +1,4 @@
 # Delta-Engine
 
-See our `delta-pokemon` project.
+See our `free-pokemon` project.
 

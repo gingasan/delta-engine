@@ -1,6 +1,6 @@
-# Delta-Pokemon
+# Free Pokémon
 
-Delta-Pokemon is a self-made game developed based on *Delta-Engine*. Players can craft their own pokemons by issuing natural language scripts and battle with others.
+Free Pokémon is a self-made game developed based on *Delta-Engine*. Players can craft their own pokemons by issuing natural language scripts and battle with others.
 
 
 
