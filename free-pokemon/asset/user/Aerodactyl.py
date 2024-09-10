@@ -8,6 +8,7 @@ class Aerodactyl(PokemonBase):
     _ability=['Tough Claws']
     _move_1=('Head Smash',150,80,'Physical','Rock',0,['contact'])
     _move_2=('Dual Wingbeat',40,90,'Physical','Flying',0,['contact'])
+    _base=(80,135,85,70,80,150)
     def __init__(self):
         super().__init__()
 

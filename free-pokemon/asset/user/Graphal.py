@@ -3,11 +3,12 @@ from engine import *
 
 class Graphal(PokemonBase):
     _species='Graphal'
-    _types=['Dark','Ghost']
+    _types=['Dark','Dragon']
     _gender='Male'
     _ability=['Dark World']
     _move_1=('Dark Rainbow',100,100,'Special','Dark',0,[])
-    _move_2=('Shadow Ball',80,100,'Special','Ghost',0,[])
+    _move_2=('Dragon Pulse',85,100,'Special','Dragon',0,[])
+    _base=(80,60,100,120,120,120)
     def __init__(self):
         super().__init__()
 
@@ -40,13 +41,11 @@ class Graphal(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-    def move_2(self): # Shadow Ball
+    def move_2(self): # Dragon Pulse
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_boost('spd',-1)
 
 # -------------------------------------------------------------
 
@@ -56,6 +55,7 @@ def value():
 
 @Increment(Graphal)
 def move_3(self): # Dark Dealings
+    self.log("Graphal makes a deal with the dark world.", color="grey")
     self.set_boost('atk',+2,'self')
     self.set_boost('spa',+2,'self')
     self.set_boost('spe',+2,'self')
@@ -94,11 +94,15 @@ def take_damage(self,x,from_='attack'):
         self._take_damage_loss(x)
     elif from_=='recoil':
         self._take_damage_recoil(x)
-    if self['status']=='FNT':
+    if self['hp']==0:
         if self['conditions'].get('REVIVE'):
             self.state['status']=None
             self.state['hp']=self['max_hp']//2
             del self['conditions']['REVIVE']
+            self.log('Revive! Lord of Dark, Graphal.',color='purple')
+        else:
+            self.state['status']='FNT'
+            self.log('%s faints.'%self._species)
 
 # -------------------------------------------------------------
 
@@ -108,4 +112,7 @@ def value():
 
 @Increment(Graphal)
 def move_5(self): # Dark World
-    self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+    if self['side_conditions'].get('DARK_WORLD'):
+        self['side_conditions']['DARK_WORLD']['max_count']=self['side_conditions']['DARK_WORLD']['counter']+5
+    else:
+        self.set_side_condition('DARK_WORLD',counter=0,max_count=5)

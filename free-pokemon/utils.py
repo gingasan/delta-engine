@@ -21,7 +21,7 @@ def randomize(x):
     return int(int(x * (100 - random.randrange(0, 16))) / 100)
 
 def n2f(n):
-    return n.lower().replace("-", "").replace(" ", "_")
+    return n.replace("-", "").replace(" ", "_")
 
 
 def read_json(filename):
@@ -49,3 +49,16 @@ def write_jsonl(content, filename, mode="w"):
     with open(filename, mode) as f:
         for line in content:
             f.write(json.dumps(line, ensure_ascii=False) + "\n")
+
+
+class Logger:
+    def __init__(self):
+        self.logs = []
+
+    def clr(self):
+        del self.logs[:]
+
+    def log(self, content, **kwargs):
+        line = {"content": content}
+        line.update(kwargs)
+        self.logs.append(line)

@@ -23,7 +23,6 @@ args = parser.parse_args()
 
 role = create_role("asset.{}.{}".format(args.user, args.role))
 oppo = create_role("asset.{}.{}".format(args.user, args.oppo))
-print("**\nV.S.:\t{}\nType:\t{}".format(oppo._species, " & ".join(oppo["types"])))
 battle = Battle(role, oppo)
 
 flag = None
@@ -36,13 +35,14 @@ while not flag:
     move1_id = available_moves[input("**\nChoose your move from:\n{}\n".format(available_moves))]
     move2_id = rndc(oppo.get_moves())
     battle.act(move1_id, move2_id)
+    flag = battle.endturn()
     print("**")
-    if role["act"]:
-        print("{} used {}!".format(role._species, role["act"]["id"]))
-    if oppo["act"]:
-        print("{} used {}!".format(oppo._species, oppo["act"]["id"]))
+    logs = battle.get_logs()
+    for line in logs:
+        print(line["content"])
+    print("**\n")
+    battle.logger.clr()
     print(role.sum)
     print(oppo.sum)
-    flag = battle.endturn()
 
 print("\n**\nBattle is over. {} wins.\n**".format(role._species if not role.isfaint() else oppo._species))

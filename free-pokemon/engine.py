@@ -8,33 +8,44 @@ class Battle:
         self.env = {}
         self.pokemon1.init_env(self.env)
         self.pokemon2.init_env(self.env)
+        self.logger = Logger()
+        self.pokemon1.logger = self.logger
+        self.pokemon2.logger = self.logger
 
     def _act(self, source, target, move_id):
         if source["conditions"].get("FLINCH"): # Flinch
             del source["conditions"]["FLINCH"]
+            self.log("%s is flinched. It cannot move." % source._species)
             return
         if source["status"]: # Freeze & Paralysis & Sleep
             if source.isstatus("FRZ"):
                 if rnd() < 0.2:
                     source.state["status"] = None
+                    self.log("%s is recovered from Freeze." % source._species)
                 else:
+                    self.log("%s cannot move due to Freeze." % source._species)
                     return
             elif source.isstatus("PAR"):
                 if rnd() < 0.25:
+                    self.log("%s cannot move due to Paralysis." % source._species)
                     return
             elif source.isstatus("SLP"):
                 wakeup_ratio = {0: 0.0, 1: 0.33, 2: 0.5, 3: 1.0}
                 if rnd() < wakeup_ratio[source["status"]["SLP"]["counter"]]:
                     source.state["status"] = None
+                    self.log("%s wakes up." % source._species)
                 else:
                     source.state["status"]["SLP"]["counter"] += 1
+                    self.log("%s is sleeping." % source._species)
                     return
         if source["conditions"].get("CONFUSION"): # Confusion
             if source["conditions"]["CONFUSION"]["counter"] == 4:
                 del source["conditions"]["CONFUSION"]
+                self.log("%s is out of confusion." % source._species)
             elif rnd() < 0.33:
                 source.take_damage(source.get_confusion_damage(), "recoil")
                 source["conditions"]["CONFUSION"]["counter"] += 1
+                self.log("%s hurts itself in its confusion." % source._species)
                 return
             else:
                 source["conditions"]["CONFUSION"]["counter"] += 1
@@ -51,11 +62,14 @@ class Battle:
             if p["status"]: # Burn & Poison & Badly Poison
                 if p.isstatus("BRN"):
                     p.take_damage(p["max_hp"] // 16, "loss")
+                    self.log("%s is hurt by Burn." % p._species)
                 elif p.isstatus("PSN"):
                     p.take_damage(p["max_hp"] // 8, "loss")
+                    self.log("%s is hurt by Poison." % p._species)
                 elif p.isstatus("TOX"):
                     p["status"]["TOX"]["counter"] += 1
                     p.take_damage(p["max_hp"] // 16 * p["status"]["TOX"]["counter"], "loss")
+                    self.log("%s is hurt by Poison." % p._species)
             if p["conditions"].get("FLINCH"): # Flinch
                 del p["conditions"]["FLINCH"]
 
@@ -64,6 +78,7 @@ class Battle:
         self.pokemon2.deregister()
 
     def start(self):
+        self.log("Battle starts: {} ({})\tV.S.\t{} ({}).".format(self.pokemon1._species, " & ".join(self.pokemon1._types), self.pokemon2._species, " & ".join(self.pokemon2._types)))
         self.pokemon1.target = self.pokemon2
         self.pokemon2.target = self.pokemon1
         self.pokemon1.onswitch()
@@ -92,11 +107,13 @@ class Battle:
                 if any([x in p["types"] for x in ["Rock", "Ground", "Steel"]]):
                     continue
                 p.take_damage(p["max_hp"] // 16, "loss")
+                self.log("%s is hurt by Sandstorm." % p._species)
         if self.env.get("HAIL"):
             for p in [self.pokemon1, self.pokemon2]:
                 if "Ice" in p["types"]:
                     continue
                 p.take_damage(p["max_hp"] // 16, "loss")
+                self.log("%s is hurt by Hail." % p._species)
 
     def movefirst(self, move1_id, move2_id):
         prio1 = self.pokemon1.get_priority(move1_id)
@@ -120,9 +137,17 @@ class Battle:
             self.pokemon2.state["canact"] = True
         (t1, move1_id), (t2, move2_id) = self.movefirst(move1_id, move2_id)
         if t1["canact"]:
+            self.log("{} uses {}.".format(t1._species, move1_id))
             self._act(t1, t2, move1_id)
         if not t2.isfaint() and t2["canact"]:
+            self.log("{} uses {}.".format(t2._species, move2_id))
             self._act(t2, t1, move2_id)
+
+    def log(self, content, **kwargs):
+        self.logger.log(content, **kwargs)
+
+    def get_logs(self):
+        return self.logger.logs
 
 
 class PokemonBase:
@@ -145,6 +170,8 @@ class PokemonBase:
 
         self.env = None
         self.target = None
+
+        self.logger = None
 
     @staticmethod
     def get_attrs(base_stats):
@@ -418,22 +445,22 @@ class PokemonBase:
             self._take_damage_loss(x)
         elif from_ == "recoil":
             self._take_damage_recoil(x)
+        if self["hp"] == 0:
+            self.state["status"] = "FNT"
+            self.log("%s faints." % self._species)
 
     def _take_damage_attack(self, x):
         self.register_act_taken()
         self.state["hp"] = max(0, self["hp"] - x)
-        if self["hp"] == 0:
-            self.state["status"] = "FNT"
+        self.log("{} loses {} HP.".format(self._species, x))
 
     def _take_damage_loss(self, x):
         self.state["hp"] = max(0, self["hp"] - x)
-        if self["hp"] == 0:
-            self.state["status"] = "FNT"
+        self.log("{} loses {} HP.".format(self._species, x))
     
     def _take_damage_recoil(self, x):
         self.state["hp"] = max(0, self["hp"] - x)
-        if self["hp"] == 0:
-            self.state["status"] = "FNT"
+        self.log("{} loses {} HP from recoil.".format(self._species, x))
 
     def restore(self, x, from_="heal"):
         if from_ == "heal":
@@ -443,9 +470,11 @@ class PokemonBase:
 
     def _restore_heal(self, x):
         self.state["hp"] = min(self["max_hp"], self["hp"] + x)
+        self.log("{} heals {} HP.".format(self._species, x))
 
     def _restore_drain(self, x):
         self.state["hp"] = min(self["max_hp"], self["hp"] + x)
+        self.log("{} drains {} HP from {}.".format(self._species, x, self.target._species))
 
     def set_status(self, x):
         if self["status"] or self.env.get("MISTY_TERRAIN"):
@@ -453,21 +482,27 @@ class PokemonBase:
         if x == "BRN":
             if not self.istype("Fire"):
                 self.state["status"] = {x: {"counter": 0}}
+                self.log("%s is burned." % self._species)
         elif x == "PAR":
             if not self.istype("Electric"):
                 self.state["status"] = {x: {"counter": 0}}
+                self.log("%s is paralyzed." % self._species)
         elif x == "PSN":
             if not self.istype("Poison") and not self.istype("Steel"):
                 self.state["status"] = {x: {"counter": 0}}
+                self.log("%s is poisoned." % self._species)
         elif x == "TOX":
             if not self.istype("Poison") and not self.istype("Steel"):
                 self.state["status"] = {x: {"counter": 0}}
+                self.log("%s is badly poisoned." % self._species)
         elif x == "FRZ":
             if not self.istype("Ice"):
                 self.state["status"] = {x: {"counter": 0}}
+                self.log("%s is frozen." % self._species)
         elif x == "SLP":
             self.state["status"] = {x: {"counter": 0}}
-    
+            self.log("%s falls asleep." % self._species)
+
     def isstatus(self, x):
         return x in self["status"] if self["status"] else False
 
@@ -480,6 +515,8 @@ class PokemonBase:
             self["boosts"][key] = min(bar, self["boosts"][key] + x)
         else:
             self["boosts"][key] = max(-bar, self["boosts"][key] + x)
+        self.log("{}'s {} is {} by {}.".format(self._species, {
+            "atk": "Attack", "def": "Defense", "spa": "Special Attack", "spd": "Special Defense", "spe": "Speed"}[key], "raised" if x > 0 else "lowered", x))
 
     def set_stat(self, key, x):
         self["stats"][key] = int(self["stats"][key] * x)
@@ -506,6 +543,12 @@ class PokemonBase:
 
     def get_priority(self, move_id):
         return self._moves[move_id]["priority"]
+    
+    def log(self, content, **kwargs):
+        self.logger.log(content, **kwargs)
+
+    def get_logs(self):
+        return self.logger.logs
 
 
 def Increment(cls, attr=None):
