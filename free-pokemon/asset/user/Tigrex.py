@@ -13,6 +13,7 @@ class Tigrex(PokemonBase):
 
     def _get_base_damage(self,power,crit):
         if 'sound' in self['act']['property']:
+            self.log('Watch out for Absolute Power.')
             atk_boost=self['boosts']['atk']
             def_boost=self.target['boosts']['def']
         else:
@@ -83,9 +84,8 @@ def value():
 @Increment(Tigrex)
 def get_power(self):
     power=self['act']['power']
-    if self['act']['category']=='Physical':
+    if self['act']['category']=='Physical' or 'sound' in self['act']['property']:
         power*=1.3
-        self.log('Watch out for Absolute Power.')
     return int(power*self.get_weather_power_mult())
 
 @Increment(Tigrex)
