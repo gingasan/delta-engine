@@ -543,8 +543,8 @@ class PokemonBase:
 class Env:
     def __init__(self, pokemon1, pokemon2):
         self._side = {
-            pokemon1._species: {"self" :"side_1", "target" :"side_2"},
-            pokemon2._species: {"self" :"side_2", "target" :"side_1"},
+            pokemon1._species: {"self": "side_1", "target": "side_2"},
+            pokemon2._species: {"self": "side_2", "target": "side_1"},
         }
         self._env = {}
         self.logger = None
@@ -563,7 +563,6 @@ class Env:
                     del self._env[":".join([side, k])]
                     break
             self._env[":".join([side, x])] = {"counter": 0, "max_count": kwargs.get("max_count", 5), "from_": from_}
-            self.log("{} summons {}.".format(from_, x))
         elif side == "both":
             self._env["both_sides:" + x] = kwargs
             self._env["both_sides:" + x].update({"from_": from_})
@@ -571,6 +570,7 @@ class Env:
             side = self._side[from_][side]
             self._env[":".join([side, x])] = kwargs
             self._env[":".join([side, x])].update({"from_": from_})
+        self.log("{} summons {}.".format(from_, x))
 
     def get(self, x, side=None, from_=None):
         if x in CFG["weather"]:
