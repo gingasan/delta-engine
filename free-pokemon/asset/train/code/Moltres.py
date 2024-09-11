@@ -19,6 +19,10 @@ class Moltres(PokemonBase):
             self._take_damage_loss(x)
         elif from_=='recoil':
             self._take_damage_recoil(x)
+        if self['hp']==0:
+            self.state['status']='FNT'
+            self.log('%s faints.'%self._species)
+            return
         if prev_hp>self['max_hp']//2 and self['hp']<=self['max_hp']//2:
             self.set_boost('spa',1,'self')
 
@@ -62,13 +66,15 @@ def move_4(self): # Protect
 
 @Increment(Moltres)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
 @Increment(Moltres)
 def endturn(self):
@@ -86,11 +92,16 @@ def set_boost(self,key,x,from_='target'):
     bar=6 if key in ['atk','def','spa','spd','spe'] else 3
     if x>0:
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
+        self.log("{}'s {} is raised by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],x))
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+        self.log("{}'s {} is lowered by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],x))
         if from_=='target':
             for _ in range(x):
                 self['boosts']['spa']=min(bar,self['boosts'][key]+2)
+            self.log("{}'s Special Attack is raised by {}.".format(self._species,2*x))
 
 # -------------------------------------------------------------
 

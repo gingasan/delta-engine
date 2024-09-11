@@ -12,27 +12,34 @@ class Espinas(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['act_taken']['category']=='Physical':
             x=int(x*0.7)
         self.state['hp']=max(0,self['hp']-x)
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if self['hp']==0:
-            self.state['status']='FNT'
             return
         if 'contact' in self['act_taken']['property'] and rnd()<20/100:
             self.target.set_condition('PSN')
 
     def set_status(self,x):
-        if self['status'] or self.env.get('MISTY_TERRAIN'):
+        if self['status'] or self.get_env('Misty Terrain'):
             return
         if x=='BRN':
             if not self.istype('Fire'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is burned.'%self._species)
         elif x=='FRZ':
             if not self.istype('Ice'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is frozen.'%self._species)
         elif x=='SLP':
-            self.state['status']={x:{'counter':0}}
+            if not self.env.get("Electric Terrain"):
+                self.state['status']={x:{'counter':0}}
+                self.log('%s falls asleep.'%self._species)
 
     def move_1(self): # Thorned Assault
         damage_ret=self.get_damage()

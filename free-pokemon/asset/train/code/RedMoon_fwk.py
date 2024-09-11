@@ -12,7 +12,7 @@ class RedMoon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('TAILWIND',counter=0,max_count=3)
+        self.set_env('Tailwind',side='self',counter=0,max_count=3)
 
     def get_stat(self,key,boost=None):
         stat=self['stats'][key]
@@ -23,7 +23,7 @@ class RedMoon(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self['side_conditions'].get('TAILWIND'):
+        if key=='spe' and self.get_env('Tailwind',side='self'):
             stat_ratio*=2
         return int(stat*stat_ratio)
 

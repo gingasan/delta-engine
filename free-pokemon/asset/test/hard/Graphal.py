@@ -3,27 +3,27 @@ from engine import *
 
 class Graphal(PokemonBase):
     _species='Graphal'
-    _types=['Dark','Ghost']
+    _types=['Dark','Dragon']
     _gender='Male'
     _ability=['Dark World']
     _move_1=('Dark Rainbow',100,100,'Special','Dark',0,[])
-    _move_2=('Shadow Ball',80,100,'Special','Ghost',0,[])
+    _move_2=('Dragon Pulse',85,100,'Special','Dragon',0,[])
     def __init__(self):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+        self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)
 
     def get_other_mult(self):
         mult=1
         if self.isstatus('BRN') and self['act']['category']=='Physical':
             mult*=0.5
-        if self['side_conditions'].get('DARK_WORLD'):
+        if self.get_env('DARK_WORLD',side='self'):
             mult=mult*1.5 if self['act']['type']=='Dark' else mult*0.75
         return mult
 
     def get_type_effect(self):
-        if self['act']['id']=='Dark Rainbow' and self['side_conditions'].get('DARK_WORLD'):
+        if self['act']['id']=='Dark Rainbow' and self.get_env('DARK_WORLD',side='self'):
             return 1
         move_type=self['act']['type']
         target_types=self.target['types']
@@ -40,13 +40,11 @@ class Graphal(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-    def move_2(self): # Shadow Ball
+    def move_2(self): # Dragon Pulse
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_boost('spd',-1)
 
 # -------------------------------------------------------------
 
@@ -56,6 +54,7 @@ def value():
 
 @Increment(Graphal)
 def move_3(self): # Dark Dealings
+    self.log("Graphal makes a deal with the dark world.", color="grey")
     self.set_boost('atk',+2,'self')
     self.set_boost('spa',+2,'self')
     self.set_boost('spe',+2,'self')
@@ -83,7 +82,7 @@ def value():
 
 @Increment(Graphal)
 def onswitch(self):
-    self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+    self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)
     self.set_condition('REVIVE',counter=1)
 
 @Increment(Graphal)
@@ -94,11 +93,15 @@ def take_damage(self,x,from_='attack'):
         self._take_damage_loss(x)
     elif from_=='recoil':
         self._take_damage_recoil(x)
-    if self['status']=='FNT':
+    if self['hp']==0:
         if self['conditions'].get('REVIVE'):
             self.state['status']=None
             self.state['hp']=self['max_hp']//2
             del self['conditions']['REVIVE']
+            self.log('Revive! Lord of Dark, Graphal.',color='purple')
+        else:
+            self.state['status']='FNT'
+            self.log('%s faints.'%self._species)
 
 # -------------------------------------------------------------
 
@@ -108,4 +111,4 @@ def value():
 
 @Increment(Graphal)
 def move_5(self): # Dark World
-    self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+    self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)

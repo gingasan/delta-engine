@@ -12,11 +12,15 @@ class Lightning(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['conditions'].get('INDUCTIVE'):
             if self['act_taken']['category']=='Special':
                 x=int(x*0.5)
         self.state['hp']=max(0,self['hp']-x)
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if 'contact' in self['act_taken']['property'] and rnd()<0.3:
             self.target.set_condition('INDUCTIVE',counter=0)
         if self['hp']==0:
@@ -53,6 +57,9 @@ def move_3(self): # Super Electro Bombardment
 
 @Increment(Lightning)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['conditions'].get('INDUCTIVE'):
         if self['act_taken']['category']=='Special':

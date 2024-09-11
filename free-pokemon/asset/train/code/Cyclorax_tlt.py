@@ -18,10 +18,13 @@ class Cyclorax(PokemonBase):
         return int(power*self.get_weather_power_mult())
     
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if self['hp']==0:
-            self.state['status']='FNT'
             return
         if self['act_taken'] and self['act_taken']['type']=='Rock':
             self.set_boost('def',1,'self')
@@ -73,6 +76,9 @@ def value():
 
 @Increment(Cyclorax)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
     if self['hp']==0:

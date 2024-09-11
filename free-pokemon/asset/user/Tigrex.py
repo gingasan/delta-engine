@@ -13,7 +13,7 @@ class Tigrex(PokemonBase):
 
     def _get_base_damage(self,power,crit):
         if 'sound' in self['act']['property']:
-            self.log('Watch out for Absolute Power.')
+            self.log('Watch out for Absolute Power.',color='red')
             atk_boost=self['boosts']['atk']
             def_boost=self.target['boosts']['def']
         else:

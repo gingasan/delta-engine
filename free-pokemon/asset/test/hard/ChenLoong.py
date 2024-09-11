@@ -12,11 +12,11 @@ class ChenLoong(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SNOW')
+        self.set_env('Snow','weather')
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self['act']['id']=='Blizzard' and self.env.get('SNOW'):
+        if self['act']['id']=='Blizzard' and self.get_env('Snow'):
             acc=1e5
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:
@@ -74,13 +74,13 @@ def value():
 
 @Increment(ChenLoong)
 def onswitch(self):
-    self.set_env('SNOW')
-    self.set_side_condition('AURORA_VEIL',counter=0,max_count=5)
+    self.set_env('Snow','weather')
+    self.set_env('Aurora Veil',side='self',counter=0,max_count=5)
 
 @Increment(ChenLoong)
 def _take_damage_attack(self,x):
     self.register_act_taken()
-    if self['side_conditions'].get('AURORA_VEIL'):
+    if self.get_env('Aurora Veil',side='self'):
         if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
             x//=2
     self.state['hp']=max(0,self['hp']-x)
@@ -99,3 +99,4 @@ def move_5(self): # Rest
         self.state['status']=None
         self.set_status('SLP')
         self.state['hp']=self['max_hp']
+        self.log("ChenLoong gets into sleep and restores all its HP.")

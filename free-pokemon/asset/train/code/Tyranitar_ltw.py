@@ -12,7 +12,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SANDSTORM')
+        self.set_env('Sandstorm','weather')
         self.set_boost('def',1,'self')
         self.set_boost('spd',1,'self')
 

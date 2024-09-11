@@ -12,7 +12,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SANDSTORM')
+        self.set_env('Sandstorm','weather')
 
     def move_1(self): # Rock Slide
         damage_ret=self.get_damage()

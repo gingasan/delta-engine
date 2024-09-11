@@ -13,14 +13,13 @@ class RedMoon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('LUNAR_AURA',counter=0)
-        self.log('Red-Moon starts Lunar Aura.',color='purple')
+        self.set_env('Lunar Aura',side='self',counter=0)
 
     def endturn(self):
-        if self['side_conditions'].get('LUNAR_AURA'):
-            self['side_conditions']['LUNAR_AURA']['counter']+=1
-            if self['side_conditions']['LUNAR_AURA']['counter']==3:
-                del self['side_conditions']['LUNAR_AURA']
+        if self.get_env('Lunar Aura',side='self'):
+            self.get_env('Lunar Aura',side='self')['counter']+=1
+            if self.get_env('Lunar Aura',side='self')['counter']==3:
+                self.del_env('Lunar Aura',side='self')
 
     def get_type_effect(self):
         move_type=self['act']['type']
@@ -85,19 +84,18 @@ def value():
 
 @Increment(RedMoon)
 def endturn(self):
-    if self['side_conditions'].get('LUNAR_AURA'):
-        self['side_conditions']['LUNAR_AURA']['counter']+=1
-        if self['side_conditions']['LUNAR_AURA']['counter']==3:
-            del self['side_conditions']['LUNAR_AURA']
-            self.log('Lunar Aura ends.')
+    if self.get_env('Lunar Aura',side='self'):
+        self.get_env('Lunar Aura',side='self')['counter']+=1
+        if self.get_env('Lunar Aura',side='self')['counter']==3:
+            self.del_env('Lunar Aura',side='self')
             if self['hp']<=self['max_hp']//2:
-                self.set_condition('BLOO_BURST',counter=0)
-                self.log('Bloo Burst! Red-Moon has gone berserk.',color='red')
+                self.set_condition('bloo_burst',counter=0)
+                self.log('Bloo Burst! Red-Moon has gone berserk.',color='purple')
 
 @Increment(RedMoon)
 def get_power(self):
     power=self['act']['power']
-    if self['conditions'].get('BLOO_BURST'):
+    if self['conditions'].get('bloo_burst'):
         power*=2
     return int(power*self.get_weather_power_mult())
 

@@ -27,9 +27,12 @@ class Scizor(PokemonBase):
             self._take_damage_loss(x)
         elif from_=='recoil':
             self._take_damage_recoil(x)
+        if self['hp']==0:
+            self.state['status']='FNT'
+            self.log('%s faints.'%self._species)
         if self['hp']>0 and x>=150:
             self.restore(int(x*0.25),'heal')
-    
+
     def move_1(self): # Steel Wing
         damage_ret=self.get_damage()
         if not damage_ret['miss']:

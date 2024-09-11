@@ -13,12 +13,15 @@ class Metagross(PokemonBase):
 
     def set_boost(self,key,x,from_='target'):
         if x<0 and from_=='target':
+            self.log("Metagross's stats cannot be lowered by opponents.")
             return
         bar=6 if key in ['atk','def','spa','spd','spe'] else 3
         if x>0:
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+        self.log("{}'s {} is {} by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
 
     def move_1(self): # Psychic Fangs
         damage_ret=self.get_damage()

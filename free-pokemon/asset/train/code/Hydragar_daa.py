@@ -83,10 +83,13 @@ def value():
 
 @Increment(Hydragar)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
+    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
     if self['hp']==0:
-        self.state['status']='FNT'
         return
     if 'crit' in self['act_taken'] and self['act_taken']['crit']:
         self.set_boost('atk',+2,'self')

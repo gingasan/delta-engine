@@ -20,14 +20,14 @@ class Venusaur(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self.env.get('SUNNYDAY'):
+        if key=='spe' and self.get_env('Sunlight'):
             stat_ratio*=2
         return int(stat*stat_ratio)
 
     def move_1(self): # Growth
         self.set_boost('atk',+1,'self')
         self.set_boost('spa',+1,'self')
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.set_boost('atk',+1,'self')
             self.set_boost('spa',+1,'self')
 

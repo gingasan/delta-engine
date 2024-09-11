@@ -13,9 +13,9 @@ class Zapdos(PokemonBase):
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self.env.get('RAINDANCE') and self['act']['id']=='Hurricane':
+        if self.get_env('Rain') and self['act']['id']=='Hurricane':
             acc=1e5
-        elif self.env.get('SUNNYDAY') and self['act']['id']=='Hurricane':
+        elif self.get_env('Sunlight') and self['act']['id']=='Hurricane':
             acc=50
         if acc<=70:
             acc=int(acc*1.5)
@@ -82,11 +82,16 @@ def set_boost(self,key,x,from_='target'):
     bar=6 if key in ['atk','def','spa','spd','spe'] else 3
     if x>0:
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
+        self.log("{}'s {} is {} by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+        self.log("{}'s {} is {} by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
         if from_=='target':
             for _ in range(x):
                 self['boosts']['spa']=min(bar,self['boosts'][key]+2)
+            self.log("{}'s Special Attack is raised by {}.".format(self._species,2*x))
 
 # -------------------------------------------------------------
 

@@ -12,11 +12,11 @@ class Stormfury(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('STORM_SURGE',counter=0,max_count=3)
+        self.set_env('Storm Surge',side='self',counter=0,max_count=3)
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self['side_conditions'].get('STORM_SURGE') and self['act']['type']=='Electric':
+        if self.get_env('Storm Surge',side='self') and self['act']['type']=='Electric':
             acc=100
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:

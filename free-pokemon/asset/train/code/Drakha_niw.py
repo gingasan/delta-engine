@@ -12,11 +12,11 @@ class Drakha(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('SHADOW_REALM',counter=0,max_count=3)
+        self.set_env('Shadow Realm',side='self',counter=0,max_count=3)
     
     def get_power(self):
         power=self['act']['power']
-        if self['side_conditions'].get('SHADOW_REALM') and self['act']['type']=='Dark':
+        if self.get_env('Shadow Realm',side='self') and self['act']['type']=='Dark':
             power*=1.5
         return int(power*self.get_weather_power_mult())
 
@@ -74,6 +74,8 @@ def set_boost(self,key,x,from_='target'):
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
         self.set_condition('DESTRUCTION_SURGE',counter=0)
+    self.log("{}'s {} is {} by {}.".format(self._species,{
+        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
 
 @Increment(Drakha)
 def get_other_mult(self):

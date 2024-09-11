@@ -5,12 +5,13 @@ class Battle:
     def __init__(self, pokemon1, pokemon2):
         self.pokemon1 = pokemon1
         self.pokemon2 = pokemon2
-        self.env = {}
+        self.env = Env(pokemon1, pokemon2)
         self.pokemon1.init_env(self.env)
         self.pokemon2.init_env(self.env)
         self.logger = Logger()
         self.pokemon1.logger = self.logger
         self.pokemon2.logger = self.logger
+        self.env.logger = self.logger
 
     def _act(self, source, target, move_id):
         if source["conditions"].get("FLINCH"): # Flinch
@@ -86,34 +87,20 @@ class Battle:
 
     def _count(self):
         del_list = []
-        for k, v in self.env.items():
-            if "counter" in v:
+        for k, v in self.env:
+            if "max_count" in v:
                 v["counter"] += 1
                 if v["counter"] == v["max_count"]:
                     del_list += [k]
         for k in del_list:
-            del self.env[k]
-        for p in [self.pokemon1, self.pokemon2]:
-            del del_list[:]
-            for k, v in p["side_conditions"].items():
-                if v.get("max_count"):
-                    v["counter"] += 1
-                    if v["counter"] == v["max_count"]:
-                        del_list += [k]
-            for k in del_list:
-                del p["side_conditions"][k]
-        if self.env.get("SANDSTORM"):
+            self.env.pop(k)
+            self.log("%s ends." % k.split(":")[-1])
+        if self.env.get("Sandstorm"):
             for p in [self.pokemon1, self.pokemon2]:
-                if any([x in p["types"] for x in ["Rock", "Ground", "Steel"]]):
+                if any([p.istype(x) for x in ["Rock", "Ground", "Steel"]]):
                     continue
                 p.take_damage(p["max_hp"] // 16, "loss")
                 self.log("%s is hurt by Sandstorm." % p._species)
-        if self.env.get("HAIL"):
-            for p in [self.pokemon1, self.pokemon2]:
-                if "Ice" in p["types"]:
-                    continue
-                p.take_damage(p["max_hp"] // 16, "loss")
-                self.log("%s is hurt by Hail." % p._species)
 
     def movefirst(self, move1_id, move2_id):
         prio1 = self.pokemon1.get_priority(move1_id)
@@ -124,10 +111,10 @@ class Battle:
         speed2 = self.pokemon2.get_stat("spe")
         if speed1 == speed2:
             speed1 = speed1 + 1 if rnd() < 0.5 else speed1 - 1
-        if self.env.get("TRICK_ROOM"):
+        if self.env.get("Trick Room", side="both"):
             speed1, speed2 = speed2, speed1
         return ((self.pokemon1, move1_id), (self.pokemon2, move2_id)) if speed1 > speed2 else ((self.pokemon2, move2_id), (self.pokemon1, move1_id))
-    
+
     def act(self, move1_id, move2_id):
         if isinstance(self.pokemon1["canact"], str):
             move1_id = self.pokemon1["canact"]
@@ -269,61 +256,41 @@ class PokemonBase:
         self.register_act(move_id, target)
         self.move2fct[move_id]()
 
-    def init_env(self, env):
-        self.env = env
-
     def move_1(self): # Earthquake
         damage_ret = self.get_damage()
         if not damage_ret["miss"]:
             damage = damage_ret["damage"]
             self.target.take_damage(damage)
-
-    def set_env(self, x, max_count=5):
-        if self.env.get(x):
-            return
-        def set_weather():
-            for k in CFG["weather"]:
-                if k in self.env:
-                    del self.env[k]
-            self.env[x] = {"counter": 0, "max_count": max_count}
-        def set_terrain():
-            for k in CFG["terrain"]:
-                if k in self.env:
-                    del self.env[k]
-            self.env[x] = {"counter": 0, "max_count": max_count}
-
-        if x in CFG["weather"]:
-            set_weather()
-        elif x in CFG["terrain"]:
-            set_terrain()
-        else:
-            self.env[x] = {"counter": 0, "max_count": max_count}
     
     def get_weather_power_mult(self):
-        if self.env.get("SUNNYDAY"):
+        if self.get_env("Sunlight"):
             if self["act"]["type"] in ["Fire", "Water"]:
-                return {"Fire": 1.5, "Water": 0.5}[self["act"]["type"]]
-        if self.env.get("RAINDANCE"):
+                return {
+                    "Fire": 1.5, "Water": 0.5
+                }[self["act"]["type"]]
+        if self.get_env("Rain"):
             if self["act"]["type"] in ["Fire", "Water"]:
-                return {"Fire": 0.5, "Water": 1.5}[self["act"]["type"]]
-        if self.env.get("ELECTRIC_TERRAIN"):
+                return {
+                    "Fire": 0.5, "Water": 1.5
+                }[self["act"]["type"]]
+        if self.get_env("Electric Terrain"):
             if self["act"]["type"] == "Electric":
                 return 1.3
-        if self.env.get("GRASSY_TERRAIN"):
+        if self.get_env("Grassy Terrain"):
             if self["act"]["type"] == "Grass":
                 return 1.3
-        if self.env.get("PSYCHIC_TERRAIN"):
+        if self.get_env("Psychic Terrain"):
             if self["act"]["type"] == "Psychic":
                 return 1.3
-        if self.env.get("MISTY_TERRAIN"):
+        if self.get_env("Misty Terrain"):
             if self["act"]["type"] == "Dragon":
                 return 0.5
         return 1.
 
     def get_weather_stat_mult(self, key):
-        if self.env.get("SANDSTORM") and key == "spd" and "Rock" in self["types"]:
+        if self.get_env("Sandstorm") and key == "spd" and self.istype("Rock"):
             return 1.5
-        if self.env.get("SNOW") and key == "def" and "Ice" in self["types"]:
+        if self.get_env("Snow") and key == "def" and self.istype("Ice"):
             return 1.5
         return 1.
     
@@ -402,6 +369,7 @@ class PokemonBase:
         accuracy = self.get_accuracy()
         if rnd() >= accuracy:
             self.register_act_damage({"miss": True})
+            self.log("Miss!")
             return {"miss": True}
 
         power = self.get_power()
@@ -437,7 +405,7 @@ class PokemonBase:
         }
         self.register_act_damage(damage_ret)
         return damage_ret
-    
+
     def take_damage(self, x, from_="attack"):
         if from_ == "attack":
             self._take_damage_attack(x)
@@ -450,9 +418,12 @@ class PokemonBase:
             self.log("%s faints." % self._species)
 
     def _take_damage_attack(self, x):
+        if "type_efc" in self.target["act"] and self.target["act"]["type_efc"] < 0.1:
+            self.logger.log("It is immune by %s." % self._species)
+            return
         self.register_act_taken()
         self.state["hp"] = max(0, self["hp"] - x)
-        self.log("{} loses {} HP.".format(self._species, x))
+        self.log("{} loses {} HP.".format(self._species, x), act_taken=self["act_taken"])
 
     def _take_damage_loss(self, x):
         self.state["hp"] = max(0, self["hp"] - x)
@@ -477,7 +448,7 @@ class PokemonBase:
         self.log("{} drains {} HP from {}.".format(self._species, x, self.target._species))
 
     def set_status(self, x):
-        if self["status"] or self.env.get("MISTY_TERRAIN"):
+        if self["status"] or self.get_env("Misty Terrain"):
             return
         if x == "BRN":
             if not self.istype("Fire"):
@@ -500,15 +471,16 @@ class PokemonBase:
                 self.state["status"] = {x: {"counter": 0}}
                 self.log("%s is frozen." % self._species)
         elif x == "SLP":
-            self.state["status"] = {x: {"counter": 0}}
-            self.log("%s falls asleep." % self._species)
+            if not self.env.get("Electric Terrain"):
+                self.state["status"] = {x: {"counter": 0}}
+                self.log("%s falls asleep." % self._species)
 
     def isstatus(self, x):
         return x in self["status"] if self["status"] else False
 
     def istype(self, x):
         return x in self["types"]
-    
+
     def set_boost(self, key, x, from_="target"):
         bar = 6 if key in ["atk", "def", "spa", "spd", "spe"] else 3
         if x > 0:
@@ -516,7 +488,7 @@ class PokemonBase:
         else:
             self["boosts"][key] = max(-bar, self["boosts"][key] + x)
         self.log("{}'s {} is {} by {}.".format(self._species, {
-            "atk": "Attack", "def": "Defense", "spa": "Special Attack", "spd": "Special Defense", "spe": "Speed"}[key], "raised" if x > 0 else "lowered", x))
+            "atk": "Attack", "def": "Defense", "spa": "Special Attack", "spd": "Special Defense", "spe": "Speed", "accuracy": "Accuracy", "crit": "Critical rate"}[key], "raised" if x > 0 else "lowered", x))
 
     def set_stat(self, key, x):
         self["stats"][key] = int(self["stats"][key] * x)
@@ -524,14 +496,10 @@ class PokemonBase:
     def set_condition(self, x, **kwargs):
         if not self["conditions"].get(x):
             self.state["conditions"].update({x: kwargs})
-    
-    def set_side_condition(self, x, **kwargs):
-        if not self["side_conditions"].get(x):
-            self.state["side_conditions"].update({x: kwargs})
 
     def isfaint(self):
         return self["status"] == "FNT" or self["hp"] < 1
-    
+
     def get_confusion_damage(self):
         attack = self.get_stat("atk")
         defense = self.target.get_stat("def")
@@ -544,11 +512,97 @@ class PokemonBase:
     def get_priority(self, move_id):
         return self._moves[move_id]["priority"]
     
+    def init_env(self, env):
+        self.env = env
+
+    def set_env(self, x, side, **kwargs):
+        self.env.set(x, side=side, from_=self._species, **kwargs)
+
+    def get_env(self, x, side=None):
+        return self.env.get(x, side=side, from_=self._species)
+
+    def del_env(self, x, side=None):
+        self.env.pop(x, side=side, from_=self._species)
+
     def log(self, content, **kwargs):
+        if kwargs.get("act_taken"):
+            if kwargs["act_taken"].get("damage", 0) == 0:
+                return
+            if kwargs["act_taken"]["crit"]:
+                self.logger.log("A critical hit!")
+            if kwargs["act_taken"]["type_efc"] > 1:
+                self.logger.log("It is super effective.")
+            elif kwargs["act_taken"]["type_efc"] < 1:
+                self.logger.log("It is not very effective.")
         self.logger.log(content, **kwargs)
 
     def get_logs(self):
         return self.logger.logs
+
+
+class Env:
+    def __init__(self, pokemon1, pokemon2):
+        self._side = {
+            pokemon1._species: {"self" :"side_1", "target" :"side_2"},
+            pokemon2._species: {"self" :"side_2", "target" :"side_1"},
+        }
+        self._env = {}
+        self.logger = None
+
+    def __getitem__(self, x):
+        if x in self._env:
+            return self._env[x]
+        return None
+
+    def set(self, x, side, from_, **kwargs):
+        if ":".join([side, x]) in self._env:
+            return
+        if side == "weather" or side == "terrain":
+            for k in CFG[side]:
+                if ":".join([side, k]) in self._env:
+                    del self._env[":".join([side, k])]
+                    break
+            self._env[":".join([side, x])] = {"counter": 0, "max_count": kwargs.get("max_count", 5), "from_": from_}
+            self.log("{} summons {}.".format(from_, x))
+        elif side == "both":
+            self._env["both_sides:" + x] = kwargs
+            self._env["both_sides:" + x].update({"from_": from_})
+        elif side == "self" or side == "target":
+            side = self._side[from_][side]
+            self._env[":".join([side, x])] = kwargs
+            self._env[":".join([side, x])].update({"from_": from_})
+
+    def get(self, x, side=None, from_=None):
+        if x in CFG["weather"]:
+            side = "weather"
+        elif x in CFG["terrain"]:
+            side = "terrain"
+        if side not in ["weather", "terrain", "both"]:
+            side = self._side[from_][side]
+        if ":".join([side, x]) in self._env:
+            return self._env[":".join([side, x])]
+
+    def pop(self, x, side=None, from_=None):
+        if x in self._env:
+            self._env.pop(x)
+            return
+        if x in CFG["weather"]:
+            side = "weather"
+        elif x in CFG["terrain"]:
+            side = "terrain"
+        if side not in ["weather", "terrain", "both"]:
+            side = self._side[from_][side]
+        self._env.pop(":".join([side, x]))
+
+    def __iter__(self):
+        for k, v in self._env.items():
+            yield k, v
+
+    def __repr__(self):
+        return self._env
+    
+    def log(self, content, **kwargs):
+        self.logger.log(content, **kwargs)
 
 
 def Increment(cls, attr=None):

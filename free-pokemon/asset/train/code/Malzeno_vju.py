@@ -66,6 +66,7 @@ def recharge(self):
 @Increment(Malzeno)
 def _restore_drain(self,x):
     self.state['hp']=min(self['max_hp'],self['hp']+x)
+    self.log('{} heals {} HP.'.format(self._species,x))
     self.recharge()
 
 @Increment(Malzeno)

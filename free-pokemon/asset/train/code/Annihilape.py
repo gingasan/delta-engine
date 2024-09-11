@@ -22,7 +22,8 @@ class Annihilape(PokemonBase):
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
             if from_=='target':
                 for _ in range(x):
-                    self.set_boost('spa',2,'self')
+                    self.set_boost('atk',2,'self')
+            self.log("{}'s Attack is raised by {}.".format(self._species,2*x))
     
     def get_power(self):        
         power=self['act']['power']

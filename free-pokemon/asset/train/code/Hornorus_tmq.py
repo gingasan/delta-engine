@@ -12,12 +12,14 @@ class Hornorus(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['act_taken']['category']=='Physical':
             x=int(x*0.75)
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def move_1(self): # Horn Smash
         damage_ret=self.get_damage()
@@ -62,14 +64,16 @@ def move_4(self): # Armored Strike
 
 @Increment(Hornorus)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['conditions'].get('TEMP_SHIELD'):
         x=int(x*0.75)
     if self['act_taken']['category']=='Physical':
         x=int(x*0.75)
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
 @Increment(Hornorus)
 def endturn(self):

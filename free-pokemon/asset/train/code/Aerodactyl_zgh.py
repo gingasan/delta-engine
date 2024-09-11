@@ -73,8 +73,11 @@ def set_boost(self,key,x,from_='target'):
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+    self.log("{}'s {} is {} by {}.".format(self._species,{
+        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
     if key=='spe' and x>0:
         self.set_boost('atk',1,'self')
+        self.log("Aerodactyl's Attack is raised by 1.")
 
 # -------------------------------------------------------------
 

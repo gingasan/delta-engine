@@ -12,14 +12,14 @@ class Blaziken(PokemonBase):
         super().__init__()
         
     def endturn(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.set_boost('atk',1,'self')
 
     def get_crit(self):
         if self['act']['id']=='Inferno Kick':
-            if self.env.get('SUNNYDAY'):
+            if self.get_env('Sunlight'):
                 return True
-            elif self.env.get('RAINDANCE'):
+            elif self.get_env('Rain'):
                 return False
         crit_mult=[0,24,8,2,1]
         crit_ratio=self['boosts']['crit']

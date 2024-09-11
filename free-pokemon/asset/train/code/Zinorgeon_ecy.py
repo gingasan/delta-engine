@@ -12,7 +12,7 @@ class Zinorgeon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('ELECTRIC_TERRAIN',max_count=5)
+        self.set_env('Electric Terrain','terrain',max_count=5)
 
     def move_1(self): # Volt Slam
         damage_ret=self.get_damage()

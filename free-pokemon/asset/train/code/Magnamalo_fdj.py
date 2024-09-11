@@ -52,15 +52,15 @@ def value():
 
 @Increment(Magnamalo)
 def move_4(self): # Gas Cloud
-    self.target.set_side_condition('GAS_CLOUD',counter=0)
+    self.set_env('Gas Cloud',side='target',counter=0)
 
 @Increment(Magnamalo)
 def endturn(self):
-    if self.target['side_conditions'].get('GAS_CLOUD'):
-        self.target['side_conditions']['GAS_CLOUD']['counter']+=1
-        if self.target['side_conditions']['GAS_CLOUD']['counter']==2:
-            del self.target['side_conditions']['GAS_CLOUD']
-    if self.target['side_conditions'].get('GAS_CLOUD'):
+    if self.get_env('Gas Cloud',side='target'):
+        self.get_env('Gas Cloud',side='target')['counter']+=1
+        if self.get_env('Gas Cloud',side='target')['counter']==2:
+            self.del_env('Gas Cloud',side='target')
+    if self.get_env('Gas Cloud',side='target'):
         if not self.target.istype('Poison'):
             self.target.set_boost('accuracy',-1)
 

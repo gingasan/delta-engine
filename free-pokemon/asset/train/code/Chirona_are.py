@@ -85,7 +85,7 @@ def value():
 
 @Increment(Chirona)
 def endturn(self):
-    if self.env.get('GRASSY_TERRAIN'):
+    if self.get_env('Grassy Terrain'):
         self.restore(self['max_hp']//8,'heal')
     if self['conditions'].get('DOUBLE_DAMAGE'):
         self['conditions']['DOUBLE_DAMAGE']['counter']+=1

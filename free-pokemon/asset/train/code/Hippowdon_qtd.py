@@ -12,15 +12,18 @@ class Hippowdon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SANDSTORM')
+        self.set_env('Sandstorm','weather')
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if self['hp']==0:
-            self.state['status']='FNT'
             return
-        self.set_env('SANDSTORM')
+        self.set_env('Sandstorm','weather')
 
     def move_1(self): # Earth Power 
         damage_ret=self.get_damage()

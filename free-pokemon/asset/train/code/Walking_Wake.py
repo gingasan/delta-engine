@@ -12,29 +12,29 @@ class Walking_Wake(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             t=max([(k,v) for k,v in self['stats'].items()],key=lambda x:x[1])[0]
             self.set_stat(t,1.5 if t=='spe' else 1.3)
 
     def get_weather_power_mult(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             if self['act']['id']=='Hydro Steam':
                 return 1.5
             if self['act']['type'] in ['Fire','Water']:
                 return {'Fire':1.5,'Water':0.5}[self['act']['type']]
-        if self.env.get('RAINDANCE'):
+        if self.get_env('Rain'):
             if self['act']['type'] in ['Fire','Water']:
                 return {'Fire':0.5,'Water':1.5}[self['act']['type']]
-        if self.env.get('ELECTRIC_TERRAIN'):
+        if self.get_env('Electric Terrain'):
             if self['act']['type']=='Electric':
                 return 1.3
-        if self.env.get('GRASSY_TERRAIN'):
+        if self.get_env('Grassy Terrain'):
             if self['act']['type']=='Grass':
                 return 1.3
-        if self.env.get('PSYCHIC_TERRAIN'):
+        if self.get_env('Psychic Terrain'):
             if self['act']['type']=='Psychic':
                 return 1.3
-        if self.env.get('MISTY_TERRAIN'):
+        if self.get_env('Misty Terrain'):
             if self['act']['type']=='Dragon':
                 return 0.5
         return 1.
@@ -81,6 +81,9 @@ def move_4(self): # Substitute
 
 @Increment(Walking_Wake)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['conditions'].get('SUBSTITUTE'):
         self['conditions']['SUBSTITUTE']['hp']-=x
@@ -88,5 +91,4 @@ def _take_damage_attack(self,x):
             del self['conditions']['SUBSTITUTE']
     else:
         self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])

@@ -12,13 +12,15 @@ class Steelix(PokemonBase):
         super().__init__()
     
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['hp']==self['max_hp']:
             self.state['hp']=max(1,self['hp']-x)
         else:
             self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
     
     def move_1(self): # Earthquake
         damage_ret=self.get_damage()

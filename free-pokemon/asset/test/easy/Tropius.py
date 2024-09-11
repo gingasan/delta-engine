@@ -12,16 +12,16 @@ class Tropius(PokemonBase):
         super().__init__()
 
     def get_weather_stat_mult(self,key):
-        if self.env.get('SANDSTORM') and key=='spd' and 'Rock' in self['types']:
+        if self.get_env('Sandstorm') and key=='spd' and 'Rock' in self['types']:
             return 1.5
-        if self.env.get('SNOW') and key=='def' and 'Ice' in self['types']:
+        if self.get_env('Snow') and key=='def' and 'Ice' in self['types']:
             return 1.5
-        if self.env.get('SUNNYDAY') and key=='spa':
+        if self.get_env('Sunlight') and key=='spa':
             return 1.5
         return 1.
 
     def endturn(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.take_damage(self['max_hp']//8,'loss')
     
     def move_1(self): # Calm Mind

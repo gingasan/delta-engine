@@ -82,5 +82,5 @@ def value():
 
 @Increment(Gudiao)
 def endturn(self):
-    if self.env.get('RAINDANCE'):
+    if self.get_env('Rain'):
         self.restore(self['max_hp']//8,'heal')

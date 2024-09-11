@@ -12,7 +12,7 @@ class Fei(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('GRASSY_TERRAIN',max_count=10)
+        self.set_env('Grassy Terrain','terrain',max_count=10)
     
     def move_1(self): # Plague Fang
         damage_ret=self.get_damage()

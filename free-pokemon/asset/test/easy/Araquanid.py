@@ -18,32 +18,42 @@ class Araquanid(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def set_status(self,x):
-        if self['status'] or self.env.get('MISTY_TERRAIN'):
+        if self['hp']<=self['max_hp']//3:
+            return
+        if self['status'] or self.get_env('Misty Terrain'):
             return
         if x=='BRN':
             return
         elif x=='PAR':
             if not self.istype('Electric'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is paralyzed.'%self._species)
         elif x=='PSN':
             if not self.istype('Poison') and not self.istype('Steel'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is poisoned.'%self._species)
         elif x=='TOX':
             if not self.istype('Poison') and not self.istype('Steel'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is badly poisoned.'%self._species)
         elif x=='FRZ':
             if not self.istype('Ice'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is frozen.'%self._species)
         elif x=='SLP':
-            self.state['status']={x:{'counter':0}}
+            if not self.env.get("Electric Terrain"):
+                self.state['status']={x:{'counter':0}}
+                self.log('%s falls asleep.'%self._species)
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['act_taken']['type']=='Fire':
             x=int(x*0.5)
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def move_1(self): # Liquidation
         damage_ret=self.get_damage()

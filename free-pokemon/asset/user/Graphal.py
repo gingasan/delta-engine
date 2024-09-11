@@ -13,18 +13,18 @@ class Graphal(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+        self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)
 
     def get_other_mult(self):
         mult=1
         if self.isstatus('BRN') and self['act']['category']=='Physical':
             mult*=0.5
-        if self['side_conditions'].get('DARK_WORLD'):
+        if self.get_env('DARK_WORLD',side='self'):
             mult=mult*1.5 if self['act']['type']=='Dark' else mult*0.75
         return mult
 
     def get_type_effect(self):
-        if self['act']['id']=='Dark Rainbow' and self['side_conditions'].get('DARK_WORLD'):
+        if self['act']['id']=='Dark Rainbow' and self.get_env('DARK_WORLD',side='self'):
             return 1
         move_type=self['act']['type']
         target_types=self.target['types']
@@ -83,7 +83,7 @@ def value():
 
 @Increment(Graphal)
 def onswitch(self):
-    self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+    self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)
     self.set_condition('REVIVE',counter=1)
 
 @Increment(Graphal)
@@ -112,7 +112,4 @@ def value():
 
 @Increment(Graphal)
 def move_5(self): # Dark World
-    if self['side_conditions'].get('DARK_WORLD'):
-        self['side_conditions']['DARK_WORLD']['max_count']=self['side_conditions']['DARK_WORLD']['counter']+5
-    else:
-        self.set_side_condition('DARK_WORLD',counter=0,max_count=5)
+    self.set_env('DARK_WORLD',side='self',counter=0,max_count=5)

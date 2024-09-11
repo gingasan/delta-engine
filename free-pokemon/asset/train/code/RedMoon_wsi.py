@@ -13,7 +13,7 @@ class RedMoon(PokemonBase):
 
     def onswitch(self):
         self.target.set_boost('atk',-1)
-        self.set_side_condition('TAILWIND',counter=0,max_count=3)
+        self.set_env('Tailwind',side='self',counter=0,max_count=3)
     
     def get_stat(self,key,boost=None):
         stat=self['stats'][key]
@@ -24,7 +24,7 @@ class RedMoon(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self['side_conditions'].get('TAILWIND'):
+        if key=='spe' and self.get_env('Tailwind',side='self'):
             stat_ratio*=2
         return int(stat*stat_ratio)
 
@@ -84,12 +84,14 @@ def value():
 
 @Increment(RedMoon)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['hp']<self['max_hp']//2 and self['act_taken']['type']=='Fairy':
         x//=2
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
 # -------------------------------------------------------------
 

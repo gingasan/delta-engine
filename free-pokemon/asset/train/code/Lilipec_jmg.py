@@ -12,7 +12,7 @@ class Lilipec(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SANDSTORM',max_count=5)
+        self.set_env('Sandstorm','weather',max_count=5)
 
     def move_1(self): # Mudslide
         damage_ret=self.get_damage()

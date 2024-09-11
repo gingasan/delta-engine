@@ -21,11 +21,15 @@ class Grapha(PokemonBase):
             self._take_damage_loss(x)
         elif from_=='recoil':
             self._take_damage_recoil(x)
-        if self['status']=='FNT':
+        if self['hp']==0:
             if self['conditions'].get('REVIVE'):
                 self.state['status']=None
                 self.state['hp']=self['max_hp']//2
                 del self['conditions']['REVIVE']
+                self.log('Revive! Lord of Dark, Graphal.',color='purple')
+            else:
+                self.state['status']='FNT'
+                self.log('%s faints.'%self._species)
 
     def move_1(self): # Shadow Blast
         damage_ret=self.get_damage()

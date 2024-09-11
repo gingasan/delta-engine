@@ -12,13 +12,15 @@ class Lunagaron(PokemonBase):
         super().__init__()
     
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
-        damage=x
         if self['act_taken']['type']!='Fire':
-            damage=int(damage*0.8)
-        self.state['hp']=max(0,self['hp']-damage)
+            x=int(x*0.8)
+        self.state['hp']=max(0,self['hp']-x)
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if self['hp']==0:
-            self.state['status']='FNT'
             return
         if 'contact' in self['act_taken']['property']:
             if rnd()<30/100:

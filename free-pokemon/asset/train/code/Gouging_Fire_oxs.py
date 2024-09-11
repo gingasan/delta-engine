@@ -51,9 +51,9 @@ def value():
 
 @Increment(Gouging_Fire)
 def move_3(self): # Morning Sun
-    if not any([x in self.env for x in ['SUNNYDAY','RAINDANCE','SANDSTORM','SNOW','HAIL']]):
+    if not any([x in self.env for x in ['Sunlight','Rain','Sandstorm','Snow']]):
         self.restore(self['max_hp']//2,'heal')
-    elif self.env.get('SUNNYDAY'):
+    elif self.get_env('Sunlight'):
         self.restore(self['max_hp']//3*2,'heal')
     else:
         self.restore(self['max_hp']//4,'heal')
@@ -70,7 +70,7 @@ def move_4(self): # Solar Claw
     if not damage_ret['miss']:
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.set_boost('atk',+1,'self')
 
 # -------------------------------------------------------------

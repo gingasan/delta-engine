@@ -12,22 +12,28 @@ class Moltaroth(PokemonBase):
         super().__init__()
 
     def set_status(self,x):
-        if self['status'] or self.env.get('MISTY_TERRAIN'):
+        if self['status'] or self.get_env('Misty Terrain'):
             return
         if x=='BRN':
             if not self.istype('Fire'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is burned.'%self._species)
         elif x=='PAR':
             if not self.istype('Electric'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is paralyzed.'%self._species)
         elif x=='PSN':
             if not self.istype('Poison') and not self.istype('Steel'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is poisoned.'%self._species)
         elif x=='TOX':
             if not self.istype('Poison') and not self.istype('Steel'):
                 self.state['status']={x:{'counter':0}}
+                self.log('%s is badly poisoned.'%self._species)
         elif x=='SLP':
-            self.state['status']={x:{'counter':0}}
+            if not self.env.get("Electric Terrain"):
+                self.state['status']={x:{'counter':0}}
+                self.log('%s falls asleep.'%self._species)
 
     def get_power(self):
         power=self['act']['power']

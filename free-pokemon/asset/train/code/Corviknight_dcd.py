@@ -14,12 +14,15 @@ class Corviknight(PokemonBase):
     def set_boost(self,key,x,from_='target'):
         if x<0 and from_=='target':
             self.target.set_boost(key,x)
+            self.log('Corviknight reflects the stat-lowering effect back to the opponent.')
             return
         bar=6 if key in ['atk','def','spa','spd','spe'] else 3
         if x>0:
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+        self.log("{}'s {} is {} by {}.".format(self._species,{
+            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
 
     def move_1(self): # Wing Slash
         damage_ret=self.get_damage()
@@ -69,12 +72,14 @@ def value():
 
 @Increment(Corviknight)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if 'type_efc' in self['act_taken'] and self['act_taken']['type_efc']>1:
         x=int(0.75*x)
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
 # -------------------------------------------------------------
 

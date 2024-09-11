@@ -13,20 +13,20 @@ class Solarzard(PokemonBase):
     
     def get_power(self):
         power=self['act']['power']
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             power+=30
         return int(power*self.get_weather_power_mult())
     
     def endturn(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.take_damage(self['max_hp']//8,'loss')
     
     def get_accuracy(self):
         acc=self['act']['accuracy']
         if self['act']['id']=='Hurricane':
-            if self.env.get('RAINDANCE'):
+            if self.get_env('Rain'):
                 acc=1e5
-            elif self.env.get('SUNNYDAY'):
+            elif self.get_env('Sunlight'):
                 acc=50
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:

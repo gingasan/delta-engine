@@ -12,7 +12,7 @@ class Mamoswine(PokemonBase):
         super().__init__()
 
     def get_evasion(self):
-        if self.env.get('SNOW'):
+        if self.get_env('Snow'):
             return 1.25
         return 1
 

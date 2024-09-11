@@ -12,12 +12,13 @@ class Hippowdon(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
-            return
-        if rnd()<25/100:
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        if self['hp']>0 and rnd()<25/100:
             self.set_boost('atk',1,'self')
 
     def move_1(self): # Earthquake
@@ -42,7 +43,7 @@ def value():
 
 @Increment(Hippowdon)
 def move_3(self): # Sandstorm
-    self.set_env('SANDSTORM')
+    self.set_env('Sandstorm','weather')
 
 # -------------------------------------------------------------
 
@@ -52,6 +53,9 @@ def value():
 
 @Increment(Hippowdon)
 def _take_damage_attack(self,x):
+    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['act_taken']['id']=='Earthquake':
         x=int(x*0.5)

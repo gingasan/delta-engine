@@ -15,6 +15,8 @@ class Dragomir(PokemonBase):
         bar=6 if key in ['atk','def','spa','spd','spe'] else 3
         if x>0:
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
+            self.log("{}'s {} is raised by {}.".format(self._species,{
+                'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],x))
     
     def move_1(self): # Legend Strike
         damage_ret=self.get_damage()

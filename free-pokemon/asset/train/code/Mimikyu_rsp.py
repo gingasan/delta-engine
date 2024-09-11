@@ -15,13 +15,15 @@ class Mimikyu(PokemonBase):
         self.set_condition('DISGUISE',counter=0)
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         if self['conditions'].get('DISGUISE'):
             del self['conditions']['DISGUISE']
         else:
             self.register_act_taken()
             self.state['hp']=max(0,self['hp']-x)
-            if self['hp']==0:
-                self.state['status']='FNT'
+            self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def get_crit(self):
         crit_mult=[0,24,8,2,1]

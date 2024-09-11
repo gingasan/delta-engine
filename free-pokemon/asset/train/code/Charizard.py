@@ -12,24 +12,24 @@ class Charizard(PokemonBase):
         super().__init__()
     
     def get_weather_stat_mult(self, key):
-        if self.env.get('SANDSTORM') and key=='spd' and 'Rock' in self['types']:
+        if self.get_env('Sandstorm') and key=='spd' and 'Rock' in self['types']:
             return 1.5
-        if self.env.get('SNOW') and key=='def' and 'Ice' in self['types']:
+        if self.get_env('Snow') and key=='def' and 'Ice' in self['types']:
             return 1.5
-        if self.env.get('SUNNYDAY') and key=='spa':
+        if self.get_env('Sunlight') and key=='spa':
             return 1.5
         return 1.
     
     def endturn(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.take_damage(self['max_hp']//8,'loss')
     
     def get_accuracy(self):
         acc=self['act']['accuracy']
         if self['act']['id']=='Hurricane':
-            if self.env.get('RAINDANCE'):
+            if self.get_env('Rain'):
                 acc=1e5
-            elif self.env.get('SUNNYDAY'):
+            elif self.get_env('Sunlight'):
                 acc=50
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:

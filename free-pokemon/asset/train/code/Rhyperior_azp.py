@@ -12,6 +12,9 @@ class Rhyperior(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         if self['conditions'].get('PROTECT'):
             del self['conditions']['PROTECT']
             return
@@ -19,8 +22,7 @@ class Rhyperior(PokemonBase):
         if self['act_taken']['type_efc']>1:
             x=int(x*0.7)
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def move_1(self): # Quake Impact
         damage_ret=self.get_damage()
@@ -79,7 +81,7 @@ def value():
 
 @Increment(Rhyperior)
 def endturn(self):
-    if self.env.get('STANDSTORM'):
+    if self.get_env('Sandstorm'):
         self.set_boost('spd',1,'self')
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']

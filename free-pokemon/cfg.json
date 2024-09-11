@@ -362,17 +362,16 @@
     }
   },
   "terrain": [
-    "PSYCHIC_TERRAIN",
-    "ELECTRIC_TERRAIN",
-    "GRASSY_TERRAIN",
-    "MISTY_TERRAIN"
+    "Psychic Terrain",
+    "Electric Terrain",
+    "Grassy Terrain",
+    "Misty Terrain"
   ],
   "weather": [
-    "HAIL",
-    "RAINDANCE",
-    "SANDSTORM",
-    "SNOW",
-    "SUNNYDAY"
+    "Rain",
+    "Sandstorm",
+    "Snow",
+    "Sunlight"
   ],
   "status": [
     "BRN",

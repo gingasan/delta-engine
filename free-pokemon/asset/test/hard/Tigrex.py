@@ -112,6 +112,6 @@ def move_5(self): # Ice Spinner
     if not damage_ret['miss']:
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        for t in ['PSYCHIC_TERRAIN','ELECTRIC_TERRAIN','GRASSY_TERRAIN','MISTY_TERRAIN']:
+        for t in ['Psychic Terrain','Electric Terrain','Grassy Terrain','Misty Terrain']:
             if self.env.get(t):
                 del self.env[t]

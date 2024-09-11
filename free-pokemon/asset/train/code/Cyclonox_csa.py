@@ -18,12 +18,14 @@ class Cyclonox(PokemonBase):
                 del self['conditions']['TITAN_GAZE']
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['act_taken']['category']=='Special':
             self.set_condition('TITAN_GAZE',counter=0)
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def get_power(self):
         power=self['act']['power']

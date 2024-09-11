@@ -15,6 +15,9 @@ class Velkhana(PokemonBase):
         self.set_condition('ICE_ARMOR',counter=0)
     
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         if self['conditions'].get('ICE_ARMOR'):
             if self['act_taken']['category']=='Physical':
@@ -27,8 +30,7 @@ class Velkhana(PokemonBase):
             if self['conditions']['ICY_WALL']['counter']==3:
                 del self['conditions']['ICY_WALL']
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def move_1(self): # Flash Freeze Breath
         damage_ret=self.get_damage()

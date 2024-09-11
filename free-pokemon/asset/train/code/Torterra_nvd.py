@@ -28,13 +28,18 @@ class Torterra(PokemonBase):
         return int(stat*stat_ratio)
 
     def take_damage(self,x,from_='attack'):
+        prev_hp=self['hp']
         if from_=='attack':
             self._take_damage_attack(x)
         elif from_=='loss':
             self._take_damage_loss(x)
         elif from_=='recoil':
             self._take_damage_recoil(x)
-        if self['hp']<=self['max_hp']//2:
+        if self['hp']==0:
+            self.state['status']='FNT'
+            self.log('%s faints.'%self._species)
+            return
+        if prev_hp>self['max_hp']//2 and self['hp']<=self['max_hp']//2:
             self.set_boost('atk',+1,'self')
             self.set_boost('spa',+1,'self')
             self.set_boost('spe',+1,'self')

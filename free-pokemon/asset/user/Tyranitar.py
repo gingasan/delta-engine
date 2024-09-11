@@ -13,7 +13,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('SANDSTORM')
+        self.set_env('Sandstorm','weather')
 
     def get_crit(self):
         crit_mult=[0,24,8,2,1]

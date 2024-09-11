@@ -12,7 +12,7 @@ class Goumang(PokemonBase):
         super().__init__()
 
     def endturn(self):
-        if self.env.get('SUNNYDAY'):
+        if self.get_env('Sunlight'):
             self.restore(self['max_hp']//16,'heal')
 
     def move_1(self): # Fusang Flame
@@ -64,6 +64,6 @@ def value():
 @Increment(Goumang)
 def get_power(self):
     power=self['act']['power']
-    if self.env.get('SUNNYDAY') and self['act']['type']=='Grass':
+    if self.get_env('Sunlight') and self['act']['type']=='Grass':
         power*=1.3
     return int(power*self.get_weather_power_mult())

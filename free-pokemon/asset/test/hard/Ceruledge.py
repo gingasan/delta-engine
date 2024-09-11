@@ -12,11 +12,12 @@ class Ceruledge(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
-            return
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
         if self['act_taken'] and self['act_taken']['category']=='Physical':
             self.set_boost('def',-1)
             self.set_boost('spe',2)
@@ -69,6 +70,7 @@ def value():
 def _restore_drain(self,x):
     x=int(x*1.5)
     self.state['hp']=min(self['max_hp'],self['hp']+x)
+    self.log('Ceruledge is ravenously hungry. It drains {} HP from {}.'.format(x,self.target._species),color='red')
 
 # -------------------------------------------------------------
 

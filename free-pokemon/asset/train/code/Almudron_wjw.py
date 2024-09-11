@@ -16,13 +16,15 @@ class Almudron(PokemonBase):
             self.target.set_stat('spe',0.7)
 
     def _take_damage_attack(self,x):
+        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+            self.logger.log('It is immune by %s.'%self._species)
+            return
         self.register_act_taken()
-        if self['side_conditions'].get('MUD_WALL'):
+        if self.get_env('Mud Wall',side='self'):
             if self['act_taken']['category']=='Special':
                 x//=2
         self.state['hp']=max(0,self['hp']-x)
-        if self['hp']==0:
-            self.state['status']='FNT'
+        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
 
     def move_1(self): # Mud Wave
         damage_ret=self.get_damage()
@@ -33,7 +35,7 @@ class Almudron(PokemonBase):
                 self.target.set_boost('spe',-1)
 
     def move_2(self): # Mud Wall
-        self.set_side_condition('MUD_WALL',counter=0,max_count=5)
+        self.set_env('Mud Wall',side='self',counter=0,max_count=5)
 
 # -------------------------------------------------------------
 

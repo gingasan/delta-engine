@@ -88,6 +88,8 @@ def set_boost(self,key,x,from_='target'):
                 self.restore(self['max_hp']//10,'heal')
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
+    self.log("{}'s {} is {} by {}.".format(self._species,{
+        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
 
 # -------------------------------------------------------------
 
