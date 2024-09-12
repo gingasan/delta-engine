@@ -52,7 +52,7 @@ class Walking_Wake(PokemonBase):
             self.target.take_damage(damage)
             self.set_boost('spa',-2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Walking_Wake,'_move_3')
 def value():
@@ -67,7 +67,7 @@ def move_3(self): # Flamethrower
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Walking_Wake,'_move_4')
 def value():
@@ -91,4 +91,4 @@ def _take_damage_attack(self,x):
             del self['conditions']['SUBSTITUTE']
     else:
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])

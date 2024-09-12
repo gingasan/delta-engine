@@ -24,7 +24,7 @@ class ChenLoong(PokemonBase):
             if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
                 x//=2
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def get_accuracy(self):
         acc=self['act']['accuracy']

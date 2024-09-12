@@ -38,7 +38,7 @@ class Venusaur(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Venusaur,'_move_3')
 def value():
@@ -53,7 +53,7 @@ def move_3(self): # Earth Power
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Venusaur,'_move_4')
 def value():

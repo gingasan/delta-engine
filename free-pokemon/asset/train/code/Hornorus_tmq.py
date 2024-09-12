@@ -19,7 +19,7 @@ class Hornorus(PokemonBase):
         if self['act_taken']['category']=='Physical':
             x=int(x*0.75)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Horn Smash
         damage_ret=self.get_damage()
@@ -33,7 +33,7 @@ class Hornorus(PokemonBase):
         self.set_boost('def',+1,'self')
         self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hornorus,'_move_3')
 def value():
@@ -48,7 +48,7 @@ def move_3(self): # Groundquake
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hornorus,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def _take_damage_attack(self,x):
     if self['act_taken']['category']=='Physical':
         x=int(x*0.75)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Hornorus)
 def endturn(self):
@@ -82,7 +82,7 @@ def endturn(self):
        if self['conditions']['TEMP_SHIELD']['counter']==2:
            del self['conditions']['TEMP_SHIELD']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hornorus,'_ability')
 def value():

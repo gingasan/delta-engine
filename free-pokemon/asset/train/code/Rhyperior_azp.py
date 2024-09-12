@@ -22,7 +22,7 @@ class Rhyperior(PokemonBase):
         if self['act_taken']['type_efc']>1:
             x=int(x*0.7)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Quake Impact
         damage_ret=self.get_damage()
@@ -37,7 +37,7 @@ class Rhyperior(PokemonBase):
             return
         self.set_condition('PROTECT',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Rhyperior,'_move_3')
 def value():
@@ -62,7 +62,7 @@ def move_3(self): # Rock Blast
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Rhyperior,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def move_4(self): # Earthen Barrier
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Rhyperior,'_ability')
 def value():
@@ -86,7 +86,7 @@ def endturn(self):
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Rhyperior,'_move_5')
 def value():

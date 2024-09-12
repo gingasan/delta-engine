@@ -40,7 +40,7 @@ class Lightning(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lightning,'_move_3')
 def value():
@@ -68,7 +68,7 @@ def _take_damage_attack(self,x):
     if self['hp']==0:
         self.state['status']='FNT'
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lightning,'_move_4')
 def value():
@@ -83,7 +83,7 @@ def move_4(self): # Meteor Mash
         if rnd()<20/100:
             self.set_boost('atk',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lightning,'_ability')
 def value():
@@ -97,7 +97,7 @@ def get_power(self):
         self.log("Lightning is recharging!", color="blue")
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lightning,'_move_5')
 def value():

@@ -28,7 +28,7 @@ class Grimmsnarl(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Grimmsnarl,'_move_3')
 def value():
@@ -52,4 +52,4 @@ def _take_damage_attack(self,x):
             del self['conditions']['SUBSTITUTE']
     else:
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])

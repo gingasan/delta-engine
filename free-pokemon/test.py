@@ -34,15 +34,17 @@ while not flag:
     state2 = deepcopy(oppo.state)
     move1_id = available_moves[input("**\nChoose your move from:\n{}\n".format(available_moves))]
     move2_id = rndc(oppo.get_moves())
-    battle.act(move1_id, move2_id)
-    flag = battle.endturn()
+    data = battle.act(move1_id, move2_id)
+    # print(data)
+    flag = data["wrap"]
     print("**")
-    logs = battle.get_logs()
-    for line in logs:
-        print(line["content"])
+    for phase in ["phase-1", "phase-2", "phase-3"]:
+        if data[phase]:
+            for line in data[phase]["logs"]:
+                print(line["content"])
     print("**\n")
-    battle.logger.clr()
-    print(role.sum)
-    print(oppo.sum)
+
+    # print(role.sum)
+    # print(oppo.sum)
 
 print("\n**\nBattle is over. {} wins.\n**".format(role._species if not role.isfaint() else oppo._species))

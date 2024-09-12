@@ -27,7 +27,7 @@ class Baize(PokemonBase):
         self.set_boost('spd',1,'self')
         self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Baize,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def move_3(self): # Celestial Voice
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Baize,'_ability')
 def value():
@@ -61,7 +61,7 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Baize)
 def endturn(self):

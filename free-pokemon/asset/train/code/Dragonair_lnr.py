@@ -28,7 +28,7 @@ class Dragonair(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragonair,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # Fire Fang
             if rnd()<10/100:
                 self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragonair,'_move_4')
 def value():

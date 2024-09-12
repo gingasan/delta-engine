@@ -17,7 +17,7 @@ class Ceruledge(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['act_taken'] and self['act_taken']['category']=='Physical':
             self.set_boost('def',-1)
             self.set_boost('spe',2)
@@ -36,7 +36,7 @@ class Ceruledge(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Ceruledge,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Play Rough
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Ceruledge,'_move_4')
 def value():
@@ -60,7 +60,7 @@ def value():
 def move_4(self): # Swords Dance
     self.set_boost('atk',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Ceruledge,'_ability')
 def value():
@@ -72,7 +72,7 @@ def _restore_drain(self,x):
     self.state['hp']=min(self['max_hp'],self['hp']+x)
     self.log('Ceruledge is ravenously hungry. It drains {} HP from {}.'.format(x,self.target._species),color='red')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Ceruledge,'_move_5')
 def value():

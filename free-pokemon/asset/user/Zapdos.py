@@ -14,9 +14,9 @@ class Zapdos(PokemonBase):
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self.env.get('RAINDANCE') and self['act']['id']=='Hurricane':
+        if self.get_env('Rain') and self['act']['id']=='Hurricane':
             acc=1e5
-        elif self.env.get('SUNNYDAY') and self['act']['id']=='Hurricane':
+        elif self.get_env('Sunlight') and self['act']['id']=='Hurricane':
             acc=50
         if acc<=70:
             acc=int(acc*1.5)
@@ -44,7 +44,7 @@ class Zapdos(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_3')
 def value():
@@ -59,7 +59,7 @@ def move_3(self): # Focus Blast
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def move_4(self): # Energy Recycle
         self.set_boost('spe',1,'self')
         self.log('Zapdos recycles energy from surrounding ions.',color='yellow')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_ability')
 def value():
@@ -115,7 +115,7 @@ def move_3(self): # Focus Blast
         self.restore(self['max_hp']//5,'heal')
         self.log('Zapdos recycles energy from missing attack.',color='yellow')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_5')
 def value():

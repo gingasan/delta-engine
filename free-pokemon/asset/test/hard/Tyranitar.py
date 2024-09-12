@@ -37,7 +37,7 @@ class Tyranitar(PokemonBase):
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100: self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranitar,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranitar,'_move_4')
 def value():
@@ -62,7 +62,7 @@ def move_4(self): # Toxic
     if not damage_ret['miss']:
         self.target.set_status('TOX')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranitar,'_ability')
 def value():
@@ -77,9 +77,9 @@ def _take_damage_attack(self,x):
     if rnd()<30/100:
         x//=2
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranitar,'_move_5')
 def value():

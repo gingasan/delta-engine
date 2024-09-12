@@ -45,7 +45,7 @@ class Sandslash(PokemonBase):
                 del self['conditions']['TRAP']
             self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Sandslash,'_move_3')
 def value():
@@ -60,7 +60,7 @@ def move_3(self): # Iron Head
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Sandslash,'_ability')
 def value():

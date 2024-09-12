@@ -31,7 +31,7 @@ class Talonflame(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Talonflame,'_move_3')
 def value():
@@ -43,7 +43,7 @@ def move_3(self): # Will-O-Wisp
     if not damage_ret['miss']:
         self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Talonflame,'_move_4')
 def value():

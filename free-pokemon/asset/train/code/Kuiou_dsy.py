@@ -35,7 +35,7 @@ class Kuiou(PokemonBase):
                 damage=int(damage*2)
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kuiou,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # Guardian Shield
     self.set_boost('def',1,'self')
     self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kuiou,'_ability')
 def value():
@@ -62,4 +62,4 @@ def _take_damage_attack(self,x):
         x=int(x*0.5)
         self.state['hp']=min(self['max_hp'],self['hp']+self['max_hp']//8)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])

@@ -56,7 +56,7 @@ class Tianma(PokemonBase):
                 if rnd()<0.3:
                     self.target.set_condition('DIZZY',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tianma,'_move_3')
 def value():
@@ -67,7 +67,7 @@ def move_3(self): # Celestial Barrier
     self.set_boost('def',+2,'self')
     self.set_boost('spd',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tianma,'_ability')
 def value():
@@ -82,7 +82,7 @@ def _take_damage_attack(self,x):
     if self['act_taken']['type']=='Ground':
         return
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Tianma)
 def get_evasion(self):

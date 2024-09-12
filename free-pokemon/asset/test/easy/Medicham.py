@@ -30,7 +30,7 @@ class Medicham(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Medicham,'_move_3')
 def value():

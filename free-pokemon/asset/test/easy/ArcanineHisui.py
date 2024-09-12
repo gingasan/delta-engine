@@ -25,7 +25,7 @@ class ArcanineHisui(PokemonBase):
             if not self.target.isfaint():
                 if rnd()<10/100: self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(ArcanineHisui,'_move_3')
 def value():

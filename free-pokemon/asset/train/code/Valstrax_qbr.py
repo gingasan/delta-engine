@@ -33,7 +33,7 @@ class Valstrax(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Valstrax,'_move_3')
 def value():
@@ -43,7 +43,7 @@ def value():
 def move_3(self): # Roost
     self.restore(self['max_hp']//2,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Valstrax,'_move_4')
 def value():
@@ -61,7 +61,7 @@ def move_4(self): # Flare Cascade
             if rnd()<10/100:
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Valstrax,'_ability')
 def value():

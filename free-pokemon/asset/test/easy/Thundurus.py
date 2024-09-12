@@ -27,7 +27,7 @@ class Thundurus(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Thundurus,'_move_3')
 def value():

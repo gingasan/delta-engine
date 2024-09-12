@@ -30,7 +30,7 @@ class Velkhana(PokemonBase):
             if self['conditions']['ICY_WALL']['counter']==3:
                 del self['conditions']['ICY_WALL']
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Flash Freeze Breath
         damage_ret=self.get_damage()
@@ -43,7 +43,7 @@ class Velkhana(PokemonBase):
     def move_2(self): # Icy Wall
         self.set_condition('ICY_WALL',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Velkhana,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Tail Lance
         for key in ['atk','def','spa','spd','spe','crit','accuracy']:
             self['boosts'][key]=0
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Velkhana,'_ability')
 def value():

@@ -29,7 +29,7 @@ class Cloyster(PokemonBase):
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cloyster,'_move_3')
 def value():

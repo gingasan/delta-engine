@@ -35,7 +35,7 @@ class Chirona(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chirona,'_move_3')
 def value():
@@ -66,7 +66,7 @@ def endturn(self):
         if self['conditions']['DOUBLE_DAMAGE']['counter']==2:
             del self['conditions']['DOUBLE_DAMAGE']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chirona,'_move_4')
 def value():
@@ -77,7 +77,7 @@ def move_4(self): # Cave Shield
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chirona,'_ability')
 def value():

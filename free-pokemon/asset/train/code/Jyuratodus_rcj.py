@@ -19,7 +19,7 @@ class Jyuratodus(PokemonBase):
         if self['act_taken']['category']=='Physical' and self['hp']<self['max_hp']//2:
             x=int(x*0.5)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def endturn(self):
         if self.target['conditions'].get('TRAP'):
@@ -43,7 +43,7 @@ class Jyuratodus(PokemonBase):
             self.target.take_damage(damage)
             self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Jyuratodus,'_move_3')
 def value():
@@ -57,7 +57,7 @@ def move_3(self): # Swamp Wave
         if t.istype('Water'):
             t.restore(t['max_hp']//4,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Jyuratodus,'_ability')
 def value():

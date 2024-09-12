@@ -19,7 +19,7 @@ class Spectreon(PokemonBase):
         if self['boosts']['def']>=0:
             x=int(x*(1-0.1*self['boosts']['def']))
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Shadow Ball
         damage_ret=self.get_damage()

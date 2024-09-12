@@ -19,7 +19,7 @@ class Huashe(PokemonBase):
         if self['act_taken']['category']=='Special' and rnd()<30/100:
             self.target.set_boost('spa',-1)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Phantom Cry
         damage_ret=self.get_damage()
@@ -37,7 +37,7 @@ class Huashe(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Huashe,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def _take_damage_attack(self,x):
     if self['act_taken']['category']=='Special' and rnd()<30/100:
         self.target.set_boost('spa',-1)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Huashe)
 def endturn(self):
@@ -67,7 +67,7 @@ def endturn(self):
         if self['conditions']['GHOST_IMMUNE']['counter']==3:
             del self['conditions']['GHOST_IMMUNE']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Huashe,'_move_4')
 def value():
@@ -82,7 +82,7 @@ def move_4(self): # Serpent Strike
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Huashe,'_ability')
 def value():

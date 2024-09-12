@@ -33,7 +33,7 @@ class Livyatan(PokemonBase):
             if not self.target.isfaint() and rnd()<50/100:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Livyatan,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def move_3(self): # Whale Song
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Livyatan,'_move_4')
 def value():
@@ -59,7 +59,7 @@ def move_4(self): # Dark Surge
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Livyatan,'_ability')
 def value():
@@ -74,13 +74,13 @@ def _take_damage_attack(self,x):
     if self['act_taken']['category']=='Physical':
         x=int(x*0.75)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     if self['hp']==0:
         return
     if 'property' in self['act_taken'] and 'contact' in self['act_taken']['property'] and rnd()<20/100:
         self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Livyatan,'_move_5')
 def value():

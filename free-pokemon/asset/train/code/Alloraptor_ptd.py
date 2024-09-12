@@ -33,7 +33,7 @@ class Alloraptor(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Alloraptor,'_move_3')
 def value():
@@ -45,7 +45,7 @@ def move_3(self): # Ancient Roar
         self.target.set_boost('atk',-1)
         self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Alloraptor,'_move_4')
 def value():
@@ -60,7 +60,7 @@ def move_4(self): # Steel Slash
         if not self.target.isfaint() and rnd()<10/100:
             self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Alloraptor,'_ability')
 def value():
@@ -97,7 +97,7 @@ def set_status(self,x):
             self.state['status']={x:{'counter':0}}
             self.log('%s falls asleep.'%self._species)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Alloraptor,'_move_5')
 def value():

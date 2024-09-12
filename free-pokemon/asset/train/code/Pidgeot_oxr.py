@@ -19,8 +19,7 @@ class Pidgeot(PokemonBase):
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+        self.log(script='boost',species=self._species,key=key,x=x)
 
     def endturn(self):
         if self['conditions'].get('RECHARGE'):

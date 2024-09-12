@@ -32,7 +32,7 @@ class Dodrio(PokemonBase):
                 elif rnd()<40/100:self.target.set_status('PAR')
                 elif rnd()<60/100:self.target.set_status('FRZ')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dodrio,'_move_3')
 def value():

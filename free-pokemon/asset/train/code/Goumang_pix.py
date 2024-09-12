@@ -31,7 +31,7 @@ class Goumang(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Goumang,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def move_3(self): # Dragon Ride
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Goumang,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Spring Renewal
     self.restore(self['max_hp']//2,'heal')
     self.state['status']=None
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Goumang,'_ability')
 def value():

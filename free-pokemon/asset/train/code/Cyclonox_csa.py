@@ -25,7 +25,7 @@ class Cyclonox(PokemonBase):
         if self['act_taken']['category']=='Special':
             self.set_condition('TITAN_GAZE',counter=0)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def get_power(self):
         power=self['act']['power']
@@ -51,7 +51,7 @@ class Cyclonox(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyclonox,'_move_3')
 def value():
@@ -65,7 +65,7 @@ def move_3(self): # Crafted Strike
         self.target.take_damage(damage)
         self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyclonox,'_move_4')
 def value():

@@ -31,18 +31,18 @@ class Lycanroc(PokemonBase):
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
-            self.target.take_damage(damage*1.3)
-            for t in ['REFLECT','LIGHT_SCREEN','AURORA_VEIL']:
-                if self.target['side_conditions'].get(t):
-                    del self.target['side_conditions'][t]
+            self.target.take_damage(damage)
+            for t in ['Reflect','Light Screen','Aurora Veil']:
+                if self.get_env(t,side='target'):
+                    self.del_env(t,side='target')
 
     def move_2(self): # Stone Edge
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
-            self.target.take_damage(damage*1.3)
+            self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lycanroc,'_move_3')
 def value():
@@ -57,7 +57,7 @@ def move_3(self): # Zen Headbutt
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lycanroc,'_move_4')
 def value():
@@ -70,7 +70,7 @@ def move_4(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lycanroc,'_ability')
 def value():
@@ -85,10 +85,9 @@ def set_boost(self,key,x,from_='target'):
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log("{}'s {} is {} by {}.".format(self._species,{
-        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+    self.log(script='boost',species=self._species,key=key,x=x)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lycanroc,'_move_5')
 def value():

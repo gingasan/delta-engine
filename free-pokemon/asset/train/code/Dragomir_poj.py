@@ -32,7 +32,7 @@ class Dragomir(PokemonBase):
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100: self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragomir,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def value():
 def move_3(self): # Recover
     self.restore(self['max_hp']//2,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragomir,'_move_4')
 def value():
@@ -56,7 +56,7 @@ def move_4(self): # Psychic Blast
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragomir,'_ability')
 def value():

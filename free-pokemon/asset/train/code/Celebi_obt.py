@@ -32,7 +32,7 @@ class Celebi(PokemonBase):
             if not self.target.isfaint() and rnd()<self.get_effect_chance(10/100):
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Celebi,'_move_3')
 def value():
@@ -48,7 +48,7 @@ def move_3(self): # Ancient Power
             for k in ['atk','def','spa','spd','spe']:
                 self.set_boost(k,1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Celebi,'_move_4')
 def value():
@@ -62,7 +62,7 @@ def move_4(self): # Giga Drain
         self.target.take_damage(damage)
         self.restore(int(0.5*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Celebi,'_move_5')
 def value():

@@ -31,7 +31,7 @@ class Aerodactyl(PokemonBase):
             self.target.take_damage(damage)
             self.take_damage(int(0.33*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def move_3(self): # Dragon Claw
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Dragon Dance
     self.set_boost('atk',1,'self')
     self.set_boost('spe',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_ability')
 def value():
@@ -75,7 +75,7 @@ def move_2(self): # Brave Bird
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_5')
 def value():

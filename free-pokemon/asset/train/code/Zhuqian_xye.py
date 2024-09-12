@@ -19,7 +19,7 @@ class Zhuqian(PokemonBase):
         if self['act_taken']['type']=='Dark':
             self.set_boost('def',1,'self')
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def get_power(self):
         power=self['act']['power']
@@ -49,7 +49,7 @@ class Zhuqian(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_condition('TRAP',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zhuqian,'_move_3')
 def value():
@@ -64,7 +64,7 @@ def move_3(self): # Steel Howl
         self.set_boost('spa',1,'self')
         self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zhuqian,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def move_4(self): # Coiling Guard
     self.set_boost('def',2,'self')
     self.restore(self['max_hp']//4,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zhuqian,'_ability')
 def value():

@@ -38,7 +38,7 @@
       "power": 90,
       "accuracy": 100,
       "category": "Special",
-      "type": "Ice",
+      "type": "Water",
       "effect": "Randomly lower one of the target's stat by one stage."
     },
     "Wrath of Black": {
@@ -47,6 +47,13 @@
       "category": "Physical",
       "type": "Ghost",
       "effect": "Ignores the target's Def stat change during the attack. Deals double damage to Fairy-type Pokemon."
+    },
+    "Signal Buster": {
+        "power": 70,
+        "accuracy": 100,
+        "category": "Special",
+        "type": "Electric",
+        "effect": "Lowers the target's Spe by one stage. If this move is super effective to the target, paralyzes it."
     }
   }
 }

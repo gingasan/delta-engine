@@ -51,7 +51,7 @@ class Tigrex(PokemonBase):
             self.target.take_damage(damage)
             self.take_damage(int(0.33*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tigrex,'_move_3')
 def value():
@@ -64,7 +64,7 @@ def move_3(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tigrex,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def move_4(self): # Bulk Up
     self.set_boost('atk',+1,'self')
     self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tigrex,'_ability')
 def value():
@@ -101,7 +101,7 @@ def get_accuracy(self):
     acc*=self.target.get_evasion()
     return acc/100
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tigrex,'_move_5')
 def value():

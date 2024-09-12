@@ -19,7 +19,7 @@ class Linghu(PokemonBase):
         if self['hp']>self['max_hp']//2:
             x=int(x*0.75)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Verdant Goad
         damage_ret=self.get_damage()
@@ -35,7 +35,7 @@ class Linghu(PokemonBase):
         if self['act_taken'] and self['act_taken']['category']=='Physical':
             self.target.take_damage(int(self['act_taken']['damage']*0.25))
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Linghu,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Bovine Crush
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Linghu,'_ability')
 def value():

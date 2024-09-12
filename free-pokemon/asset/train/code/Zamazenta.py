@@ -48,7 +48,7 @@ class Zamazenta(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zamazenta,'_move_3')
 def value():
@@ -62,7 +62,7 @@ def move_3(self): # Play Rough
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zamazenta,'_move_4')
 def value():
@@ -72,7 +72,7 @@ def value():
 def move_4(self): # Iron Defense
     self.set_boost('def',2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zamazenta,'_ability')
 def value():
@@ -88,10 +88,9 @@ def set_boost(self,key,x,from_='target'):
                 self.restore(self['max_hp']//10,'heal')
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log("{}'s {} is {} by {}.".format(self._species,{
-        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+    self.log(script='boost',species=self._species,key=key,x=x)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zamazenta,'_move_5')
 def value():

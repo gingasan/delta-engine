@@ -17,7 +17,7 @@ class Garchomp(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['act_taken'] and 'property' in self['act_taken'] and 'contact' in self['act_taken']['property']:
             self.target.take_damage(self.target['max_hp']//8,'loss')
 
@@ -43,7 +43,7 @@ class Garchomp(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Garchomp,'_move_3')
 def value():
@@ -59,7 +59,7 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     if self['act_taken'] and 'property' in self['act_taken'] and 'contact' in self['act_taken']['property']:
         self.target.take_damage(self.target['max_hp']//8,'loss')
 

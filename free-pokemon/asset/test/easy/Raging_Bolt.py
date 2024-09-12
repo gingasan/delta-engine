@@ -26,7 +26,7 @@ class Raging_Bolt(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Raging_Bolt,'_move_3')
 def value():

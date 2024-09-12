@@ -32,7 +32,7 @@ class Mew(PokemonBase):
             if not self.target.isfaint() and rnd()<0.1:
                 self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Mew,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def move_3(self): # Astral Beam
         if not self.target.isfaint() and rnd()<0.2:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Mew,'_move_4')
 def value():
@@ -58,7 +58,7 @@ def move_4(self): # Mind Shield
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Mew,'_ability')
 def value():
@@ -73,4 +73,4 @@ def _take_damage_attack(self,x):
     if x>self['max_hp']//2:
         x//=2
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])

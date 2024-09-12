@@ -30,7 +30,7 @@ class Lilipec(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lilipec,'_move_3')
 def value():
@@ -43,7 +43,7 @@ def move_3(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lilipec,'_ability')
 def value():

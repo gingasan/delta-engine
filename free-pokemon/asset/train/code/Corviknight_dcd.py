@@ -21,8 +21,7 @@ class Corviknight(PokemonBase):
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+        self.log(script='boost',species=self._species,key=key,x=x)
 
     def move_1(self): # Wing Slash
         damage_ret=self.get_damage()
@@ -38,7 +37,7 @@ class Corviknight(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Corviknight,'_move_3')
 def value():
@@ -49,7 +48,7 @@ def move_3(self): # Mirror Shield
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Corviknight,'_move_4')
 def value():
@@ -64,7 +63,7 @@ def move_4(self): # Sky Dive
         recoil=int(damage/3)
         self.take_damage(recoil,'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Corviknight,'_ability')
 def value():
@@ -79,9 +78,9 @@ def _take_damage_attack(self,x):
     if 'type_efc' in self['act_taken'] and self['act_taken']['type_efc']>1:
         x=int(0.75*x)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Corviknight,'_move_5')
 def value():

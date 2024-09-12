@@ -47,7 +47,7 @@ class Tyranotor(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(30/100*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranotor,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Devastating Roar
     self.target.set_boost('atk',-1)
     self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranotor,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def move_4(self): # Tail Smash
         if not self.target.isfaint() and rnd()<0.2:
             self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranotor,'_ability')
 def value():
@@ -88,7 +88,7 @@ def move_1(self): # Savage Bite
         if not self.target.isfaint() and rnd()<0.42:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyranotor,'_move_5')
 def value():

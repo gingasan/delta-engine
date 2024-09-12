@@ -37,7 +37,7 @@ class Cyberagon(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyberagon,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Thunder Charge
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyberagon,'_move_4')
 def value():
@@ -85,7 +85,7 @@ def _get_base_damage(self,power,crit):
 
     return base_damage
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyberagon,'_ability')
 def value():
@@ -101,5 +101,4 @@ def set_boost(self,key,x,from_='target'):
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log("{}'s {} is {} by {}.".format(self._species,{
-        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+    self.log(script='boost',species=self._species,key=key,x=x)

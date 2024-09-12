@@ -27,7 +27,7 @@ class TingLu(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(TingLu,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def move_3(self): # Rock Slide
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(TingLu,'_move_4')
 def value():
@@ -54,7 +54,7 @@ def move_4(self): # Ancient Curse
     self.set_boost('atk',+1,'self')
     self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(TingLu,'_ability')
 def value():
@@ -70,7 +70,7 @@ def _take_damage_attack(self,x):
     if self['hp']==0:
         self.state['status']='FNT'
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(TingLu,'_move_5')
 def value():

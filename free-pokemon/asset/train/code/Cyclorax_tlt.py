@@ -23,7 +23,7 @@ class Cyclorax(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
         if self['act_taken'] and self['act_taken']['type']=='Rock':
@@ -45,7 +45,7 @@ class Cyclorax(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyclorax,'_move_3')
 def value():
@@ -57,7 +57,7 @@ def move_3(self): # Stubborn Stare
     self.set_boost('def',+1,'self')
     self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyclorax,'_move_4')
 def value():
@@ -68,7 +68,7 @@ def move_4(self): # Counter
     if self['act_taken'] and self['act_taken']['category']=='Physical' and self['act_taken'].get('damage'):
         self.target.take_damage(self['act_taken']['damage']*2)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Cyclorax,'_ability')
 def value():

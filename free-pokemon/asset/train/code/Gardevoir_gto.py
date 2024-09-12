@@ -30,7 +30,7 @@ class Gardevoir(PokemonBase):
             if not self.target.isfaint() and rnd()<0.2:
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gardevoir,'_move_3')
 def value():
@@ -45,7 +45,7 @@ def move_3(self): # Mind Blast
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gardevoir,'_move_4')
 def value():
@@ -56,7 +56,7 @@ def move_4(self): # Fairy Shield
     self.set_boost('def',1,'self')
     self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gardevoir,'_ability')
 def value():

@@ -18,7 +18,7 @@ class FireEagle(PokemonBase):
         self.register_act_taken()
         x=int(x*0.5)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def endturn(self):
         self.take_damage(self['max_hp']//8,'loss')
@@ -47,7 +47,7 @@ class FireEagle(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FireEagle,'_move_3')
 def value():
@@ -61,7 +61,7 @@ def move_3(self): # Eagle Dive
         self.target.take_damage(damage)
         self.restore(int(0.5*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FireEagle,'_move_4')
 def value():
@@ -71,7 +71,7 @@ def value():
 def move_4(self): # Flame Storm
     self.target.set_boost('def',-2)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FireEagle,'_move_5')
 def value():

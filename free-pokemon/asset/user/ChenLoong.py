@@ -42,7 +42,7 @@ class ChenLoong(PokemonBase):
                 damage*=2
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(ChenLoong,'_move_3')
 def value():
@@ -53,7 +53,7 @@ def move_3(self): # Calm Mind
     self.set_boost('spa',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(ChenLoong,'_move_4')
 def value():
@@ -67,7 +67,7 @@ def move_4(self): # Thunderbolt
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(ChenLoong,'_ability')
 def value():
@@ -88,7 +88,7 @@ def _take_damage_attack(self,x):
     if self['hp']==0:
         self.state['status']='FNT'
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(ChenLoong,'_move_5')
 def value():

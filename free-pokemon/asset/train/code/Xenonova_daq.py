@@ -34,7 +34,7 @@ class Xenonova(PokemonBase):
                 self.target.set_condition('FLINCH',counter=0)
             self.take_damage(int(0.15*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Xenonova,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # Will-O-Wisp
     if not damage_ret['miss']:
         self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Xenonova,'_move_4')
 def value():
@@ -57,7 +57,7 @@ def move_4(self): # Dragon Dance
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Xenonova,'_ability')
 def value():

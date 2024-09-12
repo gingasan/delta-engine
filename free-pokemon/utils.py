@@ -49,16 +49,3 @@ def write_jsonl(content, filename, mode="w"):
     with open(filename, mode) as f:
         for line in content:
             f.write(json.dumps(line, ensure_ascii=False) + "\n")
-
-
-class Logger:
-    def __init__(self):
-        self.logs = []
-
-    def clr(self):
-        del self.logs[:]
-
-    def log(self, content, **kwargs):
-        line = {"content": content}
-        line.update(kwargs)
-        self.logs.append(line)

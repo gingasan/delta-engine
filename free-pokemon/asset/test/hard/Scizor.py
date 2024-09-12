@@ -39,7 +39,7 @@ class Scizor(PokemonBase):
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Scizor,'_move_3')
 def value():
@@ -55,7 +55,7 @@ def move_3(self): # Dual Wingbeat
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Scizor,'_move_4')
 def value():
@@ -65,7 +65,7 @@ def value():
 def move_4(self): # Swords Dance
     self.set_boost('atk',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Scizor,'_ability')
 def value():
@@ -78,7 +78,7 @@ def get_power(self):
         power=int(power*1.5)
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Scizor,'_move_5')
 def value():

@@ -35,7 +35,7 @@ class Neos(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_3')
 def value():
@@ -51,7 +51,7 @@ def move_3(self): # Burn to Ash
         if not self.target.isfaint() and rnd()<50/100:
             self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_4')
 def value():
@@ -68,7 +68,7 @@ def move_4(self): # Echo Burst
             t=rndc(['atk','def','spa','spd','spe'])
             self.target.set_boost(t,-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_ability')
 def value():
@@ -82,7 +82,7 @@ def type_change(self):
         self.state['status']=None
         self.restore(self['max_hp']//3,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_5')
 def value():
@@ -127,3 +127,21 @@ def get_type_effect(self):
         else:
             effect*=TYPEEFFECTIVENESS[move_type][tt]
     return effect
+
+# ----------
+
+@Increment(Neos,'_move_6')
+def value():
+    return ('Signal Buster',70,100,'Special','Electric',0,[])
+
+@Increment(Neos)
+def move_6(self): # Signal Buster
+    self.type_change()
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        if not self.target.isfaint():
+            self.target.set_boost('spe',-1)
+            if damage_ret['type_efc']>1:
+                self.target.set_status('PAR')

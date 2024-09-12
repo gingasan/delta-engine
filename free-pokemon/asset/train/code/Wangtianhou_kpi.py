@@ -33,7 +33,7 @@ class Wangtianhou(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Wangtianhou,'_move_3')
 def value():
@@ -43,7 +43,7 @@ def value():
 def move_3(self): # Celestial Roar
     self.target.set_boost('atk',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Wangtianhou,'_move_4')
 def value():
@@ -54,7 +54,7 @@ def move_4(self): # Heaven Shield
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Wangtianhou,'_ability')
 def value():

@@ -43,7 +43,7 @@ class Luxray(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Luxray,'_move_3')
 def value():

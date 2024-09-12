@@ -13,24 +13,23 @@ class Metagross(PokemonBase):
 
     def set_boost(self,key,x,from_='target'):
         if x<0 and from_=='target':
-            self.log("Metagross's stats cannot be lowered by opponents.")
+            self.log('Due to Clear Body, Metagross is immune to stat-lowering from opponents.')
             return
         bar=6 if key in ['atk','def','spa','spd','spe'] else 3
         if x>0:
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+        self.log(script='boost',species=self._species,key=key,x=x)
 
     def move_1(self): # Psychic Fangs
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            for t in ['REFLECT','LIGHT_SCREEN','AURORA_VEIL']:
-                if self.target['side_conditions'].get(t):
-                    del self.target['side_conditions'][t]
+            for t in ['Reflect','Light Screen','Aurora Veil']:
+                if self.get_env(t,side='target'):
+                    self.del_env(t,side='target')
 
     def move_2(self): # Bullet Punch
         damage_ret=self.get_damage()
@@ -38,7 +37,7 @@ class Metagross(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Metagross,'_move_3')
 def value():
@@ -53,7 +52,7 @@ def move_3(self): # Meteor Mash
         if rnd()<20/100:
             self.set_boost('atk',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Metagross,'_move_4')
 def value():

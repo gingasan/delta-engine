@@ -36,7 +36,7 @@ class Tropius(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tropius,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Giga Drain
         self.target.take_damage(damage)
         self.restore(int(1/2*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tropius,'_move_4')
 def value():

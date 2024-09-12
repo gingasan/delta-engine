@@ -44,7 +44,7 @@ class Chimeraon(PokemonBase):
             if not self.target.isfaint() and rnd()<0.2:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chimeraon,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Goat Rush
         self.target.take_damage(damage)
         self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chimeraon,'_move_4')
 def value():
@@ -77,7 +77,7 @@ def move_4(self): # Serpent Venom
             if not self.target.isfaint() and rnd()<0.5:
                 self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Chimeraon,'_ability')
 def value():
@@ -90,7 +90,7 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     if self['hp']==0:
         return
     if self['act_taken'] and 'contact' in self['act_taken']['property']:

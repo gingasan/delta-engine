@@ -35,7 +35,7 @@ class RedMoon(PokemonBase):
             elif rnd()<10/100:
                 self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_3')
 def value():

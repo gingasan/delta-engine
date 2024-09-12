@@ -36,7 +36,7 @@ class Aerodactyl(PokemonBase):
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_3')
 def value():
@@ -51,7 +51,7 @@ def move_3(self): # Air Slash
         if rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_4')
 def value():
@@ -72,7 +72,7 @@ def get_power(self):
         power+=10*self['conditions']['MOMENTUM_CLAWS']['counter']
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_ability')
 def value():
@@ -99,7 +99,7 @@ def move_3(self): # Air Slash
             self.target.set_condition('FLINCH',counter=0)
     self.set_boost('spe',2)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aerodactyl,'_move_5')
 def value():

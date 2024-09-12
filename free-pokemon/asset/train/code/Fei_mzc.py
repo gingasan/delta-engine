@@ -30,7 +30,7 @@ class Fei(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Fei,'_move_3')
 def value():
@@ -41,7 +41,7 @@ def move_3(self): # Pestilence
     self.target.set_status('PSN')
     self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Fei,'_ability')
 def value():

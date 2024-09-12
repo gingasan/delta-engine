@@ -19,7 +19,7 @@ class Snorlax(PokemonBase):
         if self['act_taken']['type'] in ['Ice','Fire']:
             x//=2
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Rest  
         self.state['status']=None
@@ -35,7 +35,7 @@ class Snorlax(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Snorlax,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Body Slam
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Snorlax,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def endturn(self):
             del self['conditions']['RECHARGE']
             self.state['canact']=True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Snorlax,'_ability')
 def value():
@@ -92,7 +92,7 @@ def endturn(self):
     if self['status']=='SLP':
         self.restore(self['max_hp']//8,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Snorlax,'_move_5')
 def value():

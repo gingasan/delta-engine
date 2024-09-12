@@ -35,7 +35,7 @@ class Dragalge(PokemonBase):
             if not self.target.isfaint()and rnd()<30/100:
                 self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragalge,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def move_3(self): # Toxic
     if not damage_ret['miss']:
         self.target.set_status('TOX')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragalge,'_move_4')
 def value():
@@ -62,7 +62,7 @@ def move_4(self): # Scald
         if not self.target.isfaint()and rnd()<30/100:
             self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragalge,'_ability')
 def value():
@@ -73,7 +73,7 @@ def endturn(self):
     if self['act'] and self['act']['type']=='Poison' and rnd()<10/100:
         self.set_boost('spa',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragalge,'_move_5')
 def value():

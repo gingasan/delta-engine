@@ -37,7 +37,7 @@ class RedMoon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                if self['side_conditions'].get('LUNAR_AURA'):
+                if self.get_env('Lunar Aura',side='self'):
                     self.target.set_boost('spd',-1)
                 elif rnd()<30/100:
                     self.target.set_boost('spd',-1)
@@ -48,7 +48,7 @@ class RedMoon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_3')
 def value():
@@ -58,12 +58,12 @@ def value():
 def move_3(self): # Lunar Dance
     self.set_boost('spa',+1,'self')
     self.set_boost('spd',+1,'self')
-    if self['side_conditions'].get('LUNAR_AURA'):
+    if self.get_env('Lunar Aura',side='self'):
         self.set_boost('spe',+1,'self')
     elif rnd()<30/100:
         self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def move_4(self): # Will-O-Wisp
     if not damage_ret['miss']:
         self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_ability')
 def value():
@@ -88,17 +88,17 @@ def endturn(self):
         if self.get_env('Lunar Aura',side='self')['counter']==3:
             self.del_env('Lunar Aura',side='self')
             if self['hp']<=self['max_hp']//2:
-                self.set_condition('bloo_burst',counter=0)
+                self.set_condition('Burst',counter=0)
                 self.log('Bloo Burst! Red-Moon has gone berserk.',color='purple')
 
 @Increment(RedMoon)
 def get_power(self):
     power=self['act']['power']
-    if self['conditions'].get('bloo_burst'):
+    if self['conditions'].get('Burst'):
         power*=2
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_5')
 def value():

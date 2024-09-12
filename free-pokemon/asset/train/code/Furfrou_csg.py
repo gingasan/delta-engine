@@ -19,7 +19,7 @@ class Furfrou(PokemonBase):
         if self['act_taken']['category']=='Physical':
             x//=2
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Thunder Fang
         damage_ret=self.get_damage()

@@ -29,7 +29,7 @@ class Feraligatr(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Feraligatr,'_move_3')
 def value():
@@ -49,7 +49,7 @@ def get_power(self):
         power*=1.3
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Feraligatr,'_move_4')
 def value():
@@ -76,7 +76,7 @@ def move_4(self): # Scale Shot
     self.set_boost('def',-1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Feraligatr,'_ability')
 def value():
@@ -88,7 +88,7 @@ def get_priority(self,move_id):
         return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Feraligatr,'_move_5')
 def value():

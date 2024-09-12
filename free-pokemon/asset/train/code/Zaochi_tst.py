@@ -17,7 +17,7 @@ class Zaochi(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
         if self['act_taken'] and self['act_taken']['category']=='Physical':
@@ -37,7 +37,7 @@ class Zaochi(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zaochi,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Muddy Assault
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zaochi,'_move_4')
 def value():
@@ -70,7 +70,7 @@ def endturn(self):
         if self.target['conditions']['LOWER_ATTACKS']['counter']==3:
            del self.target['conditions']['LOWER_ATTACKS']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zaochi,'_ability')
 def value():

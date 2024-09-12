@@ -26,16 +26,16 @@ class Kangaskhan(PokemonBase):
             i+=1; hit=False if self.target.isfaint() else True
 
     def move_2(self): # Brick Break
-        if self.target['side_conditions'].get('REFLECT'):
-            del self.target['side_conditions']['REFLECT']
-        if self.target['side_conditions'].get('LIGHT_SCREEN'):
-            del self.target['side_conditions']['LIGHT_SCREEN']
+        if self.get_env('Reflect',side='target'):
+            self.del_env('Reflect',side='target')
+        if self.get_env('Light Screen',side='target'):
+            self.del_env('Light Screen',side='target')
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_move_3')
 def value():
@@ -50,7 +50,7 @@ def move_3(self): # Crunch
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_move_4')
 def value():

@@ -42,7 +42,7 @@ class Aeroscala(PokemonBase):
         self.set_boost('def',1,'self')
         self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aeroscala,'_move_3')
 def value():
@@ -64,7 +64,7 @@ def get_crit(self):
     crit=True if rnd()*crit_mult[crit_ratio+1]<1 else False
     return crit
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aeroscala,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def move_4(self): # Ancient Wisdom
     self.set_boost('spa',1,'self')
     self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Aeroscala,'_ability')
 def value():

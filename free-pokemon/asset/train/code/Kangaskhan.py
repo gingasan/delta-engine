@@ -36,7 +36,7 @@ class Kangaskhan(PokemonBase):
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_move_3')
 def value():
@@ -49,7 +49,7 @@ def move_3(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_move_4')
 def value():
@@ -64,7 +64,7 @@ def move_4(self): # Rock Slide
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_ability')
 def value():
@@ -122,7 +122,7 @@ def move_4(self): # Rock Slide
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kangaskhan,'_move_5')
 def value():

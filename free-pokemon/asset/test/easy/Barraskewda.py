@@ -40,7 +40,7 @@ class Barraskewda(PokemonBase):
             self.set_boost('def',-1,'self')
             self.set_boost('spd',-1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Barraskewda,'_move_3')
 def value():

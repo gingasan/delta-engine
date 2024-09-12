@@ -20,7 +20,7 @@ class Gastrodon(PokemonBase):
             self.set_boost('spa',1)
             return
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Earth Power
         damage_ret=self.get_damage()
@@ -36,7 +36,7 @@ class Gastrodon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gastrodon,'_move_3')
 def value():
@@ -48,7 +48,7 @@ def move_3(self): # Pain Split
     self.target.state['hp']=hp
     self.state['hp']=hp
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gastrodon,'_move_4')
 def value():
@@ -81,7 +81,7 @@ def endturn(self):
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gastrodon,'_move_5')
 def value():

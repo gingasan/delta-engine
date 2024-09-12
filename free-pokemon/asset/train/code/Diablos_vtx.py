@@ -48,7 +48,7 @@ class Diablos(PokemonBase):
             if self.target.isfaint(): break
             if rnd()<10/100: self.target.set_condition('FLINCH')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Diablos,'_move_3')
 def value():
@@ -63,7 +63,7 @@ def move_3(self): # Raging Earth
         if self.target.isfaint() and rnd()<30/100:
             self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Diablos,'_move_4')
 def value():
@@ -78,7 +78,7 @@ def move_4(self): # Infernal Roar
         if self.target.isfaint() and rnd()<20/100:
             self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Diablos,'_ability')
 def value():

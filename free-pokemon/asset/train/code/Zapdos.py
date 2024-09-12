@@ -43,7 +43,7 @@ class Zapdos(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Focus Blast
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_4')
 def value():
@@ -71,7 +71,7 @@ def move_4(self): # Energy recovery
         self.set_boost('spd',1,'self')
         self.set_boost('spe',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_ability')
 def value():
@@ -82,18 +82,15 @@ def set_boost(self,key,x,from_='target'):
     bar=6 if key in ['atk','def','spa','spd','spe'] else 3
     if x>0:
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
-        if from_=='target':
-            for _ in range(x):
-                self['boosts']['spa']=min(bar,self['boosts'][key]+2)
-            self.log("{}'s Special Attack is raised by {}.".format(self._species,2*x))
+    self.log(script='boost',species=self._species,key=key,x=x)
+    if from_=='target' and x<0:
+        for _ in range(x):
+            self['boosts']['spa']=min(bar,self['boosts'][key]+2)
+        self.log('Due to Competitive, Zapdos further raises its SpA. by {}.'.format(2*x))
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_5')
 def value():

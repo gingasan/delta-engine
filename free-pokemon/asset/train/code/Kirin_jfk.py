@@ -28,7 +28,7 @@ class Kirin(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kirin,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def endturn(self):
         if self.get_env('Deflecting Aura',side='self')['counter']==3:
             self.del_env('Deflecting Aura',side='self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kirin,'_move_4')
 def value():
@@ -61,7 +61,7 @@ def move_4(self): # Draco Meteor
         self.target.take_damage(damage)
         self.set_boost('spa',-2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kirin,'_ability')
 def value():
@@ -85,7 +85,7 @@ def get_accuracy(self):
     acc*=self.target.get_evasion()
     return acc/100
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Kirin,'_move_5')
 def value():

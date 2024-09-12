@@ -29,7 +29,7 @@ class Gudiao(PokemonBase):
                 self.target.set_condition('CONFUSION',counter=0)
             self.set_boost('spa',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gudiao,'_move_3')
 def value():
@@ -63,7 +63,7 @@ def _get_base_damage(self,power,crit):
 
     return base_damage
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gudiao,'_move_4')
 def value():
@@ -74,7 +74,7 @@ def move_4(self): # Aqua Camouflage
     self.set_boost('def',1,'self')
     self.state['types']=['Water']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gudiao,'_ability')
 def value():

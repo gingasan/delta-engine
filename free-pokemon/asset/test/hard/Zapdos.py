@@ -43,7 +43,7 @@ class Zapdos(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Focus Blast
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_4')
 def value():
@@ -70,8 +70,9 @@ def move_4(self): # Energy Recycle
         self.set_boost('spa',1,'self')
         self.set_boost('spd',1,'self')
         self.set_boost('spe',1,'self')
+        self.log('Zapdos recycles energy from surrounding ions.',color='yellow')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_ability')
 def value():
@@ -87,6 +88,7 @@ def move_1(self): # Hurricane
             self.target.set_condition('CONFUSION',counter=0)
     else:
         self.restore(self['max_hp']//5,'heal')
+        self.log('Zapdos recycles energy from missing attack.',color='yellow')
 
 @Increment(Zapdos)
 def move_2(self): # Zap Cannon
@@ -98,6 +100,7 @@ def move_2(self): # Zap Cannon
             self.target.set_status('PAR')
     else:
         self.restore(self['max_hp']//5,'heal')
+        self.log('Zapdos recycles energy from missing attack.',color='yellow')
 
 @Increment(Zapdos)
 def move_3(self): # Focus Blast
@@ -109,8 +112,9 @@ def move_3(self): # Focus Blast
             self.target.set_boost('spd',-1)
     else:
         self.restore(self['max_hp']//5,'heal')
+        self.log('Zapdos recycles energy from missing attack.',color='yellow')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zapdos,'_move_5')
 def value():
@@ -126,3 +130,4 @@ def move_5(self): # Inferno
             self.target.set_status('BRN')
     else:
         self.restore(self['max_hp']//5,'heal')
+        self.log('Zapdos recycles energy from missing attack.',color='yellow')

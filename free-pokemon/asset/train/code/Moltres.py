@@ -37,7 +37,7 @@ class Moltres(PokemonBase):
     def move_2(self): # Nasty Plot
         self.set_boost('spa',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltres,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Air Slash
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltres,'_move_4')
 def value():
@@ -74,14 +74,14 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Moltres)
 def endturn(self):
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltres,'_ability')
 def value():
@@ -92,18 +92,15 @@ def set_boost(self,key,x,from_='target'):
     bar=6 if key in ['atk','def','spa','spd','spe'] else 3
     if x>0:
         self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        self.log("{}'s {} is raised by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],x))
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is lowered by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],x))
-        if from_=='target':
-            for _ in range(x):
-                self['boosts']['spa']=min(bar,self['boosts'][key]+2)
-            self.log("{}'s Special Attack is raised by {}.".format(self._species,2*x))
+    self.log(script='boost',species=self._species,key=key,x=x)
+    if from_=='target' and x<0:
+        for _ in range(x):
+            self['boosts']['spa']=min(bar,self['boosts'][key]+2)
+        self.log('Due to Competitive, Moltres further raises its SpA. by {}.'.format(2*x))
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltres,'_move_5')
 def value():

@@ -33,7 +33,7 @@ class Malzeno(PokemonBase):
             if rnd()<20/100:
                 self.target.set_status('PAR')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Malzeno,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def move_3(self): # Quirio Beam
         self.target.take_damage(damage)
         self.restore(int(damage//2),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Malzeno,'_ability')
 def value():

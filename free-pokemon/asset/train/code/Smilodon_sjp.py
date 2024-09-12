@@ -33,7 +33,7 @@ class Smilodon(PokemonBase):
             if not self.target.isfaint() and rnd()<0.2:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Smilodon,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def move_3(self): # Roar of Dominance
     self.target.set_boost('atk', -1)
     self.set_boost('atk', 1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Smilodon,'_move_4')
 def value():
@@ -59,7 +59,7 @@ def move_4(self): # Frozen Roar
         else:
             self.target.set_status('FRZ')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Smilodon,'_ability')
 def value():
@@ -79,7 +79,7 @@ def get_stat(self,key,boost=None):
         stat_ratio*=1.5
     return int(stat*stat_ratio)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Smilodon,'_move_5')
 def value():

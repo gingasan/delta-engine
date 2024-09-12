@@ -23,7 +23,7 @@ class Tyrantrum(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Tyrantrum,'_move_3')
 def value():
@@ -35,6 +35,6 @@ def move_3(self): # Psychic Fangs
     if not damage_ret['miss']:
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        for t in ['REFLECT','LIGHT_SCREEN','AURORA_VEIL']:
-            if self.target['side_conditions'].get(t):
-                del self.target['side_conditions'][t]
+        for t in ['Reflect','Light Screen','Aurora Veil']:
+            if self.get_env(t,side='target'):
+                self.del_env(t,side='target')

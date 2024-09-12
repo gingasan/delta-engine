@@ -29,7 +29,7 @@ class FlareWing(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FlareWing,'_move_3')
 def value():
@@ -53,7 +53,7 @@ def get_crit(self):
         crit=True
     return crit
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FlareWing,'_move_4')
 def value():
@@ -68,7 +68,7 @@ def move_4(self): # Wing Slash
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FlareWing,'_ability')
 def value():
@@ -84,7 +84,7 @@ def get_other_mult(self):
             mult*=1.5
     return mult
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(FlareWing,'_move_5')
 def value():

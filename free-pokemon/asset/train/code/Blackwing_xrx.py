@@ -25,7 +25,7 @@ class Blackwing(PokemonBase):
             if self['conditions']['BLACK_FEATHER']['counter']==0:
                 del self['conditions']['BLACK_FEATHER']
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     
     def endturn(self):
         if self['conditions'].get('BLACK_FEATHER'):
@@ -47,7 +47,7 @@ class Blackwing(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blackwing,'_move_3')
 def value():
@@ -71,7 +71,7 @@ def get_crit(self):
         crit=True
     return crit
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blackwing,'_move_4')
 def value():
@@ -83,7 +83,7 @@ def move_4(self): # Feather Storm
     if not damage_ret['miss']:
         self.target.set_boost('accuracy',-2)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blackwing,'_ability')
 def value():
@@ -106,7 +106,7 @@ def _take_damage_attack(self,x):
     if self['hp']==0:
         self.state['status']='FNT'
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blackwing,'_move_5')
 def value():

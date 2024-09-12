@@ -49,7 +49,7 @@ class Blaziken(PokemonBase):
             self.set_boost('def',-1,'self')
             self.set_boost('spd',-1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blaziken,'_move_3')
 def value():
@@ -63,7 +63,7 @@ def move_3(self): # Brave Bird
         self.target.take_damage(damage)
         self.take_damage(int(0.33*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blaziken,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def value():
 def move_4(self): # Swords Dance
     self.set_boost('atk',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blaziken,'_ability')
 def value():
@@ -83,7 +83,7 @@ def value():
 def endturn(self):
     self.set_boost('spe',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blaziken,'_move_5')
 def value():

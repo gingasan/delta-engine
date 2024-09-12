@@ -25,7 +25,7 @@ class Suanyu(PokemonBase):
     def move_2(self): # Serpent Dance
         self.set_boost('spe',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Suanyu,'_move_3')
 def value():
@@ -51,7 +51,7 @@ def get_crit(self):
         crit=True
     return crit
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Suanyu,'_ability')
 def value():
@@ -66,4 +66,4 @@ def _take_damage_attack(self,x):
     self.state['hp']=max(0,self['hp']-x)
     if rnd()<0.3:
         self.target.set_condition('CONFUSION',counter=0)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])

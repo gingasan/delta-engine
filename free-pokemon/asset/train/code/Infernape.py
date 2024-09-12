@@ -29,7 +29,7 @@ class Infernape(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Infernape,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def move_3(self): # Thunder Punch
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Infernape,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Earthquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Infernape,'_ability')
 def value():
@@ -70,7 +70,7 @@ def get_power(self):
         power*=1.3
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Infernape,'_move_5')
 def value():

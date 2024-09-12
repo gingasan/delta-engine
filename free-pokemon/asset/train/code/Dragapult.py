@@ -13,15 +13,14 @@ class Dragapult(PokemonBase):
 
     def set_boost(self,key,x,from_='target'):
         if x<0 and from_=='target':
-            self.log("Dragapult's stats cannot be lowered by opponents.")
+            self.log('Due to Clear Body, Dragapult is immune to stat-lowering from opponents.')
             return
         bar=6 if key in ['atk','def','spa','spd','spe'] else 3
         if x>0:
             self['boosts'][key]=min(bar,self['boosts'][key]+x)
         else:
             self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log("{}'s {} is {} by {}.".format(self._species,{
-            'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed'}[key],'raised' if x>0 else 'lowered',x))
+        self.log(script='boost',species=self._species,key=key,x=x)
 
     def get_evasion(self):
         if self['conditions'].get('PHANTOM_FORCE'):
@@ -49,7 +48,7 @@ class Dragapult(PokemonBase):
                 damage=damage_ret['damage']
                 self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Dragapult,'_move_3')
 def value():

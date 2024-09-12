@@ -17,7 +17,7 @@ class Taotaur(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
         self.set_boost('atk',+1,'self')
@@ -39,7 +39,7 @@ class Taotaur(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_status('SLP')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Taotaur,'_move_3')
 def value():
@@ -53,7 +53,7 @@ def move_3(self): # Ritual Stomp
         self.target.take_damage(damage)
         self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Taotaur,'_move_4')
 def value():
@@ -64,7 +64,7 @@ def move_4(self): # Gluttonous Maw
     self.restore(self['max_hp']//2,'heal')
     self.set_boost('atk',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Taotaur,'_ability')
 def value():

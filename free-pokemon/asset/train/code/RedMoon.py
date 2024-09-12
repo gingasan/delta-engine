@@ -29,7 +29,7 @@ class RedMoon(PokemonBase):
             if damage>0:
                 self.take_damage(int(0.33*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_3')
 def value():
@@ -40,7 +40,7 @@ def move_3(self): # Dragon Dance
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Iron Head
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_ability')
 def value():
@@ -68,11 +68,11 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     if self['hp']>0 and self['act_taken']:
         self.target.take_damage(self.target['max_hp']//8 if self.target.isstatus('BRN') else self.target['max_hp']//16,'loss')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_5')
 def value():

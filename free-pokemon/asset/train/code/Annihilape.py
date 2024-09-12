@@ -46,7 +46,7 @@ class Annihilape(PokemonBase):
             self.set_boost('def',-1,'self')
             self.set_boost('spd',-1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Annihilape,'_move_3')
 def value():

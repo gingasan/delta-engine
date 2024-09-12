@@ -34,7 +34,7 @@ class Brontogon(PokemonBase):
                 self.target.set_condition('FLINCH',counter=0)
         self.random_stat_boost()
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Brontogon,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Tail Lash
             break
     self.random_stat_boost()
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Brontogon,'_move_4')
 def value():
@@ -63,7 +63,7 @@ def move_4(self): # Stone Garden
     self.set_boost('def',2,'self')
     self.restore(self['max_hp']//4,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Brontogon,'_ability')
 def value():
@@ -81,7 +81,7 @@ def _take_damage_attack(self,x):
     if self['hp']==0:
         self.state['status']='FNT'
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Brontogon,'_move_5')
 def value():

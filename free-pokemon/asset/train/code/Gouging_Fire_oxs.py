@@ -43,7 +43,7 @@ class Gouging_Fire(PokemonBase):
             self.take_damage(int(0.33*damage),'recoil')
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gouging_Fire,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Morning Sun
     else:
         self.restore(self['max_hp']//4,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gouging_Fire,'_move_4')
 def value():
@@ -73,7 +73,7 @@ def move_4(self): # Solar Claw
         if self.get_env('Sunlight'):
             self.set_boost('atk',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gouging_Fire,'_move_5')
 def value():

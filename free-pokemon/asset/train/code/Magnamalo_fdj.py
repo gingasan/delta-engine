@@ -27,7 +27,7 @@ class Magnamalo(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Magnamalo,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def move_3(self): # Explosive Strike
         self.set_boost('spa',+1,'self')
         self.take_damage(self['max_hp']//16,'loss')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Magnamalo,'_move_4')
 def value():
@@ -64,7 +64,7 @@ def endturn(self):
         if not self.target.istype('Poison'):
             self.target.set_boost('accuracy',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Magnamalo,'_ability')
 def value():

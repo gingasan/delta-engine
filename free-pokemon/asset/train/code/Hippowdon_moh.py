@@ -17,7 +17,7 @@ class Hippowdon(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']>0 and rnd()<25/100:
             self.set_boost('atk',1,'self')
 
@@ -35,7 +35,7 @@ class Hippowdon(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hippowdon,'_move_3')
 def value():
@@ -45,7 +45,7 @@ def value():
 def move_3(self): # Sandstorm
     self.set_env('Sandstorm','weather')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hippowdon,'_ability')
 def value():

@@ -36,7 +36,7 @@ class Drakha(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Drakha,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def move_3(self): # Despair Roar
     self.target.set_boost('atk',-1)
     self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Drakha,'_move_4')
 def value():
@@ -60,7 +60,7 @@ def move_4(self): # Dragon Claw
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Drakha,'_ability')
 def value():
@@ -74,8 +74,7 @@ def set_boost(self,key,x,from_='target'):
     else:
         self['boosts'][key]=max(-bar,self['boosts'][key]+x)
         self.set_condition('DESTRUCTION_SURGE',counter=0)
-    self.log("{}'s {} is {} by {}.".format(self._species,{
-        'atk':'Attack','def':'Defense','spa':'Special Attack','spd':'Special Defense','spe':'Speed','accuracy':'Accuracy','crit':'Critical rate'}[key],'raised' if x>0 else 'lowered',x))
+    self.log(script='boost',species=self._species,key=key,x=x)
 
 @Increment(Drakha)
 def get_other_mult(self):

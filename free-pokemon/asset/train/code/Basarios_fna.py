@@ -19,7 +19,7 @@ class Basarios(PokemonBase):
         if self['act_taken']['type'] in ['Water','Grass']:
             x=int(x*0.5)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Lava Beam
         damage_ret=self.get_damage()
@@ -34,7 +34,7 @@ class Basarios(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Basarios,'_move_3')
 def value():
@@ -44,7 +44,7 @@ def value():
 def move_3(self): # Poison Cloud
     self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Basarios,'_move_4')
 def value():
@@ -59,7 +59,7 @@ def move_4(self): # Rock Slide
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Basarios,'_ability')
 def value():

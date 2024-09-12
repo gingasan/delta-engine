@@ -45,7 +45,7 @@ class RedMoon(PokemonBase):
             if not self.isfaint() and rnd()<20/100:
                 self.set_boost('def',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_3')
 def value():
@@ -60,7 +60,7 @@ def move_3(self): # Lunar Strike
         if not self.target.isfaint() and rnd()<15/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_4')
 def value():
@@ -76,7 +76,7 @@ def move_4(self): # Wind Cutter
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_ability')
 def value():
@@ -91,9 +91,9 @@ def _take_damage_attack(self,x):
     if self['hp']<self['max_hp']//2 and self['act_taken']['type']=='Fairy':
         x//=2
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(RedMoon,'_move_5')
 def value():

@@ -55,7 +55,7 @@ class Moltaroth(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltaroth,'_move_3')
 def value():
@@ -69,7 +69,7 @@ def move_3(self): # Fury Charge
         self.target.take_damage(damage)
         self.take_damage(int(0.33*damage),'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltaroth,'_move_4')
 def value():
@@ -80,7 +80,7 @@ def move_4(self): # Enrage
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Moltaroth,'_ability')
 def value():

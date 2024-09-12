@@ -58,7 +58,7 @@ class Gallade(PokemonBase):
 
         return base_damage
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gallade,'_move_3')
 def value():
@@ -68,7 +68,7 @@ def value():
 def move_3(self): # Swords Dance
     self.set_boost('atk',+2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gallade,'_move_4')
 def value():
@@ -92,7 +92,7 @@ def move_4(self): # Leaf Blade
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gallade,'_ability')
 def value():
@@ -104,7 +104,7 @@ def get_priority(self,move_id):
         return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Gallade,'_move_5')
 def value():

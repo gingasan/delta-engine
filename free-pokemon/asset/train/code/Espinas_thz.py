@@ -19,7 +19,7 @@ class Espinas(PokemonBase):
         if self['act_taken']['category']=='Physical':
             x=int(x*0.7)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
         if 'contact' in self['act_taken']['property'] and rnd()<20/100:
@@ -57,7 +57,7 @@ class Espinas(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Espinas,'_move_3')
 def value():
@@ -72,7 +72,7 @@ def move_3(self): # Flame Rush
         if rnd()<50/100:
             self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Espinas,'_ability')
 def value():

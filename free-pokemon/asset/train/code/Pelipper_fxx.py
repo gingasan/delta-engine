@@ -46,7 +46,7 @@ class Pelipper(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Pelipper,'_move_3')
 def value():

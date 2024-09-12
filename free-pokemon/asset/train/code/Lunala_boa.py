@@ -19,7 +19,7 @@ class Lunala(PokemonBase):
         if self['hp']==self['max_hp']:
             x//=2
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Psychic
         damage_ret=self.get_damage()
@@ -37,7 +37,7 @@ class Lunala(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunala,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Phantom Wave
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunala,'_move_4')
 def value():
@@ -63,7 +63,7 @@ def move_4(self): # Lunar Barrier
     self.set_boost('spd',+1,'self')
     self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunala,'_ability')
 def value():
@@ -103,7 +103,7 @@ def move_3(self): # Phantom Wave
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunala,'_move_5')
 def value():

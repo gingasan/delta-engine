@@ -35,7 +35,7 @@ class Hydrodrake(PokemonBase):
             if not self.target.isfaint() and rnd()<40/100:
                 self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hydrodrake,'_move_3')
 def value():
@@ -47,7 +47,7 @@ def move_3(self): # Head Rebirth
         self.restore(self['max_hp']//4,'heal')
         self.set_boost('def',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hydrodrake,'_move_4')
 def value():
@@ -66,7 +66,7 @@ def _take_damage_attack(self,x):
         return
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Hydrodrake)
 def endturn(self):
@@ -77,7 +77,7 @@ def endturn(self):
        if self['conditions']['IGNORE_ATTACKS']['counter']==2:
            del self['conditions']['IGNORE_ATTACKS']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Hydrodrake,'_ability')
 def value():

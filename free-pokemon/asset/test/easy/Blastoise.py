@@ -37,7 +37,7 @@ class Blastoise(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blastoise,'_move_3')
 def value():
@@ -52,7 +52,7 @@ def move_3(self): # Ice Beam
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_status('FRZ')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blastoise,'_move_4')
 def value():

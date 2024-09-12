@@ -19,7 +19,7 @@ class Revavroom(PokemonBase):
         if self['act_taken'].get('type_efc',0)>1:
             x=int(x*0.75)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Shift Gear
         self.set_boost('spe',2,'self')
@@ -33,7 +33,7 @@ class Revavroom(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('PSN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Revavroom,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # High Horsepower
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Revavroom,'_move_4')
 def value():

@@ -19,7 +19,7 @@ class WeezingGalar(PokemonBase):
         if self['act_taken']['type']=='Ground':
             return
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Strange Steam
         damage_ret=self.get_damage()
@@ -34,7 +34,7 @@ class WeezingGalar(PokemonBase):
         self.target.state['hp']=hp
         self.state['hp']=hp
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(WeezingGalar,'_move_3')
 def value():

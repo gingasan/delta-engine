@@ -24,7 +24,7 @@ class Deviljho(PokemonBase):
         self.target.set_boost('def',-1)
         self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Deviljho,'_move_3')
 def value():
@@ -39,7 +39,7 @@ def move_3(self):
         if rnd()<30/100:
             self.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Deviljho,'_ability')
 def value():

@@ -19,7 +19,7 @@ class Lumina(PokemonBase):
         if self['hp']==self['max_hp']:
             self.target.take_damage(x,'loss')
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Prismatic Beam
         damage_ret=self.get_damage()
@@ -33,7 +33,7 @@ class Lumina(PokemonBase):
         self.set_boost('spa',1,'self')
         self.set_boost('spd',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lumina,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # Dazzling Gleam
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lumina,'_move_4')
 def value():

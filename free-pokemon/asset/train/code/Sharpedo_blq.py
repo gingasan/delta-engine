@@ -30,7 +30,7 @@ class Sharpedo(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Sharpedo,'_move_3')
 def value():
@@ -43,7 +43,7 @@ def move_3(self): # Aqua Jet
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Sharpedo,'_move_4')
 def value():
@@ -58,7 +58,7 @@ def move_4(self): # Fin Slash
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Sharpedo,'_ability')
 def value():

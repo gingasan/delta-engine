@@ -28,7 +28,7 @@ class Jirachi(PokemonBase):
             if not self.target.isfaint() and rnd()<60/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Jirachi,'_move_3')
 def value():
@@ -39,7 +39,7 @@ def move_3(self): # Lunar Wish
     self.restore(self['max_hp']//2,'heal')
     self.state['status']=None
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Jirachi,'_move_4')
 def value():

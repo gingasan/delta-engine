@@ -34,7 +34,7 @@ class Nebulazoid(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nebulazoid,'_move_3')
 def value():
@@ -49,7 +49,7 @@ def move_3(self): # Nightmare Pulse
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nebulazoid,'_move_4')
 def value():
@@ -60,7 +60,7 @@ def move_4(self): # Astral Gaze
     self.set_boost('spa',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nebulazoid,'_ability')
 def value():
@@ -73,7 +73,7 @@ def get_power(self):
         power*=1.33
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nebulazoid,'_move_5')
 def value():

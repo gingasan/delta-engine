@@ -43,7 +43,7 @@ class Bladecuga(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('BLEED',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bladecuga,'_move_3')
 def value():
@@ -58,7 +58,7 @@ def move_3(self): # Savage Bite
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_boost('def',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bladecuga,'_move_4')
 def value():
@@ -72,7 +72,7 @@ def move_4(self): # Pounce
         self.target.take_damage(damage)
         self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bladecuga,'_ability')
 def value():

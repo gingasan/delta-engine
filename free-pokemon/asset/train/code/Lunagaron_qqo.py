@@ -19,7 +19,7 @@ class Lunagaron(PokemonBase):
         if self['act_taken']['type']!='Fire':
             x=int(x*0.8)
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
         if 'contact' in self['act_taken']['property']:
@@ -53,7 +53,7 @@ class Lunagaron(PokemonBase):
             self.target.take_damage(damage)
             if self.target.isfaint(): break
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunagaron,'_move_3')
 def value():
@@ -68,7 +68,7 @@ def move_3(self): # Close Combat
         self.set_boost('def',-1,'self')
         self.set_boost('spd',-1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunagaron,'_move_4')
 def value():
@@ -78,7 +78,7 @@ def value():
 def move_4(self): # Swords Dance
     self.set_boost('atk',2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lunagaron,'_ability')
 def value():

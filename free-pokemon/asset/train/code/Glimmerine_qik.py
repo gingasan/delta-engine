@@ -37,7 +37,7 @@ class Glimmerine(PokemonBase):
             self.target.take_damage(damage)
             self.restore(int(1/4*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Glimmerine,'_move_3')
 def value():
@@ -49,7 +49,7 @@ def move_3(self):  # Hypnotic Pulse
     if not damage_ret['miss']:
         self.target.set_status('SLP')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Glimmerine,'_move_4')
 def value():
@@ -60,7 +60,7 @@ def move_4(self):  # Fairy Shield
     self.set_boost('def',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Glimmerine,'_ability')
 def value():
@@ -76,7 +76,7 @@ def move_2(self):  # Aqua Veil
             self.target.set_condition('CONFUSION',counter=0)
         self.restore(int(1/4*damage),'drain')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Glimmerine,'_move_5')
 def value():

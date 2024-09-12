@@ -28,7 +28,7 @@ class Blissey(PokemonBase):
             if not self.target.isfaint() and rnd()<self.get_effect_chance(20/100):
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blissey,'_move_3')
 def value():
@@ -39,7 +39,7 @@ def move_3(self): # Calm Mind
     self.set_boost('spa',+1,'self')
     self.set_boost('spd',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Blissey,'_move_4')
 def value():

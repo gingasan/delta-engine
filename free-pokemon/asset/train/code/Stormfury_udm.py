@@ -42,7 +42,7 @@ class Stormfury(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('spe',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Stormfury,'_move_3')
 def value():
@@ -57,7 +57,7 @@ def move_3(self): # Storm Burst
         if not self.target.isfaint() and rnd()<20/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Stormfury,'_move_4')
 def value():
@@ -72,7 +72,7 @@ def move_4(self): # Gale Wing
         if not self.target.isfaint() and rnd()<10/100:
             self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Stormfury,'_ability')
 def value():
@@ -85,7 +85,7 @@ def get_power(self):
         power*=1.2
     return int(power*self.get_weather_power_mult())
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Stormfury,'_move_5')
 def value():

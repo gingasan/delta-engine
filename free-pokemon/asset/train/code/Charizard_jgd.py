@@ -57,7 +57,7 @@ class Charizard(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Charizard,'_move_3')
 def value():
@@ -75,7 +75,7 @@ def move_3(self): # Inferno Cyclone
             elif rnd()<50/100:
                 self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Charizard,'_move_4')
 def value():
@@ -90,7 +90,7 @@ def move_4(self): # Sky Blaze
         if self.target.isfaint():
             self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Charizard,'_move_5')
 def value():

@@ -51,12 +51,13 @@ class Battle:
             else:
                 source["conditions"]["CONFUSION"]["counter"] += 1
         source._act(move_id, target)
+        return self.pokemon1.state, self.pokemon2.state
 
     def endturn(self):
         if self.pokemon1.isfaint() or self.pokemon2.isfaint():
             self.pokemon1.deregister()
             self.pokemon2.deregister()
-            return self.pokemon1, self.pokemon2
+
         self.pokemon1.endturn()
         self.pokemon2.endturn()
         for p in [self.pokemon1, self.pokemon2]:
@@ -116,6 +117,13 @@ class Battle:
         return ((self.pokemon1, move1_id), (self.pokemon2, move2_id)) if speed1 > speed2 else ((self.pokemon2, move2_id), (self.pokemon1, move1_id))
 
     def act(self, move1_id, move2_id):
+        if self.pokemon1.isfaint() or self.pokemon2.isfaint():
+            return
+        ret = {
+            "phase-1": {},
+            "phase-2": {},
+            "phase-3": {}
+        }
         if isinstance(self.pokemon1["canact"], str):
             move1_id = self.pokemon1["canact"]
             self.pokemon1.state["canact"] = True
@@ -126,9 +134,25 @@ class Battle:
         if t1["canact"]:
             self.log("{} uses {}.".format(t1._species, move1_id))
             self._act(t1, t2, move1_id)
+            ret["phase-1"]["pokemon-1"] = deepcopy(self.pokemon1.state)
+            ret["phase-1"]["pokemon-2"] = deepcopy(self.pokemon2.state)
+            ret["phase-1"]["logs"] = deepcopy(self.get_logs())
+            self.logger.clr()
         if not t2.isfaint() and t2["canact"]:
             self.log("{} uses {}.".format(t2._species, move2_id))
             self._act(t2, t1, move2_id)
+            ret["phase-2"]["pokemon-1"] = deepcopy(self.pokemon1.state)
+            ret["phase-2"]["pokemon-2"] = deepcopy(self.pokemon2.state)
+            ret["phase-2"]["logs"] = deepcopy(self.get_logs())
+            self.logger.clr()
+        self.endturn()
+        ret["phase-3"]["pokemon-1"] = deepcopy(self.pokemon1.state)
+        ret["phase-3"]["pokemon-2"] = deepcopy(self.pokemon2.state)
+        ret["phase-3"]["logs"] = deepcopy(self.get_logs())
+        self.logger.clr()
+
+        ret["wrap"] = True if self.pokemon1.isfaint() or self.pokemon2.isfaint() else False
+        return ret
 
     def log(self, content, **kwargs):
         self.logger.log(content, **kwargs)
@@ -183,7 +207,6 @@ class PokemonBase:
             "stats": {k: v for k, v in attrs.items() if k != "hp"},
             "boosts": {k: 0 for k in ["atk", "def", "spa", "spd", "spe", "accuracy", "crit"]},
             "conditions": {},
-            "side_conditions": {},
             "act": None, "act_taken": None, "canact": True,
             "last_act": None, "last_act_taken": None,
         }
@@ -423,7 +446,7 @@ class PokemonBase:
             return
         self.register_act_taken()
         self.state["hp"] = max(0, self["hp"] - x)
-        self.log("{} loses {} HP.".format(self._species, x), act_taken=self["act_taken"])
+        self.log(script="attack", species=self._species, x=x, **self["act_taken"])
 
     def _take_damage_loss(self, x):
         self.state["hp"] = max(0, self["hp"] - x)
@@ -487,8 +510,7 @@ class PokemonBase:
             self["boosts"][key] = min(bar, self["boosts"][key] + x)
         else:
             self["boosts"][key] = max(-bar, self["boosts"][key] + x)
-        self.log("{}'s {} is {} by {}.".format(self._species, {
-            "atk": "Attack", "def": "Defense", "spa": "Special Attack", "spd": "Special Defense", "spe": "Speed", "accuracy": "Accuracy", "crit": "Critical rate"}[key], "raised" if x > 0 else "lowered", x))
+        self.log(script="boost", species=self._species, key=key, x=x)
 
     def set_stat(self, key, x):
         self["stats"][key] = int(self["stats"][key] * x)
@@ -524,16 +546,7 @@ class PokemonBase:
     def del_env(self, x, side=None):
         self.env.pop(x, side=side, from_=self._species)
 
-    def log(self, content, **kwargs):
-        if kwargs.get("act_taken"):
-            if kwargs["act_taken"].get("damage", 0) == 0:
-                return
-            if kwargs["act_taken"]["crit"]:
-                self.logger.log("A critical hit!")
-            if kwargs["act_taken"]["type_efc"] > 1:
-                self.logger.log("It is super effective.")
-            elif kwargs["act_taken"]["type_efc"] < 1:
-                self.logger.log("It is not very effective.")
+    def log(self, content=None, **kwargs):
         self.logger.log(content, **kwargs)
 
     def get_logs(self):
@@ -601,8 +614,45 @@ class Env:
     def __repr__(self):
         return self._env
     
-    def log(self, content, **kwargs):
+    def log(self, content=None, **kwargs):
         self.logger.log(content, **kwargs)
+
+
+class Logger:
+    def __init__(self):
+        self.logs = []
+
+    def clr(self):
+        del self.logs[:]
+
+    def log(self, content=None, script=None, **kwargs):
+        if script == "attack":
+            self._log_attack(**kwargs)
+        elif script == "boost":
+            self._log_boost(**kwargs)
+        else:
+            line = {"content": content}
+            line.update(kwargs)
+            self.logs.append(line)
+
+    def _log_attack(self, **kwargs):
+        content = "{} loses {} HP.".format(kwargs["species"], kwargs["x"]) 
+        if kwargs.get("damage", 0) == 0:
+            return
+        if kwargs["crit"]:
+            self.log("A critical hit!")
+        if kwargs["type_efc"] > 1:
+            self.log(" ".join(["Super effective.", content]))
+        elif kwargs["type_efc"] < 1:
+            self.log(" ".join(["Not very effective.", content]))
+        else:
+            self.log(content)
+    
+    def _log_boost(self, **kwargs):
+        key = {
+            "atk": "Atk.", "def": "Def.", "spa": "SpA.", "spd": "SpD.", "spe": "Spd.",
+            "accuracy": "Acc.", "crit": "Crit."}[kwargs["key"]]
+        self.log("{}'s {} is {} by {}.".format(kwargs["species"], key, "raised" if kwargs["x"] > 0 else "lowered", abs(kwargs["x"])))
 
 
 def Increment(cls, attr=None):

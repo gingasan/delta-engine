@@ -19,7 +19,7 @@ class Shagaru(PokemonBase):
         if self['act_taken']['type'] in ['Dragon','Fairy']:
             return
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def endturn(self):
         if self.target['conditions'].get('FRENZY'):
@@ -44,7 +44,7 @@ class Shagaru(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_status('TOX')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Shagaru,'_move_3')
 def value():
@@ -59,7 +59,7 @@ def move_3(self): # Shadow Pummel
         if rnd()<20/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Shagaru,'_ability')
 def value():

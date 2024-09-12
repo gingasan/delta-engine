@@ -30,7 +30,7 @@ class Lucario(PokemonBase):
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lucario,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def move_3(self): # Explore Mind
     self.set_boost('spa',1,'self')
     self.set_boost('spe',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lucario,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Extreme Speed
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lucario,'_ability')
 def value():
@@ -66,7 +66,7 @@ def onswitch(self):
     self.set_stat('atk',1.25)
     self.set_stat('spa',1.25)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Lucario,'_move_5')
 def value():

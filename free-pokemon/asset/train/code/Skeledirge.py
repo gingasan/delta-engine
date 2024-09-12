@@ -42,7 +42,7 @@ class Skeledirge(PokemonBase):
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Skeledirge,'_move_3')
 def value():
@@ -66,9 +66,9 @@ def _take_damage_attack(self,x):
             del self['conditions']['SUBSTITUTE']
     else:
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Skeledirge,'_move_4')
 def value():
@@ -78,7 +78,7 @@ def value():
 def move_4(self): # Slack Off
     self.restore(self['max_hp']//2,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Skeledirge,'_move_5')
 def value():

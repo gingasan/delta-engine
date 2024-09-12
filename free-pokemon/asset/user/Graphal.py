@@ -47,7 +47,7 @@ class Graphal(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Graphal,'_move_3')
 def value():
@@ -61,7 +61,7 @@ def move_3(self): # Dark Dealings
     self.set_boost('spe',+2,'self')
     self.take_damage(self['max_hp']//2,'loss')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Graphal,'_move_4')
 def value():
@@ -75,7 +75,7 @@ def move_4(self): # Flash Cannon
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('spd',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Graphal,'_ability')
 def value():
@@ -104,7 +104,7 @@ def take_damage(self,x,from_='attack'):
             self.state['status']='FNT'
             self.log('%s faints.'%self._species)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Graphal,'_move_5')
 def value():

@@ -29,7 +29,7 @@ class Bazelgeuse(PokemonBase):
             return
         self.register_act_taken()
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         self.drop_scales()
 
     def endturn(self):
@@ -47,7 +47,7 @@ class Bazelgeuse(PokemonBase):
             self.target.take_damage(damage)
             if rnd()<50/100: self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bazelgeuse,'_move_3')
 def value():
@@ -61,7 +61,7 @@ def move_3(self): # Draco Meteor
         self.target.take_damage(damage)
         self.set_boost('spa',-2,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bazelgeuse,'_move_4')
 def value():
@@ -72,7 +72,7 @@ def move_4(self): # Dragon Roar
     self.target.set_boost('atk',-1)
     self.target.set_boost('spa',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bazelgeuse,'_ability')
 def value():
@@ -88,7 +88,7 @@ def explode_scales(self):
             self.target.take_damage(self.target['max_hp']//10,'loss')
     del self.target['conditions']['EXPLOSIVE_SCALES']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bazelgeuse,'_move_5')
 def value():

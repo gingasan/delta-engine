@@ -35,7 +35,7 @@ class Nergigante(PokemonBase):
             recoil=int(damage*1/3)
             self.take_damage(recoil,'recoil')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nergigante,'_move_3')
 def value():
@@ -46,7 +46,7 @@ def move_3(self): # Regenerate
     self.restore(self['max_hp']//2,'heal')
     self.set_condition('SPIKES',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nergigante,'_move_4')
 def value():
@@ -57,7 +57,7 @@ def move_4(self): # Dragon Dance
     self.set_boost('atk',1,'self')
     self.set_boost('spe',1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Nergigante,'_ability')
 def value():

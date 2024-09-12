@@ -25,7 +25,7 @@ class Bubblifur(PokemonBase):
         self.restore(self['max_hp']//2,'heal')
         self.state['status']=None
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bubblifur,'_move_3')
 def value():
@@ -40,7 +40,7 @@ def move_3(self): # Aqua Jet
         if not self.target.isfaint() and rnd()<30/100:
             self.target.set_boost('accuracy',-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bubblifur,'_move_4')
 def value():
@@ -55,7 +55,7 @@ def move_4(self): # Pressurized Jet
         if rnd()<10/100:
             self.target.set_condition('CONFUSION',counter=0)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Bubblifur,'_ability')
 def value():
@@ -72,6 +72,6 @@ def _take_damage_attack(self,x):
     if self['act_taken']['category']=='Special':
         x=int(x*0.75)
     self.state['hp']=max(0,self['hp']-x)
-    self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
     if self['hp']>0 and rnd()<20/100:
         self.target.set_boost('spa',-1)

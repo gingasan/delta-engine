@@ -8,15 +8,16 @@ class Neos(PokemonBase):
     _ability=['Elemental Heart']
     _move_1=('Neos Force',80,100,'Physical','Normal',2,['contact'])
     _move_2=('Skyrip Wing',80,100000,'Physical','Flying',0,[])
-    _base=(100,100,100,100,100,100)
     def __init__(self):
         super().__init__()
 
     def type_change(self):
         self.state['types']=['Normal',self['act']['type']]
+        self.log('Neos acquires the power of {}.'.format(self['act']['type']))
 
     def move_1(self): # Neos Force
         if self['types']!=['Normal']:
+            self.log('Neos releases the power of {}.'.format(self.state['types'][-1]),color='blue')
             del self.state['types'][-1]
             self.set_boost('atk',1,'self')
         damage_ret=self.get_damage()
@@ -33,7 +34,7 @@ class Neos(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_3')
 def value():
@@ -49,11 +50,11 @@ def move_3(self): # Burn to Ash
         if not self.target.isfaint() and rnd()<50/100:
             self.target.set_status('BRN')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_4')
 def value():
-    return ('Echo Burst',90,100,'Special','Ice',0,[])
+    return ('Echo Burst',90,100,'Special','Water',0,[])
 
 @Increment(Neos)
 def move_4(self): # Echo Burst
@@ -66,7 +67,7 @@ def move_4(self): # Echo Burst
             t=rndc(['atk','def','spa','spd','spe'])
             self.target.set_boost(t,-1)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_ability')
 def value():
@@ -76,10 +77,11 @@ def value():
 def type_change(self):
     if self['types']!=['Normal',self['act']['type']]:
         self.state['types']=['Normal',self['act']['type']]
+        self.log('Neos acquires the deep power of {}.'.format(self['act']['type']),color='red')
         self.state['status']=None
         self.restore(self['max_hp']//3,'heal')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Neos,'_move_5')
 def value():
@@ -124,3 +126,20 @@ def get_type_effect(self):
         else:
             effect*=TYPEEFFECTIVENESS[move_type][tt]
     return effect
+
+# ----------
+
+@Increment(Neos,'_move_6')
+def value():
+    return ('Signal Buster',70,100,'Special','Electirc',0,[])
+
+@Increment(Neos)
+def move_6(self): # Signal Buster
+    self.type_change()
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        self.target.set_boost('spe',-1)
+        if damage_ret['type_efc']>1:
+            self.target.set_status('PAR')

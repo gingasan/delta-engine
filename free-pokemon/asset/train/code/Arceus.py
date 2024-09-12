@@ -24,7 +24,7 @@ class Arceus(PokemonBase):
                 del self['conditions']['SUBSTITUTE']
         else:
             self.state['hp']=max(0,self['hp']-x)
-            self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+            self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Thousand Arrows
         damage_ret=self.get_damage()
@@ -48,7 +48,7 @@ class Arceus(PokemonBase):
                 effect*=TYPEEFFECTIVENESS[move_type][tt]
         return effect
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Arceus,'_move_3')
 def value():
@@ -60,7 +60,7 @@ def move_3(self): # Toxic
     if not damage_ret['miss']:
         self.target.set_status('TOX')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Arceus,'_move_4')
 def value():
@@ -89,14 +89,14 @@ def _take_damage_attack(self,x):
             del self['conditions']['SUBSTITUTE']
     else:
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 @Increment(Arceus)
 def endturn(self):
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Arceus,'_ability')
 def value():

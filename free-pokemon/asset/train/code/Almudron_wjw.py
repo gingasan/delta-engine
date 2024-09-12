@@ -24,7 +24,7 @@ class Almudron(PokemonBase):
             if self['act_taken']['category']=='Special':
                 x//=2
         self.state['hp']=max(0,self['hp']-x)
-        self.log('{} loses {} HP.'.format(self._species,x),act_taken=self['act_taken'])
+        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
     def move_1(self): # Mud Wave
         damage_ret=self.get_damage()
@@ -37,7 +37,7 @@ class Almudron(PokemonBase):
     def move_2(self): # Mud Wall
         self.set_env('Mud Wall',side='self',counter=0,max_count=5)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Almudron,'_move_3')
 def value():
@@ -60,7 +60,7 @@ def endturn(self):
         if self.target['conditions']['TRAP']['counter']==self.target['conditions']['TRAP']['max_count']:
             del self.target['conditions']['TRAP']
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Almudron,'_ability')
 def value():

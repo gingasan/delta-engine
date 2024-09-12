@@ -26,7 +26,7 @@ class Zinorgeon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zinorgeon,'_move_3')
 def value():
@@ -42,7 +42,7 @@ def move_3(self): # Electric Orb
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zinorgeon,'_move_4')
 def value():
@@ -53,7 +53,7 @@ def move_4(self): # Thunder Howl
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zinorgeon,'_ability')
 def value():
@@ -89,7 +89,7 @@ def get_other_mult(self):
         mult*=2.0
     return mult
 
-# -------------------------------------------------------------
+# ----------
 
 @Increment(Zinorgeon,'_move_5')
 def value():
