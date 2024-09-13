@@ -1,0 +1,42 @@
+{
+  "species": "Mosasauron",
+  "types": [
+    "Water",
+    "Dragon"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Marine Apex": "This Pokemon's attacks deal 20% more damage to Water-type opponents.",
+    "Amphibious Armor": "In rain, this Pokemon's Defense and Special Defense are 1.5x."
+  },
+  "moves": {
+    "Tidal Fang": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Water",
+      "effect": "Has a 20% chance to lower the target's Defense by one stage."
+    },
+    "Fierce Gaze": {
+      "power": 70,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Power doubles if the target is paralyzed."
+    },
+    "Scale Shield": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the users Defense and Special Defense by one stage."
+    },
+    "Ancient Tide": {
+      "power": 100,
+      "accuracy": 90,
+      "category": "Special",
+      "type": "Water",
+      "effect": "Has a 20% chance to lower the target's Speed by one stage."
+    }
+  }
+}

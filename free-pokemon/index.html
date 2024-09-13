@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>失控宝可梦</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Futura", Arial, sans-serif;
+            background: url("asset/bg.png") no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+        }
+        .start-section {
+            width: 100%;
+            z-index: 3;
+        }
+        .battle-section {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            z-index: 2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .attack-animation-1 {
+            animation: attackAnimation1 1s forwards;
+        }
+        .attack-animation-2 {
+            animation: attackAnimation2 1s forwards;
+        }
+        .shake-animation {
+            animation: shakeAnimation 0.75s ease-in-out;
+        }
+        .faint-animation {
+            animation: faintAnimation 1.5s forwards;
+        }
+        @keyframes attackAnimation1 {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translate(100%, -50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        @keyframes attackAnimation2 {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translate(-100%, 50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        @keyframes shakeAnimation {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-15px) rotate(-5deg); }
+            50% { transform: translateX(15px) rotate(5deg); }
+            75% { transform: translateX(-15px) rotate(-5deg); }
+            100% { transform: translateX(0) rotate(0deg); } 
+        }
+        @keyframes faintAnimation {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(200%);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="start-section" id="start">
+        <h1>Create Initial Pokémon</h1>
+    
+        <div class="panel">
+            <div class="left-panel">
+                <div class="input-container">
+                    <label for="species">SPECIES</label>
+                    <input type="text" id="species" name="species" placeholder="Pokémon species (e.g. Salamence, Mewtwo)", value="Neos">
+                </div>
+                <div class="input-container">
+                    <label for="types">TYPES</label>
+                    <div class="types-input">
+                        <input type="text" id="type1" name="type1" placeholder="Type 1", value="Normal">
+                        <input type="text" id="type2" name="type2" placeholder="Type 2", valur="">
+                    </div>
+                </div>
+                <div class="input-container">
+                    <label for="ability">ABILITY</label>
+                    <div class="ability-input">
+                        <input type="text" id="ability-name" name="ability-name" placeholder="Initial ability", value="Elemental Heart">
+                        <input type="text" id="ability-desc" name="ability-desc" placeholder="Description", value="Each time this Pokemon uses a non-Normal type moves (X-type), it becomes Normal+X type before moving.">
+                    </div>
+                </div>
+                <div class="input-container">
+                    <label for="avatar">AVATAR</label>
+                    <select id="avatar" name="avatar">
+                        <option value="" disabled selected>Choose a loverly avatar</option>
+                        <option value="003Venusaur.png">003Venusaur</option>
+                        <option value="006Charizard.png">006Charizard</option>
+                        <option value="009Blastoise.png">009Blastoise</option>
+                        <option value="131Lapras.png">131Lapras</option>
+                        <option value="142Aerodactyl-Mega.png">142Aerodactyl-Mega</option>
+                        <option value="145Zapdos.png">145Zapdos</option>
+                        <option value="212Scizor.png">212Scizor</option>
+                        <option value="248Tyranitar.png">248Tyranitar</option>
+                        <option value="257Blaziken-Mega.png">257Blaziken-Mega</option>
+                        <option value="373Salamence-Mega.png">373Salamence-Mega</option>
+                        <option value="448Lucario.png">448Lucario</option>
+                        <option value="792Lunala.png">792Lunala</option>
+                        <option value="937Ceruledge.png">937Ceruledge</option>
+                        <option value="1003Ting-Lu.png">1003Ting-Lu</option>
+                        <option value="Neos.webp" selected>Neos</option>
+                        <option value="Graphal.webp">Graphal</option>
+                        <option value="Tigrex.png">Tigrex</option>
+                    </select>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="input-container">
+                    <label for="hp">HP</label>
+                    <input type="number" id="hp" name="hp" placeholder="Base HP (sum of all base stats no more than 600)", value=100>
+                </div>
+                <div class="input-container">
+                    <label for="atk">ATK</label>
+                    <input type="number" id="atk" name="atk" placeholder="Base Atk", value=100>
+                </div>
+                <div class="input-container">
+                    <label for="def">DEF</label>
+                    <input type="number" id="def" name="def" placeholder="Base Def", value=100>
+                </div>
+                <div class="input-container">
+                    <label for="spa">SPA</label>
+                    <input type="number" id="spa" name="spa" placeholder="Base SpA", value=100>
+                </div>
+                <div class="input-container">
+                    <label for="spd">SPD</label>
+                    <input type="number" id="spd" name="spd" placeholder="Base SpD", value=100>
+                </div>
+                <div class="input-container">
+                    <label for="spe">SPE</label>
+                    <input type="number" id="spe" name="spe" placeholder="Base SpE", value=100>
+                </div>
+            </div>
+        </div>
+    
+        <div class="input-container">
+            <button class="start-battle">Start Your Journey</button>
+        </div>
+    </div>
+    
+    <div class="battle-section hidden">
+
+        <!-- Code -->
+        <button class="toggle-code-display" onclick="toggleCodeDisplay()">Code for </button>
+        <div class="code-display">
+            <pre><code class="language-python"></code></pre>
+        </div>
+
+        <!-- Log -->
+        <div class="log-container">
+            <!-- <div class="log-entry"></div> -->
+        </div>
+
+        <!-- Pokemon 1 -->
+        <div class="pokemon-container pokemon-1">
+            <div class="pokemon">
+                <img src="" alt="Pokemon-1">
+            </div>
+            <div class="info-container">
+                <div class="name">--</div>
+                <div class="hp-bar">
+                    <div class="hp"></div>
+                </div>
+                <div class="status">
+                    <img src="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Pokemon 2 -->
+        <div class="pokemon-container pokemon-2">
+            <div class="pokemon">
+                <img src="" alt="Pokemon-2">
+            </div>
+            <div class="info-container">
+                <div class="name">--</div>
+                <div class="hp-bar">
+                    <div class="hp"></div>
+                </div>
+                <div class="status">
+                    <img src="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Move Select -->
+        <div class="move-select">
+            <button class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 1
+                    <div class="move-info">pow: -- acc: --</div>
+                </div>
+            </button>
+            <div class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 2
+                    <div class="move-info">pow: -- acc: 100</div>
+                </div>
+            </div>
+            <div class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 3
+                    <div class="move-info">pow: -- acc: --</div>
+                </div>
+            </div>
+            <div class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 4
+                    <div class="move-info">pow: -- acc: --</div>
+                </div>
+            </div>
+            <div class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 5
+                    <div class="move-info">pow: -- acc: 90</div>
+                </div>
+            </div>
+            <div class="move">
+                <img src="asset/type/Normal.png">
+                <div class="move-name">Move 6
+                    <div class="move-info">pow: -- acc: --</div>
+                </div>
+            </div>
+        </div>
+        <button class="restart">Restart</button>
+    </div>
+
+    <div class="result-section hidden">
+        <div class="result-container">
+            <button class="next-battle">Next Battle</button>
+        </div>
+    </div>
+    
+    <script>
+
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") {
+                let init = {};
+                let inputs = document.querySelectorAll(".start-section input, .start-section select");
+                inputs.forEach(i => {
+                    init[i.name] = i.value;
+                });
+                initState(init);
+            }
+        });
+
+        function toggleCodeDisplay() {
+            const codeDisplay = document.querySelector(".code-display");
+            codeDisplay.classList.toggle("open");
+        }
+
+        document.querySelector(".start-battle").addEventListener("click", () => {
+            let init = {};
+            let inputs = document.querySelectorAll(".start-section input, .start-section select");
+            inputs.forEach(i => {
+                init[i.name] = i.value;
+            });
+            initState(init);
+            document.querySelector(".battle-section").classList.remove("hidden");
+            document.getElementById("start").style.display = "none";
+        });
+
+        document.querySelectorAll(".move").forEach((move, i) => {
+            move.addEventListener("click", () => {
+                const moveId = move.querySelector(".move-name").firstChild.textContent.trim();
+                updateState(moveId);
+            });
+        });
+
+        document.querySelector(".restart").addEventListener("click", () => {
+            document.querySelector(".battle-section").classList.add("hidden");
+            document.getElementById("start").style.display = "block";
+        });
+
+        document.querySelector(".next-battle").addEventListener("click", () => {
+            let init = {};
+            let inputs = document.querySelectorAll(".start-section input, .start-section select");
+            inputs.forEach(i => {
+                init[i.name] = i.value;
+            });
+            initState(init);
+            document.querySelector(".result-section").classList.add("hidden");
+            document.querySelector(".battle-section").classList.remove("hidden");
+        });
+
+    </script>
+    <script src="battle.js"></script>
+    <script src="animation.js"></script>
+
+</body>
+</html>

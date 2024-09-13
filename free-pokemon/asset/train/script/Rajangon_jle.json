@@ -1,0 +1,50 @@
+{
+  "species": "Rajangon",
+  "types": [
+    "Electric",
+    "Fighting"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Rage Mode": "When this Pokemon's HP drops below 50%, its Attack and Speed stats increase by 50%, but its Defense and Special Defense stats decrease by 25%.",
+    "Deflecting Arms": "When this Pokemon is hit by a physical attack, there is a 30% chance to reduce the damage by half and increase its own Attack stat by one stage."
+  },
+  "moves": {
+    "Thunder Beam": {
+      "power": 120,
+      "accuracy": 70,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "Has a 30% chance to paralyze the target."
+    },
+    "Rampage": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "The user attacks wildly, increasing its own Attack stat by one stage after the attack."
+    },
+    "Deflect": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "priority": 4,
+      "type": "Fighting",
+      "effect": "The user is protected from attacks made by other Pokemon during this turn. Fails if the user uses this move last turn. Increases its own Attack stat by one stage if protected successfully."
+    },
+    "Blazing Fists": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Rage Blast": {
+      "power": 100,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Normal",
+      "effect": "If the user has any stat drops, this move's power is doubled."
+    }
+  }
+}
