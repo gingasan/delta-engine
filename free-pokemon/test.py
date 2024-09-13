@@ -38,7 +38,7 @@ while not flag:
     # print(data)
     flag = data["wrap"]
     print("**")
-    for phase in ["phase-1", "phase-2", "phase-3"]:
+    for phase in ["phase_1", "phase_2", "phase_3"]:
         if data[phase]:
             for line in data[phase]["logs"]:
                 print(line["content"])

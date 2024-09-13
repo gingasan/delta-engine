@@ -71,13 +71,15 @@ def value():
 
 @Increment(Tyranitar)
 def _take_damage_attack(self,x):
+    if self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if rnd()<30/100:
         x//=2
         self.log("Tyranitar's Heavy Armor is activated.",color='orange')
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 # ----------
 

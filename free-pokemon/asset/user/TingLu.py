@@ -13,6 +13,7 @@ class TingLu(PokemonBase):
         super().__init__()
 
     def onswitch(self):
+        self.log('Ting-Lu dampens the SpA. of the surrounding.',color='green')
         self.target.set_stat('spa',0.75)
     
     def move_1(self): # Ruination
@@ -62,13 +63,15 @@ def value():
 
 @Increment(TingLu)
 def _take_damage_attack(self,x):
+    if self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self['act_taken']['type']=='Water':
         x//=2
         self.log('Water-type attack becomes weak against Ting-Lu.',color='green')
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 # ----------
 

@@ -80,13 +80,15 @@ def onswitch(self):
 
 @Increment(ChenLoong)
 def _take_damage_attack(self,x):
+    if self.target['act']['type_efc']<0.1:
+        self.logger.log('It is immune by %s.'%self._species)
+        return
     self.register_act_taken()
     if self.get_env('Aurora Veil',side='self'):
         if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
             x//=2
     self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
 
 # ----------
 

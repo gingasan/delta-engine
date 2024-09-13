@@ -151,17 +151,17 @@ function updateState(move_id) {
                 }
                 
                 // show move selector
-                if (!data.wrap) {
+                if (data.wrap === false) {
                     document.querySelector(".move-select").style.display = "block";
                 }
             }, 3500);
 
             // next battle
-            setTimeout(() => {
-                if (data.wrap) {
-                    document.querySelector(".result-section").classList.remove('hidden');
-                }
-                document.querySelector(".move-select").style.display = "block";
-            }, 5500);
+            if (data.wrap) {
+                setTimeout(() => {
+                    document.querySelector(".result-section").classList.remove("hidden");
+                    document.querySelector(".move-select").style.display = "block";
+                }, 5500);
+            }
         });
 }
