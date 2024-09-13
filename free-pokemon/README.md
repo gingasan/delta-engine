@@ -22,6 +22,22 @@ To get SFT data, use `proc.ipynb`.
 
 To see our prompts used in the paper, see `prompt`.
 
+![](asset/ui.png)
+
+
+
+## UI
+
+1. Start the backend on your local host:
+
+```bash
+python app.py
+```
+
+2. Open `index.html` in the browser
+
+
+
 
 
 ## Data

@@ -49,3 +49,9 @@ def write_jsonl(content, filename, mode="w"):
     with open(filename, mode) as f:
         for line in content:
             f.write(json.dumps(line, ensure_ascii=False) + "\n")
+
+def rndstr(k=3):
+    code = ""
+    for i in range(k):
+        code += chr(random.randint(97, 122))
+    return code

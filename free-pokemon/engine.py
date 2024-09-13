@@ -12,6 +12,7 @@ class Battle:
         self.pokemon1.logger = self.logger
         self.pokemon2.logger = self.logger
         self.env.logger = self.logger
+        self.turn = 0
 
     def _act(self, source, target, move_id):
         if source["conditions"].get("FLINCH"): # Flinch
@@ -57,7 +58,7 @@ class Battle:
         if self.pokemon1.isfaint() or self.pokemon2.isfaint():
             self.pokemon1.deregister()
             self.pokemon2.deregister()
-
+            return
         self.pokemon1.endturn()
         self.pokemon2.endturn()
         for p in [self.pokemon1, self.pokemon2]:
@@ -85,6 +86,7 @@ class Battle:
         self.pokemon2.target = self.pokemon1
         self.pokemon1.onswitch()
         self.pokemon2.onswitch()
+        self.turn += 1
 
     def _count(self):
         del_list = []
@@ -117,12 +119,13 @@ class Battle:
         return ((self.pokemon1, move1_id), (self.pokemon2, move2_id)) if speed1 > speed2 else ((self.pokemon2, move2_id), (self.pokemon1, move1_id))
 
     def act(self, move1_id, move2_id):
+        self.log("-- Turn %d --" % self.turn)
         if self.pokemon1.isfaint() or self.pokemon2.isfaint():
-            return
+            return {"wrap": True}
         ret = {
-            "phase-1": {},
-            "phase-2": {},
-            "phase-3": {}
+            "phase_1": None,
+            "phase_2": None,
+            "phase_3": {}
         }
         if isinstance(self.pokemon1["canact"], str):
             move1_id = self.pokemon1["canact"]
@@ -132,26 +135,29 @@ class Battle:
             self.pokemon2.state["canact"] = True
         (t1, move1_id), (t2, move2_id) = self.movefirst(move1_id, move2_id)
         if t1["canact"]:
+            ret["phase_1"] = {"attacker": t1._species, "defender": t2._species}
             self.log("{} uses {}.".format(t1._species, move1_id))
             self._act(t1, t2, move1_id)
-            ret["phase-1"]["pokemon-1"] = deepcopy(self.pokemon1.state)
-            ret["phase-1"]["pokemon-2"] = deepcopy(self.pokemon2.state)
-            ret["phase-1"]["logs"] = deepcopy(self.get_logs())
+            ret["phase_1"]["pokemon_1"] = deepcopy(self.pokemon1.state)
+            ret["phase_1"]["pokemon_2"] = deepcopy(self.pokemon2.state)
+            ret["phase_1"]["logs"] = deepcopy(self.get_logs())
             self.logger.clr()
         if not t2.isfaint() and t2["canact"]:
+            ret["phase_2"] = {"attacker": t2._species, "defender": t1._species}
             self.log("{} uses {}.".format(t2._species, move2_id))
             self._act(t2, t1, move2_id)
-            ret["phase-2"]["pokemon-1"] = deepcopy(self.pokemon1.state)
-            ret["phase-2"]["pokemon-2"] = deepcopy(self.pokemon2.state)
-            ret["phase-2"]["logs"] = deepcopy(self.get_logs())
+            ret["phase_2"]["pokemon_1"] = deepcopy(self.pokemon1.state)
+            ret["phase_2"]["pokemon_2"] = deepcopy(self.pokemon2.state)
+            ret["phase_2"]["logs"] = deepcopy(self.get_logs())
             self.logger.clr()
         self.endturn()
-        ret["phase-3"]["pokemon-1"] = deepcopy(self.pokemon1.state)
-        ret["phase-3"]["pokemon-2"] = deepcopy(self.pokemon2.state)
-        ret["phase-3"]["logs"] = deepcopy(self.get_logs())
+        ret["phase_3"]["pokemon_1"] = deepcopy(self.pokemon1.state)
+        ret["phase_3"]["pokemon_2"] = deepcopy(self.pokemon2.state)
+        ret["phase_3"]["logs"] = deepcopy(self.get_logs())
         self.logger.clr()
 
         ret["wrap"] = True if self.pokemon1.isfaint() or self.pokemon2.isfaint() else False
+        self.turn += 1
         return ret
 
     def log(self, content, **kwargs):

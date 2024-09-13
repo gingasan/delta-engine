@@ -8,6 +8,7 @@ class RedMoon(PokemonBase):
     _ability=['Lunar Aura']
     _move_1=('Lunar Cannon',100,100,'Special','Dragon',0,[])
     _move_2=('Aura Sphere',80,100000,'Special','Fighting',0,[])
+    _base=(106,62,95,110,109,118)
     def __init__(self):
         super().__init__()
 

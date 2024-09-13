@@ -8,7 +8,7 @@ class Incineroar(PokemonBase):
     _ability=['Contrary']
     _move_1=('V-create',180,95,'Physical','Fire',0,['contact'])
     _move_2=('Power Trip',20,100,'Physical','Dark',0,['contact'])
-    _base=(115,135,100,80,100,70)
+    _base=(115,115,100,80,120,70)
     def __init__(self):
         super().__init__()
 
