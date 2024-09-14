@@ -1,0 +1,64 @@
+{
+  "species": "Lucario",
+  "types": [
+    "Fighting",
+    "Steel"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Adaptability": "This Pokemon's same-type attack bonus (STAB) is 2 instead of 1.5.",
+    "Vitory Heart": "On switch-in, this Pokemon's Atk and SpA will be 1.25x."
+  },
+  "moves": {
+    "Aura Sphere": {
+      "power": 80,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Fighting",
+      "effect": "This move does not check accuracy."
+    },
+    "Flash Cannon": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Explore Mind": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "Increases the user's attack, special attack, and speed by one stage."
+    },
+    "Extreme Speed": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "priority": 2,
+      "type": "Normal",
+      "effect": "Nearly always goes first.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Close Combat": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Lowers the user's Defense and Special Defense by 1 stage.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    }
+  }
+}

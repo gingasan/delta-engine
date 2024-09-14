@@ -1,0 +1,61 @@
+{
+  "species": "Tigrex",
+  "types": [
+    "Dragon",
+    "Fire"
+  ],
+  "gender": "Male",
+  "ability": {
+    "Concussive Roar": "Damage from any of this Pokemon's sound-based moves is calculated using its Attack instead of Speacial Attack. Sound-based moves have a 30% chance to flinch the opponents.",
+    "Absolute Power": "Increases the power of physical moves or sound-based moves by 50 points but lowers the accuracy by 10 points."
+  },
+  "moves": {
+    "Moltenquake": {
+      "power": 140,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "No additional effect.",
+      "property": [
+        "sound"
+      ]
+    },
+    "Flare Blitz": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fire",
+      "effect": "Has a 10% chance to burn the target. If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Ice Spinner": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Ice",
+      "effect": "Ends the effects of Electric Terrain, Grassy Terrain, Misty Terrain, and Psychic Terrain.",
+      "property": [
+        "contact"
+      ]
+    },
+    "Roar of War": {
+      "power": 20,
+      "accuracy": 100000,
+      "category": "Special",
+      "type": "Dark",
+      "effect": "Lowers the target's Attack and Special Attack by 1 stage. The next sound-based move drains 50% HP lost by the target.",
+      "property": [
+        "sound"
+      ]
+    },
+    "Dragon Dance": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
+    }
+  }
+}

@@ -28,6 +28,7 @@ function initState(init_data) {
                 // update move
                 moveName.firstChild.textContent = data.pokemon_1[`move_${i + 1}`].id;
                 moveInfo.textContent = `pow: ${data.pokemon_1[`move_${i + 1}`].power} acc: ${data.pokemon_1[`move_${i + 1}`].accuracy}`;
+                move.setAttribute("description", data.pokemon_1[`move_${i + 1}`].effect);
 
                 // update type icon
                 moveImg.src = `asset/type/${data.pokemon_1[`move_${i + 1}`].type.toLowerCase()}.png`;
@@ -59,6 +60,8 @@ function initState(init_data) {
             // update hp & status
             const hp1 = document.querySelector(".pokemon-1 .hp");
             hp1.style.width = "100%";
+            const hp1Value = document.querySelector(".pokemon-1 .hp-value");
+            hp1Value.textContent = `${data.pokemon_1.max_hp}/${data.pokemon_1.max_hp}`
             document.querySelector(".pokemon-1 .status img").style.display = "none";
             const hp2 = document.querySelector(".pokemon-2 .hp");
             hp2.style.width = "100%";
@@ -76,6 +79,8 @@ function updateStatePhase(data) {
     // update hp
     const hp1 = document.querySelector(".pokemon-1 .hp");
     hp1.style.width = `${(data.pokemon_1.hp / data.pokemon_1.max_hp) * 100}%`;
+    const hp1Value = document.querySelector(".pokemon-1 .hp-value");
+    hp1Value.textContent = `${data.pokemon_1.hp}/${data.pokemon_1.max_hp}`
 
     const hp2 = document.querySelector(".pokemon-2 .hp");
     hp2.style.width = `${(data.pokemon_2.hp / data.pokemon_2.max_hp) * 100}%`;

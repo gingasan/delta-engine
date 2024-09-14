@@ -85,6 +85,10 @@ def init_state():
     state["pokemon_2"]["avatar"] = oppo_pool[n2f(oppo._species)]
     state["code"] = read("asset/user/{}.py".format(init_data["species"])) + "\n\n\n\n\n\n"
 
+    script = read_json("asset/user/{}.json".format(init_data["species"]))
+    for i, k in enumerate(script["moves"]):
+        state["pokemon_1"]["move_%s" % (i + 1)]["effect"] = script["moves"][k]["effect"]
+
     return jsonify(state)
 
 @app.route("/get-state")

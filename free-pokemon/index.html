@@ -110,7 +110,7 @@
             <div class="left-panel">
                 <div class="input-container">
                     <label for="species">SPECIES</label>
-                    <input type="text" id="species" name="species" placeholder="Pokémon species (e.g. Salamence, Mewtwo)", value="Neos">
+                    <input type="text" id="species" name="species" placeholder="Pokémon species (e.g. Salamence, Mewtwo)", value="Tigrex">
                 </div>
                 <div class="input-container">
                     <label for="types">TYPES</label>
@@ -144,9 +144,9 @@
                         <option value="792Lunala.png">792Lunala</option>
                         <option value="937Ceruledge.png">937Ceruledge</option>
                         <option value="1003Ting-Lu.png">1003Ting-Lu</option>
-                        <option value="Neos.webp" selected>Neos</option>
+                        <option value="Neos.webp">Neos</option>
                         <option value="Graphal.webp">Graphal</option>
-                        <option value="Tigrex.png">Tigrex</option>
+                        <option value="Tigrex.png" selected>Tigrex</option>
                     </select>
                 </div>
             </div>
@@ -205,6 +205,7 @@
                 <div class="name">--</div>
                 <div class="hp-bar">
                     <div class="hp"></div>
+                    <div class="hp-value"></div>
                 </div>
                 <div class="status">
                     <img src="">
@@ -230,45 +231,46 @@
 
         <!-- Move Select -->
         <div class="move-select">
-            <button class="move">
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 1
                     <div class="move-info">pow: -- acc: --</div>
                 </div>
             </button>
-            <div class="move">
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 2
                     <div class="move-info">pow: -- acc: 100</div>
                 </div>
-            </div>
-            <div class="move">
+            </button>
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 3
                     <div class="move-info">pow: -- acc: --</div>
                 </div>
-            </div>
-            <div class="move">
+            </button>
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 4
                     <div class="move-info">pow: -- acc: --</div>
                 </div>
-            </div>
-            <div class="move">
+            </button>
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 5
                     <div class="move-info">pow: -- acc: 90</div>
                 </div>
-            </div>
-            <div class="move">
+            </button>
+            <button class="move" description="--">
                 <img src="asset/type/Normal.png">
                 <div class="move-name">Move 6
                     <div class="move-info">pow: -- acc: --</div>
                 </div>
-            </div>
+            </button>
         </div>
         <button class="restart">Restart</button>
     </div>
+    <div class="tooltip hidden"></div>
 
     <div class="result-section hidden">
         <div class="result-container">
@@ -277,6 +279,23 @@
     </div>
     
     <script>
+
+        const tooltip = document.querySelector(".tooltip");
+
+        document.querySelectorAll(".move").forEach(move => {
+            move.addEventListener("mouseenter", (e) => {
+                const description = move.getAttribute("description");
+                tooltip.textContent = description;
+                tooltip.style.display = "block";
+                const rect = move.getBoundingClientRect();
+                tooltip.style.left = rect.right - 50 + "px";
+                tooltip.style.top = rect.top + "px";
+            });
+
+            move.addEventListener("mouseleave", () => {
+                tooltip.style.display = "none";
+            });
+        });
 
         document.addEventListener("keydown", function(event) {
             if (event.code === "Space") {

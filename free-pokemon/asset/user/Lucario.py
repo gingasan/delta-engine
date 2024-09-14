@@ -82,3 +82,18 @@ def move_5(self): # Close Combat
         self.target.take_damage(damage)
         self.set_boost('def',-1,'self')
         self.set_boost('spd',-1,'self')
+
+# ----------
+
+@Increment(Lucario,'_move_6')
+def value():
+    return ('Shadow Ball',80,100,'Special','Ghost',0,[])
+
+@Increment(Lucario)
+def move_6(self): # Shadow Ball
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        if not self.target.isfaint() and rnd()<20/100:
+                self.target.set_condition('FLINCH',counter=0)

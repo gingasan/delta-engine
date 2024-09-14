@@ -181,6 +181,13 @@ code[class*="language-"] {
     width: 100%;
     transition: width 0.5s linear;
 }
+.hp-value {
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+}
 .status {
     height: 30px;
     width: 30px;
@@ -252,6 +259,19 @@ code[class*="language-"] {
     font-size: 15px;
     color: #fff;
     margin-top: 5px;
+}
+.tooltip {
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(80, 80, 80, 0.7);
+    padding: 8px 12px;
+    display: none;
+    font-size: 13px;
+    color: #fff;
+    max-width: 200px;
+    text-align: left;
+    z-index: 3;
 }
 .log-container {
     font-family: "Verdana", Arial, sans-serif;
