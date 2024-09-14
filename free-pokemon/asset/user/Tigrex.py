@@ -7,7 +7,7 @@ class Tigrex(PokemonBase):
     _gender='Male'
     _ability=['Concussive Roar']
     _move_1=('Moltenquake',140,100000,'Special','Dragon',0,['sound'])
-    _move_2=('Flare Blitz',120,100,'Physical','Fire',0,['contact'])
+    _move_2=('Flame Charge',40,100,'Physical','Fire',0,['contact'])
     _base=(108,140,90,75,90,97)
     def __init__(self):
         super().__init__()
@@ -44,12 +44,14 @@ class Tigrex(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('FLINCH',counter=0)
     
-    def move_2(self): # Flare Blitz
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
-            damage=damage_ret['damage']
-            self.target.take_damage(damage)
-            self.take_damage(int(0.33*damage),'recoil')
+    def move_2(self): # Flame Charge
+        for i in range(3):
+            damage_ret=self.get_damage()
+            if not damage_ret['miss']:
+                damage=damage_ret['damage']
+                self.target.take_damage(damage)
+                if self.target.isfaint():
+                    break
 
 # ----------
 
@@ -110,7 +112,7 @@ def value():
 def get_power(self):
     power=self['act']['power']
     if self['act']['category']=='Physical' or 'sound' in self['act']['property']:
-        power+=50
+        power+=30
     return int(power*self.get_weather_power_mult())
 
 @Increment(Tigrex)
@@ -136,3 +138,18 @@ def value():
 def move_5(self): # Dragon Dance
     self.set_boost('atk',+1,'self')
     self.set_boost('spe',+1,'self')
+
+# ----------
+
+@Increment(Tigrex,'_move_6')
+def value():
+    return ('Close Combat',120,100,'Physical','Fighting',0,['contact'])
+
+@Increment(Tigrex)
+def move_6(self): # Close Combat
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        self.set_boost('def',-1,'self')
+        self.set_boost('spd',-1,'self')
