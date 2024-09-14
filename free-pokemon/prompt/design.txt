@@ -5,6 +5,7 @@ IMPORTANT:
 
 You should return like the following format. Do not return any additional words.
 Output example:
+```json
 {
   "species": "Arceus",
   "types": [
@@ -48,5 +49,5 @@ Output example:
     }
   }
 }
-
+```
 Your output:

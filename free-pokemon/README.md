@@ -20,22 +20,24 @@ Code of our engine is in `engine.py`. It can be split into two modules: role eng
 
 To get SFT data, use `proc.ipynb`.
 
-To see our prompts used in the paper, see `prompt`.
-
-![](asset/ui.png)
+To see our prompts used in the paper, see `prompt/`.
 
 
 
 ## UI
 
-1. Start the backend on your local host:
+![](asset/ui.png)
+
+
+1. Start the backend on your local host.
 
 ```bash
 python app.py
 ```
 
-2. Open `index.html` in the browser
+2. Put your role script (e.g. `Tigrex.json`) and role code (e.g. `Tigrex.py`) into `asset/user/`.
 
+3. Open `index.html` in the browser.
 
 
 

@@ -9,6 +9,7 @@ Tyrannosaurus was a bipedal carnivore with a massive skull balanced by a long, h
 
 You should return like the following format. Do not return any additional words.
 Output example:
+```json
 {
   "species": "Arceus",
   "types": [
@@ -52,5 +53,5 @@ Output example:
     }
   }
 }
-
+```
 Your output:
