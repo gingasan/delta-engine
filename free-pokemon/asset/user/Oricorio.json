@@ -1,0 +1,56 @@
+{
+  "species": "Oricorio",
+  "types": [
+    "Electric",
+    "Flying"
+  ],
+  "gender": "Female",
+  "ability": {
+    "Dancer": "This Pokemon's dance moves have their priority +1.",
+    "Swirling Winds": "After using a dance move, this Pokemon enters a hover state for 3 turns, increasing its special attack and speed by 30%."
+  },
+  "moves": {
+    "Revelation Dance": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Electric",
+      "effect": "20% chane to paralyze the target."
+    },
+    "Fleeting Moon": {
+      "power": 120,
+      "accuracy": 80,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "Restores 30% HP lost by the target."
+    },
+    "Calm Mind": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Psychic",
+      "effect": "The user raises its Special Attack and Special Defense by 1 stage each."
+    },
+    "Roost": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Flying",
+      "effect": "The user recovers 50% of its max HP."
+    },
+    "Teeter Dance": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "Causes the target to become confused."
+    },
+    "Moonblast": {
+      "power": 95,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Fairy",
+      "effect": "Has a 30% chance to lower the target's Special Attack by 1 stage."
+    }
+  }
+}

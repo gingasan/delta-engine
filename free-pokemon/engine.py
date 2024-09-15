@@ -46,7 +46,7 @@ class Battle:
                 self.log("%s is out of confusion." % source._species)
             elif rnd() < 0.33:
                 source.take_damage(source.get_confusion_damage(), "recoil")
-                source["conditions"]["CONFUSION"]["counter"] += 1
+                source["conditions"]["CONFUSION"]["counter"] += 2
                 self.log("%s hurts itself in its confusion." % source._species)
                 return
             else:
