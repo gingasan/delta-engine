@@ -13,7 +13,7 @@ class Oricorio(PokemonBase):
         super().__init__()
 
     def get_priority(self,move_id):
-        if self._moves[move_id] in ['Revelation Dance']:
+        if move_id in ['Revelation Dance']:
             return self._moves[move_id]['priority']+1
         return self._moves[move_id]['priority']
 
@@ -106,7 +106,9 @@ def move_5(self): # Teeter Dance
 
 @Increment(Oricorio)
 def get_priority(self,move_id):
-    if self._moves[move_id] in ['Revelation Dance','Teeter Dance']:
+    print(10, move_id)
+    if move_id in ['Revelation Dance','Teeter Dance']:
+        print(1024)
         return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 
