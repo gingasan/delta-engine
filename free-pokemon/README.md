@@ -26,7 +26,7 @@ To see our prompts used in the paper, see `prompt/`.
 
 ## UI
 
-![](asset/ui.png)
+![](asset/ui1.png)
 
 
 1. Start the backend on your local host.
