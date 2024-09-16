@@ -7,8 +7,8 @@ class PokemonBase:
     _gender='Male'
     _move_1=('Earthquake',100,100,'Physical','Normal',0,[])
     _base=(100,100,100,100,100,100)
-    def __init__(self, state=None):
-        self.state = self.init_state() if not state else state
+    def __init__(self):
+        self.state = self.init_state()
 
         self.move2fct = {}
         self._moves = {}
@@ -453,8 +453,6 @@ class Battle:
         self.log("Battle starts: {} ({})\tV.S.\t{} ({}).".format(self.pokemon1._species, " & ".join(self.pokemon1._types), self.pokemon2._species, " & ".join(self.pokemon2._types)))
         self.pokemon1.target = PokemonWrapper(self.pokemon2)
         self.pokemon2.target = PokemonWrapper(self.pokemon1)
-        # self.pokemon1.target = self.pokemon2
-        # self.pokemon2.target = self.pokemon1
         self.pokemon1.onswitch()
         self.pokemon2.onswitch()
         self.turn += 1
@@ -610,6 +608,14 @@ class Env:
 
     def log(self, content=None, **kwargs):
         self.logger.log(content, **kwargs)
+
+    @property
+    def state(self):
+        return {
+            "weather": self.weather,
+            "terrain": self.terrain,
+            "side_conditions": self.side_conditions
+        }
 
 
 class Logger:
