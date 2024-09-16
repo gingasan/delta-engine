@@ -400,17 +400,17 @@ class Battle:
                     source.state["status"]["SLP"]["counter"] += 1
                     self.log("%s is sleeping." % source._species)
                     return
-        if source["conditions"].get("CONFUSION"): # Confusion
-            if source["conditions"]["CONFUSION"]["counter"] == 4:
-                del source["conditions"]["CONFUSION"]
+        if source["conditions"].get("Confusion"): # Confusion
+            if source["conditions"]["Confusion"]["counter"] == 4:
+                del source["conditions"]["Confusion"]
                 self.log("%s is out of confusion." % source._species)
             elif rnd() < 0.33:
                 source.take_damage(source.get_confusion_damage(), "recoil")
-                source["conditions"]["CONFUSION"]["counter"] += 2
+                source["conditions"]["Confusion"]["counter"] += 2
                 self.log("%s hurts itself in its confusion." % source._species)
                 return
             else:
-                source["conditions"]["CONFUSION"]["counter"] += 1
+                source["conditions"]["Confusion"]["counter"] += 1
         source._act(move_id, target)
         return self.pokemon1.state, self.pokemon2.state
 

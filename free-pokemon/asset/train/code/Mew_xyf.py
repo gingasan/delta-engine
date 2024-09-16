@@ -45,7 +45,7 @@ def move_3(self): # Astral Beam
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.2:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 

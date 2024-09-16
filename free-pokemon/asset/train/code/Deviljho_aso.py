@@ -37,7 +37,7 @@ def move_3(self):
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<30/100:
-            self.set_condition('CONFUSION',counter=0)
+            self.set_condition('Confusion',counter=0)
 
 # ----------
 

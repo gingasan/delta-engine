@@ -38,11 +38,11 @@ def move_3(self): # Echoing Cry
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.3:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 @Increment(Suanyu)
 def get_crit(self):
-    if self['act']['id']=='Echoing Cry' and self.target['conditions'].get('CONFUSION'):
+    if self['act']['id']=='Echoing Cry' and self.target['conditions'].get('Confusion'):
         return True
     crit_mult=[0,24,8,2,1]
     crit_ratio=self['boosts']['crit']
@@ -65,5 +65,5 @@ def _take_damage_attack(self,x):
     self.register_act_taken()
     self.state['hp']=max(0,self['hp']-x)
     if rnd()<0.3:
-        self.target.set_condition('CONFUSION',counter=0)
+        self.target.set_condition('Confusion',counter=0)
     self.log(script='attack',species=self._species,x=x,**self['act_taken'])

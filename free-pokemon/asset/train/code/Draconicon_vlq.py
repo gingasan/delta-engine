@@ -22,7 +22,7 @@ class Draconicon(PokemonBase):
             return
         if self['act_taken'] and 'property' in self['act_taken'] and 'contact' in self['act_taken']['property']:
             if rnd()<20/100:
-                self.target.set_condition('CONFUSION',counter=0)
+                self.target.set_condition('Confusion',counter=0)
     
     def get_power(self):
         power=self['act']['power']

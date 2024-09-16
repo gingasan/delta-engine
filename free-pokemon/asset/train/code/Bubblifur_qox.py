@@ -53,7 +53,7 @@ def move_4(self): # Pressurized Jet
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<10/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 

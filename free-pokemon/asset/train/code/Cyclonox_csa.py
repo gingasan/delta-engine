@@ -49,7 +49,7 @@ class Cyclonox(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
-                self.target.set_condition('CONFUSION',counter=0)
+                self.target.set_condition('Confusion',counter=0)
 
 # ----------
 

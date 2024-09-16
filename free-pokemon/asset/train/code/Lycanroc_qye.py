@@ -34,7 +34,7 @@ class Lycanroc(PokemonBase):
             self.target.take_damage(damage)
             for t in ['Reflect','Light Screen','Aurora Veil']:
                 if self.env.get_side_condition(t,self.target.side_id):
-                    self.remove(t,self.target.side_id)
+                    self.env.remove(t,self.target.side_id)
 
     def move_2(self): # Stone Edge
         damage_ret=self.get_damage()

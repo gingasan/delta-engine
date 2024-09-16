@@ -12,7 +12,7 @@ class Nebulazoid(PokemonBase):
         super().__init__()
     
     def get_other_mult(self):
-        if self.target['conditions'].get('CONFUSION') and self['act']['type']=='Psychic':
+        if self.target['conditions'].get('Confusion') and self['act']['type']=='Psychic':
             return 2.0
         return 1.0
 
@@ -32,7 +32,7 @@ class Nebulazoid(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_boost('spd',-1)
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('CONFUSION',counter=0)
+                self.target.set_condition('Confusion',counter=0)
 
 # ----------
 
@@ -47,7 +47,7 @@ def move_3(self): # Nightmare Pulse
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 
@@ -86,4 +86,4 @@ def move_5(self): # Shadow Blast
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)

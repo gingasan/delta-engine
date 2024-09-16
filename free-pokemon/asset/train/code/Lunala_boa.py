@@ -50,7 +50,7 @@ def move_3(self): # Phantom Wave
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 
@@ -101,7 +101,7 @@ def move_3(self): # Phantom Wave
         self.target.take_damage(damage)
         self.land_hit_effect()
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 

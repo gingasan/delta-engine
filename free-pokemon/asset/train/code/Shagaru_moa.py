@@ -57,7 +57,7 @@ def move_3(self): # Shadow Pummel
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
 
 # ----------
 

@@ -73,7 +73,7 @@ def move_2(self):  # Aqua Veil
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
         self.restore(int(1/4*damage),'drain')
 
 # ----------
@@ -89,4 +89,4 @@ def move_5(self):  # Mystic Wave
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)

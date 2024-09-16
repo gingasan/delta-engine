@@ -28,7 +28,7 @@ class Lilipec(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('CONFUSION',counter=0)
+                self.target.set_condition('Confusion',counter=0)
 
 # ----------
 
@@ -71,7 +71,7 @@ def move_2(self): # Aqua Pulse
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('CONFUSION',counter=0)
+            self.target.set_condition('Confusion',counter=0)
     self.industrious_call()
 
 @Increment(Lilipec)

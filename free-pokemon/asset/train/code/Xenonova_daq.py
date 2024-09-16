@@ -66,4 +66,4 @@ def value():
 @Increment(Xenonova)
 def endturn(self):
     if rnd()<20/100:
-        self.target.set_condition('CONFUSION',counter=0)
+        self.target.set_condition('Confusion',counter=0)

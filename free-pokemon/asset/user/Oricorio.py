@@ -100,7 +100,7 @@ def value():
 def move_5(self): # Teeter Dance
     damage_ret=self.get_damage()
     if not damage_ret['miss']:
-        self.target.set_condition('CONFUSION',counter=0)
+        self.target.set_condition('Confusion',counter=0)
     self.set_condition('Hover',counter=0)
     self.log('Oricorio enters the hover state, fully unleashing its power.',color='yellow')
 

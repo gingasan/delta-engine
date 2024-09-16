@@ -19,11 +19,11 @@ class Hydrodrake(PokemonBase):
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']
-            if self.target['conditions'].get('CONFUSION'):
+            if self.target['conditions'].get('Confusion'):
                 damage=int(damage*1.5)
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
-                self.target.set_condition('CONFUSION',counter=0)
+                self.target.set_condition('Confusion',counter=0)
 
     def move_2(self): # Venomous Strike
         damage_ret=self.get_damage()
