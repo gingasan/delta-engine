@@ -13,7 +13,7 @@ class Livyatan(PokemonBase):
 
     def get_power(self):
         power=self['act']['power']
-        if self.target['stats']['spe']<self['stats']['spe']:
+        if self.target.get_stat('spe')<self.get_stat('spe'):
             power*=1.3
         return int(power*self.get_weather_power_mult())
 

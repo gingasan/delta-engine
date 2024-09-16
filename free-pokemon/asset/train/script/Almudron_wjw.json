@@ -6,7 +6,7 @@
   ],
   "gender": "Female",
   "ability": {
-    "Muddy Secretion": "Active Pokemon without this ability have their speed multiplied by 0.7.",
+    "Muddy Secretion": "On switch-in, other Pokemon have their speed multiplied by 0.7.",
     "Soil Absorption": "This Pokemon recovers 1/8th of its maximum HP if it hits a foe with a Ground-type move."
   },
   "moves": {

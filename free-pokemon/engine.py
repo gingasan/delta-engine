@@ -451,10 +451,10 @@ class Battle:
 
     def start(self):
         self.log("Battle starts: {} ({})\tV.S.\t{} ({}).".format(self.pokemon1._species, " & ".join(self.pokemon1._types), self.pokemon2._species, " & ".join(self.pokemon2._types)))
-        # self.pokemon1.target = PokemonWrapper(self.pokemon2)
-        # self.pokemon2.target = PokemonWrapper(self.pokemon1)
-        self.pokemon1.target = self.pokemon2
-        self.pokemon2.target = self.pokemon1
+        self.pokemon1.target = PokemonWrapper(self.pokemon2)
+        self.pokemon2.target = PokemonWrapper(self.pokemon1)
+        # self.pokemon1.target = self.pokemon2
+        # self.pokemon2.target = self.pokemon1
         self.pokemon1.onswitch()
         self.pokemon2.onswitch()
         self.turn += 1
@@ -668,12 +668,13 @@ class Logger:
 class PokemonWrapper:
     def __init__(self, pokemon):
         self.__pokemon = pokemon
-        self.species = pokemon._species
+        self._species = pokemon._species
         self.public_list = [
             "isstatus", "istype", "isfaint",
             "take_damage", "restore",
             "set_status", "set_boost", "set_stat", "set_condition",
-            "get_evasion", "get_disable_moves"
+            "get_evasion", "get_disable_moves", "get_stat",
+            "side_id"
         ]
 
     @property
@@ -681,7 +682,7 @@ class PokemonWrapper:
         return {
             "types":  self.__pokemon["types"],
             "status": self.__pokemon["status"],
-            "hp_ratio": self.__pokemon["hp"] / self.__pokemon["max_hp"] * 100,
+            "hp": self.__pokemon["hp"], "max_hp": self.__pokemon["max_hp"], "hp_ratio": self.__pokemon["hp"] / self.__pokemon["max_hp"] * 100,
             "boosts": {k: self.__pokemon["boosts"][k] for k in ["atk", "def", "spa", "spd", "spe", "accuracy", "crit"]},
             "conditions": self.__pokemon["conditions"],
             "act": self.__pokemon["act"], "act_taken": self.__pokemon["act_taken"],

@@ -12,7 +12,7 @@ class PorygonZ(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        if self.target['stats']['def']<self.target['stats']['spd']:
+        if self.target.get_stat('def')<self.target.get_stat('spd'):
             self.set_boost('atk',1,'self')
         else:
             self.set_boost('spa',1,'self')

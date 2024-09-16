@@ -12,8 +12,7 @@ class Almudron(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        if 'Muddy Secretion' not in self.target._ability:
-            self.target.set_stat('spe',0.7)
+        self.target.set_stat('spe',0.7)
 
     def _take_damage_attack(self,x):
         if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
