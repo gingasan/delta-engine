@@ -12,7 +12,7 @@ class RedMoon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Tailwind',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Tailwind',self.side_id,from_=self._species,counter=0,max_count=3)
 
     def get_stat(self,key,boost=None):
         stat=self['stats'][key]
@@ -23,7 +23,7 @@ class RedMoon(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self.get_env('Tailwind',side='self'):
+        if key=='spe' and self.env.get_side_condition('Tailwind',self.side_id):
             stat_ratio*=2
         return int(stat*stat_ratio)
 
@@ -37,7 +37,7 @@ class RedMoon(PokemonBase):
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if not self.target.isfaint() and rnd()<20/100: self.target.set_condition('FLINCH',counter=0)
+            if not self.target.isfaint() and rnd()<20/100: self.target.set_condition('Flinch',counter=0)
         recoil_damage=int(self['max_hp']//3)
         self.take_damage(recoil_damage,'recoil')
 

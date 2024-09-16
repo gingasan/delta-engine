@@ -90,7 +90,7 @@ def move_4(self): # Double Iron Bash
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
         if i<2 and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

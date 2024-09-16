@@ -12,7 +12,7 @@ class Kangaskhan(PokemonBase):
         super().__init__()
 
     def set_condition(self,x,**kwargs):
-        if x=='FLINCH': return
+        if x=='Flinch': return
         if not self['conditions'].get(x):
             self.state['conditions'].update({x: kwargs})
 
@@ -26,10 +26,10 @@ class Kangaskhan(PokemonBase):
             i+=1; hit=False if self.target.isfaint() else True
 
     def move_2(self): # Brick Break
-        if self.get_env('Reflect',side='target'):
-            self.del_env('Reflect',side='target')
-        if self.get_env('Light Screen',side='target'):
-            self.del_env('Light Screen',side='target')
+        if self.env.get_side_condition('Reflect',self.target.side_id):
+            self.env.remove('Reflect',self.target.side_id)
+        if self.env.get_side_condition('Light Screen',self.target.side_id):
+            self.env.remove('Light Screen',self.target.side_id)
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
             damage=damage_ret['damage']

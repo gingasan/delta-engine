@@ -20,7 +20,7 @@ class Araquanid(PokemonBase):
     def set_status(self,x):
         if self['hp']<=self['max_hp']//3:
             return
-        if self['status'] or self.get_env('Misty Terrain'):
+        if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
             return
@@ -46,7 +46,7 @@ class Araquanid(PokemonBase):
                 self.log('%s falls asleep.'%self._species)
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()

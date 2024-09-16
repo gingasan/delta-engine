@@ -36,7 +36,7 @@ class Blaziken(PokemonBase):
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if not self.target.isfaint() and rnd()<10/100: self.target.set_condition('FLINCH',counter=0)
+            if not self.target.isfaint() and rnd()<10/100: self.target.set_condition('Flinch',counter=0)
 
     def get_crit(self):
         crit_mult=[0,24,8,2,1]

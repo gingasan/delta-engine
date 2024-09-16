@@ -11,7 +11,7 @@ class Skeledirge(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _get_base_damage(self,power,crit):
+    def get_base_damage(self,power,crit):
         atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
         def_boost=0
         
@@ -56,7 +56,7 @@ def move_3(self): # Substitute
 
 @Increment(Skeledirge)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

@@ -46,7 +46,7 @@ class Diablos(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self.target.isfaint(): break
-            if rnd()<10/100: self.target.set_condition('FLINCH')
+            if rnd()<10/100: self.target.set_condition('Flinch')
 
 # ----------
 

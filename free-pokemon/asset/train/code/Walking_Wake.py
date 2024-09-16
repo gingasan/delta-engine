@@ -12,29 +12,29 @@ class Walking_Wake(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        if self.get_env('Sunlight'):
+        if self.env.get('Sunlight'):
             t=max([(k,v) for k,v in self['stats'].items()],key=lambda x:x[1])[0]
             self.set_stat(t,1.5 if t=='spe' else 1.3)
 
     def get_weather_power_mult(self):
-        if self.get_env('Sunlight'):
+        if self.env.get('Sunlight'):
             if self['act']['id']=='Hydro Steam':
                 return 1.5
             if self['act']['type'] in ['Fire','Water']:
                 return {'Fire':1.5,'Water':0.5}[self['act']['type']]
-        if self.get_env('Rain'):
+        if self.env.get('Rain'):
             if self['act']['type'] in ['Fire','Water']:
                 return {'Fire':0.5,'Water':1.5}[self['act']['type']]
-        if self.get_env('Electric Terrain'):
+        if self.env.get('Electric Terrain'):
             if self['act']['type']=='Electric':
                 return 1.3
-        if self.get_env('Grassy Terrain'):
+        if self.env.get('Grassy Terrain'):
             if self['act']['type']=='Grass':
                 return 1.3
-        if self.get_env('Psychic Terrain'):
+        if self.env.get('Psychic Terrain'):
             if self['act']['type']=='Psychic':
                 return 1.3
-        if self.get_env('Misty Terrain'):
+        if self.env.get('Misty Terrain'):
             if self['act']['type']=='Dragon':
                 return 0.5
         return 1.
@@ -81,7 +81,7 @@ def move_4(self): # Substitute
 
 @Increment(Walking_Wake)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

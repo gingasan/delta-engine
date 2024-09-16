@@ -12,11 +12,11 @@ class Stormfury(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Storm Surge',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Storm Surge',self.side_id,from_=self._species,counter=0,max_count=3)
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self.get_env('Storm Surge',side='self') and self['act']['type']=='Electric':
+        if self.env.get_side_condition('Storm Surge',self.side_id) and self['act']['type']=='Electric':
             acc=100
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:
@@ -70,7 +70,7 @@ def move_4(self): # Gale Wing
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

@@ -12,11 +12,11 @@ class Arceus(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
-        if not self['act_taken'].get('type_efc',0)>1:
+        if not self['act_taken'].get('type_effect',0)>1:
             return
         if self['conditions'].get('SUBSTITUTE'):
             self['conditions']['SUBSTITUTE']['hp']-=x
@@ -74,14 +74,14 @@ def move_4(self): # Protect
 
 @Increment(Arceus)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     if self['conditions'].get('PROTECT'):
         del self['conditions']['PROTECT']
         return
     self.register_act_taken()
-    if not self['act_taken'].get('type_efc',0)>1:
+    if not self['act_taken'].get('type_effect',0)>1:
         return
     if self['conditions'].get('SUBSTITUTE'):
         self['conditions']['SUBSTITUTE']['hp']-=x
@@ -104,7 +104,7 @@ def value():
 
 @Increment(Arceus)
 def set_status(self,x):
-    if self['status'] or self.get_env('Misty Terrain'):
+    if self['status'] or self.env.get('Misty Terrain'):
         return
     if x=='BRN':
         if not self.istype('Fire'):

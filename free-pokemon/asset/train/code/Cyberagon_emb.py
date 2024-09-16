@@ -66,7 +66,7 @@ def move_4(self): # Barrier Break
         self.target.take_damage(damage)
 
 @Increment(Cyberagon)
-def _get_base_damage(self,power,crit):
+def get_base_damage(self,power,crit):
     atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
     def_boost=self.target['boosts']['def'] if self['act']['category']=='Physical' else self.target['boosts']['spd']
     

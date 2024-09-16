@@ -12,7 +12,7 @@ class Tigrex(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _get_base_damage(self,power,crit):
+    def get_base_damage(self,power,crit):
         if 'sound' in self['act']['property']:
             self.log('Watch out for Absolute Power.',color='red')
             atk_boost=self['boosts']['atk']
@@ -42,7 +42,7 @@ class Tigrex(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
     
     def move_2(self): # Flame Charge
         for i in range(3):
@@ -65,9 +65,7 @@ def move_3(self): # Ice Spinner
     if not damage_ret['miss']:
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        for t in ['Psychic Terrain','Electric Terrain','Grassy Terrain','Misty Terrain']:
-            if self.get_env(t):
-                self.del_env[t]
+        self.env.clr_terrain()
 
 # ----------
 
@@ -97,7 +95,7 @@ def move_1(self): # Moltenquake
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
         if self['conditions'].get('Raging'):
             self.restore(int(1/2*damage),'drain')
             del self['conditions']['Raging']

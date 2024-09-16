@@ -23,7 +23,7 @@ class Smilodon(PokemonBase):
                 if rnd()<0.1:
                     self.target.set_status('FRZ')
                 if rnd()<0.1:
-                    self.target.set_condition('FLINCH',counter=0)
+                    self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Saber Slash
         damage_ret=self.get_damage()

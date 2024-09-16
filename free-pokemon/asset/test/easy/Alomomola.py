@@ -12,7 +12,7 @@ class Alomomola(PokemonBase):
         super().__init__()
 
     def endturn(self):
-        if self.get_env('Rain'):
+        if self.env.get('Rain'):
             self.state['status']=None
         if self['conditions'].get('PROTECT'):
             del self['conditions']['PROTECT']
@@ -33,7 +33,7 @@ class Alomomola(PokemonBase):
         self.set_condition('PROTECT',counter=0)
     
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         if self['conditions'].get('PROTECT'):

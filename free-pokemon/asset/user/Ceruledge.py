@@ -13,7 +13,7 @@ class Ceruledge(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if self.target['act']['type_efc']<0.1:
+        if self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()

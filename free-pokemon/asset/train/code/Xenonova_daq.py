@@ -31,7 +31,7 @@ class Xenonova(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<20/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
             self.take_damage(int(0.15*damage),'recoil')
 
 # ----------

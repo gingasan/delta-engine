@@ -55,3 +55,11 @@ def rndstr(k=3):
     for i in range(k):
         code += chr(random.randint(97, 122))
     return code
+
+def get_keys(content):
+    if isinstance(content, dict):
+        return list(content.keys())
+    
+def get_values(content):
+    if isinstance(content, dict):
+        return list(content.values())

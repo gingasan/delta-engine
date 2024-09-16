@@ -42,5 +42,5 @@ def move_3(self): # Ice Spinner
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         for t in ['Psychic Terrain','Electric Terrain','Grassy Terrain','Misty Terrain']:
-            if self.get_env(t,'terrain'):
-                self.del_env(t,'terrain')
+            if self.env.get(t):
+                self.env.clr_terrain()

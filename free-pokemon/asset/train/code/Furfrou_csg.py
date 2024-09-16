@@ -12,7 +12,7 @@ class Furfrou(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -29,7 +29,7 @@ class Furfrou(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100: 
                 self.target.set_status('PAR')
             if not self.target.isfaint() and rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Ice Fang
         damage_ret=self.get_damage()
@@ -39,4 +39,4 @@ class Furfrou(PokemonBase):
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_status('FRZ')
             if not self.target.isfaint() and rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)

@@ -12,7 +12,7 @@ class Zaochi(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -29,7 +29,7 @@ class Zaochi(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('FLINCH')
+                self.target.set_condition('Flinch')
     
     def move_2(self): # Shield Bash
         damage_ret=self.get_damage()
@@ -84,7 +84,7 @@ def move_1(self): # Gleaming Spear
         self.target.take_damage(damage)
         if not self.target.isfaint():
             if rnd()<20/100:
-                self.target.set_condition('FLINCH')
+                self.target.set_condition('Flinch')
             if rnd()<30/100:
                 self.target.set_boost('def',-1)
 

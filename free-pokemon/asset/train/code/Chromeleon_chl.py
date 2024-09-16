@@ -12,7 +12,7 @@ class Chromeleon(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -27,7 +27,7 @@ class Chromeleon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.3:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Ghostly Claw  
         damage_ret=self.get_damage()

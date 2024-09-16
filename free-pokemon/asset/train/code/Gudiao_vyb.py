@@ -44,7 +44,7 @@ def move_3(self): # Wing Slice
         self.set_boost('spa',1,'self')
 
 @Increment(Gudiao)
-def _get_base_damage(self,power,crit):
+def get_base_damage(self,power,crit):
     atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
     if self['act']['id']=='Wing Slice':
         def_boost=0
@@ -82,5 +82,5 @@ def value():
 
 @Increment(Gudiao)
 def endturn(self):
-    if self.get_env('Rain'):
+    if self.env.get('Rain'):
         self.restore(self['max_hp']//8,'heal')

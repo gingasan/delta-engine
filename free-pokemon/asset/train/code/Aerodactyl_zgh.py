@@ -30,7 +30,7 @@ class Aerodactyl(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<50/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
 # ----------
 
@@ -45,7 +45,7 @@ def move_3(self): # Rock Slide
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

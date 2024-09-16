@@ -14,7 +14,7 @@ class Zamazenta(PokemonBase):
     def onswitch(self):
         self.set_boost('def',1,'self')
 
-    def _get_base_damage(self,power,crit):
+    def get_base_damage(self,power,crit):
         if self['act']['id']=='Body Press':
             atk_boost=self['boosts']['def']
         else:

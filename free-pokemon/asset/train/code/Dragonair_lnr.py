@@ -42,7 +42,7 @@ def move_3(self): # Fire Fang
         self.target.take_damage(damage)
         if not self.target.isfaint():
             if rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
             if rnd()<10/100:
                 self.target.set_status('BRN')
 

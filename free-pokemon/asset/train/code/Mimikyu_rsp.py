@@ -15,7 +15,7 @@ class Mimikyu(PokemonBase):
         self.set_condition('DISGUISE',counter=0)
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         if self['conditions'].get('DISGUISE'):

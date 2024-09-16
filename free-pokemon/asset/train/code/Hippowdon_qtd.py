@@ -12,10 +12,10 @@ class Hippowdon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Sandstorm','weather')
+        self.env.set_weather('Sandstorm',from_=self._species)
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -23,7 +23,7 @@ class Hippowdon(PokemonBase):
         self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
-        self.set_env('Sandstorm','weather')
+        self.env.set_weather('Sandstorm',from_=self._species)
 
     def move_1(self): # Earth Power 
         damage_ret=self.get_damage()

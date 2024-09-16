@@ -12,7 +12,7 @@ class RedMoon(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Lunar Aura',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Lunar Aura',self.side_id,from_=self._species,counter=0,max_count=3)
 
     def move_1(self): # Lunar Slash
         damage_ret=self.get_damage()
@@ -20,7 +20,7 @@ class RedMoon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                if self.get_env('Lunar Aura',side='self'):
+                if self.env.get_side_condition('Lunar Aura',self.side_id):
                     self.target.set_boost('spe',-1)
                 elif rnd()<20/100:
                     self.target.set_boost('spe',-1)
@@ -30,7 +30,7 @@ class RedMoon(PokemonBase):
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if self.get_env('Lunar Aura',side='self'):
+            if self.env.get_side_condition('Lunar Aura',self.side_id):
                 self.set_boost('spe',+1,'self')
             elif rnd()<10/100:
                 self.set_boost('spe',+1,'self')
@@ -48,4 +48,4 @@ def move_3(self): # Zen Headbutt
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)

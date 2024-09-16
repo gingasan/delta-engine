@@ -81,6 +81,6 @@ def get_stat(self,key,boost=None):
     stat_ratio*=self.get_weather_stat_mult(key)
     if key=='spe' and self.isstatus('PAR'):
         stat_ratio*=0.5
-    if key in ['def','spd'] and self.get_env('Rain'):
+    if key in ['def','spd'] and self.env.get('Rain'):
         stat_ratio*=1.5
     return int(stat*stat_ratio)

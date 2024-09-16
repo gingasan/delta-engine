@@ -71,11 +71,11 @@ def value():
 
 @Increment(Corviknight)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()
-    if 'type_efc' in self['act_taken'] and self['act_taken']['type_efc']>1:
+    if 'type_effect' in self['act_taken'] and self['act_taken']['type_effect']>1:
         x=int(0.75*x)
     self.state['hp']=max(0,self['hp']-x)
     self.log(script='attack',species=self._species,x=x,**self['act_taken'])
@@ -94,7 +94,7 @@ def move_5(self): # Body Press
         self.target.take_damage(damage)
 
 @Increment(Corviknight)
-def _get_base_damage(self,power,crit):
+def get_base_damage(self,power,crit):
     if self['act']['id']=='Body Press':
         atk_boost=self['boosts']['def']
     else:

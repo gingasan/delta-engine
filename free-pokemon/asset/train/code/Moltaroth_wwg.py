@@ -12,7 +12,7 @@ class Moltaroth(PokemonBase):
         super().__init__()
 
     def set_status(self,x):
-        if self['status'] or self.get_env('Misty Terrain'):
+        if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
             if not self.istype('Fire'):

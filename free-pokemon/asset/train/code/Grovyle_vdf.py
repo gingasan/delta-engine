@@ -12,7 +12,7 @@ class Grovyle(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -20,7 +20,7 @@ class Grovyle(PokemonBase):
         self.log(script='attack',species=self._species,x=x,**self['act_taken'])
         if self['hp']==0:
             return
-        self.set_env('Grassy Terrain','terrain')
+        self.env.set_terrain('Grassy Terrain',from_=self._species)
     
     def endturn(self):
         if self.target['conditions'].get('LEECH_SEED'):

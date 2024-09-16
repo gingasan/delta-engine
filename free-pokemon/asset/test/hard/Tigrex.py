@@ -11,7 +11,7 @@ class Tigrex(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _get_base_damage(self,power,crit):
+    def get_base_damage(self,power,crit):
         if 'sound' in self['act']['property']:
             atk_boost=self['boosts']['atk']
             def_boost=self.target['boosts']['def']
@@ -41,7 +41,7 @@ class Tigrex(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
     
     def move_2(self): # Flare Blitz
         damage_ret=self.get_damage()

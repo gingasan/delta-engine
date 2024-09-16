@@ -20,7 +20,7 @@ class Sandslash(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self.get_env('Snow'):
+        if key=='spe' and self.env.get('Snow'):
             stat_ratio*=2
         return int(stat*stat_ratio)
 
@@ -58,7 +58,7 @@ def move_3(self): # Iron Head
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

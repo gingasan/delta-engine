@@ -12,7 +12,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Sandstorm','weather')
+        self.env.set_weather('Sandstorm',from_=self._species)
         self.set_boost('def',1,'self')
         self.set_boost('spd',1,'self')
 
@@ -37,4 +37,4 @@ class Tyranitar(PokemonBase):
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            if not self.target.isfaint() and rnd()<20/100: self.target.set_condition('FLINCH',counter=0)
+            if not self.target.isfaint() and rnd()<20/100: self.target.set_condition('Flinch',counter=0)

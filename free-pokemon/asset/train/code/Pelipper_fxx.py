@@ -12,15 +12,15 @@ class Pelipper(PokemonBase):
         super().__init__()
 
     def endturn(self):
-        if self.get_env('Rain'):
+        if self.env.get('Rain'):
             self.restore(self['max_hp']//16,'heal')
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
         if self['act']['id']=='Hurricane':
-            if self.get_env('Rain'):
+            if self.env.get('Rain'):
                 acc=1e5
-            elif self.get_env('Sunlight'):
+            elif self.env.get('Sunlight'):
                 acc=50
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:

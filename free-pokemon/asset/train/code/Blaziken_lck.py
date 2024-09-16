@@ -14,7 +14,7 @@ class Blaziken(PokemonBase):
     def set_status(self,x):
         if x=='FRZ' and self['hp']<=self['max_hp']//3:
             return
-        if self['status'] or self.get_env('Misty Terrain'):
+        if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
             if not self.istype('Fire'):

@@ -12,7 +12,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Sandstorm','weather')
+        self.env.set_weather('Sandstorm',from_=self._species)
 
     def get_type_effect(self):
         move_type=self['act']['type']
@@ -47,7 +47,7 @@ def value():
 def move_3(self): # Wild Release
     self.set_boost('atk',1,'self')
     self.set_boost('spe',1,'self')
-    if self.get_env('Sandstorm'):
+    if self.env.get('Sandstorm'):
         self.set_boost('atk',1,'self')
         self.set_boost('spe',1,'self')
 
@@ -67,7 +67,7 @@ def move_4(self): # Fire Fang
             if rnd()<0.1:
                 self.target.set_status('BRN')
             if rnd()<0.1:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
 # ----------
 
@@ -77,7 +77,7 @@ def value():
 
 @Increment(Tyranitar)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

@@ -30,7 +30,7 @@ class Garchomp(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                self.move_effect(damage_ret['type_efc'])
+                self.move_effect(damage_ret['type_effect'])
                 if rnd()<30/100:
                     self.target.set_condition('TRAP',counter=0)
 
@@ -40,7 +40,7 @@ class Garchomp(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                self.move_effect(damage_ret['type_efc'])
+                self.move_effect(damage_ret['type_effect'])
 
 # ----------
 
@@ -56,7 +56,7 @@ def move_3(self): # Protect
 
 @Increment(Garchomp)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     if self['conditions'].get('PROTECT'):

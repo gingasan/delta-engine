@@ -12,7 +12,7 @@ class Kirin(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Electric Terrain','terrain')
+        self.env.set_terrain('Electric Terrain',from_=self._species)
 
     def move_1(self): # Thunder
         damage_ret=self.get_damage()
@@ -36,16 +36,13 @@ def value():
 
 @Increment(Kirin)
 def move_3(self): # Deflecting Aura
-    self.set_env('Deflecting Aura',side='self',counter=0)
+    self.env.set_side_condition('Deflecting Aura',self.side_id,from_=self._species,counter=0)
 
 @Increment(Kirin)
 def endturn(self):
-    if self.get_env('Deflecting Aura',side='self'):
+    if self.env.get_side_condition('Deflecting Aura',self.side_id):
         self.set_boost('def',1,'self')
         self.set_boost('spd',1,'self')
-        self.get_env('Deflecting Aura',side='self')['counter']+=1
-        if self.get_env('Deflecting Aura',side='self')['counter']==3:
-            self.del_env('Deflecting Aura',side='self')
 
 # ----------
 
@@ -73,9 +70,9 @@ def get_accuracy(self):
         return 100000
     acc=self['act']['accuracy']
     if self['act']['id']=='Thunder':
-        if self.get_env('Rain'):
+        if self.env.get('Rain'):
             acc=1e5
-        elif self.get_env('Sunlight'):
+        elif self.env.get('Sunlight'):
             acc=50
     acc_mult=[1.0,1.33,1.67,2.0]
     if self['boosts']['accuracy']>=0:

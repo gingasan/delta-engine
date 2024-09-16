@@ -12,7 +12,7 @@ class Volcarona(PokemonBase):
         super().__init__()
 
     def _take_damage_attack(self,x):
-        if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
             self.logger.log('It is immune by %s.'%self._species)
             return
         self.register_act_taken()
@@ -45,9 +45,9 @@ def value():
 
 @Increment(Volcarona)
 def move_3(self): # Morning Sun
-    if not any([x in self.env for x in ['Sunlight','Rain','Sandstorm','Snow']]):
+    if not any([self.env.get(x) for x in ['Sunlight','Rain','Sandstorm','Snow']]):
         self.restore(self['max_hp']//2,'heal')
-    elif self.get_env('Sunlight'):
+    elif self.env.get('Sunlight'):
         self.restore(self['max_hp']//3*2,'heal')
     else:
         self.restore(self['max_hp']//4,'heal')

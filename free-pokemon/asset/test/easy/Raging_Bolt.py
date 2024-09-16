@@ -12,7 +12,7 @@ class Raging_Bolt(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        if self.get_env('Sunlight'):
+        if self.env.get('Sunlight'):
             t=max([(k,v) for k,v in self['stats'].items()],key=lambda x:x[1])[0]
             self.set_stat(t,1.5 if t=='spe' else 1.3)
     

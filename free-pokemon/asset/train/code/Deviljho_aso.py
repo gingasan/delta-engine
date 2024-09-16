@@ -18,7 +18,7 @@ class Deviljho(PokemonBase):
             self.target.take_damage(damage)
             self.restore(damage//4,'drain')
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
     def move_2(self):
         self.target.set_boost('def',-1)

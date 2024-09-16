@@ -95,5 +95,4 @@ def move_6(self): # Shadow Ball
     if not damage_ret['miss']:
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('FLINCH',counter=0)
+        if not self.target.isfaint() and rnd()<20/100: self.target.set_boost('spd',-1)

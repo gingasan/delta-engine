@@ -86,7 +86,7 @@ def move_1(self): # Savage Bite
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.42:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 
@@ -104,4 +104,4 @@ def move_5(self): # Ice Fang
             if rnd()<0.1:
                 self.target.set_status('FRZ')
             if rnd()<0.42:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)

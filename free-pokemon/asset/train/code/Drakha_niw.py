@@ -12,11 +12,11 @@ class Drakha(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Shadow Realm',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Shadow Realm',self.side_id,from_=self._species,counter=0,max_count=3)
     
     def get_power(self):
         power=self['act']['power']
-        if self.get_env('Shadow Realm',side='self') and self['act']['type']=='Dark':
+        if self.env.get_side_condition('Shadow Realm',self.side_id) and self['act']['type']=='Dark':
             power*=1.5
         return int(power*self.get_weather_power_mult())
 
@@ -34,7 +34,7 @@ class Drakha(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

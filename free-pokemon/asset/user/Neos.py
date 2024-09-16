@@ -97,7 +97,7 @@ def move_5(self): # Wrath of Black
         self.target.take_damage(damage)
 
 @Increment(Neos)
-def _get_base_damage(self,power,crit):
+def get_base_damage(self,power,crit):
     atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
     if self['act']['id']=='Wrath of Black':
         def_boost=0
@@ -143,5 +143,5 @@ def move_6(self): # Signal Buster
         self.target.take_damage(damage)
         if not self.target.isfaint():
             self.target.set_boost('spe',-1)
-            if damage_ret['type_efc']>1:
+            if damage_ret['type_effect']>1:
                 self.target.set_status('PAR')

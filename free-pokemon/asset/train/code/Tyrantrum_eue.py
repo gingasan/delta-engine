@@ -36,5 +36,5 @@ def move_3(self): # Psychic Fangs
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         for t in ['Reflect','Light Screen','Aurora Veil']:
-            if self.get_env(t,side='target'):
-                self.del_env(t,side='target')
+            if self.env.get_side_condition(t,self.target.side_id):
+                self.env.remove(t,self.target.side_id)

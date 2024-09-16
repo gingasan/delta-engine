@@ -12,10 +12,10 @@ class Swampert(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Mist Mirage',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Mist Mirage',self.side_id,from_=self._species,counter=0,max_count=3)
 
     def endturn(self):
-        if self.get_env('Mist Mirage',side='self'):
+        if self.env.get_side_condition('Mist Mirage',self.side_id):
             self.restore(self['max_hp']//16,'heal')
 
     def move_1(self): # Aqua Jet

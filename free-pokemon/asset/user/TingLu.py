@@ -41,7 +41,7 @@ def move_3(self): # Rock Slide
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 
@@ -63,7 +63,7 @@ def value():
 
 @Increment(TingLu)
 def _take_damage_attack(self,x):
-    if self.target['act']['type_efc']<0.1:
+    if self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

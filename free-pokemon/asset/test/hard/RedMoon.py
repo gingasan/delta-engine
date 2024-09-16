@@ -8,17 +8,18 @@ class RedMoon(PokemonBase):
     _ability=['Lunar Aura']
     _move_1=('Lunar Cannon',100,100,'Special','Dragon',0,[])
     _move_2=('Aura Sphere',80,100000,'Special','Fighting',0,[])
+    _base=(106,62,95,110,109,118)
     def __init__(self):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Lunar Aura',side='self',counter=0)
+        self.env.set_side_condition('Lunar Aura',self.side_id,from_=self._species,counter=0)
 
     def endturn(self):
-        if self.get_env('Lunar Aura',side='self'):
-            self.get_env('Lunar Aura',side='self')['counter']+=1
-            if self.get_env('Lunar Aura',side='self')['counter']==3:
-                self.del_env('Lunar Aura',side='self')
+        if self.env.get_side_condition('Lunar Aura',self.side_id):
+            self.env.get_side_condition('Lunar Aura',self.side_id)['counter']+=1
+            if self.env.get_side_condition('Lunar Aura',self.side_id)['counter']==3:
+                self.env.remove('Lunar Aura',self.side_id)
 
     def get_type_effect(self):
         move_type=self['act']['type']
@@ -37,7 +38,7 @@ class RedMoon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                if self.get_env('Lunar Aura',side='self'):
+                if self.env.get_side_condition('Lunar Aura',self.side_id):
                     self.target.set_boost('spd',-1)
                 elif rnd()<30/100:
                     self.target.set_boost('spd',-1)
@@ -58,7 +59,7 @@ def value():
 def move_3(self): # Lunar Dance
     self.set_boost('spa',+1,'self')
     self.set_boost('spd',+1,'self')
-    if self.get_env('Lunar Aura',side='self'):
+    if self.env.get_side_condition('Lunar Aura',self.side_id):
         self.set_boost('spe',+1,'self')
     elif rnd()<30/100:
         self.set_boost('spe',+1,'self')
@@ -83,10 +84,10 @@ def value():
 
 @Increment(RedMoon)
 def endturn(self):
-    if self.get_env('Lunar Aura',side='self'):
-        self.get_env('Lunar Aura',side='self')['counter']+=1
-        if self.get_env('Lunar Aura',side='self')['counter']==3:
-            self.del_env('Lunar Aura',side='self')
+    if self.env.get_side_condition('Lunar Aura',self.side_id):
+        self.env.get_side_condition('Lunar Aura',self.side_id)['counter']+=1
+        if self.env.get_side_condition('Lunar Aura',self.side_id)['counter']==3:
+            self.env.remove('Lunar Aura',self.side_id)
             if self['hp']<=self['max_hp']//2:
                 self.set_condition('Burst',counter=0)
                 self.log('Bloo Burst! Red-Moon has gone berserk.',color='purple')

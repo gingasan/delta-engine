@@ -33,8 +33,8 @@ class Lycanroc(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             for t in ['Reflect','Light Screen','Aurora Veil']:
-                if self.get_env(t,side='target'):
-                    self.del_env(t,side='target')
+                if self.env.get_side_condition(t,self.target.side_id):
+                    self.remove(t,self.target.side_id)
 
     def move_2(self): # Stone Edge
         damage_ret=self.get_damage()
@@ -55,7 +55,7 @@ def move_3(self): # Zen Headbutt
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 

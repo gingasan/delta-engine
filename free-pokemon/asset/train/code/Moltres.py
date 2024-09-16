@@ -32,7 +32,7 @@ class Moltres(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Nasty Plot
         self.set_boost('spa',+2,'self')
@@ -50,7 +50,7 @@ def move_3(self): # Air Slash
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
-            self.target.set_condition('FLINCH',counter=0)
+            self.target.set_condition('Flinch',counter=0)
 
 # ----------
 
@@ -66,7 +66,7 @@ def move_4(self): # Protect
 
 @Increment(Moltres)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     if self['conditions'].get('PROTECT'):

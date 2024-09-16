@@ -13,7 +13,7 @@ class Tyranitar(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Sandstorm','weather')
+        self.env.set_weather('Sandstorm',from_=self._species)
 
     def get_crit(self):
         crit_mult=[0,24,8,2,1]
@@ -71,7 +71,7 @@ def value():
 
 @Increment(Tyranitar)
 def _take_damage_attack(self,x):
-    if self.target['act']['type_efc']<0.1:
+    if self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

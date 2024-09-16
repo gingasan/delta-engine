@@ -64,4 +64,4 @@ def value():
 
 @Increment(Gardevoir)
 def onswitch(self):
-    self.set_env('Psychic Terrain','terrain')
+    self.env.set_terrain('Psychic Terrain',from_=self._species)

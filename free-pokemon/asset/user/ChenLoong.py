@@ -13,11 +13,11 @@ class ChenLoong(PokemonBase):
         super().__init__()
 
     def onswitch(self):
-        self.set_env('Snow','weather')
+        self.env.set_weather('Snow',from_=self._species)
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self['act']['id']=='Blizzard' and self.get_env('Snow'):
+        if self['act']['id']=='Blizzard' and self.env.get('Snow'):
             acc=1e5
         acc_mult=[1.0,1.33,1.67,2.0]
         if self['boosts']['accuracy']>=0:
@@ -75,16 +75,16 @@ def value():
 
 @Increment(ChenLoong)
 def onswitch(self):
-    self.set_env('Snow','weather')
-    self.set_env('Aurora Veil',side='self',counter=0,max_count=5)
+    self.env.set_weather('Snow',from_=self._species)
+    self.env.set_side_condition('Aurora Veil',self.side_id,from_=self._species,counter=0,max_count=3)
 
 @Increment(ChenLoong)
 def _take_damage_attack(self,x):
-    if self.target['act']['type_efc']<0.1:
+    if self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()
-    if self.get_env('Aurora Veil',side='self'):
+    if self.env.get_side_condition('Aurora Veil',self.side_id):
         if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
             x//=2
     self.state['hp']=max(0,self['hp']-x)

@@ -12,16 +12,16 @@ class Charizard(PokemonBase):
         super().__init__()
 
     def get_weather_stat_mult(self,key):
-        if self.get_env('Sandstorm') and key=='spd' and 'Rock' in self['types']:
+        if self.env.get('Sandstorm') and key=='spd' and 'Rock' in self['types']:
             return 1.5
-        if self.get_env('Snow') and key=='def' and 'Ice' in self['types']:
+        if self.env.get('Snow') and key=='def' and 'Ice' in self['types']:
             return 1.5
-        if self.get_env('Sunlight') and key=='spa':
+        if self.env.get('Sunlight') and key=='spa':
             return 1.5
         return 1.
     
     def endturn(self):
-        if self.get_env('Sunlight'):
+        if self.env.get('Sunlight'):
             self.take_damage(self['max_hp']//8,'loss')
     
     def move_1(self): # Flamethrower
@@ -30,7 +30,7 @@ class Charizard(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
-                if self.get_env('Sunlight') or rnd()<10/100:
+                if self.env.get('Sunlight') or rnd()<10/100:
                     self.target.set_status('BRN')
     
     def move_2(self): # Air Slash
@@ -39,4 +39,4 @@ class Charizard(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)

@@ -13,9 +13,9 @@ class Zapdos(PokemonBase):
 
     def get_accuracy(self):
         acc=self['act']['accuracy']
-        if self.get_env('Rain') and self['act']['id']=='Hurricane':
+        if self.env.get('Rain') and self['act']['id']=='Hurricane':
             acc=1e5
-        elif self.get_env('Sunlight') and self['act']['id']=='Hurricane':
+        elif self.env.get('Sunlight') and self['act']['id']=='Hurricane':
             acc=50
         if acc<=70:
             acc=int(acc*1.5)

@@ -19,7 +19,7 @@ class Muk(PokemonBase):
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('PSN')
             if not self.target.isfaint() and rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Lunge
         damage_ret=self.get_damage()
@@ -29,4 +29,4 @@ class Muk(PokemonBase):
             if not self.target.isfaint():
                 self.target.set_boost('atk',-1)
             if not self.target.isfaint() and rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)

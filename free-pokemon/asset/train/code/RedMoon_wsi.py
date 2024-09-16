@@ -13,7 +13,7 @@ class RedMoon(PokemonBase):
 
     def onswitch(self):
         self.target.set_boost('atk',-1)
-        self.set_env('Tailwind',side='self',counter=0,max_count=3)
+        self.env.set_side_condition('Tailwind',self.side_id,from_=self._species,counter=0,max_count=3)
     
     def get_stat(self,key,boost=None):
         stat=self['stats'][key]
@@ -24,7 +24,7 @@ class RedMoon(PokemonBase):
         stat_ratio*=self.get_weather_stat_mult(key)
         if key=='spe' and self.isstatus('PAR'):
             stat_ratio*=0.5
-        if key=='spe' and self.get_env('Tailwind',side='self'):
+        if key=='spe' and self.env.get_side_condition('Tailwind',self.side_id):
             stat_ratio*=2
         return int(stat*stat_ratio)
 
@@ -34,7 +34,7 @@ class RedMoon(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
-                self.target.set_condition('FLINCH',counter=0)
+                self.target.set_condition('Flinch',counter=0)
     
     def move_2(self): # Brave Bird  
         damage_ret=self.get_damage()
@@ -84,7 +84,7 @@ def value():
 
 @Increment(RedMoon)
 def _take_damage_attack(self,x):
-    if 'type_efc' in self.target['act'] and self.target['act']['type_efc']<0.1:
+    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)
         return
     self.register_act_taken()

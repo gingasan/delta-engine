@@ -39,7 +39,7 @@ class Gallade(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
-    def _get_base_damage(self,power,crit):
+    def get_base_damage(self,power,crit):
         atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
         if self['act']['id']=='Sacred Sword':
             def_boost=0
