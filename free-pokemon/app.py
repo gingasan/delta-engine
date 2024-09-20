@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from engine import *
 from utils import *
+from agent import *
 
 
 def create_role(code_path):
@@ -18,7 +19,10 @@ def step(move1_id):
     if user.isfaint() or oppo.isfaint():
         return
     battle.logger.clr()
-    move2_id = rndc(oppo.get_moves())
+    if isinstance(oppo, PokemonAgent):
+        move2_id = oppo.plan()
+    else:
+        move2_id = rndc(oppo.get_moves())
     state = battle.act(move1_id, move2_id)
     for phase in ["phase_1", "phase_2"]:
         if state[phase]:
@@ -47,16 +51,17 @@ CORS(app)
 
 
 oppo_pool = {
-    "Ceruledge": "937Ceruledge.png",
+    # "Ceruledge": "937Ceruledge.png",
     "Blaziken": "257Blaziken-Mega.png",
-    "Tyranitar": "248Tyranitar.png",
-    "Aerodactyl": "142Aerodactyl-Mega.png",
+    # "Tyranitar": "248Tyranitar.png",
+    # "Aerodactyl": "142Aerodactyl-Mega.png",
     "TingLu": "1003Ting-Lu.png",
-    "Scizor": "212Scizor.png",
+    # "Scizor": "212Scizor.png",
     "Lucario": "448Lucario.png",
-    "ChenLoong": "131Lapras.png",
-    "RedMoon": "373Salamence-Mega.png",
-    "Zapdos": "145Zapdos.png"
+    # "ChenLoong": "131Lapras.png",
+    # "RedMoon": "373Salamence-Mega.png",
+    # "Zapdos": "145Zapdos.png",
+    "Graphal": "Graphal.webp"
 }
 
 
@@ -67,7 +72,16 @@ def init_state():
     init_data = request.get_json()
     print(init_data)
     user = create_role("asset.user.{}".format(init_data["species"]))
-    oppo = create_role("asset.user.{}".format(rndc(oppo_pool)))
+    t = rndc(oppo_pool)
+    try:
+        oppo = {
+            "Blaziken": BlazikenAgent(),
+            "Lucario": LucarioAgent(),
+            "TingLu": TingLuAgent(),
+            "Graphal": GraphalAgent()
+        }[t]
+    except KeyError:
+        oppo = create_role("asset.user.{}".format(t))
     battle = Battle(user, oppo)
 
     battle.start()

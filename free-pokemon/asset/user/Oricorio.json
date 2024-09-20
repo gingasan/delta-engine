@@ -7,22 +7,22 @@
   "gender": "Female",
   "ability": {
     "Dancer": "This Pokemon's dance moves have their priority +1.",
-    "Swirling Winds": "After using a dance move, this Pokemon enters a hover state for 3 turns, increasing its special attack and speed by 30%."
+    "Swirling Winds": "After using a dance move, this Pokemon enters a hover state for 3 turns, increasing its special attack and speed by 20%."
   },
   "moves": {
     "Revelation Dance": {
-      "power": 90,
+      "power": 70,
       "accuracy": 100,
       "category": "Special",
       "type": "Electric",
       "effect": "20% chane to paralyze the target."
     },
     "Fleeting Moon": {
-      "power": 120,
-      "accuracy": 80,
+      "power": 70,
+      "accuracy": 100,
       "category": "Special",
       "type": "Flying",
-      "effect": "Restores 30% HP lost by the target."
+      "effect": "Restores 50% HP lost by the target."
     },
     "Calm Mind": {
       "power": 0,

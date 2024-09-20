@@ -21,7 +21,7 @@
       ]
     },
     "Flame Charge": {
-      "power": 40,
+      "power": 30,
       "accuracy": 100,
       "category": "Physical",
       "type": "Fire",

@@ -8,7 +8,7 @@ class TingLu(PokemonBase):
     _ability=['Vessel of Ruin']
     _move_1=('Ruination',0,90,'Special','Dark',0,[])
     _move_2=('Earthquake',100,100,'Physical','Ground',0,[])
-    _base=(165,110,125,65,85,50)
+    _base=(165,110,125,55,105,40)
     def __init__(self):
         super().__init__()
 
@@ -77,7 +77,7 @@ def _take_damage_attack(self,x):
 
 @Increment(TingLu,'_move_5')
 def value():
-    return ('Sin-Absorb',0,10000,'Status','Dark',-4,[])
+    return ('Sin-Absorb',0,100000,'Status','Dark',-4,[])
 
 @Increment(TingLu)
 def move_5(self): # Sin-Absorb
@@ -85,4 +85,40 @@ def move_5(self): # Sin-Absorb
     if self['act_taken']:
         self.restore(self['max_hp']//3*2,'heal')
     else:
-        self.restore(self['max_hp']//3,'heal')
+        self.restore(self['max_hp']//8,'heal')
+
+# ----------
+
+@Increment(TingLu,'_move_6')
+def value():
+    return ('Body Press',80,100,'Physical','Fighting',0,['contact'])
+
+@Increment(TingLu)
+def move_6(self): # Body Press
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+
+@Increment(TingLu)
+def get_base_damage(self,power,crit):
+    if self['act']['id']=='Body Press':
+        atk_boost=self['boosts']['def']
+    else:
+        atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
+    def_boost=self.target['boosts']['def'] if self['act']['category']=='Physical' else self.target['boosts']['spd']
+    
+    if crit:
+        atk_boost=max(0,atk_boost)
+        def_boost=min(0,def_boost)
+
+    if self['act']['id']=='Body Press':
+        attack=self.get_stat('def',atk_boost)
+    else:
+        attack=self.get_stat('atk' if self['act']['category']=='Physical' else 'spa',atk_boost)
+    defense=self.target.get_stat('def' if self['act']['category']=='Physical' else 'spd',def_boost)
+
+    level=100
+    base_damage=int(int(int(int(2*level/5+2)*power*attack)/defense)/50)+2
+
+    return base_damage

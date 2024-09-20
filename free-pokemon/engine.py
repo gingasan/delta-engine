@@ -61,7 +61,7 @@ class PokemonBase:
 
     def get_moves(self):
         available_move_ids = []
-        disabled = self.target.get_disable_moves(self._moves)
+        disabled = self.target.disable_moves(self._moves)
         for m in self._moves:
             if m not in disabled:
                 available_move_ids += [m]
@@ -308,8 +308,9 @@ class PokemonBase:
         if self["status"] or self.env.get("Misty Terrain"):
             return
         if x == "BRN":
-            if not self.istype("Fire"):
-                self.state["status"] = {x: {"counter": 0}}
+            if self.istype("Fire"):
+                return
+            self.state["status"] = {x: {"counter": 0}}
         elif x == "PAR":
             if self.istype("Electric"):
                 return
@@ -352,8 +353,7 @@ class PokemonBase:
     def get_evasion(self):
         return 1
 
-    def get_disable_moves(self, moves):
-        target = self.target
+    def disable_moves(self, moves):
         disabled = []
         return disabled
 
@@ -401,10 +401,10 @@ class Battle:
                     self.log("%s is sleeping." % source._species)
                     return
         if source["conditions"].get("Confusion"): # Confusion
-            if source["conditions"]["Confusion"]["counter"] == 4:
+            if source["conditions"]["Confusion"]["counter"] == 3:
                 del source["conditions"]["Confusion"]
                 self.log("%s is out of confusion." % source._species)
-            elif rnd() < 0.33:
+            elif rnd() < 0.15:
                 source.take_damage(source.get_confusion_damage(), "recoil")
                 source["conditions"]["Confusion"]["counter"] += 2
                 self.log("%s hurts itself in its confusion." % source._species)
@@ -527,18 +527,20 @@ class Env:
 
     @property
     def _weather(self):
-        return get_keys(self.weather)[0]
+        return get_keys(self.weather)[0] if self.weather else None
 
     @property
     def _terrain(self):
-        return get_keys(self.terrain)[0]
+        return get_keys(self.terrain)[0] if self.terrain else None
 
     def clr_weather(self):
-        self.log("{} ends.".format(self._weather))
+        if self._weather:
+            self.log("{} ends.".format(self._weather))
         self.weather = {}
 
     def clr_terrain(self):
-        self.log("{} ends.".format(self._terrain))
+        if self._terrain:
+            self.log("{} ends.".format(self._terrain))
         self.terrain = {}
 
     def set_weather(self, x, from_, **kwargs):
@@ -652,7 +654,7 @@ class Logger:
     
     def _log_boost(self, **kwargs):
         key = {
-            "atk": "Atk.", "def": "Def.", "spa": "SpA.", "spd": "SpD.", "spe": "Spd.",
+            "atk": "Atk.", "def": "Def.", "spa": "SpA.", "spd": "SpD.", "spe": "Spe.",
             "accuracy": "Acc.", "crit": "Crit."}[kwargs["key"]]
         self.log("{}'s {} is {} by {}.".format(kwargs["species"], key, "raised" if kwargs["x"] > 0 else "lowered", abs(kwargs["x"])))
 
@@ -679,7 +681,7 @@ class PokemonWrapper:
             "isstatus", "istype", "isfaint",
             "take_damage", "restore",
             "set_status", "set_boost", "set_stat", "set_condition",
-            "get_evasion", "get_disable_moves", "get_stat",
+            "get_evasion", "disable_moves", "get_stat",
             "side_id"
         ]
 
@@ -688,7 +690,7 @@ class PokemonWrapper:
         return {
             "types":  self.__pokemon["types"],
             "status": self.__pokemon["status"],
-            "hp": self.__pokemon["hp"], "max_hp": self.__pokemon["max_hp"], "hp_ratio": self.__pokemon["hp"] / self.__pokemon["max_hp"] * 100,
+            "hp": self.__pokemon["hp"], "max_hp": self.__pokemon["max_hp"], "hp_ratio": self.__pokemon["hp"] / self.__pokemon["max_hp"],
             "boosts": {k: self.__pokemon["boosts"][k] for k in ["atk", "def", "spa", "spd", "spe", "accuracy", "crit"]},
             "conditions": self.__pokemon["conditions"],
             "act": self.__pokemon["act"], "act_taken": self.__pokemon["act_taken"],

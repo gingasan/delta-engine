@@ -19,8 +19,8 @@ class Graphal(PokemonBase):
         mult=1
         if self.isstatus('BRN') and self['act']['category']=='Physical':
             mult*=0.5
-        if self.env.get_side_condition('Dark World',self.side_id):
-            mult=mult*1.5 if self['act']['type']=='Dark' else mult*0.75
+        if self.env.get_side_condition('Dark World',self.side_id) and self['act']['type']=='Dark':
+            mult*=1.5
         return mult
 
     def get_type_effect(self):
@@ -118,3 +118,17 @@ def endturn(self):
             self.target.take_damage(self.target['max_hp']//3,'loss')
             self.restore(self['max_hp']//3,'heal')
             self.log('%s is punished by not making attack.'%self.target._species,color='red')
+
+# ----------
+
+@Increment(Graphal,'_move_6')
+def value():
+    return ('Oblivion Wing',80,100,'Special','Flying',0,[])
+
+@Increment(Graphal)
+def move_6(self): # Oblivion Wing
+    damage_ret=self.get_damage()
+    if not damage_ret['miss']:
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        self.restore(int(3/4*damage),'drain')

@@ -6,9 +6,9 @@ class Oricorio(PokemonBase):
     _types=['Electric','Flying']
     _gender='Female'
     _ability=['Dancer']
-    _move_1=('Revelation Dance',90,100,'Special','Electric',0,[])
-    _move_2=('Fleeting Moon',120,80,'Special','Flying',0,[])
-    _base=(99,80,80,128,90,123)
+    _move_1=('Revelation Dance',70,100,'Special','Electric',0,[])
+    _move_2=('Fleeting Moon',70,100,'Special','Flying',0,[])
+    _base=(70,90,60,128,109,143)
     def __init__(self):
         super().__init__()
 
@@ -30,7 +30,7 @@ class Oricorio(PokemonBase):
         if not damage_ret['miss']:
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-            self.restore(int(0.3*damage),'drain')
+            self.restore(int(0.5*damage),'drain')
 
 # ----------
 @Increment(Oricorio,'_move_3')
@@ -69,14 +69,14 @@ def get_stat(self,key,boost=None):
     if key=='spe' and self.isstatus('PAR'):
         stat_ratio*=0.5
     if (key=='spa' or key=='spe') and self['conditions'].get('Hover'):
-        stat_ratio*=1.3
+        stat_ratio*=1.2
     return int(stat*stat_ratio)
 
 @Increment(Oricorio)
 def endturn(self):
     if self['conditions'].get('Hover'):
         self['conditions']['Hover']['counter']+=1
-        if self['conditions']['Hover']['counter']==1:
+        if self['conditions']['Hover']['counter']==3:
             del self['conditions']['Hover']
 
 @Increment(Oricorio)
@@ -106,9 +106,7 @@ def move_5(self): # Teeter Dance
 
 @Increment(Oricorio)
 def get_priority(self,move_id):
-    print(10, move_id)
     if move_id in ['Revelation Dance','Teeter Dance']:
-        print(1024)
         return self._moves[move_id]['priority']+1
     return self._moves[move_id]['priority']
 

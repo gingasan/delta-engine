@@ -1,8 +1,8 @@
 from engine import *
 
 
-class Walking_Wake(PokemonBase):
-    _species='Walking Wake'
+class WalkingWake(PokemonBase):
+    _species='Walking-Wake'
     _types=['Dragon','Water']
     _gender='Male'
     _ability=['Protosynthesis']
@@ -54,11 +54,11 @@ class Walking_Wake(PokemonBase):
 
 # ----------
 
-@Increment(Walking_Wake,'_move_3')
+@Increment(WalkingWake,'_move_3')
 def value():
     return ('Flamethrower',90,100,'Special','Fire',0,[])
 
-@Increment(Walking_Wake)
+@Increment(WalkingWake)
 def move_3(self): # Flamethrower
     damage_ret=self.get_damage()
     if not damage_ret['miss']:
@@ -69,17 +69,17 @@ def move_3(self): # Flamethrower
 
 # ----------
 
-@Increment(Walking_Wake,'_move_4')
+@Increment(WalkingWake,'_move_4')
 def value():
     return ('Substitute',0,100000,'Status','Normal',0,[])
 
-@Increment(Walking_Wake)
+@Increment(WalkingWake)
 def move_4(self): # Substitute
     if self['hp']>self['max_hp']//4 and not self['conditions'].get('SUBSTITUTE'):
         self.take_damage(self['max_hp']//4,'loss')
         self.set_condition('SUBSTITUTE',hp=self['max_hp']//4)
 
-@Increment(Walking_Wake)
+@Increment(WalkingWake)
 def _take_damage_attack(self,x):
     if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
         self.logger.log('It is immune by %s.'%self._species)

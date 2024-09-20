@@ -18,13 +18,18 @@ function initState(init_data) {
 
             const moves = document.querySelectorAll(".move");
             moves.forEach((move, i) => {
-                if (!data.pokemon_1[`move_${i + 1}`]) {
-                    return;
-                }
                 const moveName = move.querySelector(".move-name");
                 const moveInfo = move.querySelector(".move-info");
                 const moveImg = move.querySelector("img");
-                
+
+                if (!data.pokemon_1[`move_${i + 1}`]) {
+                    moveName.firstChild.textContent = `Move ${i + 1}`;
+                    moveInfo.textContent = "pow: -- acc: --";
+                    move.setAttribute("description", "--");
+                    moveImg.src = "asset/type/Normal.png";
+                    return;
+                }
+
                 // update move
                 moveName.firstChild.textContent = data.pokemon_1[`move_${i + 1}`].id;
                 moveInfo.textContent = `pow: ${data.pokemon_1[`move_${i + 1}`].power} acc: ${data.pokemon_1[`move_${i + 1}`].accuracy}`;

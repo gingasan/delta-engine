@@ -85,8 +85,9 @@ def _take_damage_attack(self,x):
 
 @Increment(Tyranitar,'_move_5')
 def value():
-    return ('Iron Defense',0,100000,'Status','Steel',0,[])
+    return ('Dragon Dance',0,100000,'Status','Dragon',0,[])
 
 @Increment(Tyranitar)
-def move_5(self): # Iron Defense
-    self.set_boost('def',2,'self')
+def move_5(self): # Dragon Dance
+    self.set_boost('atk',+1,'self')
+    self.set_boost('spe',+1,'self')

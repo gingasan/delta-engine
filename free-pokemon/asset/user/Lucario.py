@@ -68,6 +68,14 @@ def onswitch(self):
     self.set_stat('spa',1.25)
     self.log('Lucario craves victory and raises its Attack and Special Attack!',color='red')
 
+@Increment(Lucario)
+def get_power(self):
+    power=self['act']['power']
+    if self['act']['id']=='Aura Sphere':
+        power=int(power*1.5)
+        self.log('Super Aura Sphere!',color='blue')
+    return int(power*self.get_weather_power_mult())
+
 # ----------
 
 @Increment(Lucario,'_move_5')

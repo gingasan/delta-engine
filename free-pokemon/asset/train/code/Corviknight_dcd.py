@@ -115,3 +115,29 @@ def get_base_damage(self,power,crit):
     base_damage=int(int(int(int(2*level/5+2)*power*attack)/defense)/50)+2
 
     return base_damage
+
+# ----------
+
+@Increment(Corviknight,'_move_6')
+def value():
+    return ('Taunt',0,100,'Status','Dark',0,[])
+
+@Increment(Corviknight)
+def move_6(self): # Taunt
+    self.target.set_condition('Taunt',counter=0)
+
+@Increment(Corviknight)
+def disable_moves(self, moves):
+    disabled = []
+    if self.target['conditions'].get('Taunt'):
+        for _, move in moves.items():
+            if move['category']=='Status':
+                disabled+=[move['id']]
+    return disabled
+
+@Increment(Corviknight)
+def endturn(self):
+    if self.target['conditions'].get('Taunt'):
+        self.target['conditions']['Taunt']['counter']+=1
+        if self.target['conditions']['Taunt']['counter']==4:
+            del self.target['conditions']['Taunt']

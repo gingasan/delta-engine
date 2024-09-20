@@ -47,6 +47,13 @@
       "property": [
         "contact"
       ]
+    },
+    "Taunt": {
+      "power": 0,
+      "accuracy": 100,
+      "category": "Status",
+      "type": "Dark",
+      "effect": "Prevents the target from using non-damaging moves for its next three turns. Pokemon with the Oblivious Ability or protected by the Aroma Veil Ability are immune."
     }
   }
 }

@@ -32,7 +32,7 @@ class Ceruledge(PokemonBase):
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
-    
+
     def move_2(self): # Poltergeist
         damage_ret=self.get_damage()
         if not damage_ret['miss']:

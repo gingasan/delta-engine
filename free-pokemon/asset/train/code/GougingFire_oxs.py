@@ -1,8 +1,8 @@
 from engine import *
 
 
-class Gouging_Fire(PokemonBase):
-    _species='Gouging Fire'
+class GougingFire(PokemonBase):
+    _species='Gouging-Fire'
     _types=['Fire','Dragon']
     _gender='Genderless'
     _ability=['Protosynthesis']
@@ -45,11 +45,11 @@ class Gouging_Fire(PokemonBase):
 
 # ----------
 
-@Increment(Gouging_Fire,'_move_3')
+@Increment(GougingFire,'_move_3')
 def value():
     return ('Morning Sun',0,100000,'Status','Normal',0,[])
 
-@Increment(Gouging_Fire)
+@Increment(GougingFire)
 def move_3(self): # Morning Sun
     if not any([self.env.get(x) for x in ['Sunlight','Rain','Sandstorm','Snow']]):
         self.restore(self['max_hp']//2,'heal')
@@ -60,11 +60,11 @@ def move_3(self): # Morning Sun
 
 # ----------
 
-@Increment(Gouging_Fire,'_move_4')
+@Increment(GougingFire,'_move_4')
 def value():
     return ('Solar Claw',80,100,'Physical','Grass',0,['contact'])
 
-@Increment(Gouging_Fire)
+@Increment(GougingFire)
 def move_4(self): # Solar Claw
     damage_ret=self.get_damage()
     if not damage_ret['miss']:
@@ -75,10 +75,10 @@ def move_4(self): # Solar Claw
 
 # ----------
 
-@Increment(Gouging_Fire,'_move_5')
+@Increment(GougingFire,'_move_5')
 def value():
     return ('Iron Defense',0,100000,'Status','Steel',0,[])
 
-@Increment(Gouging_Fire)
+@Increment(GougingFire)
 def move_5(self): # Iron Defense
     self.set_boost('def',+2,'self')

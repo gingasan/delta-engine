@@ -7,7 +7,7 @@ class Tigrex(PokemonBase):
     _gender='Male'
     _ability=['Concussive Roar']
     _move_1=('Moltenquake',140,100000,'Special','Dragon',0,['sound'])
-    _move_2=('Flame Charge',40,100,'Physical','Fire',0,['contact'])
+    _move_2=('Flame Charge',30,100,'Physical','Fire',0,['contact'])
     _base=(108,140,90,75,90,97)
     def __init__(self):
         super().__init__()

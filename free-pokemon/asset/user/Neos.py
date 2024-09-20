@@ -28,7 +28,7 @@ class Neos(PokemonBase):
 
     def move_2(self): # Skyrip Wing
         self.type_change()
-        if self['hp']<self.target['hp']:
+        if self['hp']/self['max_hp']<self.target['hp']/self.target['max_hp']:
             self.set_boost('atk',1,'self')
         damage_ret=self.get_damage()
         if not damage_ret['miss']:
