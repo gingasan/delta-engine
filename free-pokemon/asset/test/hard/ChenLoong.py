@@ -8,6 +8,7 @@ class ChenLoong(PokemonBase):
     _ability=['Snow Warning']
     _move_1=('Blizzard',110,70,'Special','Ice',0,[])
     _move_2=('Hydro Pump',110,80,'Special','Water',0,[])
+    _base=(150,85,90,105,110,60)
     def __init__(self):
         super().__init__()
 
@@ -27,15 +28,17 @@ class ChenLoong(PokemonBase):
         return acc/100
 
     def move_1(self): # Blizzard
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('FRZ')
     
     def move_2(self): # Surf
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['conditions'].get('DIVE'):
                 damage*=2
@@ -60,8 +63,9 @@ def value():
 
 @Increment(ChenLoong)
 def move_4(self): # Thunderbolt
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_status('PAR')
@@ -75,17 +79,15 @@ def value():
 @Increment(ChenLoong)
 def onswitch(self):
     self.env.set_weather('Snow',from_=self._species)
-    self.env.set_side_condition('Aurora Veil',self.side_id,from_=self._species,counter=0,max_count=5)
+    self.env.set_side_condition('Aurora Veil',self.side_id,from_=self._species,counter=0,max_count=3)
 
 @Increment(ChenLoong)
-def _take_damage_attack(self,x):
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self.env.get_side_condition('Aurora Veil',self.side_id):
         if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
             x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self._set_hp(-x)
 
 # ----------
 

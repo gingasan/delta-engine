@@ -7,17 +7,18 @@ class Tigrex(PokemonBase):
     _gender='Male'
     _ability=['Concussive Roar']
     _move_1=('Moltenquake',140,100000,'Special','Dragon',0,['sound'])
-    _move_2=('Flare Blitz',120,100,'Physical','Fire',0,['contact'])
+    _move_2=('Flame Charge',30,100,'Physical','Fire',0,['contact'])
+    _base=(108,140,90,75,90,97)
     def __init__(self):
         super().__init__()
 
     def get_base_damage(self,power,crit):
         if 'sound' in self['act']['property']:
+            self.log('Watch out for Absolute Power.',color='red')
             atk_boost=self['boosts']['atk']
-            def_boost=self.target['boosts']['def']
         else:
             atk_boost=self['boosts']['atk'] if self['act']['category']=='Physical' else self['boosts']['spa']
-            def_boost=self.target['boosts']['def'] if self['act']['category']=='Physical' else self.target['boosts']['spd']
+        def_boost=self.target['boosts']['def'] if self['act']['category']=='Physical' else self.target['boosts']['spd']
     
         if crit:
             atk_boost=max(0,atk_boost)
@@ -36,43 +37,73 @@ class Tigrex(PokemonBase):
         return base_damage
 
     def move_1(self): # Moltenquake
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Flinch',counter=0)
-    
-    def move_2(self): # Flare Blitz
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
-            damage=damage_ret['damage']
-            self.target.take_damage(damage)
-            self.take_damage(int(0.33*damage),'recoil')
+
+    def move_2(self): # Flame Charge
+        for i in range(3):
+            attack_ret=self.attack()
+            if not (attack_ret['miss'] or attack_ret['immune']):
+                damage_ret=self.get_damage()
+                damage=damage_ret['damage']
+                self.target.take_damage(damage)
+                if self.target.isfaint():
+                    break
 
 # ----------
 
 @Increment(Tigrex,'_move_3')
 def value():
-    return ('Earthquake',100,100,'Physical','Ground',0,[])
+    return ('Ice Spinner',80,100,'Physical','Ice',0,['contact'])
 
 @Increment(Tigrex)
-def move_3(self): # Earthquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+def move_3(self): # Ice Spinner
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
+        self.env.clr_terrain()
 
 # ----------
 
 @Increment(Tigrex,'_move_4')
 def value():
-    return ('Bulk Up',0,100000,'Status','Fighting',0,[])
+    return ('Roar of War',20,100000,'Special','Dark',0,['sound'])
 
 @Increment(Tigrex)
-def move_4(self): # Bulk Up
-    self.set_boost('atk',+1,'self')
-    self.set_boost('def',+1,'self')
+def move_4(self): # Roar of War
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        if not self.target.isfaint():
+            self.target.set_boost('atk',-1)
+            self.target.set_boost('spa',-1)
+        if self['conditions'].get('Raging'):
+            self.restore(int(1/2*damage),'drain')
+            del self['conditions']['Raging']
+        self.set_condition('Raging',counter=0)
+        self.log('Tigrex flushes blood to its forelimbs.',color='orange')
+
+@Increment(Tigrex)
+def move_1(self): # Moltenquake
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        if not self.target.isfaint() and rnd()<30/100:
+            self.target.set_condition('Flinch',counter=0)
+        if self['conditions'].get('Raging'):
+            self.restore(int(1/2*damage),'drain')
+            del self['conditions']['Raging']
 
 # ----------
 
@@ -83,14 +114,14 @@ def value():
 @Increment(Tigrex)
 def get_power(self):
     power=self['act']['power']
-    if self['act']['category']=='Physical':
-        power*=1.3
+    if self['act']['category']=='Physical' or 'sound' in self['act']['property']:
+        power+=30
     return int(power*self.get_weather_power_mult())
 
 @Increment(Tigrex)
 def get_accuracy(self):
     acc=self['act']['accuracy']
-    if self['act']['category']=='Physical':
+    if self['act']['category']=='Physical' or 'sound' in self['act']['property']:
         acc-=10
     acc_mult=[1.0,1.33,1.67,2.0]
     if self['boosts']['accuracy']>=0:
@@ -104,14 +135,25 @@ def get_accuracy(self):
 
 @Increment(Tigrex,'_move_5')
 def value():
-    return ('Ice Spinner',80,100,'Physical','Ice',0,['contact'])
+    return ('Dragon Dance',0,100000,'Status','Dragon',0,[])
 
 @Increment(Tigrex)
-def move_5(self): # Ice Spinner
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+def move_5(self): # Dragon Dance
+    self.set_boost('atk',+1,'self')
+    self.set_boost('spe',+1,'self')
+
+# ----------
+
+@Increment(Tigrex,'_move_6')
+def value():
+    return ('Close Combat',120,100,'Physical','Fighting',0,['contact'])
+
+@Increment(Tigrex)
+def move_6(self): # Close Combat
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        for t in ['Psychic Terrain','Electric Terrain','Grassy Terrain','Misty Terrain']:
-            if self.env.get(t):
-                del self.env[t]
+        self.set_boost('def',-1,'self')
+        self.set_boost('spd',-1,'self')

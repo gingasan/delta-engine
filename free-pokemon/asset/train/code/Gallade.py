@@ -28,14 +28,16 @@ class Gallade(PokemonBase):
         return crit
 
     def move_1(self): # Psycho Cut
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Sacred Sword
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -87,8 +89,9 @@ def get_crit(self):
 
 @Increment(Gallade)
 def move_4(self): # Leaf Blade
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -112,8 +115,9 @@ def value():
 
 @Increment(Gallade)
 def move_5(self): # Drain Punch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(1/2*damage),'drain')

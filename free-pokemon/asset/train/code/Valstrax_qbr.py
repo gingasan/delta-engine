@@ -18,16 +18,18 @@ class Valstrax(PokemonBase):
             self.set_boost('spe',1,'self')
 
     def move_1(self): # Dragon Laser
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_boost('spd',-2)
 
     def move_2(self): # Explosive Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -51,8 +53,9 @@ def value():
 
 @Increment(Valstrax)
 def move_4(self): # Flare Cascade
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():

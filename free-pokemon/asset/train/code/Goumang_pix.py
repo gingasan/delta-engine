@@ -16,16 +16,18 @@ class Goumang(PokemonBase):
             self.restore(self['max_hp']//16,'heal')
 
     def move_1(self): # Fusang Flame
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_status('BRN')
 
     def move_2(self): # Willow Whip
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -39,8 +41,9 @@ def value():
 
 @Increment(Goumang)
 def move_3(self): # Dragon Ride
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

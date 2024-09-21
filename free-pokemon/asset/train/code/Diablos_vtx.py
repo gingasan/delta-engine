@@ -29,20 +29,23 @@ class Diablos(PokemonBase):
             self.set_condition('BERSERKER_MODE',counter=0)
 
     def move_1(self): # Corkscrew Burrow
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
         if self['conditions'].get('BERSERKER_MODE'):
-            damage_ret=self.get_damage()
-            if not damage_ret['miss']:
+            attack_ret=self.attack()
+            if not (attack_ret['miss'] or attack_ret['immune']):
+                damage_ret=self.get_damage()
                 damage=damage_ret['damage']
                 self.target.take_damage(damage)
 
     def move_2(self): # Multi-Charge
         for _ in range(rndc([2,3,4,5])):
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self.target.isfaint(): break
@@ -56,8 +59,9 @@ def value():
 
 @Increment(Diablos)
 def move_3(self): # Raging Earth
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self.target.isfaint() and rnd()<30/100:
@@ -71,8 +75,9 @@ def value():
 
 @Increment(Diablos)
 def move_4(self): # Infernal Roar
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self.target.isfaint() and rnd()<20/100:
@@ -89,12 +94,11 @@ def take_damage(self,x,from_='attack'):
     if from_=='attack':
         self._take_damage_attack(x)
     elif from_=='loss':
-        self._take_damage_loss(x)
+        self.take_damage_loss(x)
     elif from_=='recoil':
-        self._take_damage_recoil(x)
+        self.take_damage_recoil(x)
     if self['hp']==0:
-        self.state['status']='FNT'
-        self.log('%s faints.'%self._species)
+        self._faint()
         return
     if rnd()<0.3:
         self.set_boost('atk',1,'self')

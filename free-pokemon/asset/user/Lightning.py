@@ -12,20 +12,19 @@ class Lightning(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['conditions'].get('INDUCTIVE'):
             if self['act_taken']['category']=='Special':
                 x=int(x*0.5)
-        self.state['hp']=max(0,self['hp']-x)
+        self._set_hp(-x)
         if 'contact' in self['act_taken']['property'] and rnd()<0.3:
             self.target.set_condition('INDUCTIVE',counter=0)
-        if self['hp']==0:
-            self.state['status']='FNT'
 
     def move_1(self): # Lightning Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['conditions'].get('INDUCTIVE'):
                 damage*=2
@@ -34,8 +33,9 @@ class Lightning(PokemonBase):
                 self.target.set_status('PAR')
 
     def move_2(self): # Drain Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
@@ -53,7 +53,7 @@ def move_3(self): # Super Electro Bombardment
     self.set_condition('ELECTRO_SHIELD',counter=0)
 
 @Increment(Lightning)
-def _take_damage_attack(self,x):
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['conditions'].get('INDUCTIVE'):
         if self['act_taken']['category']=='Special':
@@ -62,11 +62,9 @@ def _take_damage_attack(self,x):
         x=int(x*0.5)
         del self['conditions']['ELECTRO_SHIELD']
         self.log("The electro shield mitigates the attack.", color="yellow")
-    self.state['hp']=max(0,self['hp']-x)
+    self._set_hp(-x)
     if 'contact' in self['act_taken']['property'] and rnd()<0.3:
         self.target.set_condition('INDUCTIVE',counter=0)
-    if self['hp']==0:
-        self.state['status']='FNT'
 
 # ----------
 
@@ -76,8 +74,9 @@ def value():
 
 @Increment(Lightning)
 def move_4(self): # Meteor Mash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<20/100:

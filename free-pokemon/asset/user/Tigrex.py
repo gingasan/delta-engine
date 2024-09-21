@@ -37,17 +37,19 @@ class Tigrex(PokemonBase):
         return base_damage
 
     def move_1(self): # Moltenquake
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Flinch',counter=0)
-    
+
     def move_2(self): # Flame Charge
         for i in range(3):
-            damage_ret=self.get_damage()
-            if not damage_ret['miss']:
+            attack_ret=self.attack()
+            if not (attack_ret['miss'] or attack_ret['immune']):
+                damage_ret=self.get_damage()
                 damage=damage_ret['damage']
                 self.target.take_damage(damage)
                 if self.target.isfaint():
@@ -61,8 +63,9 @@ def value():
 
 @Increment(Tigrex)
 def move_3(self): # Ice Spinner
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.env.clr_terrain()
@@ -75,8 +78,9 @@ def value():
 
 @Increment(Tigrex)
 def move_4(self): # Roar of War
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -90,8 +94,9 @@ def move_4(self): # Roar of War
 
 @Increment(Tigrex)
 def move_1(self): # Moltenquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -145,8 +150,9 @@ def value():
 
 @Increment(Tigrex)
 def move_6(self): # Close Combat
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('def',-1,'self')

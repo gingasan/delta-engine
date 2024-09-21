@@ -17,16 +17,18 @@ class Mew(PokemonBase):
         self.set_boost(t2,-1)
 
     def move_1(self): # Psychic
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.1:
                 self.target.set_boost('spd',-1)
     
     def move_2(self): # Play Rough
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.1:
@@ -40,8 +42,9 @@ def value():
 
 @Increment(Mew)
 def move_3(self): # Astral Beam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.2:
@@ -65,12 +68,8 @@ def value():
     return ['Moody','Mirage Shield']
 
 @Increment(Mew)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if x>self['max_hp']//2:
         x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)

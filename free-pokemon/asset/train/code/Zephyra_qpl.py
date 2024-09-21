@@ -17,16 +17,18 @@ class Zephyra(PokemonBase):
             self.restore(self['max_hp']//6,'heal')
     
     def move_1(self): # Brave Bird
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if damage>0:
                 self.take_damage(int(0.33*damage),'recoil')
     
     def move_2(self): # Steel Wing
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<10/100:

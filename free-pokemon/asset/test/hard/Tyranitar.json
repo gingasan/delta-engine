@@ -41,12 +41,12 @@
       "type": "Poison",
       "effect": "Badly poisons the target."
     },
-    "Iron Defense": {
+    "Dragon Dance": {
       "power": 0,
       "accuracy": 100000,
       "category": "Status",
-      "type": "Steel",
-      "effect": "Raises the user's Defense by 2 stages."
+      "type": "Dragon",
+      "effect": "Raises the user's Attack and Speed by 1 stage."
     }
   }
 }

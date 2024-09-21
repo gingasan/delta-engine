@@ -18,16 +18,18 @@ class Malzeno(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Bloodblight Strike
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(self.target['max_hp']*0.125),'drain')
             self.recharge()
     
     def move_2(self): # Dragon Breath
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<20/100:
@@ -41,8 +43,9 @@ def value():
 
 @Increment(Malzeno)
 def move_3(self): # Quirio Beam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(damage//2),'drain')

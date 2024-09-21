@@ -15,15 +15,17 @@ class Kirin(PokemonBase):
         self.env.set_terrain('Electric Terrain',from_=self._species)
 
     def move_1(self): # Thunder
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100: self.target.set_status('PAR')
     
     def move_2(self): # Parabolic Charge
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
@@ -52,8 +54,9 @@ def value():
 
 @Increment(Kirin)
 def move_4(self): # Draco Meteor
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spa',-2,'self')
@@ -90,8 +93,9 @@ def value():
 
 @Increment(Kirin)
 def move_5(self): # Raging Horn
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

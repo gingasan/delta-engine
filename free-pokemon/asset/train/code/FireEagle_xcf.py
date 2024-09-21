@@ -11,14 +11,10 @@ class FireEagle(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         x=int(x*0.5)
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
 
     def endturn(self):
         self.take_damage(self['max_hp']//8,'loss')
@@ -34,16 +30,18 @@ class FireEagle(PokemonBase):
         return crit
     
     def move_1(self): # Inferno Wing
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('BRN')
 
     def move_2(self): # Blazing Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -55,8 +53,9 @@ def value():
 
 @Increment(FireEagle)
 def move_3(self): # Eagle Dive
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(0.5*damage),'drain')
@@ -79,8 +78,9 @@ def value():
 
 @Increment(FireEagle)
 def move_5(self): # Sky Inferno
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.take_damage(int(1/3*damage),'recoil')

@@ -29,16 +29,18 @@ class Chimeraon(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Blazing Breath
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.3:
                 self.target.set_status('BRN')
 
     def move_2(self): # Dragon Fang
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.2:
@@ -52,8 +54,9 @@ def value():
 
 @Increment(Chimeraon)
 def move_3(self): # Goat Rush
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spe',+1,'self')
@@ -66,8 +69,9 @@ def value():
 
 @Increment(Chimeraon)
 def move_4(self): # Serpent Venom
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -84,13 +88,9 @@ def value():
     return ['Fiery Roar','Venomous Strike']
 
 @Increment(Chimeraon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
     if self['hp']==0:
         return
     if self['act_taken'] and 'contact' in self['act_taken']['property']:

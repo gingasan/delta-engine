@@ -18,9 +18,9 @@ class Grapha(PokemonBase):
         if from_=='attack':
             self._take_damage_attack(x)
         elif from_=='loss':
-            self._take_damage_loss(x)
+            self.take_damage_loss(x)
         elif from_=='recoil':
-            self._take_damage_recoil(x)
+            self.take_damage_recoil(x)
         if self['hp']==0:
             if self['conditions'].get('REVIVE'):
                 self.state['status']=None
@@ -28,20 +28,21 @@ class Grapha(PokemonBase):
                 del self['conditions']['REVIVE']
                 self.log('Revive! Lord of Dark, Graphal.',color='purple')
             else:
-                self.state['status']='FNT'
-                self.log('%s faints.'%self._species)
+                self._faint()
 
     def move_1(self): # Shadow Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('spd',-1)
 
     def move_2(self): # Dragon Rage
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -55,8 +56,9 @@ def value():
 
 @Increment(Grapha)
 def move_3(self): # Nightmare Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
@@ -81,8 +83,9 @@ def value():
 
 @Increment(Grapha)
 def move_1(self): # Shadow Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
@@ -91,8 +94,9 @@ def move_1(self): # Shadow Blast
 
 @Increment(Grapha)
 def move_3(self): # Nightmare Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:

@@ -8,30 +8,32 @@ class Ceruledge(PokemonBase):
     _ability=['Weak Armor']
     _move_1=('Bitter Blade',90,100,'Physical','Fire',0,['contact'])
     _move_2=('Poltergeist',70,100,'Physical','Ghost',0,['contact'])
+    _base=(85,145,80,75,110,105)
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)
+        if self['hp']==0:
+            return
         if self['act_taken'] and self['act_taken']['category']=='Physical':
+            self.log("Ceruledge's Weak Armor is activated.")
             self.set_boost('def',-1)
             self.set_boost('spe',2)
 
     def move_1(self): # Bitter Blade
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
-    
+
     def move_2(self): # Poltergeist
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
@@ -44,8 +46,9 @@ def value():
 
 @Increment(Ceruledge)
 def move_3(self): # Play Rough
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('atk',-1)
@@ -80,8 +83,9 @@ def value():
 
 @Increment(Ceruledge)
 def move_5(self): # Close Combat
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('def',-1,'self')

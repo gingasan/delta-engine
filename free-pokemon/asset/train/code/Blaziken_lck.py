@@ -17,41 +17,38 @@ class Blaziken(PokemonBase):
         if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
-            if not self.istype('Fire'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is burned.'%self._species)
+            if self.istype('Fire'):
+                return
         elif x=='PAR':
-            if not self.istype('Electric'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is paralyzed.'%self._species)
+            if self.istype('Electric'):
+                return
         elif x=='PSN':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is poisoned.'%self._species)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
         elif x=='TOX':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is badly poisoned.'%self._species)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
         elif x=='FRZ':
-            if not self.istype('Ice'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is frozen.'%self._species)
+            if self.istype('Ice'):
+                return
         elif x=='SLP':
-            if not self.env.get("Electric Terrain"):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s falls asleep.'%self._species)
+            if self.env.get("Electric Terrain"):
+                return
+        self._set_status(x)
 
     def move_1(self): # Fire Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('BRN')
     
     def move_2(self): # High Jump Kick
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
         else:

@@ -11,15 +11,11 @@ class Shagaru(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken']['type'] in ['Dragon','Fairy']:
             return
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
 
     def endturn(self):
         if self.target['conditions'].get('FRENZY'):
@@ -29,16 +25,18 @@ class Shagaru(PokemonBase):
                 del self.target['conditions']['FRENZY']
 
     def move_1(self): # Frenzy Beam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('FRENZY',counter=0,max_count=3)
 
     def move_2(self): # Virus Eruption
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -52,8 +50,9 @@ def value():
 
 @Increment(Shagaru)
 def move_3(self): # Shadow Pummel
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<20/100:
@@ -67,8 +66,9 @@ def value():
 
 @Increment(Shagaru)
 def move_1(self): # Frenzy Beam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -76,8 +76,9 @@ def move_1(self): # Frenzy Beam
 
 @Increment(Shagaru)
 def move_2(self): # Virus Eruption
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():

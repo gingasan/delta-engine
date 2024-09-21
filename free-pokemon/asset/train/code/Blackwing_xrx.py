@@ -14,34 +14,32 @@ class Blackwing(PokemonBase):
     def onswitch(self):
         self.set_condition('BLACK_FEATHER',counter=3)
     
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['conditions'].get('BLACK_FEATHER'):
             x=int(x*0.5)
             self['conditions']['BLACK_FEATHER']['counter']-=1
             if self['conditions']['BLACK_FEATHER']['counter']==0:
                 del self['conditions']['BLACK_FEATHER']
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
     
     def endturn(self):
         if self['conditions'].get('BLACK_FEATHER'):
             self.take_damage(self['max_hp']//8,'loss')
     
     def move_1(self): # Dark Tempest
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('def',-1)
     
     def move_2(self): # Wing Beat
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
@@ -55,8 +53,9 @@ def value():
 
 @Increment(Blackwing)
 def move_3(self): # Shadow Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -79,8 +78,8 @@ def value():
 
 @Increment(Blackwing)
 def move_4(self): # Feather Storm
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         self.target.set_boost('accuracy',-2)
 
 # ----------
@@ -90,17 +89,14 @@ def value():
     return ['Black Feather','Shadow Glide']
 
 @Increment(Blackwing)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['conditions'].get('BLACK_FEATHER'):
         x=int(x*0.5)
         self['conditions']['BLACK_FEATHER']['counter']-=1
         if self['conditions']['BLACK_FEATHER']['counter']==0:
             del self['conditions']['BLACK_FEATHER']
-    self.state['hp']=max(0,self['hp']-x)
+    self._set_hp(-x)
     if self['act_taken']['category']=='Physical':
         self.set_boost('spe',+2)
     if self['hp']==0:
@@ -114,8 +110,9 @@ def value():
 
 @Increment(Blackwing)
 def move_5(self): # Night Dive
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(0.5*damage),'drain')

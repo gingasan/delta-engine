@@ -8,6 +8,7 @@ class Tyranitar(PokemonBase):
     _ability=['Sand Stream']
     _move_1=('Stone Edge',100,80,'Physical','Rock',0,[])
     _move_2=('Crunch',80,100,'Physical','Dark',0,['contact'])
+    _base=(120,134,100,85,100,61)
     def __init__(self):
         super().__init__()
 
@@ -25,14 +26,16 @@ class Tyranitar(PokemonBase):
         return crit
 
     def move_1(self): # Stone Edge
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Crunch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100: self.target.set_boost('def',-1)
@@ -45,8 +48,9 @@ def value():
 
 @Increment(Tyranitar)
 def move_3(self): # Earthquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -58,8 +62,8 @@ def value():
 
 @Increment(Tyranitar)
 def move_4(self): # Toxic
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         self.target.set_status('TOX')
 
 # ----------
@@ -69,22 +73,20 @@ def value():
     return ['Sand Stream','Heavy Armor']
 
 @Increment(Tyranitar)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if rnd()<30/100:
         x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self.log("Tyranitar's Heavy Armor is activated.",color='orange')
+    self._set_hp(-x)
 
 # ----------
 
 @Increment(Tyranitar,'_move_5')
 def value():
-    return ('Iron Defense',0,100000,'Status','Steel',0,[])
+    return ('Dragon Dance',0,100000,'Status','Dragon',0,[])
 
 @Increment(Tyranitar)
-def move_5(self): # Iron Defense
-    self.set_boost('def',2,'self')
+def move_5(self): # Dragon Dance
+    self.set_boost('atk',+1,'self')
+    self.set_boost('spe',+1,'self')

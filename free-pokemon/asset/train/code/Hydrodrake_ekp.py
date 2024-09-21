@@ -16,8 +16,9 @@ class Hydrodrake(PokemonBase):
             self.restore(self['max_hp']//8,'heal')
 
     def move_1(self): # Hydra Surge
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['conditions'].get('Confusion'):
                 damage=int(damage*1.5)
@@ -26,8 +27,9 @@ class Hydrodrake(PokemonBase):
                 self.target.set_condition('Confusion',counter=0)
 
     def move_2(self): # Venomous Strike
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target.isstatus('PSN') or self.target.isstatus('TOX'):
                 damage=int(damage*2)
@@ -58,15 +60,11 @@ def move_4(self): # Serpent's Wrath
     self.set_condition('IGNORE_ATTACKS',counter=0)
 
 @Increment(Hydrodrake)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     if self['conditions'].get('IGNORE_ATTACKS'):
         return
     self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 @Increment(Hydrodrake)
 def endturn(self):
@@ -84,15 +82,10 @@ def value():
     return ['Regenerative Scales','Toxic Resilience']
 
 @Increment(Hydrodrake)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     if self['conditions'].get('IGNORE_ATTACKS'):
         return
     self.register_act_taken()
     if self['act_taken']['type']=='Poison':
         x=int(x*0.5)
-    self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self._set_hp(-x)

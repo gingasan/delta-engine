@@ -11,29 +11,27 @@ class Taotaur(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
         if self['hp']==0:
             return
         self.set_boost('atk',+1,'self')
         self.set_boost('spa',+1,'self')
 
     def move_1(self): # Devouring Bite
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_condition('Flinch',counter=0)
     
     def move_2(self): # Ancient Power
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
@@ -47,8 +45,9 @@ def value():
 
 @Increment(Taotaur)
 def move_3(self): # Ritual Stomp
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.target.set_boost('def',-1)

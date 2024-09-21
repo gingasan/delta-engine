@@ -11,28 +11,26 @@ class Gastrodon(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken'] and self['act_taken']['type']=='Water':
             self.set_boost('spa',1)
             return
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
 
     def move_1(self): # Earth Power
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_boost('spd',-1)
 
     def move_2(self): # Surf
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -58,28 +56,27 @@ def value():
 def move_4(self): # Protect
     if self['last_act'] and self['last_act']['id']=='Protect':
         return
-    self.set_condition('PROTECT',counter=0)
+    self.set_condition('Protected',counter=0)
 
 @Increment(Gastrodon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
-        return
+def get_immune(self):
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
+        return True
+    return False
+
+@Increment(Gastrodon)
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken'] and self['act_taken']['type']=='Water':
         self.set_boost('spa',1)
         return
-    self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self._set_hp(-x)
 
 @Increment(Gastrodon)
 def endturn(self):
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
 
 # ----------
 
@@ -89,8 +86,9 @@ def value():
 
 @Increment(Gastrodon)
 def move_5(self): # Ice Beam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:

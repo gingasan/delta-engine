@@ -24,18 +24,20 @@ class Scizor(PokemonBase):
         if (key=='atk' or key=='spa') and self['act']['type']=='Bug' and self['hp']<=self['max_hp']//3:
             stat_ratio*=1.5
         return int(stat*stat_ratio)
-    
+
     def move_1(self): # Bullet Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
-    
+
     def move_2(self): # Bug Tangle
         hit=True; i=0
         while hit and i<4:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -50,8 +52,9 @@ def value():
 def move_3(self): # Dual Wingbeat
     hit=True; i=0
     while hit and i<2:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -87,8 +90,9 @@ def value():
 
 @Increment(Scizor)
 def move_5(self): # Close Combat
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('def',-1,'self')

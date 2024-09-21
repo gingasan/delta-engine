@@ -27,8 +27,9 @@ class GougingFire(PokemonBase):
         else:
             n_hits=5
         while hit and i<n_hits:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -36,8 +37,9 @@ class GougingFire(PokemonBase):
         self.set_boost('spe',+1,'self')
 
     def move_2(self): # Flare Blitz
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.take_damage(int(0.33*damage),'recoil')
@@ -66,8 +68,9 @@ def value():
 
 @Increment(GougingFire)
 def move_4(self): # Solar Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self.env.get('Sunlight'):

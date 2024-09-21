@@ -20,13 +20,14 @@ class Celebi(PokemonBase):
             self.take_damage(self.target['max_hp']//8,'drain')
 
     def move_1(self): # Leech Seed
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             self.target.set_condition('LEECH_SEED',counter=0)
 
     def move_2(self): # Psychic
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<self.get_effect_chance(10/100):
@@ -40,8 +41,9 @@ def value():
 
 @Increment(Celebi)
 def move_3(self): # Ancient Power
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<self.get_effect_chance(10/100):
@@ -56,8 +58,9 @@ def value():
 
 @Increment(Celebi)
 def move_4(self): # Giga Drain
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(0.5*damage),'drain')

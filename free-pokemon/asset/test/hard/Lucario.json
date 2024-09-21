@@ -7,7 +7,7 @@
   "gender": "Male",
   "ability": {
     "Adaptability": "This Pokemon's same-type attack bonus (STAB) is 2 instead of 1.5.",
-    "Vitory Heart": "On switch-in, this Pokemon's Atk and SpA will be 1.25x."
+    "Vitory Heart": "On switch-in, this Pokemon's Atk and SpA will be 1.25x. The power of Aura Sphere becomes 1.5x."
   },
   "moves": {
     "Aura Sphere": {
@@ -51,6 +51,14 @@
       "property": [
         "contact"
       ]
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "priority": 0,
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
     }
   }
 }

@@ -12,16 +12,18 @@ class Magnamalo(PokemonBase):
         super().__init__()
 
     def move_1(self): # Hellfire Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.set_boost('spa',+1,'self')
             self.take_damage(self['max_hp']//16,'loss')
 
     def move_2(self): # Poison Vents
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -35,8 +37,9 @@ def value():
 
 @Increment(Magnamalo)
 def move_3(self): # Explosive Strike
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.target.take_damage(self.target['max_hp']//10,'loss')
@@ -68,8 +71,9 @@ def value():
 
 @Increment(Magnamalo)
 def move_1(self): # Hellfire Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<50/100:
@@ -79,8 +83,9 @@ def move_1(self): # Hellfire Blast
 
 @Increment(Magnamalo)
 def move_3(self): # Explosive Strike
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.target.take_damage(self.target['max_hp']//10,'loss')

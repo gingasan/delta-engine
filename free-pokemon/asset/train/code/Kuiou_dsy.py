@@ -18,8 +18,9 @@ class Kuiou(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Celestial Roar
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target.isstatus('PAR'):
                 damage=int(damage*1.5)
@@ -28,8 +29,9 @@ class Kuiou(PokemonBase):
                 self.target.set_status('PAR')
     
     def move_2(self): # Ruler Strike
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['hp']>self['hp']:
                 damage=int(damage*2)
@@ -53,13 +55,9 @@ def value():
     return ['Storm Command','Celestial Guard']
 
 @Increment(Kuiou)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['type']=='Dragon':
         x=int(x*0.5)
         self.state['hp']=min(self['max_hp'],self['hp']+self['max_hp']//8)
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)

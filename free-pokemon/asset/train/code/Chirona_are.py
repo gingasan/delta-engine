@@ -22,14 +22,15 @@ class Chirona(PokemonBase):
         return effect
 
     def move_1(self): # Healing Touch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             self.target.restore(self.target['max_hp']//10,'heal')
             self.state['status']=None
 
     def move_2(self): # Nature Wrath
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -43,8 +44,9 @@ def value():
 
 @Increment(Chirona)
 def move_3(self): # Philosopher Strike
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self.target['status']:

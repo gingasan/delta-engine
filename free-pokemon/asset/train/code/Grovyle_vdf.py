@@ -11,13 +11,9 @@ class Grovyle(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
         if self['hp']==0:
             return
         self.env.set_terrain('Grassy Terrain',from_=self._species)
@@ -28,13 +24,14 @@ class Grovyle(PokemonBase):
             self.restore(self.target['max_hp']//8,'drain')
 
     def move_1(self): # Leech Seed
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             self.target.set_condition('LEECH_SEED',counter=0)
 
     def move_2(self): # Seed Flare 
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():

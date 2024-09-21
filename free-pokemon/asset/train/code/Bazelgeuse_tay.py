@@ -23,26 +23,23 @@ class Bazelgeuse(PokemonBase):
             self.target.take_damage(self.target['max_hp']//10,'loss')
         del self.target['conditions']['EXPLOSIVE_SCALES']
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
         self.drop_scales()
 
     def endturn(self):
         self.explode_scales()
 
     def move_1(self): # Scale Burst
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             self.drop_scales()
     
     def move_2(self): # Inferno Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<50/100: self.target.set_status('BRN')
@@ -55,8 +52,9 @@ def value():
 
 @Increment(Bazelgeuse)
 def move_3(self): # Draco Meteor
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spa',-2,'self')
@@ -96,8 +94,9 @@ def value():
 
 @Increment(Bazelgeuse)
 def move_5(self): # Earth Power
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.1:

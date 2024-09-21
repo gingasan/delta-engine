@@ -15,8 +15,9 @@ class Smilodon(PokemonBase):
         return 100000
 
     def move_1(self): # Ice Fang
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -26,8 +27,9 @@ class Smilodon(PokemonBase):
                     self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Saber Slash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<0.2:
@@ -52,8 +54,8 @@ def value():
 
 @Increment(Smilodon)
 def move_4(self): # Frozen Roar
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         if self.target.isstatus('FRZ'):
             self.set_boost('spe',2)
         else:
@@ -87,7 +89,8 @@ def value():
 
 @Increment(Smilodon)
 def move_5(self): # Bone Crush
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

@@ -17,8 +17,9 @@ class Xenonova(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Explosive Beam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<30/100:
@@ -26,8 +27,9 @@ class Xenonova(PokemonBase):
             self.take_damage(int(0.15*damage),'recoil')
     
     def move_2(self): # Trample
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<20/100:
@@ -42,8 +44,8 @@ def value():
 
 @Increment(Xenonova)
 def move_3(self): # Will-O-Wisp
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         self.target.set_status('BRN')
 
 # ----------

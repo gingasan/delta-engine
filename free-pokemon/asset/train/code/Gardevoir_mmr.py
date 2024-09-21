@@ -15,46 +15,38 @@ class Gardevoir(PokemonBase):
         if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
-            if not self.istype('Fire'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is burned.'%self._species)
-                self.target.set_status(x)
+            if self.istype('Fire'):
+                return
         elif x=='PAR':
-            if not self.istype('Electric'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is paralyzed.'%self._species)
-                self.target.set_status(x)
+            if self.istype('Electric'):
+                return
         elif x=='PSN':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is poisoned.'%self._species)
-                self.target.set_status(x)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
         elif x=='TOX':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is badly poisoned.'%self._species)
-                self.target.set_status(x)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
         elif x=='FRZ':
-            if not self.istype('Ice'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is frozen.'%self._species)
-                self.target.set_status(x)
+            if self.istype('Ice'):
+                return
         elif x=='SLP':
-            if not self.env.get("Electric Terrain"):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s falls asleep.'%self._species)
-                self.target.set_status(x)
+            if self.env.get("Electric Terrain"):
+                return
+        self._set_status(x)
+        self.target.set_status(x)
 
     def move_1(self): # Psychic
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('spd',-1)
 
     def move_2(self): # Moon Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100: self.target.set_boost('spa',-1)
@@ -67,8 +59,9 @@ def value():
 
 @Increment(Gardevoir)
 def move_3(self): # Thunderbolt
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_status('PAR')
@@ -81,8 +74,9 @@ def value():
 
 @Increment(Gardevoir)
 def move_4(self): # Shadow Ball
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100: self.target.set_boost('spd',-1)
@@ -94,15 +88,11 @@ def value():
     return ['Synchronize','Mind Shield']
 
 @Increment(Gardevoir)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['category']=='Special':
         x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 # ----------
 

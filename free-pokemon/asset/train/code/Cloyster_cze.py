@@ -14,8 +14,9 @@ class Cloyster(PokemonBase):
     def move_1(self): # Rock Blast
         hit=True; i=0
         while hit and i<5:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -23,8 +24,9 @@ class Cloyster(PokemonBase):
     def move_2(self): # Icicle Spear
         hit=True; i=0
         while hit and i<5:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -37,8 +39,9 @@ def value():
 
 @Increment(Cloyster)
 def move_3(self): # Ice Spinner
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         for t in ['Psychic Terrain','Electric Terrain','Grassy Terrain','Misty Terrain']:

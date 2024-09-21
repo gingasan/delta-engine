@@ -21,8 +21,9 @@ class Scizor(PokemonBase):
         hit=True
         i=0
         while hit and i<5:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -32,8 +33,9 @@ class Scizor(PokemonBase):
             
     def move_2(self): # Quik Pinch
         self.set_boost('spe',1,'self')
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -45,8 +47,9 @@ def value():
 
 @Increment(Scizor)
 def move_3(self): # Iron Buzz
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<0.2:
@@ -60,8 +63,9 @@ def value():
 
 @Increment(Scizor)
 def move_4(self): # Bug Echo
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

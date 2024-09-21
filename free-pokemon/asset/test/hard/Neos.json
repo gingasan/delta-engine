@@ -25,7 +25,7 @@
       "accuracy": 100000,
       "category": "Physical",
       "type": "Flying",
-      "effect": "If the user's HP is lower than the target's HP, raises the user's Atk by one stage before the attack."
+      "effect": "If the user's HP ratio is lower than the target's HP ratio, raises the user's Atk by one stage before the attack."
     },
     "Burn to Ash": {
       "power": 90,
@@ -39,7 +39,7 @@
       "accuracy": 100,
       "category": "Special",
       "type": "Water",
-      "effect": "Randomly lower one of the target's stat by one stage."
+      "effect": "Randomly lowers one of the target's stat by one stage."
     },
     "Wrath of Black": {
       "power": 100,

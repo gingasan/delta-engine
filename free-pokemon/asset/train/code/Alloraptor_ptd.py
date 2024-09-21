@@ -18,16 +18,18 @@ class Alloraptor(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Iron Tail
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
                 self.target.set_boost('def',-1)
     
     def move_2(self): # Fossil Fang
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -53,8 +55,9 @@ def value():
 
 @Increment(Alloraptor)
 def move_4(self): # Steel Slash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -73,29 +76,24 @@ def set_status(self,x):
     if self['status'] or self.env.get('Misty Terrain'):
         return
     if x=='BRN':
-        if not self.istype('Fire'):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s is burned.'%self._species)
+        if self.istype('Fire'):
+            return
     elif x=='PAR':
-        if not self.istype('Electric'):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s is paralyzed.'%self._species)
+        if self.istype('Electric'):
+            return
     elif x=='PSN':
-        if not self.istype('Poison') and not self.istype('Steel'):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s is poisoned.'%self._species)
+        if self.istype('Poison') or self.istype('Steel'):
+            return
     elif x=='TOX':
-        if not self.istype('Poison') and not self.istype('Steel'):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s is badly poisoned.'%self._species)
+        if self.istype('Poison') or self.istype('Steel'):
+            return
     elif x=='FRZ':
-        if not self.istype('Ice'):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s is frozen.'%self._species)
+        if self.istype('Ice'):
+            return
     elif x=='SLP':
-        if not self.env.get("Electric Terrain"):
-            self.state['status']={x:{'counter':0}}
-            self.log('%s falls asleep.'%self._species)
+        if self.env.get("Electric Terrain"):
+            return
+    self._set_status(x)
 
 # ----------
 
@@ -105,7 +103,8 @@ def value():
 
 @Increment(Alloraptor)
 def move_5(self): # Dragon Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

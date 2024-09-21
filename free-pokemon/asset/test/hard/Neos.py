@@ -8,6 +8,7 @@ class Neos(PokemonBase):
     _ability=['Elemental Heart']
     _move_1=('Neos Force',80,100,'Physical','Normal',2,['contact'])
     _move_2=('Skyrip Wing',80,100000,'Physical','Flying',0,[])
+    _base=(100,100,100,100,100,100)
     def __init__(self):
         super().__init__()
 
@@ -20,17 +21,19 @@ class Neos(PokemonBase):
             self.log('Neos releases the power of {}.'.format(self.state['types'][-1]),color='blue')
             del self.state['types'][-1]
             self.set_boost('atk',1,'self')
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Skyrip Wing
         self.type_change()
-        if self['hp']<self.target['hp']:
+        if self['hp']/self['max_hp']<self.target['hp']/self.target['max_hp']:
             self.set_boost('atk',1,'self')
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -43,8 +46,9 @@ def value():
 @Increment(Neos)
 def move_3(self): # Burn to Ash
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<50/100:
@@ -59,8 +63,9 @@ def value():
 @Increment(Neos)
 def move_4(self): # Echo Burst
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -90,8 +95,9 @@ def value():
 @Increment(Neos)
 def move_5(self): # Wrath of Black
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -131,15 +137,17 @@ def get_type_effect(self):
 
 @Increment(Neos,'_move_6')
 def value():
-    return ('Signal Buster',70,100,'Special','Electirc',0,[])
+    return ('Signal Buster',70,100,'Special','Electric',0,[])
 
 @Increment(Neos)
 def move_6(self): # Signal Buster
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
-        self.target.set_boost('spe',-1)
-        if damage_ret['type_effect']>1:
-            self.target.set_status('PAR')
+        if not self.target.isfaint():
+            self.target.set_boost('spe',-1)
+            if damage_ret['type_effect']>1:
+                self.target.set_status('PAR')

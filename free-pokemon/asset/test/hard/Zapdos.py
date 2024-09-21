@@ -8,6 +8,7 @@ class Zapdos(PokemonBase):
     _ability=['Laser Eye']
     _move_1=('Hurricane',110,70,'Special','Flying',0,[])
     _move_2=('Zap Cannon',120,50,'Special','Electric',0,[])
+    _base=(90,90,85,125,90,120)
     def __init__(self):
         super().__init__()
 
@@ -28,16 +29,18 @@ class Zapdos(PokemonBase):
         return acc/100
 
     def move_1(self): # Hurricane
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Confusion',counter=0)
 
     def move_2(self): # Zap Cannon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -51,8 +54,9 @@ def value():
 
 @Increment(Zapdos)
 def move_3(self): # Focus Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -80,8 +84,9 @@ def value():
 
 @Increment(Zapdos)
 def move_1(self): # Hurricane
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -92,8 +97,9 @@ def move_1(self): # Hurricane
 
 @Increment(Zapdos)
 def move_2(self): # Zap Cannon
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -104,8 +110,9 @@ def move_2(self): # Zap Cannon
 
 @Increment(Zapdos)
 def move_3(self): # Focus Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -122,8 +129,9 @@ def value():
 
 @Increment(Zapdos)
 def move_5(self): # Inferno
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():

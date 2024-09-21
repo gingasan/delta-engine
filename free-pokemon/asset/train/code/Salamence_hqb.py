@@ -15,26 +15,27 @@ class Salamence(PokemonBase):
         if from_=='attack':
             self._take_damage_attack(x)
         elif from_=='loss':
-            self._take_damage_loss(x)
+            self.take_damage_loss(x)
         elif from_=='recoil':
-            self._take_damage_recoil(x)
+            self.take_damage_recoil(x)
         if self['hp']==0:
-            self.state['status']='FNT'
-            self.log('%s faints.'%self._species)
+            self._faint()
         if self['hp']>0 and x>=200:
             self.set_boost('atk',2,'self')
-    
+
     def move_1(self): # Dragon Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
     
     def move_2(self): # Dual Wingbeat
         hit=True; i=0
         while hit and i<2:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True

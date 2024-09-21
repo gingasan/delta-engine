@@ -21,8 +21,9 @@ class Grimmsnarl(PokemonBase):
         self.set_boost('def',+1,'self')
     
     def move_2(self): # Spirit Break
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -41,15 +42,11 @@ def move_3(self): # Substitute
         self.set_condition('SUBSTITUTE',hp=self['max_hp']//4)
 
 @Increment(Grimmsnarl)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['conditions'].get('SUBSTITUTE'):
         self['conditions']['SUBSTITUTE']['hp']-=x
         if self['conditions']['SUBSTITUTE']['hp']<1:
             del self['conditions']['SUBSTITUTE']
     else:
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)

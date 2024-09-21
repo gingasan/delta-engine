@@ -63,3 +63,7 @@ def get_keys(content):
 def get_values(content):
     if isinstance(content, dict):
         return list(content.values())
+
+class mdict(dict):
+    def __eq__(self, value):
+        return value == list(self.keys())[0]

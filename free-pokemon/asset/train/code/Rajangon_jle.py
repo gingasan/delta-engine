@@ -27,16 +27,18 @@ class Rajangon(PokemonBase):
         return int(stat*stat_ratio)
 
     def move_1(self): # Thunder Beam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_status('PAR')
 
     def move_2(self): # Rampage
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.set_boost('atk',+1,'self')
@@ -54,17 +56,11 @@ def move_3(self): # Deflect
     self.set_condition('Protected',counter=0)
 
 @Increment(Rajangon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def get_immune(self):
     if self['conditions'].get('Protected'):
         del self['conditions']['Protected']
-        self.set_boost('atk',+1,'self')
-        return
-    self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        return True
+    return False
 
 @Increment(Rajangon)
 def endturn(self):
@@ -79,8 +75,9 @@ def value():
 
 @Increment(Rajangon)
 def move_4(self): # Blazing Fists
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
@@ -93,19 +90,11 @@ def value():
     return ['Rage Mode','Deflecting Arms']
 
 @Increment(Rajangon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
-    if self['conditions'].get('Protected'):
-        del self['conditions']['Protected']
-        self.set_boost('atk',+1,'self')
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['category']=='Physical' and rnd()<0.3:
         x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 # ----------
 
@@ -115,8 +104,9 @@ def value():
 
 @Increment(Rajangon)
 def move_5(self): # Rage Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

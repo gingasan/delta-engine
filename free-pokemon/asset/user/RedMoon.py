@@ -33,8 +33,9 @@ class RedMoon(PokemonBase):
         return effect
 
     def move_1(self): # Lunar Cannon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -44,8 +45,9 @@ class RedMoon(PokemonBase):
                     self.target.set_boost('spd',-1)
 
     def move_2(self): # Aura Sphere
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -72,8 +74,8 @@ def value():
 
 @Increment(RedMoon)
 def move_4(self): # Will-O-Wisp
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         self.target.set_status('BRN')
 
 # ----------

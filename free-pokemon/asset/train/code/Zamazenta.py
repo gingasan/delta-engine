@@ -37,14 +37,16 @@ class Zamazenta(PokemonBase):
         return base_damage
     
     def move_1(self): # Behemoth Bash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Body Press
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -56,8 +58,9 @@ def value():
 
 @Increment(Zamazenta)
 def move_3(self): # Play Rough
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('atk',-1)
@@ -80,15 +83,10 @@ def value():
 
 @Increment(Zamazenta)
 def set_boost(self,key,x,from_='target'):
-    bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-    if x>0:
-        self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        if key=='def':
-            for _ in range(x):
-                self.restore(self['max_hp']//10,'heal')
-    else:
-        self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log(script='boost',species=self._species,key=key,x=x)
+    self._set_boost(key,x)
+    if x>0 and key=='def':
+        for _ in range(x):
+            self.restore(self['max_hp']//10,'heal')
 
 # ----------
 

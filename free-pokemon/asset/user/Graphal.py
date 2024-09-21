@@ -34,16 +34,18 @@ class Graphal(PokemonBase):
         return effect
 
     def move_1(self): # Dark Rainbow
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Flash Cannon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('spd',-1)
@@ -86,11 +88,11 @@ def onswitch(self):
 @Increment(Graphal)
 def take_damage(self,x,from_='attack'):
     if from_=='attack':
-        self._take_damage_attack(x)
+        self.take_damage_attack(x)
     elif from_=='loss':
-        self._take_damage_loss(x)
+        self.take_damage_loss(x)
     elif from_=='recoil':
-        self._take_damage_recoil(x)
+        self.take_damage_recoil(x)
     if self['hp']==0:
         if self['conditions'].get('REVIVE'):
             self.state['status']=None
@@ -98,8 +100,7 @@ def take_damage(self,x,from_='attack'):
             del self['conditions']['REVIVE']
             self.log('Revive! Lord of Dark, Graphal.',color='purple')
         else:
-            self.state['status']='FNT'
-            self.log('%s faints.'%self._species)
+            self._faint()
 
 # ----------
 
@@ -127,8 +128,9 @@ def value():
 
 @Increment(Graphal)
 def move_6(self): # Oblivion Wing
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(3/4*damage),'drain')

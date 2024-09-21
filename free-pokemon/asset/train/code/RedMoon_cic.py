@@ -15,8 +15,9 @@ class RedMoon(PokemonBase):
         self.env.set_side_condition('Lunar Aura',self.side_id,from_=self._species,counter=0,max_count=3)
 
     def move_1(self): # Lunar Slash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -26,8 +27,9 @@ class RedMoon(PokemonBase):
                     self.target.set_boost('spe',-1)
 
     def move_2(self): # Moonlit Flight
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self.env.get_side_condition('Lunar Aura',self.side_id):
@@ -43,8 +45,9 @@ def value():
 
 @Increment(RedMoon)
 def move_3(self): # Zen Headbutt
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:

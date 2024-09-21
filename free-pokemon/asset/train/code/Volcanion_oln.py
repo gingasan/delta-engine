@@ -11,16 +11,12 @@ class Volcanion(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken']['type']=='Water':
             self.state['hp']=min(self['max_hp'],self['hp']+self['max_hp']//4)
             return
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
         if self['hp']>0 and self['act_taken']['type']=='Fire':
             self.set_condition('ERUPTION_BOOST',counter=0)
 
@@ -44,8 +40,9 @@ class Volcanion(PokemonBase):
                 del self['conditions']['ERUPTION_BOOST']
 
     def move_1(self): # Steam Eruption
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self['conditions'].get('ERUPTION_BOOST'):
@@ -55,8 +52,9 @@ class Volcanion(PokemonBase):
             if self['status']=='FRZ': self.state['status']=None
 
     def move_2(self): # Fire Blast
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('BRN')

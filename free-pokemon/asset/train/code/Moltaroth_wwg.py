@@ -15,25 +15,23 @@ class Moltaroth(PokemonBase):
         if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
-            if not self.istype('Fire'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is burned.'%self._species)
+            if self.istype('Fire'):
+                return
         elif x=='PAR':
-            if not self.istype('Electric'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is paralyzed.'%self._species)
+            if self.istype('Electric'):
+                return
         elif x=='PSN':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is poisoned.'%self._species)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
         elif x=='TOX':
-            if not self.istype('Poison') and not self.istype('Steel'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is badly poisoned.'%self._species)
+            if self.istype('Poison') or self.istype('Steel'):
+                return
+        elif x=='FRZ':
+            return
         elif x=='SLP':
-            if not self.env.get("Electric Terrain"):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s falls asleep.'%self._species)
+            if self.env.get("Electric Terrain"):
+                return
+        self._set_status(x)
 
     def get_power(self):
         power=self['act']['power']
@@ -42,16 +40,18 @@ class Moltaroth(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Molten Breath
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<30/100:
                 self.target.set_status('BRN')
 
     def move_2(self): # Gold Meltdown
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -63,8 +63,9 @@ def value():
 
 @Increment(Moltaroth)
 def move_3(self): # Fury Charge
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.take_damage(int(0.33*damage),'recoil')
@@ -93,8 +94,9 @@ def type_change(self):
 @Increment(Moltaroth)
 def move_1(self): # Molten Breath
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<30/100:
@@ -103,16 +105,18 @@ def move_1(self): # Molten Breath
 @Increment(Moltaroth)
 def move_2(self): # Gold Meltdown
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
 @Increment(Moltaroth)
 def move_3(self): # Fury Charge
     self.type_change()
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.take_damage(int(0.33*damage),'recoil')

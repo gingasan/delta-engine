@@ -15,12 +15,7 @@ class Dragapult(PokemonBase):
         if x<0 and from_=='target':
             self.log('Due to Clear Body, Dragapult is immune to stat-lowering from opponents.')
             return
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log(script='boost',species=self._species,key=key,x=x)
+        self._set_boost(key,x)
 
     def get_evasion(self):
         if self['conditions'].get('PHANTOM_FORCE'):
@@ -30,8 +25,9 @@ class Dragapult(PokemonBase):
     def move_1(self): # Dragon Darts
         hit=True; i=0
         while hit and i<2:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -43,8 +39,9 @@ class Dragapult(PokemonBase):
         else:
             del self['conditions']['PHANTOM_FORCE']
             self.state['canact']=True
-            damage_ret=self.get_damage()
-            if not damage_ret['miss']:
+            attack_ret=self.attack()
+            if not (attack_ret['miss'] or attack_ret['immune']):
+                damage_ret=self.get_damage()
                 damage=damage_ret['damage']
                 self.target.take_damage(damage)
 

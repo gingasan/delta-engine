@@ -12,8 +12,9 @@ class Gudiao(PokemonBase):
         super().__init__()
 
     def move_1(self): # Horn Surge
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -21,8 +22,9 @@ class Gudiao(PokemonBase):
             self.set_boost('spa',1,'self')
 
     def move_2(self): # Eerie Wail
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -37,8 +39,9 @@ def value():
 
 @Increment(Gudiao)
 def move_3(self): # Wing Slice
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spa',1,'self')

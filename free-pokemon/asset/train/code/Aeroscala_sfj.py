@@ -31,8 +31,9 @@ class Aeroscala(PokemonBase):
                     del self.target['conditions']['DIZZY']
 
     def move_1(self): # Wind Vortex
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -50,8 +51,9 @@ def value():
 
 @Increment(Aeroscala)
 def move_3(self): # Gale Force
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

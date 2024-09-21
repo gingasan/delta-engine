@@ -16,22 +16,19 @@ class Corviknight(PokemonBase):
             self.target.set_boost(key,x)
             self.log('Corviknight reflects the stat-lowering effect back to the opponent.')
             return
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log(script='boost',species=self._species,key=key,x=x)
+        self._set_boost(key,x)
 
     def move_1(self): # Wing Slash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
     
     def move_2(self): # Steel Wing
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
@@ -56,8 +53,9 @@ def value():
 
 @Increment(Corviknight)
 def move_4(self): # Sky Dive
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         recoil=int(damage/3)
@@ -70,15 +68,11 @@ def value():
     return ['Mirror Armor','Steel Clad']
 
 @Increment(Corviknight)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if 'type_effect' in self['act_taken'] and self['act_taken']['type_effect']>1:
         x=int(0.75*x)
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 # ----------
 
@@ -88,8 +82,9 @@ def value():
 
 @Increment(Corviknight)
 def move_5(self): # Body Press
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 

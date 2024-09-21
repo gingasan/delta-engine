@@ -75,9 +75,22 @@ class PokemonBase:
 
     def register_act(self, move_id, target):
         self.state["act"] = deepcopy(self._moves[move_id])
-    
+
     def register_act_damage(self, damage_ret):
         self.state["act"].update(damage_ret)
+        if damage_ret["crit"]:
+            self.log("A critical hit!")
+        if damage_ret["type_effect"] > 1:
+            self.log("Super effective.")
+        elif damage_ret["type_effect"] < 1:
+            self.log("Not very effective.")
+
+    def register_act_attack(self, attack_ret):
+        self.state["act"].update(attack_ret)
+        if attack_ret["miss"]:
+            self.log("Miss!")
+        elif attack_ret.get("immune", False):
+            self.logger.log("It is immune by %s." % self.target._species)
 
     def register_act_taken(self):
         self.state["act_taken"] = deepcopy(self.target["act"])
@@ -188,15 +201,29 @@ class PokemonBase:
         base_damage = int(int(int(int(2 * level / 5 + 2) * power * attack) / defense) / 50) + 2
 
         return base_damage
-
-    def get_damage(self):
+    
+    def attack(self):
         accuracy = self.get_accuracy()
         if rnd() >= accuracy:
-            damage_ret = {"miss": True}
-            self.register_act_damage(damage_ret)
-            self.log("Miss!")
-            return damage_ret
+            attack_ret = {"miss": True}
+            self.register_act_attack(attack_ret)
+            return attack_ret
 
+        attack_ret = {"miss": False}
+        move_type = self["act"]["type"]
+        target_types = self.target["types"]
+        immune = self.target.get_immune()
+        type_immune = False
+        for tt in target_types:
+            if TYPEEFFECTIVENESS[move_type][tt] < 0.1:
+                type_immune = True
+        immune = type_immune or immune
+        attack_ret["immune"] = immune
+
+        self.register_act_attack(attack_ret)
+        return attack_ret
+
+    def get_damage(self):
         power = self.get_power()
 
         crit = self.get_crit()
@@ -225,12 +252,12 @@ class PokemonBase:
         damage_ret = {
             "damage": damage,
             "crit": crit,
-            "miss": False,
             "type_effect": type_effect,
         }
+
         self.register_act_damage(damage_ret)
         return damage_ret
-    
+
     def get_confusion_damage(self):
         attack = self.get_stat("atk")
         defense = self.get_stat("def")
@@ -243,6 +270,46 @@ class PokemonBase:
     def get_priority(self, move_id):
         return self._moves[move_id]["priority"]
     
+    def _set_hp(self, x):
+        if x < 0:
+            self.state["hp"] = max(0, self["hp"] + x)
+            self.log("{} loses {} HP.".format(self._species, -x))
+        else:
+            self.state["hp"] = min(self["max_hp"], self["hp"] + x)
+            self.log("{} recovers {} HP.".format(self._species, x))
+    
+    def _set_status(self, x):
+        self.state["status"] = mdict({x: {"counter": 0}})
+        if x == "BRN":
+            self.log("%s is burned." % self._species)
+        elif x == "PAR":
+            self.log("%s is paralyzed." % self._species)
+        elif x == "PSN":
+            self.log("%s is poisoned." % self._species)
+        elif x == "TOX":
+            self.log("%s is badly poisoned." % self._species)
+        elif x == "FRZ":
+            self.log("%s is frozen." % self._species)
+        elif x == "SLP":
+            self.log("%s falls asleep." % self._species)
+
+    def _faint(self):
+        self.state["status"] = mdict({"FNT": {"counter": 0}})
+        self.log("{} faints.".format(self._species))
+
+    def _set_boost(self, key, x):
+        bar = 6 if key in ["atk", "def", "spa", "spd", "spe"] else 3
+        self["boosts"][key] = min(bar, max(-bar, self["boosts"][key] + x))
+        key = {
+            "atk": "Atk.", "def": "Def.", "spa": "SpA.", "spd": "SpD.", "spe": "Spe.",
+            "accuracy": "Acc.", "crit": "Crit."}[key]
+        self.log("{}'s {} is {} by {}.".format(self._species, key, "raised" if x > 0 else "lowered", abs(x)))
+
+    def _set_condition(self, x, **kwargs):
+        self.state["conditions"].update({x: kwargs})
+        if "broadcast" in kwargs:
+            self.log(kwargs["broadcast"])
+
     def _take_damage_attack(self, x):
         if "type_effect" in self.target["act"] and self.target["act"]["type_effect"] < 0.1:
             self.logger.log("It is immune by %s." % self._species)
@@ -251,21 +318,21 @@ class PokemonBase:
         self.state["hp"] = max(0, self["hp"] - x)
         self.log(script="attack", species=self._species, x=x, **self["act_taken"])
 
-    def _take_damage_loss(self, x):
-        self.state["hp"] = max(0, self["hp"] - x)
-        self.log("{} loses {} HP.".format(self._species, x))
+    def take_damage_attack(self, x):
+        self.register_act_taken()
+        self._set_hp(-x)
+
+    def take_damage_loss(self, x):
+        self._set_hp(-x)
     
-    def _take_damage_recoil(self, x):
-        self.state["hp"] = max(0, self["hp"] - x)
-        self.log("{} loses {} HP from recoil.".format(self._species, x))
+    def take_damage_recoil(self, x):
+        self._set_hp(-x)
 
-    def _restore_heal(self, x):
-        self.state["hp"] = min(self["max_hp"], self["hp"] + x)
-        self.log("{} heals {} HP.".format(self._species, x))
+    def restore_heal(self, x):
+        self._set_hp(x)
 
-    def _restore_drain(self, x):
-        self.state["hp"] = min(self["max_hp"], self["hp"] + x)
-        self.log("{} drains {} HP from {}.".format(self._species, x, self.target._species))
+    def restore_drain(self, x):
+        self._set_hp(x)
 
     def log(self, content=None, **kwargs):
         self.logger.log(content, **kwargs)
@@ -286,23 +353,22 @@ class PokemonBase:
     
     def isfaint(self):
         return self["status"] == "FNT" or self["hp"] < 1
-    
+
     def take_damage(self, x, from_="attack"):
         if from_ == "attack":
-            self._take_damage_attack(x)
+            self.take_damage_attack(x)
         elif from_ == "loss":
-            self._take_damage_loss(x)
+            self.take_damage_loss(x)
         elif from_ == "recoil":
-            self._take_damage_recoil(x)
+            self.take_damage_recoil(x)
         if self["hp"] == 0:
-            self.state["status"] = "FNT"
-            self.log("%s faints." % self._species)
+            self._faint()
 
     def restore(self, x, from_="heal"):
         if from_ == "heal":
-            self._restore_heal(x)
+            self.restore_heal(x)
         elif from_ == "drain":
-            self._restore_drain(x)
+            self.restore_drain(x)
 
     def set_status(self, x):
         if self["status"] or self.env.get("Misty Terrain"):
@@ -310,48 +376,38 @@ class PokemonBase:
         if x == "BRN":
             if self.istype("Fire"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
         elif x == "PAR":
             if self.istype("Electric"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
         elif x == "PSN":
-            if self.istype("Poison") and not self.istype("Steel"):
+            if self.istype("Poison") or self.istype("Steel"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
         elif x == "TOX":
-            if self.istype("Poison") and not self.istype("Steel"):
+            if self.istype("Poison") or self.istype("Steel"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
         elif x == "FRZ":
             if self.istype("Ice"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
         elif x == "SLP":
             if self.env.get("Electric Terrain"):
                 return
-            self.state["status"] = {x: {"counter": 0}}
-        self.log(script="status", species=self._species, x=x)
+        self._set_status(x)
 
     def set_boost(self, key, x, from_="target"):
-        bar = 6 if key in ["atk", "def", "spa", "spd", "spe"] else 3
-        if x > 0:
-            self["boosts"][key] = min(bar, self["boosts"][key] + x)
-        else:
-            self["boosts"][key] = max(-bar, self["boosts"][key] + x)
-        self.log(script="boost", species=self._species, key=key, x=x)
+        self._set_boost(key, x)
 
     def set_stat(self, key, x, from_="target"):
         self["stats"][key] = int(self["stats"][key] * x)
 
     def set_condition(self, x, **kwargs):
         if not self["conditions"].get(x):
-            self.state["conditions"].update({x: kwargs})
-            if "broadcast" in kwargs:
-                self.log(kwargs["broadcast"])
+            self._set_condition(x, **kwargs)
 
     def get_evasion(self):
         return 1
+    
+    def get_immune(self):
+        return False
 
     def disable_moves(self, moves):
         disabled = []
@@ -681,7 +737,7 @@ class PokemonWrapper:
             "isstatus", "istype", "isfaint",
             "take_damage", "restore",
             "set_status", "set_boost", "set_stat", "set_condition",
-            "get_evasion", "disable_moves", "get_stat",
+            "get_evasion", "get_immune", "disable_moves", "get_stat",
             "side_id"
         ]
 

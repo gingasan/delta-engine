@@ -28,16 +28,18 @@ class Zapdos(PokemonBase):
         return acc/100
 
     def move_1(self): # Hurricane
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Confusion',counter=0)
 
     def move_2(self): # Zap Cannon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -51,8 +53,9 @@ def value():
 
 @Increment(Zapdos)
 def move_3(self): # Focus Blast
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -79,16 +82,9 @@ def value():
 
 @Increment(Zapdos)
 def set_boost(self,key,x,from_='target'):
-    bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-    if x>0:
-        self['boosts'][key]=min(bar,self['boosts'][key]+x)
-    else:
-        self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log(script='boost',species=self._species,key=key,x=x)
+    self._set_boost(key,x)
     if from_=='target' and x<0:
-        for _ in range(x):
-            self['boosts']['spa']=min(bar,self['boosts'][key]+2)
-        self.log('Due to Competitive, Zapdos further raises its SpA. by {}.'.format(2*x))
+        self._set_boost('spa',2)
 
 # ----------
 
@@ -98,8 +94,9 @@ def value():
 
 @Increment(Zapdos)
 def move_5(self): # Inferno
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():

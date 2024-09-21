@@ -6,7 +6,7 @@
   ],
   "gender": "Male",
   "ability": {
-    "Dark World": "On switch-in, summons Dark World for 5 turns. During this time, Dark-type attacks cause 1.5x damage and non-Dark-type attacks cause 0.75x damage.",
+    "Dark World": "On switch-in, summons Dark World for 5 turns. During this time, Dark-type attacks cause 1.5x damage.",
     "Lord of Dark": "For one chance, when this Pokemon's HP zeroes, it revives with 50% maximum HP."
   },
   "moves": {
@@ -44,6 +44,13 @@
       "category": "Status",
       "type": "Dark",
       "effect": "For 3 turns, once the opponents use a status move, at the end of the turn, they loses 1/3 max HP and the user restores 1/3 max HP for that."
+    },
+    "Oblivion Wing": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Flying",
+      "effect": "The user recovers 3/4 the HP lost by the target."
     }
   }
 }

@@ -7,7 +7,7 @@
   "gender": "Female",
   "ability": {
     "Snow Warning": "On switch-in, this Pokemon summons Snow.",
-    "Aurora Bless": "On switch-in, this Pokemon summons Aurora Veil, which halves both physical and special damage to the user for 5 turns."
+    "Aurora Bless": "On switch-in, this Pokemon summons Aurora Veil, which halves both physical and special damage to the user for 3 turns."
   },
   "moves": {
     "Blizzard": {

@@ -8,27 +8,23 @@ class Lightning(PokemonBase):
     _ability=['Ultra-Inductive']
     _move_1=('Lightning Punch',75,100,'Physical','Electric',1,['contact'])
     _move_2=('Drain Punch',75,100,'Physical','Fighting',0,['contact'])
+    _base=(108,123,102,80,75,112)
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['conditions'].get('INDUCTIVE'):
             if self['act_taken']['category']=='Special':
                 x=int(x*0.5)
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)
         if 'contact' in self['act_taken']['property'] and rnd()<0.3:
             self.target.set_condition('INDUCTIVE',counter=0)
-        if self['hp']==0:
-            self.state['status']='FNT'
 
     def move_1(self): # Lightning Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['conditions'].get('INDUCTIVE'):
                 damage*=2
@@ -37,8 +33,9 @@ class Lightning(PokemonBase):
                 self.target.set_status('PAR')
 
     def move_2(self): # Drain Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')
@@ -56,10 +53,7 @@ def move_3(self): # Super Electro Bombardment
     self.set_condition('ELECTRO_SHIELD',counter=0)
 
 @Increment(Lightning)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['conditions'].get('INDUCTIVE'):
         if self['act_taken']['category']=='Special':
@@ -67,11 +61,10 @@ def _take_damage_attack(self,x):
     if self['conditions'].get('ELECTRO_SHIELD'):
         x=int(x*0.5)
         del self['conditions']['ELECTRO_SHIELD']
-    self.state['hp']=max(0,self['hp']-x)
+        self.log("The electro shield mitigates the attack.", color="yellow")
+    self._set_hp(-x)
     if 'contact' in self['act_taken']['property'] and rnd()<0.3:
         self.target.set_condition('INDUCTIVE',counter=0)
-    if self['hp']==0:
-        self.state['status']='FNT'
 
 # ----------
 
@@ -81,8 +74,9 @@ def value():
 
 @Increment(Lightning)
 def move_4(self): # Meteor Mash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<20/100:
@@ -99,6 +93,7 @@ def get_power(self):
     power=self['act']['power']
     if self['act']['id']=='Lightning Punch':
         power+=20*self['boosts']['spe']
+        self.log("Lightning is recharging!", color="blue")
     return int(power*self.get_weather_power_mult())
 
 # ----------

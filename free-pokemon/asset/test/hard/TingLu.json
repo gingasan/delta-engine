@@ -40,11 +40,21 @@
     },
     "Sin-Absorb": {
       "power": 0,
-      "accuracy": 10000,
+      "accuracy": 100000,
       "category": "Status",
       "type": "Dark",
       "priority": -4,
-      "effect": "Takes effect after the opponent's move. If the opponent attacks the user, the user restores 2/3 its maximum HP, otherwise restores 1/3 maximum HP."
+      "effect": "Takes effect after the opponent's move. If the opponent attacks the user, the user restores 2/3 its maximum HP, otherwise restores 1/8 maximum HP."
+    },
+    "Body Press": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Physical",
+      "type": "Fighting",
+      "effect": "Damage is calculated using the user's Defense stat as its Attack, including stat stage changes.",
+      "property": [
+        "contact"
+      ]
     }
   }
 }

@@ -12,8 +12,9 @@ class Deviljho(PokemonBase):
         super().__init__()
 
     def move_1(self):
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(damage//4,'drain')
@@ -32,8 +33,9 @@ def value():
 
 @Increment(Deviljho)
 def move_3(self):
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<30/100:

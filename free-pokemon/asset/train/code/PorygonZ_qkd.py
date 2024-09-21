@@ -19,8 +19,9 @@ class PorygonZ(PokemonBase):
         return int(power*self.get_weather_power_mult())
     
     def move_1(self): # Tri Attack
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage'] 
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -31,8 +32,9 @@ class PorygonZ(PokemonBase):
     def move_2(self): # Tri Beam
         hit=True; i=0
         while hit and i<3:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)  
             i+=1; hit=False if self.target.isfaint() else True

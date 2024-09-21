@@ -16,19 +16,19 @@ class Moltres(PokemonBase):
         if from_=='attack':
             self._take_damage_attack(x)
         elif from_=='loss':
-            self._take_damage_loss(x)
+            self.take_damage_loss(x)
         elif from_=='recoil':
-            self._take_damage_recoil(x)
+            self.take_damage_recoil(x)
         if self['hp']==0:
-            self.state['status']='FNT'
-            self.log('%s faints.'%self._species)
+            self._faint()
             return
         if prev_hp>self['max_hp']//2 and self['hp']<=self['max_hp']//2:
             self.set_boost('spa',1,'self')
 
     def move_1(self): # Fiery Wrath
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -45,8 +45,9 @@ def value():
 
 @Increment(Moltres)
 def move_3(self): # Air Slash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -62,24 +63,19 @@ def value():
 def move_4(self): # Protect
     if self['last_act'] and self['last_act']['id']=='Protect':
         return
-    self.set_condition('PROTECT',counter=0)
+    self.set_condition('Protected',counter=0)
 
 @Increment(Moltres)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
-        return
-    self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+def get_immune(self):
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
+        return True
+    return False
 
 @Increment(Moltres)
 def endturn(self):
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
 
 # ----------
 
@@ -89,16 +85,9 @@ def value():
 
 @Increment(Moltres)
 def set_boost(self,key,x,from_='target'):
-    bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-    if x>0:
-        self['boosts'][key]=min(bar,self['boosts'][key]+x)
-    else:
-        self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-    self.log(script='boost',species=self._species,key=key,x=x)
+    self._set_boost(key,x)
     if from_=='target' and x<0:
-        for _ in range(x):
-            self['boosts']['spa']=min(bar,self['boosts'][key]+2)
-        self.log('Due to Competitive, Moltres further raises its SpA. by {}.'.format(2*x))
+        self._set_boost('spa',2)
 
 # ----------
 

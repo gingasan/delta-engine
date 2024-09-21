@@ -15,15 +15,17 @@ class RedMoon(PokemonBase):
         self.target.set_boost('atk',-1)
     
     def move_1(self): # Red Dragon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100: self.target.set_status('BRN')
     
     def move_2(self): # Brave Bird
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if damage>0:
@@ -48,8 +50,9 @@ def value():
 
 @Increment(RedMoon)
 def move_4(self): # Iron Head
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -62,13 +65,9 @@ def value():
     return ['Intimidate','Red-Moon Defense']
 
 @Increment(RedMoon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
     if self['hp']>0 and self['act_taken']:
         self.target.take_damage(self.target['max_hp']//8 if self.target.isstatus('BRN') else self.target['max_hp']//16,'loss')
 

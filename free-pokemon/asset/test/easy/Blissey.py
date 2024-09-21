@@ -15,14 +15,15 @@ class Blissey(PokemonBase):
         return 2*chance if chance<=0.5 else 1
     
     def move_1(self): # Seismic Toss
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             damage=100
             self.target.take_damage(damage)
     
     def move_2(self): # Shadow Ball
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<self.get_effect_chance(20/100):

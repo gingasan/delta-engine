@@ -20,8 +20,9 @@ class Thundurus(PokemonBase):
         self.set_boost('spa',+2,'self')
 
     def move_2(self): # Thunderbolt
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
@@ -35,8 +36,9 @@ def value():
 
 @Increment(Thundurus)
 def move_3(self): # Sludge Bomb
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:

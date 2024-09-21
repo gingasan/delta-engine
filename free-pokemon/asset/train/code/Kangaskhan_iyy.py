@@ -12,15 +12,17 @@ class Kangaskhan(PokemonBase):
         super().__init__()
 
     def set_condition(self,x,**kwargs):
-        if x=='Flinch': return
-        if not self['conditions'].get(x):
-            self.state['conditions'].update({x: kwargs})
+        if x=='Flinch':
+            return
+        if not self["conditions"].get(x):
+            self._set_condition(x, **kwargs)
 
     def move_1(self): # Comet Punch
         hit=True; i=0
         while hit and i<3:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -30,8 +32,9 @@ class Kangaskhan(PokemonBase):
             self.env.remove('Reflect',self.target.side_id)
         if self.env.get_side_condition('Light Screen',self.target.side_id):
             self.env.remove('Light Screen',self.target.side_id)
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -43,8 +46,9 @@ def value():
 
 @Increment(Kangaskhan)
 def move_3(self): # Crunch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
@@ -58,8 +62,9 @@ def value():
 
 @Increment(Kangaskhan)
 def move_4(self): # Dizzy Punch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage) 
         if not self.target.isfaint() and rnd()<20/100:

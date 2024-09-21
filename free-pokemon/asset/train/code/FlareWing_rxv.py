@@ -12,8 +12,9 @@ class FlareWing(PokemonBase):
         super().__init__()
 
     def move_1(self): # Blazing Assault
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             blaze_damage=sum([v for _,v in self.target['boosts'].items() if v>0])*10
@@ -22,8 +23,9 @@ class FlareWing(PokemonBase):
                 self.target.set_status('BRN')
 
     def move_2(self): # Draco Sweep
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -37,8 +39,9 @@ def value():
 
 @Increment(FlareWing)
 def move_3(self): # Ignition Burst
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -61,8 +64,9 @@ def value():
 
 @Increment(FlareWing)
 def move_4(self): # Wing Slash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -92,8 +96,9 @@ def value():
 
 @Increment(FlareWing)
 def move_5(self): # Flare Blitz
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         recoil_damage=damage//3

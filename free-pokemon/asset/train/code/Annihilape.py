@@ -15,15 +15,9 @@ class Annihilape(PokemonBase):
         self.set_condition('RAGE_FIST',counter=0)
 
     def set_boost(self,key,x,from_='target'):
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-            if from_=='target':
-                for _ in range(x):
-                    self.set_boost('atk',2,'self')
-            self.log("{}'s Attack is raised by {}.".format(self._species,2*x))
+        self._set_boost(key,x)
+        if from_=='target' and x<0:
+            self._set_boost('atk',2)
     
     def get_power(self):        
         power=self['act']['power']
@@ -32,15 +26,17 @@ class Annihilape(PokemonBase):
         return int(power*self.get_weather_power_mult())
     
     def move_1(self): # Rage Fist
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self['conditions']['RAGE_FIST']['counter']+=1
 
     def move_2(self): # Close Combat
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.set_boost('def',-1,'self')
@@ -54,7 +50,7 @@ def value():
 
 @Increment(Annihilape)
 def move_3(self): # Final Gambit
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
         self.target.take_damage(self['hp'])
-        self.take_damage(self['hp'],'loss')
+        self._faint()

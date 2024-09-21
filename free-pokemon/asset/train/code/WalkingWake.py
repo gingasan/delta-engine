@@ -40,14 +40,16 @@ class WalkingWake(PokemonBase):
         return 1.
 
     def move_1(self): # Hydro Steam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Draco Meteor
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.set_boost('spa',-2,'self')
@@ -60,8 +62,9 @@ def value():
 
 @Increment(WalkingWake)
 def move_3(self): # Flamethrower
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -80,15 +83,11 @@ def move_4(self): # Substitute
         self.set_condition('SUBSTITUTE',hp=self['max_hp']//4)
 
 @Increment(WalkingWake)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['conditions'].get('SUBSTITUTE'):
         self['conditions']['SUBSTITUTE']['hp']-=x
         if self['conditions']['SUBSTITUTE']['hp']<1:
             del self['conditions']['SUBSTITUTE']
     else:
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)

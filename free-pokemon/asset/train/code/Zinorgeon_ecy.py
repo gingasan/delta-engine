@@ -15,14 +15,16 @@ class Zinorgeon(PokemonBase):
         self.env.set_terrain('Electric Terrain',from_=self._species,max_count=5)
 
     def move_1(self): # Volt Slam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
     def move_2(self): # Dragon Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -36,8 +38,9 @@ def value():
 def move_3(self): # Electric Orb
     hit=True; i=0
     while hit and i<3:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -61,8 +64,9 @@ def value():
 
 @Increment(Zinorgeon)
 def move_1(self): # Volt Slam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<20/100:
@@ -72,8 +76,9 @@ def move_1(self): # Volt Slam
 def move_3(self): # Electric Orb
     hit=True; i=0
     while hit and i<3:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -97,7 +102,8 @@ def value():
 
 @Increment(Zinorgeon)
 def move_5(self): # Earthquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

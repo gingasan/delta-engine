@@ -40,16 +40,18 @@ class Tianma(PokemonBase):
         return int(stat*stat_ratio)
 
     def move_1(self): # Skybound Rush
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<0.2:
                 self.set_boost('spe',+1,'self')
 
     def move_2(self): # Jade Strike
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -74,15 +76,11 @@ def value():
     return ['Heavenly Speed','Divine Flight']
 
 @Increment(Tianma)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['type']=='Ground':
         return
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 @Increment(Tianma)
 def get_evasion(self):

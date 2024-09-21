@@ -11,15 +11,11 @@ class Zhuqian(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken']['type']=='Dark':
             self.set_boost('def',1,'self')
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
 
     def get_power(self):
         power=self['act']['power']
@@ -35,15 +31,17 @@ class Zhuqian(PokemonBase):
                 del self.target['conditions']['TRAP']
 
     def move_1(self): # Thunder Lash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.target.set_status('PAR')
 
     def move_2(self): # Shadow Coils
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -57,8 +55,9 @@ def value():
 
 @Increment(Zhuqian)
 def move_3(self): # Steel Howl
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spa',1,'self')
@@ -82,16 +81,12 @@ def value():
     return ['Eclipse Guard','Thunder Roar']
 
 @Increment(Zhuqian)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['type']=='Dark':
         self.set_boost('def',1,'self')
-    self.state['hp']=max(0,self['hp']-x)
+    self._set_hp(-x)
     if self['hp']==0:
-        self.state['status']='FNT'
         return
     if self['act_taken'] and rnd()<30/100:
         self.target.set_status('PAR')

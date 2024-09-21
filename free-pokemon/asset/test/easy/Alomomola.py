@@ -14,12 +14,13 @@ class Alomomola(PokemonBase):
     def endturn(self):
         if self.env.get('Rain'):
             self.state['status']=None
-        if self['conditions'].get('PROTECT'):
-            del self['conditions']['PROTECT']
+        if self['conditions'].get('Protected'):
+            del self['conditions']['Protected']
 
     def move_1(self): # Scald
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -30,15 +31,11 @@ class Alomomola(PokemonBase):
     def move_2(self): # Protect
         if self['last_act'] and self['last_act']['id']=='Protect':
             return
-        self.set_condition('PROTECT',counter=0)
+        self.set_condition('Protected',counter=0)
     
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
-        if self['conditions'].get('PROTECT'):
-            del self['conditions']['PROTECT']
+    def take_damage_attack(self,x):
+        if self['conditions'].get('Protected'):
+            del self['conditions']['Protected']
             return
         self.register_act_taken()
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)

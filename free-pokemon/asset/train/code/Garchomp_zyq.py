@@ -25,8 +25,9 @@ class Garchomp(PokemonBase):
                 del self.target['conditions']['TRAP']
 
     def move_1(self): # Sand Tomb
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -35,8 +36,9 @@ class Garchomp(PokemonBase):
                     self.target.set_condition('TRAP',counter=0)
 
     def move_2(self): # Dragon Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint():
@@ -52,19 +54,14 @@ def value():
 def move_3(self): # Protect
     if self['last_act'] and self['last_act']['id']=='Protect':
         return
-    self.set_condition('PROTECT',counter=0)
+    self.set_condition('Protected',counter=0)
 
 @Increment(Garchomp)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
-        return
-    self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+def get_immune(self):
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
+        return True
+    return False
 
 @Increment(Garchomp)
 def endturn(self):
@@ -74,5 +71,5 @@ def endturn(self):
             self.target['conditions']['TRAP']['counter']+=1
         else:
             del self.target['conditions']['TRAP']
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']

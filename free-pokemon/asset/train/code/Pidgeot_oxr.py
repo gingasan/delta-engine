@@ -14,12 +14,7 @@ class Pidgeot(PokemonBase):
     def set_boost(self,key,x,from_='target'):
         if key=='accuracy' and x<0:
             return
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log(script='boost',species=self._species,key=key,x=x)
+        self._set_boost(key,x)
 
     def endturn(self):
         if self['conditions'].get('RECHARGE'):
@@ -30,15 +25,17 @@ class Pidgeot(PokemonBase):
                 self.state['canact']=True
     
     def move_1(self): # Steel Wing
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if rnd()<10/100: self.set_boost('def',1,'self')
     
     def move_2(self): # Hyper Beem
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
         if not self.target.isfaint():

@@ -7,7 +7,8 @@ class Aerodactyl(PokemonBase):
     _gender='Male'
     _ability=['Tough Claws']
     _move_1=('Head Smash',150,80,'Physical','Rock',0,['contact'])
-    _move_2=('Dual Wingbeat',40,90,'Physical','Flying',0,['contact'])
+    _move_2=('Brave Bird',40,90,'Physical','Flying',0,['contact'])
+    _base=(80,135,85,70,80,150)
     def __init__(self):
         super().__init__()
 
@@ -18,15 +19,17 @@ class Aerodactyl(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Head Smash
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.take_damage(damage//2,'recoil')
 
     def move_2(self): # Brave Bird
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.take_damage(int(0.33*damage),'recoil')
@@ -39,8 +42,9 @@ def value():
 
 @Increment(Aerodactyl)
 def move_3(self): # Dragon Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -63,15 +67,17 @@ def value():
 
 @Increment(Aerodactyl)
 def move_1(self): # Head Smash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
 @Increment(Aerodactyl)
 def move_2(self): # Brave Bird
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
 
@@ -83,7 +89,8 @@ def value():
 
 @Increment(Aerodactyl)
 def move_5(self): # Earthquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

@@ -26,14 +26,16 @@ class Tyranitar(PokemonBase):
         return effect
 
     def move_1(self): # Roar of Rock
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
     
     def move_2(self): # Earthquake
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -59,8 +61,9 @@ def value():
 
 @Increment(Tyranitar)
 def move_4(self): # Fire Fang
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint():
@@ -76,16 +79,12 @@ def value():
     return ['Sand Stream','Sturdy']
 
 @Increment(Tyranitar)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['hp']==self['max_hp'] and x>=self['hp']:
         self.state['hp']=max(1,self['hp']-x)
     else:
-        self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)    
 
 # ----------
 

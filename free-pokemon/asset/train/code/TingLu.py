@@ -15,13 +15,14 @@ class TingLu(PokemonBase):
         self.target.set_stat('spa',0.75)
 
     def move_1(self): # Ruination
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
             damage=int(0.5*self.target['hp'])
             self.target.take_damage(damage)
     
     def move_2(self): # Earthquake
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)

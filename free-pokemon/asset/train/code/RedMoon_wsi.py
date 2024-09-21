@@ -29,16 +29,18 @@ class RedMoon(PokemonBase):
         return int(stat*stat_ratio)
 
     def move_1(self): # Dragon Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_condition('Flinch',counter=0)
     
     def move_2(self): # Brave Bird  
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.take_damage(int(0.33*damage),'recoil')
@@ -53,8 +55,9 @@ def value():
 
 @Increment(RedMoon)
 def move_3(self): # Lunar Strike
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<15/100:
@@ -70,8 +73,9 @@ def value():
 def move_4(self): # Wind Cutter
     hit=True; i=0
     while hit and i<2:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -83,15 +87,11 @@ def value():
     return ['Intimidate','Eclipse Guard']
 
 @Increment(RedMoon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['hp']<self['max_hp']//2 and self['act_taken']['type']=='Fairy':
         x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)    
 
 # ----------
 

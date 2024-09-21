@@ -13,12 +13,7 @@ class Incineroar(PokemonBase):
 
     def set_boost(self,key,x,from_='target'):
         x=-x
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log(script='boost',species=self._species,key=key,x=x)
+        self._set_boost(key,x)
 
     def get_power(self):
         power=self['act']['power']
@@ -30,8 +25,9 @@ class Incineroar(PokemonBase):
         return int(power*self.get_weather_power_mult())
     
     def move_1(self): # V-create
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.set_boost('spe',-1,'self')
@@ -39,8 +35,9 @@ class Incineroar(PokemonBase):
             self.set_boost('spd',-1,'self')
 
     def move_2(self): # Power Trip
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -52,8 +49,9 @@ def value():
 
 @Increment(Incineroar)
 def move_3(self): # Drain Punch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.restore(int(1/2*damage),'drain')
@@ -84,8 +82,9 @@ def value():
 def move_4(self): # Double Iron Bash
     hit=True; i=0
     while hit and i<2:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -100,8 +99,9 @@ def value():
 
 @Increment(Incineroar)
 def move_5(self): # Hammer Arm
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         self.set_boost('spe',-1,'self')

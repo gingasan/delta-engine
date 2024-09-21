@@ -15,16 +15,12 @@ class Metagross(PokemonBase):
         if x<0 and from_=='target':
             self.log('Due to Clear Body, Metagross is immune to stat-lowering from opponents.')
             return
-        bar=6 if key in ['atk','def','spa','spd','spe'] else 3
-        if x>0:
-            self['boosts'][key]=min(bar,self['boosts'][key]+x)
-        else:
-            self['boosts'][key]=max(-bar,self['boosts'][key]+x)
-        self.log(script='boost',species=self._species,key=key,x=x)
+        self._set_boost(key,x)
 
     def move_1(self): # Psychic Fangs
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             for t in ['Reflect','Light Screen','Aurora Veil']:
@@ -32,8 +28,9 @@ class Metagross(PokemonBase):
                     self.env.remove(t,self.target.side_id)
 
     def move_2(self): # Bullet Punch
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
 
@@ -45,8 +42,9 @@ def value():
 
 @Increment(Metagross)
 def move_3(self): # Meteor Mash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<20/100:
@@ -60,7 +58,8 @@ def value():
 
 @Increment(Metagross)
 def move_4(self): # Earthquake
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

@@ -27,16 +27,18 @@ class Sandslash(PokemonBase):
     def move_1(self): # Triple Axel
         hit=True; i=0
         while hit and i<3:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             damage=int(damage*1.5**i)
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
 
     def move_2(self): # Rapid Spin
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self['conditions'].get('LEECH_SEED'):
@@ -53,8 +55,9 @@ def value():
 
 @Increment(Sandslash)
 def move_3(self): # Iron Head
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:
@@ -71,8 +74,9 @@ def move_1(self): # Triple Axel
     hit=True; i=0
     n_hits=3 if self['hp']>self['max_hp']//2 else 4
     while hit and i<n_hits:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         damage=int(damage*1.5**i)
         self.target.take_damage(damage)

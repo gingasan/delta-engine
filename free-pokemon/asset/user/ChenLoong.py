@@ -28,15 +28,17 @@ class ChenLoong(PokemonBase):
         return acc/100
 
     def move_1(self): # Blizzard
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('FRZ')
     
     def move_2(self): # Surf
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             if self.target['conditions'].get('DIVE'):
                 damage*=2
@@ -61,8 +63,9 @@ def value():
 
 @Increment(ChenLoong)
 def move_4(self): # Thunderbolt
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100: self.target.set_status('PAR')
@@ -79,16 +82,12 @@ def onswitch(self):
     self.env.set_side_condition('Aurora Veil',self.side_id,from_=self._species,counter=0,max_count=3)
 
 @Increment(ChenLoong)
-def _take_damage_attack(self,x):
-    if self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self.env.get_side_condition('Aurora Veil',self.side_id):
         if self['act_taken']['category']=='Physical' or self['act_taken']['category']=='Special':
             x//=2
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+    self._set_hp(-x)
 
 # ----------
 

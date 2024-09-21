@@ -11,15 +11,11 @@ class Espinas(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken']['category']=='Physical':
             x=int(x*0.7)
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
         if self['hp']==0:
             return
         if 'contact' in self['act_taken']['property'] and rnd()<20/100:
@@ -29,29 +25,35 @@ class Espinas(PokemonBase):
         if self['status'] or self.env.get('Misty Terrain'):
             return
         if x=='BRN':
-            if not self.istype('Fire'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is burned.'%self._species)
+            if self.istype('Fire'):
+                return
+        elif x=='PAR':
+            return
+        elif x=='PSN':
+            return
+        elif x=='TOX':
+            return
         elif x=='FRZ':
-            if not self.istype('Ice'):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s is frozen.'%self._species)
+            if self.istype('Ice'):
+                return
         elif x=='SLP':
-            if not self.env.get("Electric Terrain"):
-                self.state['status']={x:{'counter':0}}
-                self.log('%s falls asleep.'%self._species)
+            if self.env.get("Electric Terrain"):
+                return
+        self._set_status(x)
 
     def move_1(self): # Thorned Assault
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<50/100:
                 self.target.set_condition('BRN')
 
     def move_2(self): # Horn Charge
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
@@ -65,8 +67,9 @@ def value():
 
 @Increment(Espinas)
 def move_3(self): # Flame Rush
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<50/100:
@@ -80,8 +83,9 @@ def value():
 
 @Increment(Espinas)
 def move_3(self): # Flame Rush
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<50/100:

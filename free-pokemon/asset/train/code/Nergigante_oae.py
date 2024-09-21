@@ -19,8 +19,9 @@ class Nergigante(PokemonBase):
             self.restore(self['max_hp']//10,'heal')
 
     def move_1(self): # Spike Slam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if self['conditions'].get('SPIKES'):
@@ -28,8 +29,9 @@ class Nergigante(PokemonBase):
                 del self['conditions']['SPIKES']
 
     def move_2(self): # Dragon Dive
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             recoil=int(damage*1/3)
@@ -65,8 +67,9 @@ def value():
 
 @Increment(Nergigante)
 def move_1(self): # Spike Slam
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self['conditions'].get('SPIKES'):

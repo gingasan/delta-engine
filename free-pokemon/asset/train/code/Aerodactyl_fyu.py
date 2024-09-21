@@ -21,8 +21,9 @@ class Aerodactyl(PokemonBase):
         return int(power*self.get_weather_power_mult())
 
     def move_1(self): # Rock Claw
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
         self['conditions']['MOMENTUM_CLAWS']['counter']+=1
@@ -30,8 +31,9 @@ class Aerodactyl(PokemonBase):
     def move_2(self): # Dual Wingbeat
         hit=True; i=0
         while hit and i<2:
-            damage_ret=self.get_damage()
+            attack_ret=self.attack()
             if damage_ret['miss']:break
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -44,8 +46,9 @@ def value():
 
 @Increment(Aerodactyl)
 def move_3(self): # Air Slash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<30/100:
@@ -59,8 +62,9 @@ def value():
 
 @Increment(Aerodactyl)
 def move_4(self): # Dragon Claw
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
     self['conditions']['MOMENTUM_CLAWS']['counter']+=1
@@ -82,8 +86,9 @@ def value():
 def move_2(self): # Dual Wingbeat
     hit=True; i=0
     while hit and i<2:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']:break
         damage_ret=self.get_damage()
-        if damage_ret['miss']:break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -91,8 +96,9 @@ def move_2(self): # Dual Wingbeat
 
 @Increment(Aerodactyl)
 def move_3(self): # Air Slash
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if rnd()<30/100:
@@ -118,7 +124,8 @@ def get_crit(self):
 
 @Increment(Aerodactyl)
 def move_5(self): # Stone Edge
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)

@@ -32,12 +32,11 @@ class Torterra(PokemonBase):
         if from_=='attack':
             self._take_damage_attack(x)
         elif from_=='loss':
-            self._take_damage_loss(x)
+            self.take_damage_loss(x)
         elif from_=='recoil':
-            self._take_damage_recoil(x)
+            self.take_damage_recoil(x)
         if self['hp']==0:
-            self.state['status']='FNT'
-            self.log('%s faints.'%self._species)
+            self._faint()
             return
         if prev_hp>self['max_hp']//2 and self['hp']<=self['max_hp']//2:
             self.set_boost('atk',+1,'self')
@@ -47,16 +46,18 @@ class Torterra(PokemonBase):
             self.set_boost('spd',-1)
 
     def move_1(self): # Earth Power
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100:
                 self.target.set_boost('spd',-1)
 
     def move_2(self): # Giga Drain
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             self.restore(int(1/2*damage),'drain')

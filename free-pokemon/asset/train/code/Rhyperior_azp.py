@@ -11,22 +11,16 @@ class Rhyperior(PokemonBase):
     def __init__(self):
         super().__init__()
 
-    def _take_damage_attack(self,x):
-        if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-            self.logger.log('It is immune by %s.'%self._species)
-            return
-        if self['conditions'].get('PROTECT'):
-            del self['conditions']['PROTECT']
-            return
+    def take_damage_attack(self,x):
         self.register_act_taken()
         if self['act_taken']['type_effect']>1:
             x=int(x*0.7)
-        self.state['hp']=max(0,self['hp']-x)
-        self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        self._set_hp(-x)        
 
     def move_1(self): # Quake Impact
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -35,7 +29,13 @@ class Rhyperior(PokemonBase):
     def move_2(self): # Protect
         if self['last_act'] and self['last_act']['id']=='Protect':
             return
-        self.set_condition('PROTECT',counter=0)
+        self.set_condition('Protected',counter=0)
+
+    def get_immune(self):
+        if self['conditions'].get('Protected'):
+            del self['conditions']['Protected']
+            return True
+        return False
 
 # ----------
 
@@ -56,8 +56,9 @@ def move_3(self): # Rock Blast
     else:
         n_hits=5
     while hit and i<n_hits:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']: break
         damage_ret=self.get_damage()
-        if damage_ret['miss']: break
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         i+=1; hit=False if self.target.isfaint() else True
@@ -83,8 +84,8 @@ def value():
 def endturn(self):
     if self.env.get('Sandstorm'):
         self.set_boost('spd',1,'self')
-    if self['conditions'].get('PROTECT'):
-        del self['conditions']['PROTECT']
+    if self['conditions'].get('Protected'):
+        del self['conditions']['Protected']
 
 # ----------
 
@@ -94,8 +95,9 @@ def value():
 
 @Increment(Rhyperior)
 def move_5(self): # Ice Punch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:

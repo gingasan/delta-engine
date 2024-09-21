@@ -13,8 +13,9 @@ class Blaziken(PokemonBase):
         super().__init__()
 
     def move_1(self): # Blaze Kick II
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_status('BRN')
@@ -29,8 +30,9 @@ class Blaziken(PokemonBase):
     def move_2(self): # Double Kick II
         hit=True; i=0
         while hit and i<4:
+            attack_ret=self.attack()
+            if attack_ret['miss'] or attack_ret['immune']: break
             damage_ret=self.get_damage()
-            if damage_ret['miss']: break
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             i+=1; hit=False if self.target.isfaint() else True
@@ -46,8 +48,9 @@ def value():
 
 @Increment(Blaziken)
 def move_3(self): # Thunder Punch
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<10/100:
@@ -86,18 +89,13 @@ def move_5(self): # Burning Bulwark
     self.set_condition('Protected',counter=0)
 
 @Increment(Blaziken)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def get_immune(self):
     if self['conditions'].get('Protected'):
         del self['conditions']['Protected']
         if 'contact' in self.target['act']['property']:
             self.target.set_status('BRN')
-        return
-    self.register_act_taken()
-    self.state['hp']=max(0,self['hp']-x)
-    self.log(script='attack',species=self._species,x=x,**self['act_taken'])
+        return True
+    return False
 
 @Increment(Blaziken)
 def endturn(self):
@@ -113,7 +111,8 @@ def value():
 
 @Increment(Blaziken)
 def move_6(self): # Earthquake
-    damage_ret = self.get_damage()
-    if not damage_ret["miss"]:
-        damage = damage_ret["damage"]
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
+        damage=damage_ret['damage']
         self.target.take_damage(damage)

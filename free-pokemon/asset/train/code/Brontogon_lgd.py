@@ -17,8 +17,9 @@ class Brontogon(PokemonBase):
             self.set_boost(stat,+1)
 
     def move_1(self): # Herbivore Slam
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<20/100:
@@ -26,8 +27,9 @@ class Brontogon(PokemonBase):
         self.random_stat_boost()
 
     def move_2(self): # Rock Crush
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<25/100:
@@ -43,9 +45,10 @@ def value():
 @Increment(Brontogon)
 def move_3(self): # Tail Lash
     for _ in range(2):
-        damage_ret=self.get_damage()
-        if damage_ret['miss']:
+        attack_ret=self.attack()
+        if attack_ret['miss'] or attack_ret['immune']:
             break
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if self.target.isfaint():
@@ -70,16 +73,11 @@ def value():
     return ['Tail Whip','Boulder Shield']
 
 @Increment(Brontogon)
-def _take_damage_attack(self,x):
-    if 'type_effect' in self.target['act'] and self.target['act']['type_effect']<0.1:
-        self.logger.log('It is immune by %s.'%self._species)
-        return
+def take_damage_attack(self,x):
     self.register_act_taken()
     if self['act_taken']['category']=='Physical':
         x=int(x*(2/3))
-    self.state['hp']=max(0,self['hp']-x)
-    if self['hp']==0:
-        self.state['status']='FNT'
+    self._set_hp(-x)
 
 # ----------
 
@@ -89,8 +87,9 @@ def value():
 
 @Increment(Brontogon)
 def move_5(self): # Leaf Surge
-    damage_ret=self.get_damage()
-    if not damage_ret['miss']:
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
         damage=damage_ret['damage']
         self.target.take_damage(damage)
         if not self.target.isfaint() and rnd()<30/100:

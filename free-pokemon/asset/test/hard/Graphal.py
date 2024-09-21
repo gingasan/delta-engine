@@ -19,8 +19,8 @@ class Graphal(PokemonBase):
         mult=1
         if self.isstatus('BRN') and self['act']['category']=='Physical':
             mult*=0.5
-        if self.env.get_side_condition('Dark World',self.side_id):
-            mult=mult*1.5 if self['act']['type']=='Dark' else mult*0.75
+        if self.env.get_side_condition('Dark World',self.side_id) and self['act']['type']=='Dark':
+            mult*=1.5
         return mult
 
     def get_type_effect(self):
@@ -34,16 +34,18 @@ class Graphal(PokemonBase):
         return effect
 
     def move_1(self): # Dark Rainbow
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<30/100:
                 self.target.set_condition('Flinch',counter=0)
 
     def move_2(self): # Flash Cannon
-        damage_ret=self.get_damage()
-        if not damage_ret['miss']:
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
             damage=damage_ret['damage']
             self.target.take_damage(damage)
             if not self.target.isfaint() and rnd()<10/100: self.target.set_boost('spd',-1)
@@ -86,11 +88,11 @@ def onswitch(self):
 @Increment(Graphal)
 def take_damage(self,x,from_='attack'):
     if from_=='attack':
-        self._take_damage_attack(x)
+        self.take_damage_attack(x)
     elif from_=='loss':
-        self._take_damage_loss(x)
+        self.take_damage_loss(x)
     elif from_=='recoil':
-        self._take_damage_recoil(x)
+        self.take_damage_recoil(x)
     if self['hp']==0:
         if self['conditions'].get('REVIVE'):
             self.state['status']=None
@@ -98,8 +100,7 @@ def take_damage(self,x,from_='attack'):
             del self['conditions']['REVIVE']
             self.log('Revive! Lord of Dark, Graphal.',color='purple')
         else:
-            self.state['status']='FNT'
-            self.log('%s faints.'%self._species)
+            self._faint()
 
 # ----------
 
@@ -118,3 +119,18 @@ def endturn(self):
             self.target.take_damage(self.target['max_hp']//3,'loss')
             self.restore(self['max_hp']//3,'heal')
             self.log('%s is punished by not making attack.'%self.target._species,color='red')
+
+# ----------
+
+@Increment(Graphal,'_move_6')
+def value():
+    return ('Oblivion Wing',80,100,'Special','Flying',0,[])
+
+@Increment(Graphal)
+def move_6(self): # Oblivion Wing
+    attack_ret=self.attack()
+    if not (attack_ret['miss'] or attack_ret['immune']):
+        damage_ret=self.get_damage()
+        damage=damage_ret['damage']
+        self.target.take_damage(damage)
+        self.restore(int(3/4*damage),'drain')
