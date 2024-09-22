@@ -6,7 +6,7 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
-.left-panel, .right-panel {
+.left-panel {
     width: 95%;
 }
 .input-container {
@@ -34,6 +34,13 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus{
     border-color: #b27fd6;
     box-shadow: 0 0 8px rgba(76, 175, 80, 0.9);
 }
+.stats-input {
+    display: flex;
+    justify-content: space-between;
+}
+.stats-input input[type="number"] {
+    width: 16%;
+}
 .types-input {
     display: flex;
     justify-content: space-between;
@@ -51,12 +58,61 @@ input[type="text"]:focus, input[type="number"]:focus, select:focus{
 .ability-input input[type="text"]:nth-child(2) {
     width: 78%;
 }
+.move-input-1 {
+    display: flex;
+    justify-content: space-between;
+}
+.move-input-1 input[type="text"]:first-child {
+    width: 13%;
+}
+.move-input-1 input[type="text"]:nth-child(2) {
+    width: 13%;
+}
+.move-input-1 input[type="text"]:nth-child(3) {
+    width: 13%;
+}
+.move-input-1 input[type="text"]:nth-child(4) {
+    width: 13%;
+}
+.move-input-1 input[type="text"]:nth-child(5) {
+    width: 13%;
+}
+.move-input-1 input[type="number"]:nth-child(6) {
+    width: 13%;
+}
+.move-input-1 input[type="text"]:nth-child(7) {
+    width: 20%;
+}
 select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='292.362' height='292.362' viewBox='0 0 292.362 292.362'><path fill='%23999' d='M287.736 69.454l-14.274-14.273c-3.568-3.57-9.355-3.57-12.922 0L146.18 169.54 32.072 55.181c-3.57-3.57-9.355-3.57-12.923 0L4.875 69.454c-3.568 3.568-3.568 9.355 0 12.922l132.16 132.16c3.568 3.568 9.355 3.568 12.922 0l132.16-132.16c3.57-3.567 3.57-9.353 0-12.922z'/></svg>");
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 12px;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+.avatar-display {
+    width: 100%;
+    max-width: 390px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ac2929;
+    box-sizing: border-box;
+}
+#avatar-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
 }
 
 .start-battle {

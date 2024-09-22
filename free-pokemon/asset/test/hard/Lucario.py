@@ -75,7 +75,7 @@ def onswitch(self):
 def get_power(self):
     power=self['act']['power']
     if self['act']['id']=='Aura Sphere':
-        power=int(power*1.5)
+        power=int(power*1.3)
         self.log('Super Aura Sphere!',color='blue')
     return int(power*self.get_weather_power_mult())
 

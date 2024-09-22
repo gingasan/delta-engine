@@ -35,6 +35,7 @@ class RedMoon(PokemonBase):
             self.state['canact']='Sky Attack'
             attack_ret=self.attack()
             if not (attack_ret['miss'] or attack_ret['immune']):
+                damage_ret=self.get_damage()
                 damage=damage_ret['damage']
                 self.target.take_damage(damage)
                 if not self.target.isfaint() and rnd()<30/100:

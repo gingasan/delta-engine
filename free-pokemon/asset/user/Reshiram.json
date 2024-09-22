@@ -1,0 +1,49 @@
+{
+  "species": "Reshiram",
+  "types": [
+    "Dragon",
+    "Fire"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Sun Grace": "On switch-in, summons Sunny Day. During Sunny Day, Reshiram's Special Attack becomes 1.35x.",
+    "White Sun": "On the opponent's turn, Reshiram turns to Normal type."
+  },
+  "moves": {
+    "Blue Flare": {
+      "power": 130,
+      "accuracy": 85,
+      "category": "Special",
+      "type": "Fire",
+      "effect": "Has a 20% chance to burn the target."
+    },
+    "Truth Beam": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Dragon",
+      "effect": "Resets the target's all stat changes."
+    },
+    "Earth Power": {
+      "power": 90,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ground",
+      "effect": "Has a 10% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Solar Beam": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Grass",
+      "effect": "This attack charges on the first turn and executes on the second. Power is halved if the weather Rain Dance, Sandstorm, or Snow. If the weather is Sunny Day, no charge is needed."
+    },
+    "Recover": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  }
+}

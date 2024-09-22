@@ -110,13 +110,64 @@
             <div class="left-panel">
                 <div class="input-container">
                     <label for="species">SPECIES</label>
-                    <input type="text" id="species" name="species" placeholder="Pokémon species (e.g. Salamence, Mewtwo)", value="Neos">
+                    <input type="text" id="species" name="species" placeholder="Pokémon species (e.g. Salamence, Mewtwo)", value="Reshiram">
+                </div>
+                <div class="input-container">
+                    <label for="hp">STATS (&lt 600)</label>
+                    <div class="stats-input">
+                        <input type="number" id="hp" name="hp" placeholder="Base HP", value=100>
+                        <input type="number" id="atk" name="atk" placeholder="Base Atk", value=100>
+                        <input type="number" id="def" name="def" placeholder="Base Def", value=100>
+                        <input type="number" id="spa" name="spa" placeholder="Base SpA", value=100>
+                        <input type="number" id="spd" name="spd" placeholder="Base SpD", value=100>
+                        <input type="number" id="spe" name="spe" placeholder="Base SpE", value=100>
+                    </div>
                 </div>
                 <div class="input-container">
                     <label for="types">TYPES</label>
                     <div class="types-input">
-                        <input type="text" id="type1" name="type1" placeholder="Type 1", value="Normal">
-                        <input type="text" id="type2" name="type2" placeholder="Type 2", valur="">
+                        <select type="text" id="type1" name="type1" style="width: 39%">
+                            <option value="" disabled selected>Type 1</option>
+                            <option value="131Lapras.png">Bug</option>
+                            <option value="Dark">Dark</option>
+                            <option value="Dragon">Dragon</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Fairy">Fairy</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Fire">Fire</option>
+                            <option value="Flying">Flying</option>
+                            <option value="Ghost">Ghost</option>
+                            <option value="Grass">Grass</option>
+                            <option value="Ground">Ground</option>
+                            <option value="Ice">Ice</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Poison">Poison</option>
+                            <option value="Psychic">Psychic</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Steel">Steel</option>
+                            <option value="Water">Water</option>
+                        </select>
+                        <select type="text" id="type2" name="type2" style="width: 39%">
+                            <option value="" disabled selected>Type 2</option>
+                            <option value="131Lapras.png">Bug</option>
+                            <option value="Dark">Dark</option>
+                            <option value="Dragon">Dragon</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Fairy">Fairy</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Fire">Fire</option>
+                            <option value="Flying">Flying</option>
+                            <option value="Ghost">Ghost</option>
+                            <option value="Grass">Grass</option>
+                            <option value="Ground">Ground</option>
+                            <option value="Ice">Ice</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Poison">Poison</option>
+                            <option value="Psychic">Psychic</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Steel">Steel</option>
+                            <option value="Water">Water</option>
+                        </select>
                     </div>
                 </div>
                 <div class="input-container">
@@ -127,8 +178,36 @@
                     </div>
                 </div>
                 <div class="input-container">
+                    <label for="move1">MOVE 1</label>
+                    <div class="move-input-1">
+                        <input type="text" id="move1-name" name="move1-name" placeholder="Name">
+                        <input type="text" id="move1-power" name="move1-power" placeholder="Power">
+                        <input type="text" id="move1-accuracy" name="move1-accuracy" placeholder="Accuracy">
+                        <input type="text" id="move1-category" name="move1-category" placeholder="Category">
+                        <input type="text" id="move1-type" name="move1-type" placeholder="Type">
+                        <input type="number" id="move1-priority" name="move1-priority" placeholder="Priority">
+                        <input type="text" id="move1-property" name="move1-property" placeholder="Property">
+                    </div>
+                    <input type="text" id="move1-effect" name="move1-effect" placeholder="Effect">
+                </div>
+                <div class="input-container">
+                    <label for="move2">MOVE 2</label>
+                    <div class="move-input-1">
+                        <input type="text" id="move2-name" name="move2-name" placeholder="Name">
+                        <input type="text" id="move2-power" name="move2-power" placeholder="Power">
+                        <input type="text" id="move2-accuracy" name="move2-accuracy" placeholder="Accuracy">
+                        <input type="text" id="move2-category" name="move2-category" placeholder="Category">
+                        <input type="text" id="move2-type" name="move2-type" placeholder="Type">
+                        <input type="number" id="move2-priority" name="move2-priority" placeholder="Priority">
+                        <input type="text" id="move2-property" name="move2-property" placeholder="Property">
+                    </div>
+                    <input type="text" id="move2-effect" name="move2-effect" placeholder="Effect">
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="input-container">
                     <label for="avatar">AVATAR</label>
-                    <select id="avatar" name="avatar">
+                    <select id="avatar" name="avatar" onchange="avatarDisplay()">
                         <option value="" disabled selected>Choose a loverly avatar</option>
                         <option value="131Lapras.png">131Lapras</option>
                         <option value="142Aerodactyl-Mega.png">142Aerodactyl-Mega</option>
@@ -138,49 +217,27 @@
                         <option value="257Blaziken-Mega.png">257Blaziken-Mega</option>
                         <option value="373Salamence-Mega.png">373Salamence-Mega</option>
                         <option value="448Lucario.png">448Lucario</option>
+                        <option value="643Reshiram-Activated.png" selected>643Reshiram</option>
                         <option value="741Oricorio-Pom-Pom.png">741Oricorio-Pom-Pom</option>
                         <option value="792Lunala.png">792Lunala</option>
                         <option value="937Ceruledge.png">937Ceruledge</option>
                         <option value="1003Ting-Lu.png">1003Ting-Lu</option>
-                        <option value="Neos.webp" selected>Neos</option>
+                        <option value="Neos.webp">Neos</option>
                         <option value="Graphal.webp">Graphal</option>
                         <option value="Tigrex.png">Tigrex</option>
                     </select>
                 </div>
-            </div>
-            <div class="right-panel">
-                <div class="input-container">
-                    <label for="hp">HP</label>
-                    <input type="number" id="hp" name="hp" placeholder="Base HP (sum of all base stats no more than 600)", value=100>
-                </div>
-                <div class="input-container">
-                    <label for="atk">ATK</label>
-                    <input type="number" id="atk" name="atk" placeholder="Base Atk", value=100>
-                </div>
-                <div class="input-container">
-                    <label for="def">DEF</label>
-                    <input type="number" id="def" name="def" placeholder="Base Def", value=100>
-                </div>
-                <div class="input-container">
-                    <label for="spa">SPA</label>
-                    <input type="number" id="spa" name="spa" placeholder="Base SpA", value=100>
-                </div>
-                <div class="input-container">
-                    <label for="spd">SPD</label>
-                    <input type="number" id="spd" name="spd" placeholder="Base SpD", value=100>
-                </div>
-                <div class="input-container">
-                    <label for="spe">SPE</label>
-                    <input type="number" id="spe" name="spe" placeholder="Base SpE", value=100>
+                <div class="avatar-display">
+                    <img id="avatar-image" src="asset/pm/643Reshiram-Activated.png">
                 </div>
             </div>
         </div>
-    
+
         <div class="input-container">
             <button class="start-battle">Start Your Journey</button>
         </div>
     </div>
-    
+
     <div class="battle-section hidden">
 
         <!-- Code -->
@@ -344,6 +401,16 @@
             document.querySelector(".result-section").classList.add("hidden");
             document.querySelector(".battle-section").classList.remove("hidden");
         });
+
+        function avatarDisplay() {
+            const avatarSelect = document.getElementById("avatar");
+            const avatarValue = avatarSelect.value;
+            const avatarImage = document.getElementById("avatar-image");
+            
+            if (avatarValue) {
+                avatarImage.src = `asset/pm/${avatarValue}`;
+            }
+        }
 
     </script>
     <script src="battle.js"></script>
