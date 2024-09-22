@@ -24,7 +24,7 @@ class Zapdos(PokemonBase):
             acc*=acc_mult[self['boosts']['accuracy']]
         else:
             acc/=acc_mult[self['boosts']['accuracy']]
-        acc*=self.target.get_evasion()
+        acc*=(1-self.target.get_evasion())
         return acc/100
 
     def move_1(self): # Hurricane

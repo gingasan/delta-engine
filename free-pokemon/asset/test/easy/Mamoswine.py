@@ -13,8 +13,8 @@ class Mamoswine(PokemonBase):
 
     def get_evasion(self):
         if self.env.get('Snow'):
-            return 1.25
-        return 1
+            return 0.2
+        return 0
 
     def move_1(self): # Earthquake
         attack_ret=self.attack()

@@ -84,4 +84,4 @@ def take_damage_attack(self,x):
 
 @Increment(Tianma)
 def get_evasion(self):
-    return 1.2
+    return 0.2

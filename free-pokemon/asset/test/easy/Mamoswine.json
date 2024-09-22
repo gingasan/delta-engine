@@ -6,7 +6,7 @@
   ],
   "gender": "Male",
   "ability": {
-    "Snow Cloak": "If Snow is active, this Pokemon's evasiveness is 1.25x."
+    "Snow Cloak": "If Snow is active, this Pokemon's evasiveness increases by 20%."
   },
   "moves": {
     "Earthquake": {

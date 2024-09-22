@@ -74,7 +74,7 @@ def value():
 
 @Increment(Blaziken)
 def get_evasion(self):
-    return 1-max(0,self['boosts']['spe'])*0.1
+    return max(0,self['boosts']['spe'])*0.1
 
 # ----------
 

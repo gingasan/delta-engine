@@ -183,7 +183,7 @@ class PokemonBase:
             acc *= acc_mult[self["boosts"]["accuracy"]]
         else:
             acc /= acc_mult[self["boosts"]["accuracy"]]
-        acc *= self.target.get_evasion()
+        acc *= (1 - self.target.get_evasion())
         return acc / 100
 
     def get_base_damage(self, power, crit):
@@ -404,7 +404,7 @@ class PokemonBase:
             self._set_condition(x, **kwargs)
 
     def get_evasion(self):
-        return 1
+        return 0
     
     def get_immune(self):
         return False

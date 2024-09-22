@@ -14,7 +14,7 @@ class Dodrio(PokemonBase):
     def get_evasion(self):
         if self['status']:
             return 0.5
-        return 1
+        return 0
 
     def move_1(self): # Drill Peck
         attack_ret=self.attack()

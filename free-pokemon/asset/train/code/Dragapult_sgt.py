@@ -13,8 +13,8 @@ class Dragapult(PokemonBase):
     
     def get_evasion(self):
         if self['conditions'].get('PHANTOM_FORCE'):
-            return 0
-        return 1
+            return 1
+        return 0
     
     def endturn(self):
         if rnd()<0.3:

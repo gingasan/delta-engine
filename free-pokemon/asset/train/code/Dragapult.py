@@ -19,8 +19,8 @@ class Dragapult(PokemonBase):
 
     def get_evasion(self):
         if self['conditions'].get('PHANTOM_FORCE'):
-            return 0
-        return 1
+            return 1
+        return 0
 
     def move_1(self): # Dragon Darts
         hit=True; i=0

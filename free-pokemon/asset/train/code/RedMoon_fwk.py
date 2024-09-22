@@ -29,8 +29,8 @@ class RedMoon(PokemonBase):
 
     def get_evasion(self):
         if  self['conditions'].get('FLY'):
-            return 0
-        return 1
+            return 1
+        return 0
 
     def move_1(self): # Dragon Rush
         attack_ret=self.attack()

@@ -14,7 +14,7 @@ class Gardevoir(PokemonBase):
     def get_evasion(self):
         if self.target['act']['category']=='Status':
             return 0.5
-        return 1
+        return 0
     
     def move_1(self): # Dazzling Gleam
         attack_ret=self.attack()

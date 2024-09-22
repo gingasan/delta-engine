@@ -13,7 +13,7 @@ class Baize(PokemonBase):
 
     def get_accuracy(self):
         acc=1e5
-        acc*=self.target.get_evasion()
+        acc*=(1-self.target.get_evasion())
         return acc/100
 
     def move_1(self): # Dragon Pulse
