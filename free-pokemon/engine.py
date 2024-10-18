@@ -2,11 +2,11 @@ from utils import *
 
 
 class PokemonBase:
-    _species='Mew'
-    _types=['Normal']
-    _gender='Male'
-    _move_1=('Earthquake',100,100,'Physical','Normal',0,[])
-    _base=(100,100,100,100,100,100)
+    _species = "Mew"
+    _types = ["Normal"]
+    _gender = "Male"
+    _move_1 = ("Earthquake", 100, 100, "Physical", "Normal", 0, [])
+    _base = (100, 100, 100, 100, 100, 100)
     def __init__(self):
         self.state = self.init_state()
 
@@ -42,6 +42,7 @@ class PokemonBase:
     def init_state(self):
         attrs = self.get_attrs(self._base)
         return {
+            "species": self._species,
             "types": [t for t in self._types],
             "status": None,
             "hp": attrs["hp"], "max_hp": attrs["hp"],
@@ -107,9 +108,10 @@ class PokemonBase:
         self.move2fct[move_id]()
 
     def move_1(self): # Earthquake
-        damage_ret = self.get_damage()
-        if not damage_ret["miss"]:
-            damage = damage_ret["damage"]
+        attack_ret=self.attack()
+        if not (attack_ret['miss'] or attack_ret['immune']):
+            damage_ret=self.get_damage()
+            damage=damage_ret['damage']
             self.target.take_damage(damage)
     
     def get_weather_power_mult(self):
@@ -530,26 +532,30 @@ class Battle:
         self.log("-- Turn %d --" % self.turn)
         if self.pokemon1.isfaint() or self.pokemon2.isfaint():
             return {"wrap": True}
-        ret = {
-            "phase_1": None,
-            "phase_2": None,
-            "phase_3": {}
-        }
+
+        ret = {p: {} for p in ["phase_1", "phase_2", "phase_3"]}
+
         if isinstance(self.pokemon1["canact"], str):
             move1_id = self.pokemon1["canact"]
             self.pokemon1.state["canact"] = True
         if isinstance(self.pokemon2["canact"], str):
             move2_id = self.pokemon2["canact"]
             self.pokemon2.state["canact"] = True
+
         (t1, move1_id), (t2, move2_id) = self.movefirst(move1_id, move2_id)
+
         if t1["canact"]:
-            ret["phase_1"] = {"attacker": t1._species, "defender": t2._species}
+            ret["phase_1"]["attacker"] = t1._species
+            ret["phase_1"]["defender"] = t2._species
             self.log("{} uses {}.".format(t1._species, move1_id))
+
             self._act(t1, t2, move1_id)
+
             ret["phase_1"]["pokemon_1"] = deepcopy(self.pokemon1.state)
             ret["phase_1"]["pokemon_2"] = deepcopy(self.pokemon2.state)
             ret["phase_1"]["logs"] = deepcopy(self.get_logs())
             self.logger.clr()
+
         if not t2.isfaint() and t2["canact"]:
             ret["phase_2"] = {"attacker": t2._species, "defender": t1._species}
             self.log("{} uses {}.".format(t2._species, move2_id))
@@ -558,6 +564,7 @@ class Battle:
             ret["phase_2"]["pokemon_2"] = deepcopy(self.pokemon2.state)
             ret["phase_2"]["logs"] = deepcopy(self.get_logs())
             self.logger.clr()
+
         self.endturn()
         ret["phase_3"]["pokemon_1"] = deepcopy(self.pokemon1.state)
         ret["phase_3"]["pokemon_2"] = deepcopy(self.pokemon2.state)

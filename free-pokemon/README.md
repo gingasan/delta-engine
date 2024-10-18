@@ -22,6 +22,8 @@ To get SFT data, use `proc.ipynb`.
 
 To see our prompts used in the paper, see `prompt/`.
 
+Download our neural proxy from [Drive](), SFT based on CodeGemma-7b.
+
 
 
 ## UI

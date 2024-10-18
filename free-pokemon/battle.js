@@ -62,7 +62,7 @@ function initState(init_data) {
                 pokemon2Img.classList.remove("faint-animation");
             }
 
-            // update hp & status
+            // update hp
             const hp1 = document.querySelector(".pokemon-1 .hp");
             hp1.style.width = "100%";
             const hp1Value = document.querySelector(".pokemon-1 .hp-value");

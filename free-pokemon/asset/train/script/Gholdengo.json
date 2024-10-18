@@ -1,0 +1,41 @@
+{
+  "species": "Gholdengo",
+  "types": [
+    "Steel",
+    "Ghost"
+  ],
+  "gender": "Neutral",
+  "ability": {
+    "Good as Gold": "This Pokemon is immune to status moves."
+  },
+  "moves": {
+    "Make It Rain": {
+      "power": 120,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Steel",
+      "effect": "The user attacks everything around it and lowers its own Special Attack by 1 stage."
+    },
+    "Shadow Ball": {
+      "power": 80,
+      "accuracy": 100,
+      "category": "Special",
+      "type": "Ghost",
+      "effect": "Has a 20% chance to lower the target's Special Defense by 1 stage."
+    },
+    "Thunder Wave": {
+      "power": 0,
+      "accuracy": 90,
+      "category": "Status",
+      "type": "Electric",
+      "effect": "Paralyzes the target."
+    },
+    "Recover": {
+      "power": 0,
+      "accuracy": 100000,
+      "category": "Status",
+      "type": "Normal",
+      "effect": "The user restores 1/2 of its maximum HP."
+    }
+  }
+}

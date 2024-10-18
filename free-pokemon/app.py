@@ -51,17 +51,22 @@ CORS(app)
 
 
 oppo_pool = {
-    # "Ceruledge": "937Ceruledge.png",
+    "Ceruledge": "937Ceruledge.png",
     "Blaziken": "257Blaziken-Mega.png",
-    # "Tyranitar": "248Tyranitar.png",
-    # "Aerodactyl": "142Aerodactyl-Mega.png",
+    "Tyranitar": "248Tyranitar.png",
+    "Aerodactyl": "142Aerodactyl-Mega.png",
     "TingLu": "1003Ting-Lu.png",
-    # "Scizor": "212Scizor.png",
+    "Scizor": "212Scizor.png",
     "Lucario": "448Lucario.png",
-    # "ChenLoong": "131Lapras.png",
-    # "RedMoon": "373Salamence-Mega.png",
-    # "Zapdos": "145Zapdos.png",
-    "Graphal": "Graphal.webp"
+    "ChenLoong": "131Lapras.png",
+    "RedMoon": "373Salamence-Mega.png",
+    "Zapdos": "145Zapdos.png",
+    "Graphal": "Graphal.webp",
+    "Tigrex": "Tigrex.png",
+    "Neos": "Neos.webp",
+    "Reshiram": "643Reshiram-Activated.png",
+    "Oricorio": "741Oricorio-Pom-Pom.png",
+    "Incineroar": "727Incineroar.png"
 }
 
 
