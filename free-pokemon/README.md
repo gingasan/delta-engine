@@ -33,7 +33,7 @@ Download our neural proxy from [Drive](https://drive.google.com/file/d/1iVvZgBHK
 <img src="asset/ui1.png" style="zoom:25%;" />
 
 
-1. Start the backend on your local host.
+1. Put the neural proxy weights into `model`. Start the backend on your local host.
 
 ```bash
 python app.py
