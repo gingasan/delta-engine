@@ -70,13 +70,3 @@ class mdict(dict):
     
     def key(self):
         return list(self.keys())[0]
-
-def create_role(code_path):
-    code = (
-        "from {} import *\n"
-        "pokemon={}()"
-    ).format(code_path, code_path.split(".")[-1])
-    global_vars = {}
-    exec(code, global_vars)
-    role = global_vars["pokemon"]
-    return role

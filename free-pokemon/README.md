@@ -22,13 +22,15 @@ To get SFT data, use `proc.ipynb`.
 
 To see our prompts used in the paper, see `prompt/`.
 
-Download our neural proxy from [Drive](), SFT based on CodeGemma-7b.
+Download our neural proxy from [Drive](https://drive.google.com/file/d/1iVvZgBHK71yMJGzrcz4LKLSN_Y-vt4Ir/view?usp=share_link), SFT based on CodeGemma-7b. We upload the LoRA part of the model. Users please download the base model from https://huggingface.co/google/codegemma-7b-it.
 
 
 
 ## UI
 
-![](asset/ui1.png)
+<img src="asset/ui2.png" style="zoom:25%;" />
+
+<img src="asset/ui1.png" style="zoom:25%;" />
 
 
 1. Start the backend on your local host.
@@ -37,9 +39,11 @@ Download our neural proxy from [Drive](), SFT based on CodeGemma-7b.
 python app.py
 ```
 
-2. Put your role script (e.g. `Tigrex.json`) and role code (e.g. `Tigrex.py`) into `asset/user/`.
-
 3. Open `index.html` in the browser.
+3. Let 's Play! 
+   * The generated pokemon code will be in `ugc/tmp`.
+   * During battle, press SPACE to switch the opponent.
+   * Note: We develop battle strategies for some pokemons in `agent.py`. Others are random players.
 
 
 
@@ -210,33 +214,4 @@ def move_5(self): # Earthquake
         self.target.take_damage(damage)
 ```
 
-
-
-## Quick Play
-
-We are working on the real game. Now, we provide a quick play to test the pokemon roles.
-
-First, make a new dir in `assset` named with anything (default `user`). Then, place your role code in `asset/user`.
-
-```bash
-python test.py --user [YOUR USER NAME/DIR NAME, e.g. user] --role [YOUR POKEMON, e.g. Graphal] --oppo [OPPONENT POKEMON, e.g. Aerodactyl]
-```
-
-Sample output:
-
-```bash
-**
-V.S.:   Aerodactyl
-Type:   Rock & Flying
-**
-Choose your move from:
-{'1': 'Dark Rainbow', '2': 'Shadow Ball', '3': 'Dark Dealings', '4': 'Flash Cannon', '5': 'Dark World'}
-3
-**
-Graphal used Dark Dealings!
-Aerodactyl used Head Smash!
-Graphal|202/404||atk+2 spa+2 spe+2||DARK_WORLD
-Aerodactyl|404/404||||
-**
-```
 

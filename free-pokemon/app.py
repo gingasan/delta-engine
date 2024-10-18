@@ -3,6 +3,54 @@ from flask_cors import CORS
 from engine import *
 from utils import *
 from agent import *
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+
+
+load_from="model/cg7_v101"
+load_model_path = "google/codegemma-7b-it"
+model = AutoModelForCausalLM.from_pretrained(load_model_path, cache_dir="../cache")
+model = PeftModel.from_pretrained(model, load_from)
+model.cuda(2)
+tokenizer = AutoTokenizer.from_pretrained(load_model_path, padding_side="left", cache_dir="../cache", use_fast=True)
+
+
+app = Flask(__name__)
+CORS(app)
+
+
+ROLES = read_json("game_config/roles.json")
+
+
+INSTRUCTION = """
+You are a game programmer for Pokemon. You are tasked to finish either of the following two tasks.
+1. I will give you a json script that details a pokemon role. Generate its python implementation.
+2. I will give you an updated json script of the pokemon role and its previous python implementation. Generate the incremental code based on the previous implementation. You can overload methods or add new ones.
+""".strip()
+INPUT1 = """
+Role script:
+```json
+{}
+```
+""".strip()
+INPUT2 = """
+Previous implementation:
+```python
+{}
+```
+""".strip()
+
+
+def inference(script, code=""):
+    if code == "":
+        text = "<|im_start|>system\n{}<|im_end|>\n<|im_start|>user\n{}<|im_end|>\n<|im_start|>assistant\n".format(INSTRUCTION, INPUT1.format(json.dumps(script, indent=2)))
+    else:
+        text = "<|im_start|>system\n{}<|im_end|>\n<|im_start|>user\n{}<|im_end|>\n<|im_start|>assistant\n".format(INSTRUCTION, "\n\n".join([INPUT1.format(json.dumps(script, indent=2)), INPUT2.format(code)]))
+    input_ids = tokenizer(text, return_tensors="pt").input_ids
+    input_ids = input_ids.cuda(2)
+    outputs = model.generate(input_ids=input_ids, max_new_tokens=1000, eos_token_id=tokenizer.eos_token_id, pad_token_id=tokenizer.eos_token_id)
+
+    return tokenizer.decode(outputs[0][:-1]).split("assistant")[-1].split("<|im_end|>")[0].strip()
 
 
 def create_role(code_path):
@@ -14,6 +62,7 @@ def create_role(code_path):
     exec(code, global_vars)
     role = global_vars["pokemon"]
     return role
+
 
 def step(move1_id):
     if user.isfaint() or oppo.isfaint():
@@ -46,47 +95,79 @@ def step(move1_id):
     return state
 
 
-app = Flask(__name__)
-CORS(app)
-
-
-oppo_pool = {
-    "Ceruledge": "937Ceruledge.png",
-    "Blaziken": "257Blaziken-Mega.png",
-    "Tyranitar": "248Tyranitar.png",
-    "Aerodactyl": "142Aerodactyl-Mega.png",
-    "TingLu": "1003Ting-Lu.png",
-    "Scizor": "212Scizor.png",
-    "Lucario": "448Lucario.png",
-    "ChenLoong": "131Lapras.png",
-    "RedMoon": "373Salamence-Mega.png",
-    "Zapdos": "145Zapdos.png",
-    "Graphal": "Graphal.webp",
-    "Tigrex": "Tigrex.png",
-    "Neos": "Neos.webp",
-    "Reshiram": "643Reshiram-Activated.png",
-    "Oricorio": "741Oricorio-Pom-Pom.png",
-    "Incineroar": "727Incineroar.png"
-}
-
-
 @app.route("/init-state", methods=["POST"])
 def init_state():
     global user, oppo, battle
 
     init_data = request.get_json()
     print(init_data)
-    user = create_role("asset.user.{}".format(init_data["species"]))
-    t = rndc(oppo_pool)
+
+    script = {
+        "species": init_data["species"],
+        "types": [
+            init_data["type1"],
+            init_data["type2"]
+        ],
+        "ability": {
+            init_data["ability-name"]: init_data["ability-effect"]
+        },
+        "moves": {
+            init_data["move1-name"]: {
+                "power": init_data["move1-power"],
+                "accuracy": init_data["move1-accuracy"],
+                "category": init_data["move1-category"],
+                "type": init_data["move1-type"],
+                "effect": init_data["move1-effect"],
+                "priority": init_data["move1-priority"],
+                "property": init_data["move1-property"]
+            },
+            init_data["move2-name"]: {
+                "power": init_data["move2-power"],
+                "accuracy": init_data["move2-accuracy"],
+                "category": init_data["move2-category"],
+                "type": init_data["move2-type"],
+                "effect": init_data["move2-effect"],
+                "priority": init_data["move2-priority"],
+                "property": init_data["move2-property"]
+            },
+            init_data["move3-name"]: {
+                "power": init_data["move3-power"],
+                "accuracy": init_data["move3-accuracy"],
+                "category": init_data["move3-category"],
+                "type": init_data["move3-type"],
+                "effect": init_data["move3-effect"],
+                "priority": init_data["move3-priority"],
+                "property": init_data["move3-property"]
+            },
+            init_data["move4-name"]: {
+                "power": init_data["move4-power"],
+                "accuracy": init_data["move4-accuracy"],
+                "category": init_data["move4-category"],
+                "type": init_data["move4-type"],
+                "effect": init_data["move4-effect"],
+                "priority": init_data["move4-priority"],
+                "property": init_data["move4-property"]
+            }
+        }
+    }
+    print(script)
+
+    code = inference(script)
+    code = code.strip("```python\\n").strip()
+    write(code, "ugc/tmp/{}.py".format(script["species"]))
+
+    user = create_role("ugc.tmp.{}".format(init_data["species"]))
+    user = create_role("ugc.tmp.Reshiram")
+    t = rndc(ROLES)
     try:
         oppo = {
             "Blaziken": BlazikenAgent(),
             "Lucario": LucarioAgent(),
             "TingLu": TingLuAgent(),
             "Graphal": GraphalAgent()
-        }[t]
+        }[ROLES[t]["class_name"]]
     except KeyError:
-        oppo = create_role("asset.user.{}".format(t))
+        oppo = create_role("asset.user.{}".format(ROLES[t]["class_name"]))
     battle = Battle(user, oppo)
 
     battle.start()
@@ -101,14 +182,16 @@ def init_state():
     state["pokemon_1"].update(moves)
 
     state["pokemon_2"]["species"] = oppo._species
-    state["pokemon_2"]["avatar"] = oppo_pool[n2f(oppo._species)]
-    state["code"] = read("asset/user/{}.py".format(init_data["species"])) + "\n\n\n\n\n\n"
+    state["pokemon_2"]["avatar"] = ROLES[oppo._species]["avatar"]
+    state["code"] = code + "\n\n\n\n\n\n"
+    # state["code"] = read("asset/user/{}.py".format(init_data["species"])) + "\n\n\n\n\n\n"
 
-    script = read_json("asset/user/{}.json".format(init_data["species"]))
+    # script = read_json("asset/user/{}.json".format(init_data["species"]))
     for i, k in enumerate(script["moves"]):
         state["pokemon_1"]["move_%s" % (i + 1)]["effect"] = script["moves"][k]["effect"]
 
     return jsonify(state)
+
 
 @app.route("/get-state")
 def get_state():

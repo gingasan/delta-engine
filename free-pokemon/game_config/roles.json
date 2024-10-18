@@ -1,0 +1,62 @@
+{
+  "Ceruledge": {
+    "class_name": "Ceruledge",
+    "avatar": "Ceruledge.png"
+  },
+  "Blaziken": {
+    "class_name": "Blaziken",
+    "avatar": "Blaziken.png"
+  },
+  "Tyranitar": {
+    "class_name": "Tyranitar",
+    "avatar": "Tyranitar.png"
+  },
+  "Aerodactyl": {
+    "class_name": "Aerodactyl",
+    "avatar": "Aerodactyl-Mega.png"
+  },
+  "Ting-Lu": {
+    "class_name": "TingLu",
+    "avatar": "Ting-Lu.png"
+  },
+  "Scizor": {
+    "class_name": "Scizor",
+    "avatar": "Scizor.png"
+  },
+  "Lucario": {
+    "class_name": "Lucario",
+    "avatar": "Lucario-Mega.png"
+  },
+  "Chen-Loong": {
+    "class_name": "ChenLoong",
+    "avatar": "Lapras.png"
+  },
+  "Red-Moon": {
+    "class_name": "RedMoon",
+    "avatar": "Salamence-Mega.png"
+  },
+  "Zapdos": {
+    "class_name": "Zapdos",
+    "avatar": "Zapdos.png"
+  },
+  "Graphal": {
+    "class_name": "Graphal",
+    "avatar": "Graphal.webp"
+  },
+  "Neos": {
+    "class_name": "Neos",
+    "avatar": "Neos.webp"
+  },
+  "Tigrex": {
+    "class_name": "Tigrex",
+    "avatar": "Tigrex.png"
+  },
+  "Reshiram": {
+    "class_name": "Reshiram",
+    "avatar": "Reshiram.png"
+  },
+  "Oricorio": {
+    "class_name": "Oricorio",
+    "avatar": "Oricorio-Pom-Pom.png"
+  }
+}
