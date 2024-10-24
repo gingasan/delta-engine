@@ -157,7 +157,7 @@ def init_state():
     write(code, "ugc/tmp/{}.py".format(script["species"]))
 
     user = create_role("ugc.tmp.{}".format(init_data["species"]))
-    user = create_role("ugc.tmp.Reshiram")
+    # user = create_role("ugc.tmp.Neos")
     t = rndc(ROLES)
     try:
         oppo = {
