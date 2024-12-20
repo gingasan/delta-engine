@@ -6,8 +6,7 @@ Free Pokémon is a self-made game developed based on *Delta-Engine*. Players can
 
 Our delta-engine paper: https://arxiv.org/pdf/2408.05842
 
-Our video: https://www.bilibili.com/video/BV1FtYkehEHF
-
+Our video: https://www.bilibili.com/video/BV1U3kPYgEQt
 
 
 This project is only for research purposes. Any commercial usage is not allowed.
